@@ -1,9 +1,31 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
+from django.db.models.expressions import Value
 from django.db.models.fields.related import ForeignKey
 # from django.contrib.gis.db import models ////CORRIGIR
 
 # Create your models here.
+
+"""
+    SEXO_CHOICES = (
+        ('M', u'Masculino'),
+        ('F', u'Feminino'),
+    )
+
+    ESTADO_CIVIL_CHOICES = (
+        ('S', u'Solteiro'),
+        ('C', u'Casado'),
+        ('D', u'Divorciado'),
+        ('V', u'Viúvo'),
+    )
+"""
+"""
+class TiposUsuario(models.IntegerChoices):
+    US_NORMAL = 0, 'normal'
+    US_EMPRESA = 1, 'empresa'
+    US_INSTITUICAO = 2, 'instituição'
+"""
 
 class LOCALIZACAO(models.Model):
     cidade = models.CharField(max_length=50)
@@ -13,6 +35,16 @@ class LOCALIZACAO(models.Model):
     num = models.IntegerField()
     bairro = models.CharField(max_length=50)
     # coordenada = models.PointField() ///// CORRIGIR
+
+class USUARIO(models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
+   # tipoUsuario = models.IntegerField(choices=TiposUsuario.choices)
+    nome = models.CharField(max_length=100)
+    cpfCnpj = models.CharField(max_length=11, blank=True, null=True)
+    dataNascimento = models.DateField(blank=True, null=True, verbose_name='Data de nascimento')
+    telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name='Nº telefone')
+    pontuacao = models.DecimalField(max_digits=30, decimal_places=15)
 
 class ABRIGO(models.Model):
     FK_idUsuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,15 +58,76 @@ class Pet(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     observacoes = models.TextField()
-    comprimento = models.DecimalField(decimal_places=2,max_digits=3)
-    largura = models.DecimalField(decimal_places=2,max_digits=3)
+    comprimento = models.DecimalField(max_digits=30, decimal_places=15)
+    largura = models.DecimalField(max_digits=30, decimal_places=15)
     dataNascimento = models.DateField()
     raca = models.CharField(max_length=50)
     cor = models.CharField(max_length=30)
-    altura = models.DecimalField(decimal_places=2,max_digits=2)
-    peso = models.DecimalField(decimal_places=2,max_digits=3)
+    altura = models.DecimalField(max_digits=30, decimal_places=15)
+    peso = models.DecimalField(max_digits=30, decimal_places=15)
 
-    def __str__(self):
-        return str(self.id)
+class PET_PERDIDO_ENCONTRADO(models.Model):
+    FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
+    observacoes = models.TextField()
+    status = models.CharField(max_length=20)
+    data = models.DateField()
 
-    
+class PATROCINIO(models.Model):
+    FK_idUsuario = models.ManyToManyField(User)
+    FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
+    observacoes = models.TextField()
+    valor = models.DecimalField(max_digits=30, decimal_places=15)
+    data = models.DateField()
+
+class ADOCAO(models.Model):
+    FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
+    FK_idUsuario =  models.ForeignKey(User, on_delete=models.RESTRICT)
+    status = models.CharField(max_length=20)
+    dataEntrada = models.DateTimeField(auto_now_add=True)
+    dataAdocao = models.DateTimeField()
+    observacao = models.TextField()
+
+class TOKEN(models.Model):
+    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
+    dataToken = models.DateTimeField(auto_now_add=True)
+    token = models.CharField(max_length=20)
+
+class ANUNCIO(models.Model):
+    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=100)
+    observacoes = models.TextField()
+    tipo = models.CharField(max_length=50)
+    dataInicio = models.DateTimeField(auto_now_add=True)
+    dataFim = models.DateTimeField()
+    status = models.CharField(max_length=50)
+    valor = models.DecimalField(max_digits=30, decimal_places=15)
+
+class OPCAO_ENTREGA(models.Model):
+    opcaoEntrega = models.CharField(max_length=50)
+    prazoEntrega = models.IntegerField()
+    frete = models.DecimalField(max_digits=30, decimal_places=15)
+
+class FORMA_PAGAMENTO(models.Model):
+    formaPagamento = models.CharField(max_length=50)
+
+class PRODUTO(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField()
+    dadosTecnicos = models.TextField()
+    valor = models.DecimalField(max_digits=30, decimal_places=15)
+    categoria = models.CharField(max_length=100)
+
+class PEDIDO(models.Model):
+    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
+    FK_idProduto = models.ManyToManyField(PRODUTO)
+    FK_idOpcaoEntrega = models.ForeignKey(OPCAO_ENTREGA, on_delete=models.RESTRICT)
+    FK_idFormaPagamento = models.ForeignKey(FORMA_PAGAMENTO, on_delete=models.RESTRICT)
+    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
+    desconto = models.DecimalField(max_digits=30, decimal_places=15)
+    status = models.CharField(max_length=50)
+
+class AVALIACAO(models.Model):
+    FK_idUsuario = models.ManyToManyField(User)
+    nota = models.DecimalField(max_digits=30, decimal_places=15)
+    comentario = models.TextField()
