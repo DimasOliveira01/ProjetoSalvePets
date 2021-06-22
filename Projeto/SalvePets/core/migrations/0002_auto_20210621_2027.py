@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pet',
             name='altura',
-            field=models.DecimalField(decimal_places=2, default=1, max_digits=2),
+            field=models.DecimalField(decimal_places=2, default=1, max_digits=3),
             preserve_default=False,
         ),
         migrations.AddField(
