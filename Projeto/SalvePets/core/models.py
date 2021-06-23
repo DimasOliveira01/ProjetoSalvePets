@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.db.models.expressions import Value
 from django.db.models.fields.related import ForeignKey
+from django.utils import timezone
+
 # from django.contrib.gis.db import models ////CORRIGIR
 
 # Create your models here.
@@ -42,7 +44,7 @@ class USUARIO(models.Model):
    # tipoUsuario = models.IntegerField(choices=TiposUsuario.choices)
     nome = models.CharField(max_length=100)
     cpfCnpj = models.CharField(max_length=11, blank=True, null=True)
-    dataNascimento = models.DateField(blank=True, null=True, verbose_name='Data de nascimento')
+    dataNascimento = models.DateField(default=timezone.now, blank=True, null=True)
     telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name='Nº telefone')
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15)
 
@@ -60,7 +62,7 @@ class Pet(models.Model):
     observacoes = models.TextField()
     comprimento = models.DecimalField(max_digits=30, decimal_places=15)
     largura = models.DecimalField(max_digits=30, decimal_places=15)
-    dataNascimento = models.DateField()
+    dataNascimento = models.DateField(blank=True, null=True)
     raca = models.CharField(max_length=50)
     cor = models.CharField(max_length=30)
     altura = models.DecimalField(max_digits=30, decimal_places=15)
@@ -71,21 +73,21 @@ class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
     observacoes = models.TextField()
     status = models.CharField(max_length=20)
-    data = models.DateField()
+    data = models.DateField(blank=True, null=True)
 
 class PATROCINIO(models.Model):
     FK_idUsuario = models.ManyToManyField(User)
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
     observacoes = models.TextField()
     valor = models.DecimalField(max_digits=30, decimal_places=15)
-    data = models.DateField()
+    data = models.DateField(blank=True, null=True)
 
 class ADOCAO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
     FK_idUsuario =  models.ForeignKey(User, on_delete=models.RESTRICT)
     status = models.CharField(max_length=20)
-    dataEntrada = models.DateTimeField(auto_now_add=True)
-    dataAdocao = models.DateTimeField()
+    dataEntrada = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    dataAdocao = models.DateTimeField(blank=True, null=True)
     observacao = models.TextField()
 
 class TOKEN(models.Model):
@@ -98,8 +100,8 @@ class ANUNCIO(models.Model):
     titulo = models.CharField(max_length=100)
     observacoes = models.TextField()
     tipo = models.CharField(max_length=50)
-    dataInicio = models.DateTimeField(auto_now_add=True)
-    dataFim = models.DateTimeField()
+    dataInicio = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    dataFim = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=50)
     valor = models.DecimalField(max_digits=30, decimal_places=15)
 

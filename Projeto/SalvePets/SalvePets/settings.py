@@ -82,6 +82,34 @@ DATABASES = {
     }
 }
 
+"""
+# MATHEUS DIAS 22/06/2021: Essa é a conexão com o PostgreSQL. Como esse serviço ainda não foi hospedado na AWS, não temos um IP ou DNS para que
+# a aplicação acesse os dados. Por conta disso, caso queira testar com o PostgreSQL, faça o seguinte procedimento:
+
+# Instale o PostgreSQL + PostGis
+# Mantenha o usuário padrão e configure a senha para 123456
+# Crie um banco de dados com o nome "SalvePets"
+# Rode o banco de dados
+#
+# Depois disso, exclua a pasta "migrations" e execute os  comandos, em seguida:
+# python manage.py makemigrations core
+# python manage.py migrate
+#
+# Atualize o banco de dados pelo pgAdmin e você verá as tabelas.
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'SalvePets', 
+        'USER': 'postgres', 
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
+    }
+}
+
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
