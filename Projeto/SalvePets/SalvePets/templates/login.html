@@ -12,9 +12,47 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        
+        
+        <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+
+
     </head>
+
+
     <body>
+
+
+                <!-- Navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container px-4 px-lg-5">
+                        <!--<a class="navbar-brand" href="#!">Salve Pets</a>-->
+                        <a class="navbar-brand" href="#!"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/logo.png' %}" alt="..." /></a>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Sobre</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">Adote um pet</a></li>
+                                        <!--<li><hr class="dropdown-divider" /></li>-->
+                                        <li><a class="dropdown-item" href="#!">Ajude a manter um pet</a></li>
+                                        <li><a class="dropdown-item" href="#!">Aviso Pet Encontrado</a></li>
+                                        <li><a class="dropdown-item" href="#!">Aviso Pet Perdido</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                                                        
+                        </div>
+                    </div>
+                </nav>
+
+
+
+
 
         <!-- Página de Login-->
 
@@ -29,7 +67,8 @@
                     <label for="password">Senha</label>
                     <input type="password", class="form-control" id="password" name="password" placeholder="Senha">
                 </div>
-                <div>
+
+                <div class="py-3">
                     {% for message in messages %}
                         <div class="alert alert-danger">
                             <strong>Error!</strong>{{message}}
@@ -39,6 +78,17 @@
                 </div>
             </form>
         </div>
+
+
+        <section class="py-5">
+
+
+        </section>
+
+
+
+
+
 
 
 

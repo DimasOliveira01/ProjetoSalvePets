@@ -71,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SalvePets.wsgi.application'
 
-
+"""
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 """
+
 # MATHEUS DIAS 22/06/2021: Essa é a conexão com o PostgreSQL. Como esse serviço ainda não foi hospedado na AWS, não temos um IP ou DNS para que
 # a aplicação acesse os dados. Por conta disso, caso queira testar com o PostgreSQL, faça o seguinte procedimento:
 
@@ -109,7 +109,7 @@ DATABASES = {
     }
 }
 
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
