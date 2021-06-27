@@ -22,7 +22,6 @@ from django.urls import conf
 from django.urls.conf import include
 from core import views
 
-
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
@@ -38,7 +37,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns (
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
     path('', views.index),
