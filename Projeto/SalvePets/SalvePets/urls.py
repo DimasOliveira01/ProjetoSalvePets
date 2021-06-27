@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django import urls
+from django.conf.urls import i18n
 from django.contrib import admin
+from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
+from django.urls import conf
 from django.urls.conf import include
 from core import views
 
+
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     #path('login/', views.login_user),
     path('login/submit', views.submit_login),
@@ -30,3 +36,22 @@ urlpatterns = [
     path('accounts/', include("allauth.urls")),
     #path("", include("core.urls", namespace="core")),
 ]
+
+urlpatterns += i18n_patterns (
+    path('admin/', admin.site.urls),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user),
+    path('', views.index),
+    path('accounts/', include("allauth.urls")),
+)
+
+"""
+urlpatterns += i18n_patterns (
+    path('', include('lang.urls', namespace='lang')),
+    path('admin/', admin.site.urls),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user),
+    path('', views.index),
+    path('accounts/', include("allauth.urls")),
+)
+"""

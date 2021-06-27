@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
@@ -34,15 +35,16 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Sobre</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">{% trans "Sobre" %}</a></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#!">Adote um pet</a></li>
+                                        <li><a class="dropdown-item" href="#!">{% trans "Adote um pet" %}</a></li>
                                         <!--<li><hr class="dropdown-divider" /></li>-->
-                                        <li><a class="dropdown-item" href="#!">Ajude a manter um pet</a></li>
-                                        <li><a class="dropdown-item" href="#!">Aviso Pet Encontrado</a></li>
-                                        <li><a class="dropdown-item" href="#!">Aviso Pet Perdido</a></li>
+                                        <li><a class="dropdown-item" href="#!">{% trans "Ajude a manter um pet" %}</a></li>
+                                        <li><a class="dropdown-item" href="#!">{% trans "Aviso Pet Encontrado" %}</a></li>
+                                        <li><a class="dropdown-item" href="#!">{% trans "Aviso Pet Perdido" %}</a></li>
+                                        <li><a class="dropdown-item" href="#!">Chatbot</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -53,14 +55,14 @@
 
         <!-- Página de Login-->
         <div class="container mt-4">
-            <h2>Entrar</h2>
+            <h2>{% trans "Entrar" %}</h2>
             <form method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <section class="py-2">
                 </section>
                 <button class="btn btn-outline-dark" type="submit"> 
-                    Entrar
+                    {% trans "Entrar" %}
                 </button>
             </form>
         </div>

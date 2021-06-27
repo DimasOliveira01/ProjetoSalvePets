@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 
@@ -32,32 +33,71 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">{% trans "Sobre" %}</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Adote um pet</a></li>
+                                <li><a class="dropdown-item" href="#adote_pet">{% trans "Adote um pet" %}</a></li>
                                 <!--<li><hr class="dropdown-divider" /></li>-->
-                                <li><a class="dropdown-item" href="#!">Ajude a manter um pet</a></li>
-                                <li><a class="dropdown-item" href="#!">Aviso Pet Encontrado</a></li>
-								<li><a class="dropdown-item" href="#!">Aviso Pet Perdido</a></li>
+                                <li><a class="dropdown-item" href="#manter_pet">{% trans "Ajude a manter um pet" %}</a></li>
+                                <li><a class="dropdown-item" href="#pet_encontrado">{% trans "Aviso Pet Encontrado" %}</a></li>
+								<li><a class="dropdown-item" href="#pet_perdido">{% trans "Aviso Pet Perdido" %}</a></li>
+                                <li><a class="dropdown-item" href="#chatbot">Chatbot</a></li>
                             </ul>
+                            
+                            <!--
+                            <form class="d-flex">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ redirect_to }}">
+                                        <select name="language" id="">
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
+                                            {% for language in languages %}
+                                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                                    {{ language.name_local }} ({{ language.code }})
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" value="Go">
+                                    </form>
+                                </ul>
+                            </form></li>
+                            -->
+                            <!--
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+
+                                {% for lang in languages %}
+                                <li>
+                                    <a class="dropdown-item" href="/{{ lang.code }}/">
+                                        {{ lang.name_local }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                                
+                                <li><a class="dropdown-item" href="#!">{% trans "Adote um pet" %}</a></li>
+                                <li><a class="dropdown-item" href="#!">{% trans "Ajude a manter um pet" %}</a></li>
+                            </ul>
+                            -->
                         </li>
                     </ul>
                     <form class="d-flex">
 
                         {% if user.is_authenticated %}
                         <button class="btn btn-outline-dark" type="submit"> 
-                            <a href="{% url 'account_logout' %}">Sair</a>
+                            <a href="{% url 'account_logout' %}">{% trans "Sair" %}</a>
                             <!--<a href="/login/">Login</a>-->
                         </button>
                         {% else %}
                         <button class="btn btn-outline-dark" type="submit"> 
-                            <a href="{% url 'account_login' %}">Entrar</a>
+                            <a href="{% url 'account_login' %}">{% trans "Entrar" %}</a>
                             <!--<a href="/login/">Login</a>-->
                         </button>
                         <button class="btn btn-outline-dark" type="submit">
-                            <a href="{% url 'account_signup' %}">Cadastrar</a>
+                            <a href="{% url 'account_signup' %}">{% trans "Cadastrar" %}</a>
                             <!--<a href="/cadastro-usuario/">Cadastro</a>-->
                         </button>
                         {% endif %}
@@ -67,24 +107,44 @@
                 </div>
             </div>
         </nav>
-        <!-- Product section-->
+        
         <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                    <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
+                        <input type="hidden" name="next" value="{{ redirect_to }}">
+                        <select name="language" id="">
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Go">
+                    </form>
+                </div>
+        </section>
+        
+
+        <!-- Product section-->
+        <section class="py-5" id="pet_perdido">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/cachorro1.png' %}" alt="..." /></div>
                     <div class="col-md-4">
                         
-                        <h3 class="display-10 fw-bolder">Pet perdido! Ajude-nos a encontrar</h3>
+                        <h3 class="display-10 fw-bolder">{% trans "Pet perdido! Ajude-nos a encontrar" %}</h3>
                         <div class="fs-5 mb-5">
                            <!-- <span class="text-decoration-line-through">$45.00</span>
                             <span>$40.00</span> -->
                         </div>
-                        <p class="medium">Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade dos seu donos!</p>
+                        <p class="medium">{% trans "Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade dos seu donos!" %}</p>
                         <div class="d-flex">
                             <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <!--<i class="bi-cart-fill me-1"></i>-->
-                                Avise-nos<!--Add to cart -->
+                                {% trans "Avise-nos" %}<!--Add to cart -->
                             </button>
                         </div>
                     </div>
@@ -100,23 +160,23 @@
         
 
 
-        <section class="py-5">
+        <section class="py-5" id="adote_pet">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/cachorro1.png' %}" alt="..." /></div>
                     <div class="col-md-4">
                         
-                        <h3 class="display-10 fw-bolder">Adote este pet!</h3>
+                        <h3 class="display-10 fw-bolder">{% trans "Adote este pet!" %}</h3>
                         <div class="fs-5 mb-5">
                            <!-- <span class="text-decoration-line-through">$45.00</span>
                             <span>$40.00</span> -->
                         </div>
-                        <p class="medium">Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de um novo lar, ele é amável e fofinho!</p>
+                        <p class="medium">{% trans "Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de um novo lar, ele é amável e fofinho!" %}</p>
                         <div class="d-flex">
                             <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <!--<i class="bi-cart-fill me-1"></i>-->
-                                Adote<!--Add to cart -->
+                                {% trans "Adote" %}<!--Add to cart -->
                             </button>
                         </div>
                     </div>
@@ -128,23 +188,23 @@
             </div>
         </section>
 
-        <section class="py-5">
+        <section class="py-5" id="pet_encontrado">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/cachorro1.png' %}" alt="..." /></div>
                     <div class="col-md-4">
                         
-                        <h3 class="display-10 fw-bolder">Pet encontrado, ajude-nos a localizar o seu dono!</h3>
+                        <h3 class="display-10 fw-bolder">{% trans "Pet encontrado, ajude-nos a localizar o seu dono!" %}</h3>
                         <div class="fs-5 mb-5">
                            <!-- <span class="text-decoration-line-through">$45.00</span>
                             <span>$40.00</span> -->
                         </div>
-                        <p class="medium">Anuncie um pet localizado na sua região</p>
+                        <p class="medium">{% trans "Anuncie um pet localizado na sua região" %}</p>
                         <div class="d-flex">
                             <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <!--<i class="bi-cart-fill me-1"></i>-->
-                                Anuncie<!--Add to cart -->
+                                {% trans "Anuncie" %}<!--Add to cart -->
                             </button>
                         </div>
                     </div>
@@ -156,23 +216,51 @@
             </div>
         </section>
 	
-        <section class="py-5">
+        <section class="py-5" id="manter_pet">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/cachorro1.png' %}" alt="..." /></div>
                     <div class="col-md-4">
                         
-                        <h3 class="display-10 fw-bolder">Ajude a manter este lindo pet!</h3>
+                        <h3 class="display-10 fw-bolder">{% trans "Ajude a manter este lindo pet!" %}</h3>
                         <div class="fs-5 mb-5">
                            <!-- <span class="text-decoration-line-through">$45.00</span>
                             <span>$40.00</span> -->
                         </div>
-                        <p class="medium">Doe para uma instituição que cuida de animais abandonados</p>
+                        <p class="medium">{% trans "Doe para uma instituição que cuida de animais abandonados" %}</p>
                         <div class="d-flex">
                             <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <!--<i class="bi-cart-fill me-1"></i>-->
-                                Doar para uma instituição!<!--Add to cart -->
+                                {% trans "Doar para uma instituição!" %}<!--Add to cart -->
+                            </button>
+                        </div>
+                    </div>
+					<div class="col-md-4" >
+						<a class="navbar-brand" href="https://www.petz.com.br/"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/petz.png' %}" alt="..." /></a>
+						
+					</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5" id="chatbot">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/cachorro1.png' %}" alt="..." /></div>
+                    <div class="col-md-4">
+                        
+                        <h3 class="display-10 fw-bolder">{% trans "Possui dúvidas? Pergunte para nosso chatbot!" %}</h3>
+                        <div class="fs-5 mb-5">
+                           <!-- <span class="text-decoration-line-through">$45.00</span>
+                            <span>$40.00</span> -->
+                        </div>
+                        <p class="medium">{% trans "Inicie uma conversa on-line com o nosso chatbot." %}</p>
+                        <div class="d-flex">
+                            <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <!--<i class="bi-cart-fill me-1"></i>-->
+                                {% trans "Chamar chatbot" %}<!--Add to cart -->
                             </button>
                         </div>
                     </div>
