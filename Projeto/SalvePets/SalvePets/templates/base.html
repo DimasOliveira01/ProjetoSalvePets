@@ -1,0 +1,115 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>SalvePets</title>
+        <!-- Favicon-->
+        <!--<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />-->
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        
+        
+        <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+
+
+
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffea85;">
+            <div class="container px-4 px-lg-5">
+                <!--<a class="navbar-brand" href="#!">Salve Pets</a>-->
+				<a class="navbar-brand" href="/"><img class="card-img-top mb-5 mb-md-0" src="{% static 'core/assets/img/logo.png' %}" alt="..." /></a>
+				
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">{% trans "Sobre" %}</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#adote_pet">{% trans "Adote um pet" %}</a></li>
+                                <!--<li><hr class="dropdown-divider" /></li>-->
+                                <li><a class="dropdown-item" href="#manter_pet">{% trans "Ajude a manter um pet" %}</a></li>
+                                <li><a class="dropdown-item" href="#pet_encontrado">{% trans "Aviso Pet Encontrado" %}</a></li>
+								<li><a class="dropdown-item" href="#pet_perdido">{% trans "Aviso Pet Perdido" %}</a></li>
+                                <li><a class="dropdown-item" href="#chatbot">Chatbot</a></li>
+                            </ul>
+                            
+                            <!--
+                            <form class="d-flex">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ redirect_to }}">
+                                        <select name="language" id="">
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
+                                            {% for language in languages %}
+                                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                                    {{ language.name_local }} ({{ language.code }})
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" value="Go">
+                                    </form>
+                                </ul>
+                            </form></li>
+                            -->
+                            <!--
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+
+                                {% for lang in languages %}
+                                <li>
+                                    <a class="dropdown-item" href="/{{ lang.code }}/">
+                                        {{ lang.name_local }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                                
+                                <li><a class="dropdown-item" href="#!">{% trans "Adote um pet" %}</a></li>
+                                <li><a class="dropdown-item" href="#!">{% trans "Ajude a manter um pet" %}</a></li>
+                            </ul>
+                            -->
+                        </li>
+                    </ul>
+
+                    <form class="d-flex">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'account_logout' %}" type="button" class="btn btn-outline-dark" type="submit">{% trans "Sair" %}</a>
+                        {% else %}
+                        <a href="{% url 'account_login' %}" type="button" class="btn btn-outline-dark" type="submit">{% trans "Entrar" %}</a>
+                        <a href="{% url 'account_signup' %}" type="button" class="btn btn-outline-dark" type="submit">{% trans "Cadastrar" %}</a>
+                        {% endif %}
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+
+        {% block conteudo %}
+
+        {% endblock conteudo %}
+
+        <!-- Footer-->
+        <footer class="py-5" style="background-color: #ffea85;">
+            <div class="container"><p class="m-0 text-center text-black" style="background-color: #ffea85;">Copyright &copy; Salve Pets 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS
+        <script src="js/scripts.js"></script>
+        -->
+    </body>
+</html>
