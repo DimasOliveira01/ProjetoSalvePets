@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = ['ec2-54-237-114-7.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['34.224.62.247']
 
 # Application definition
 
@@ -110,10 +110,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SalvePets', 
+        'NAME': 'salvepets', 
         'USER': 'postgres', 
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1', 
+        'HOST': '0.0.0.0', 
         'PORT': '5432',
     }
 }

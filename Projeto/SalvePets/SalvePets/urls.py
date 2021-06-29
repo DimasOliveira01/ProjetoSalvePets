@@ -21,6 +21,7 @@ from django.urls import path, include
 from django.urls import conf
 from django.urls.conf import include
 from core import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
@@ -43,6 +44,8 @@ urlpatterns += i18n_patterns (
     path('', views.index),
     path('accounts/', include("allauth.urls")),
 )
+
+urlpatterns += staticfiles_urlpatterns()
 
 """
 urlpatterns += i18n_patterns (
