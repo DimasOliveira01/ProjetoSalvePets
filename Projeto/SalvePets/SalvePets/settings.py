@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-54-146-94-52.compute-1.amazonaws.com']
-#ALLOWED_HOSTS = ['54.146.94.52']
+#ALLOWED_HOSTS = ['ec2-54-146-94-52.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['www.salvepets.online','salvepets.online','54.146.94.52']
 
 # Application definition
 
