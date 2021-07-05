@@ -4,9 +4,11 @@
     "\\Projeto",
     "\\Projeto\\SalvePets",
     "\\Projeto\\SalvePets\\core",
-    "\\Projeto\\SalvePets\\core\\migrations",
+    "\\Projeto\\SalvePets\\features",
+    "\\Projeto\\SalvePets\\features\\steps",
+    "\\Projeto\\SalvePets\\SalvePets",
     "\\VirtualEnv"
   ],
-  "SelectedNode": "\\Projeto\\SalvePets\\core\\migrations\\0002_auto_20210621_2027.py",
+  "SelectedNode": "\\Projeto\\SalvePets\\manage.py",
   "PreviewInSolutionExplorer": false
 }
