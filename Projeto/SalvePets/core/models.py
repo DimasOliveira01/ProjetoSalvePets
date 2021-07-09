@@ -28,6 +28,10 @@ class TiposUsuario(models.IntegerChoices):
     US_EMPRESA = 1, 'empresa'
     US_INSTITUICAO = 2, 'instituição'
 """
+PET_CHOICES = (
+    ('perdido','PERDIDO'),
+    ('encontrado','ENCONTRADO'),
+)
 
 class LOCALIZACAO(models.Model):
     cidade = models.CharField(max_length=50)
@@ -56,7 +60,7 @@ class ABRIGO(models.Model):
 
 class Pet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    FK_idAbrigo = models.ForeignKey(ABRIGO, on_delete=models.RESTRICT)
+    #FK_idAbrigo = models.ForeignKey(ABRIGO, on_delete=models.RESTRICT)      #precisa remover a FK abrigo
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     observacoes = models.TextField()
@@ -67,6 +71,9 @@ class Pet(models.Model):
     cor = models.CharField(max_length=30)
     altura = models.DecimalField(max_digits=30, decimal_places=15)
     peso = models.DecimalField(max_digits=30, decimal_places=15)
+    ativo = models.BooleanField(default=True)                                                             #campo add
+    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado')  #campo add
+    foto = models.ImageField(upload_to='pet')                #(upload_to='<caminho a ser salvo>')                  #campo add
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)

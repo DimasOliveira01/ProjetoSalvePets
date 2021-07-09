@@ -29,6 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Caminho das imagens
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 
 # Application definition
 
@@ -180,10 +185,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SESSION_REMEMBER = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #não envia o e-mail para o usuário, após 
-#deploy precisa configurar o envio do e-mail
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #não envia o e-mail para o usuário, após deploy precisa configurar o envio do e-mail
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+
 
 """
 LOGIN_URL = reverse_lazy('submit_login')

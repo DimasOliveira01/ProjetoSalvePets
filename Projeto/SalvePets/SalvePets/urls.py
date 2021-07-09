@@ -21,25 +21,38 @@ from django.urls import path, include
 from django.urls import conf
 from django.urls.conf import include
 from core import views
+from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns     #imagem
+from . import settings                                                          #imagem
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     #path('login/', views.login_user),
-    path('login/submit', views.submit_login),
-    path('logout/', views.logout_user),
+    #path('login/submit', views.submit_login),
+    #path('logout/', views.logout_user),
     path('', views.index),
 
     #path('central-do-usuario/', views.central_do_usuario),
     #path('cadastro-usuario/', views.cadastro_usuario),
     path('accounts/', include("allauth.urls")),
     #path("", include("core.urls", namespace="core")),
+    path('cadastro-pet/',views.cadastro_pet),
+    path('lista-pet-encontrado/',views.lista_pets_encontrados),
+    path('lista-pet-perdido/',views.lista_pets_perdidos),
+    path('lista-pet-usuario/',views.lista_pets_usuario),
 ]
+
+#imagem
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
 
 urlpatterns += i18n_patterns (
     #path('admin/', admin.site.urls),
-    path('login/submit', views.submit_login),
-    path('logout/', views.logout_user),
+    #path('login/submit', views.submit_login),
+    #path('logout/', views.logout_user),
     path('', views.index),
     path('accounts/', include("allauth.urls")),
 )

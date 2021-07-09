@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <!-- Página de Login-->
+    <div class="container mt-4">
+        <!--<h2>{% trans "Cadastrar Pet" %}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+            {% trans "Cadastrar Pet" %}
+            </button>
+        </form>-->
+        <ul class="nav">
+            <li class="nav-item">
+                <!--<a class="nav-link" href="#######">Todos</a>-->
+                <button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>
+            </li>
+            <li class="nav-item">
+                <!--<a class="nav-link" href="#######">Cadastrar</a>-->
+                <button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>
+            </li>
+            <li class="nav-item">
+                <!--<a class="nav-link" href="#######">Meus</a>-->
+                <button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>
+            </li>
+            <li class="nav-item">
+                <!--<a class="nav-link" href="#######">Cadastrar</a>-->
+                <button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>
+            </li>
+        </ul>
+    </div>
+
+{% endblock conteudo %}
