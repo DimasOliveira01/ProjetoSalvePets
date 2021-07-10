@@ -11,7 +11,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
   }
-  </style>
+</style>
 
     <!-- Página de Login-->
     <div class="container mt-4">
@@ -46,9 +46,10 @@
     </div>
         <section class="py-2">
         </section>
+
     
     <h1 class="text-center">Detalhes do Pet</h1>
-    
+
         <div class="container mp-4 mb-4">
         <div class="row">
             <div class="col-sm-4">
@@ -62,10 +63,10 @@
                 <p><b>Tel.: </b>{{usuario.telefone}}</p>
                 <p><b>E-mail: </b>{{user.email}}</p>
                 {% if request.user == pet.user %}
-                <a href="#####">
+                <a href="/deletar-pet/{{ pet.id }}" >   
                     <button type="button" class="btn btn-outline-dark btn-danger">Excluir</button>
                 </a>
-                <a href="######">
+                <a href="/cadastro-pet/?id={{ pet.id }}">
                     <button type="button" class="btn btn-outline-dark">Alterar</button>
                 </a>
                 {% endif %}

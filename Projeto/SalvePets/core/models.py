@@ -5,6 +5,7 @@ from django.db.models.expressions import Value
 from django.db.models.fields.related import ForeignKey
 from django.utils import timezone
 
+
 # from django.contrib.gis.db import models ////CORRIGIR
 
 # Create your models here.
@@ -74,6 +75,7 @@ class Pet(models.Model):
     ativo = models.BooleanField(default=True)                                                             #campo add
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado')  #campo add
     foto = models.ImageField(upload_to='pet')                #(upload_to='<caminho a ser salvo>')                  #campo add
+
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
