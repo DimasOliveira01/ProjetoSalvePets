@@ -46,21 +46,30 @@
     </div>
         <section class="py-2">
         </section>
-    <div class="container mb-4">
+    
+    <h1 class="text-center">Detalhes do Pet</h1>
+    
+        <div class="container mp-4 mb-4">
         <div class="row">
-            {% for p in pet %}
             <div class="col-sm-4">
-                <a href="../pet-informacao/{{ p.id }}">
-                    <div class="polaroid">
-                        <img src="{{p.foto.url}}" style="width:100%">
-                        <div class="container">
-                            <p>{{ p.nome }}</p>
-                            <!--<p>Ajude-nos a encontrar o seu dono!</p>-->
-                        </div>
-                    </div>
-                </a>    
+                <div class="polaroid">
+                    <img src="{{pet.foto.url}}" width="350" height="250" >
+                </div>
             </div>
-            {% endfor %}
+            <div class="col-sm-8">
+                <p><b>Descrição: </b>{{pet.descricao}}</p>
+                <h4>Contato</h4>
+                <p><b>Tel.: </b>{{usuario.telefone}}</p>
+                <p><b>E-mail: </b>{{user.email}}</p>
+                {% if request.user == pet.user %}
+                <a href="#####">
+                    <button type="button" class="btn btn-outline-dark btn-danger">Excluir</button>
+                </a>
+                <a href="######">
+                    <button type="button" class="btn btn-outline-dark">Alterar</button>
+                </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 

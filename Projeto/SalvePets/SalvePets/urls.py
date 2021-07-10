@@ -40,6 +40,8 @@ urlpatterns = [
     path('lista-pet-encontrado/',views.lista_pets_encontrados),
     path('lista-pet-perdido/',views.lista_pets_perdidos),
     path('lista-pet-usuario/',views.lista_pets_usuario),
+    path('cadastro-pet/',views.cadastro_pet),
+    path('pet-informacao/<id>/',views.pet_informacao),
 ]
 
 #imagem

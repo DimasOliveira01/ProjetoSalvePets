@@ -14,18 +14,27 @@ from .models import Pet
 
 @login_required(login_url='/accounts/login/')
 def lista_pets_encontrados(request):
-    pet=Pet.objects.filter(encontradoPerdido='encontrado') #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
+    pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
     return render(request, 'listaPets.html',{'pet':pet})
 
 @login_required(login_url='/accounts/login/')
 def lista_pets_perdidos(request):
-    pet=Pet.objects.filter(encontradoPerdido='perdido')
+    pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
     return render(request, 'listaPets.html',{'pet':pet})
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
     pet=Pet.objects.filter(ativo=True, user=request.user)
     return render(request, 'listaPets.html',{'pet':pet})
+
+@login_required(login_url='/accounts/login')
+def cadastro_pet(request):
+    return render(request, 'cadastroPet.html')
+
+@login_required(login_url='/accounts/login')
+def pet_informacao(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    return render(request, 'pet.html', {'pet':pet})
 
 def index(request):
     return render(request, 'index.html')
