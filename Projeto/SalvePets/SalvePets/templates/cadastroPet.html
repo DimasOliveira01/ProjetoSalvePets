@@ -35,7 +35,7 @@
         <div class="container">
             <div class="form-group">
                 <label>Nome:</label>
-                <input class="form-control" name="nome" type="text" value="{{ pet.nome }}">
+                <input required="required" class="form-control" name="nome" type="text" value="{{ pet.nome }}">
             </div>
             <div class="form-group">
                 <label>Descrição:</label>
@@ -47,42 +47,49 @@
             </div>
             <div class="form-group">
                 <label>Comprimento(cm):</label>
-                <input class="form-control" name="comprimento" type="number" value="{{ pet.comprimento }}">
+                <input required="required" class="form-control" name="comprimento" type="number" value="{{ pet.comprimento }}">
             </div>
             <div class="form-group">
                 <label>Largura(cm):</label>
-                <input class="form-control" name="largura" type="number" value="{{ pet.largura }}">
+                <input required="required" class="form-control" name="largura" type="number" value="{{ pet.largura }}">
             </div>
             <div class="form-group">
                 <label>Data Nascimento:</label>
-                <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento }}">
+                <input required="required" class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento }}">
             </div>
             <div class="form-group">
                 <label>Raça:</label>
-                <input class="form-control" name="raca" type="text" value="{{ pet.raca }}">
+                <input required="required" class="form-control" name="raca" type="text" value="{{ pet.raca }}">
             </div>
             <div class="form-group">
                 <label>Cor:</label>
-                <input class="form-control" name="cor" type="text"  value="{{ pet.cor }}">
+                <input required="required" class="form-control" name="cor" type="text"  value="{{ pet.cor }}">
             </div>
             <div class="form-group">
                 <label>Altura(cm):</label>
-                <input class="form-control" name="altura" type="number" value="{{ pet.altura }}">
+                <input required="required" class="form-control" name="altura" type="number" value="{{ pet.altura }}">
             </div>
             <div class="form-group">
                 <label>Peso(Kg):</label>
-                <input class="form-control" name="peso" type="number" value="{{ pet.peso }}">
+                <input required="required" class="form-control" name="peso" type="number" value="{{ pet.peso }}">
             </div>
             <div class="form-group">
                 <label>Situação:</label>
-                <input class="form-control" name="encontradoPerdido" type="text" value="{{ pet.situacao }}">
+                <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.situacao }}">
+                    <option value="encontrado">Encontrado</option>
+                    <option value="perdido">Perdido</option>
+                  </select>
             </div>
             <div class="form-group">
-                <p><a href="/media/{{ pet.foto }}" target="_blank">Foto atual</a></p>
+                {% if pet.id != null %}
+                    <p><a   href="/media/{{ pet.foto }}" target="_blank">Foto atual</a></p>
+                {% else %}
+                    <p><label>Escolha uma imagem:</label></p>
+                {% endif %}
                 <input type="file" class="form-control-file border" name="foto" accept="image/*">
             </div>
-
-            <button type="submit" class="btn btn-outline-dark">
+            
+            <button type="submit" class="btn btn-outline-dark mt-4">
                 {% if pet %}
                     Alterar
                 {% else %}
