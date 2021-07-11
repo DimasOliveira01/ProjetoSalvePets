@@ -1,40 +1,107 @@
-{% extends "base.html" %}
+<!--{% extends "base.html" %}
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
-
+-->
 {% block conteudo %}
 
     <!-- Página de Login-->
     <div class="container mt-4">
-        <!--<h2>{% trans "Cadastrar Pet" %}</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <section class="py-2">
-            </section>
-            <button class="btn btn-outline-dark" type="submit"> 
-            {% trans "Cadastrar Pet" %}
-            </button>
-        </form>-->
+      
         <ul class="nav">
             <li class="nav-item">
-                <!--<a class="nav-link" href="#######">Todos</a>-->
-                <button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>
+                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">Meus pets cadastrados</a>
+                
             </li>
             <li class="nav-item">
-                <!--<a class="nav-link" href="#######">Cadastrar</a>-->
-                <button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>
+                <a class="btn btn-outline-dark" href="/cadastro-pet/">Cadastrar</a>
+            
             </li>
             <li class="nav-item">
-                <!--<a class="nav-link" href="#######">Meus</a>-->
-                <button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>
+                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">Pets perdidos</a>                
+                
             </li>
             <li class="nav-item">
-                <!--<a class="nav-link" href="#######">Cadastrar</a>-->
-                <button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>
+                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">Pets encontrados</a>
+                
             </li>
         </ul>
     </div>
 
-{% endblock conteudo %}
+    <h1 class="text-center">Cadastrar um Pet</h1>
+
+    <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
+        <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
+        <div class="container">
+            <div class="form-group">
+                <label>Nome:</label>
+                <input required="required" class="form-control" name="nome" type="text" value="{{ pet.nome }}">
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Observações:</label>
+                <textarea class="form-control" rows="3" name="observacoes" type="text"  >{{ pet.observacoes }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Comprimento(cm):</label>
+                <input required="required" class="form-control" name="comprimento" type="number" value="{{ pet.comprimento }}">
+            </div>
+            <div class="form-group">
+                <label>Largura(cm):</label>
+                <input required="required" class="form-control" name="largura" type="number" value="{{ pet.largura }}">
+            </div>
+            <div class="form-group">
+                <label>Data Nascimento:</label>
+                <input required="required" class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento }}">
+            </div>
+            <div class="form-group">
+                <label>Raça:</label>
+                <input required="required" class="form-control" name="raca" type="text" value="{{ pet.raca }}">
+            </div>
+            <div class="form-group">
+                <label>Cor:</label>
+                <input required="required" class="form-control" name="cor" type="text"  value="{{ pet.cor }}">
+            </div>
+            <div class="form-group">
+                <label>Altura(cm):</label>
+                <input required="required" class="form-control" name="altura" type="number" value="{{ pet.altura }}">
+            </div>
+            <div class="form-group">
+                <label>Peso(Kg):</label>
+                <input required="required" class="form-control" name="peso" type="number" value="{{ pet.peso }}">
+            </div>
+            <div class="form-group">
+                <label>Situação:</label>
+                <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.situacao }}">
+                    <option value="encontrado">Encontrado</option>
+                    <option value="perdido">Perdido</option>
+                  </select>
+            </div>
+            <div class="form-group">
+                {% if pet.id != null %}
+                    <p><a   href="/media/{{ pet.foto }}" target="_blank">Foto atual</a></p>
+                {% else %}
+                    <p><label>Escolha uma imagem:</label></p>
+                {% endif %}
+                <input type="file" class="form-control-file border" name="foto" accept="image/*">
+            </div>
+            
+            <button type="submit" class="btn btn-outline-dark mt-4">
+                {% if pet %}
+                    Alterar
+                {% else %}
+                    Cadastrar
+                {% endif %}
+            </button>
+        </div>
+    </form>
+ <!-- 
+  <form method='POST'>{% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' value='Save' />
+</form>
+-->
+{% endblock %}

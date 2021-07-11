@@ -37,10 +37,14 @@ urlpatterns = [
     #path('cadastro-usuario/', views.cadastro_usuario),
     path('accounts/', include("allauth.urls")),
     #path("", include("core.urls", namespace="core")),
-    path('cadastro-pet/',views.cadastro_pet),
     path('lista-pet-encontrado/',views.lista_pets_encontrados),
     path('lista-pet-perdido/',views.lista_pets_perdidos),
     path('lista-pet-usuario/',views.lista_pets_usuario),
+    path('cadastro-pet/',views.cadastro_pet),
+    path('pet-informacao/<id>/',views.pet_informacao),
+    path('cadastro-pet/submit',views.set_pet),
+    path('deletar-pet/<id>/',views.deletar_pet),
+
 ]
 
 #imagem
