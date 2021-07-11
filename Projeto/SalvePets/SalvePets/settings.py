@@ -191,6 +191,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.SignupForm'
 
 """
 LOGIN_URL = reverse_lazy('submit_login')
