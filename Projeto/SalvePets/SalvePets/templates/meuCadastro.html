@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <!-- Página de Visualização de dados Cadastrais-->
+    <div class="container mt-4">
+        <h2>{% trans "Meu Cadastro" %}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+                {% trans "Alterar" %}
+            </button>
+        </form>
+    </div>
+
+{% endblock conteudo %}

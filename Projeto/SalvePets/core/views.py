@@ -5,6 +5,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .models import Pet
+from .models import USUARIO
+from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from .forms import MeuCadastroForm
 
 
 # Create your views here.
@@ -33,6 +37,15 @@ def index(request):
 def cadastro_pet(request):
     return render(request, 'cadastroPet.html')
 
+@login_required(login_url='/meu-cadastro')
+def meu_cadastro(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST)
+        if form.is_valid():
+            #usuario=USUARIO.objects
+            return render(request, 'meuCadastro.html')
+    form = UserChangeForm()
+    return render(request, "meuCadastro.html", {'form':form})
 
 
 """

@@ -32,6 +32,7 @@ urlpatterns = [
     #path('logout/', views.logout_user),
     path('', views.index),
 
+    path('meu-cadastro/', views.meu_cadastro, name="meu_cadastro"),
     #path('central-do-usuario/', views.central_do_usuario),
     #path('cadastro-usuario/', views.cadastro_usuario),
     path('accounts/', include("allauth.urls")),
