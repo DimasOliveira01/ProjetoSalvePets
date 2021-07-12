@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 17:10-0300\n"
+"POT-Creation-Date: 2021-07-12 15:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,83 +18,179 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\SalvePets\templates\account\login.html:38
-#: .\SalvePets\templates\account\logout.html:38
-#: .\SalvePets\templates\account\signup.html:38
-#: .\SalvePets\templates\index.html:36
-msgid "Sobre"
-msgstr "About Us"
+#: .\SalvePets\templates\account\email_confirm.html:5
+#: .\SalvePets\templates\account\email_confirm.html:9
+msgid "Confirmar endereço de e-mail"
+msgstr "Confirm e-mail address"
 
-#: .\SalvePets\templates\account\login.html:42
-#: .\SalvePets\templates\account\logout.html:42
-#: .\SalvePets\templates\account\signup.html:42
-#: .\SalvePets\templates\index.html:40
-msgid "Adote um pet"
-msgstr "Adopt a pet"
+#: .\SalvePets\templates\account\email_confirm.html:13
+#, python-format
+msgid ""
+"Confirme que <a href=\"mailto:%(email)s\">%(email)s</a> é um endereço de e-"
+"mail do usuário %(user_display)s."
+msgstr ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
+"mail address for user %(user_display)s."
 
-#: .\SalvePets\templates\account\login.html:44
-#: .\SalvePets\templates\account\logout.html:44
-#: .\SalvePets\templates\account\signup.html:44
-#: .\SalvePets\templates\index.html:42
-msgid "Ajude a manter um pet"
-msgstr "Help keep a pet"
+#: .\SalvePets\templates\account\email_confirm.html:16
+msgid "Confirmar"
+msgstr "Confirm"
 
-#: .\SalvePets\templates\account\login.html:45
-#: .\SalvePets\templates\account\logout.html:45
-#: .\SalvePets\templates\account\signup.html:45
-#: .\SalvePets\templates\index.html:43
-msgid "Aviso Pet Encontrado"
-msgstr "Pet notice found"
+#: .\SalvePets\templates\account\email_confirm.html:20
+#, python-format
+msgid ""
+"Esse link de confirmação de e-mail expirou ou é inválido. Por favor, <a href="
+"\"%(email_url)s\">, solicite uma nova confirmação de e-mail</a>."
+msgstr ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">, issue a new e-mail confirmation request</a>."
 
-#: .\SalvePets\templates\account\login.html:46
-#: .\SalvePets\templates\account\logout.html:46
-#: .\SalvePets\templates\account\signup.html:46
-#: .\SalvePets\templates\index.html:44
-msgid "Aviso Pet Perdido"
-msgstr "Lost Pet warning"
-
-#: .\SalvePets\templates\account\login.html:58
-#: .\SalvePets\templates\account\login.html:65
-#: .\SalvePets\templates\index.html:58
+#: .\SalvePets\templates\account\login.html:10
+#: .\SalvePets\templates\account\login.html:17
+#: .\SalvePets\templates\base.html:86
 msgid "Entrar"
 msgstr "Log in"
 
-#: .\SalvePets\templates\account\logout.html:58
-#: .\SalvePets\templates\account\logout.html:65
-#: .\SalvePets\templates\index.html:53
+#: .\SalvePets\templates\account\login.html:20
+msgid "Esqueci minha senha"
+msgstr "Forgot your password?"
+
+#: .\SalvePets\templates\account\logout.html:10
+#: .\SalvePets\templates\account\logout.html:17
+#: .\SalvePets\templates\base.html:84
 msgid "Sair"
 msgstr "Log Out"
 
-#: .\SalvePets\templates\account\logout.html:59
+#: .\SalvePets\templates\account\logout.html:11
 msgid "Você tem certeza que deseja sair?"
 msgstr "Are you sure you want to quit?"
 
-#: .\SalvePets\templates\account\signup.html:58
-msgid "Cadastro"
-msgstr "Sign Up"
+#: .\SalvePets\templates\account\password_reset.html:7
+#: .\SalvePets\templates\account\password_reset.html:11
+#: .\SalvePets\templates\account\password_reset_from_key.html:4
+#: .\SalvePets\templates\account\password_reset_from_key.html:8
+#: .\SalvePets\templates\account\password_reset_from_key.html:18
+#: .\SalvePets\templates\account\password_reset_from_key_done.html:4
+#: .\SalvePets\templates\account\password_reset_from_key_done.html:7
+msgid "Mudar senha"
+msgstr "Change password"
 
-#: .\SalvePets\templates\account\signup.html:65
-#: .\SalvePets\templates\index.html:62
+#: .\SalvePets\templates\account\password_reset.html:16
+msgid ""
+"Esqueceu sua senha? Digite o seu e-mail cadastrado no Salve Pets para que "
+"enviemos um e-mail com as instruções de recuperação de senha."
+msgstr ""
+"Forgot your password? Enter your e-mail address of Salve Pets below, and "
+"we'll send you an e-mail allowing you to reset it."
+
+#: .\SalvePets\templates\account\password_reset.html:21
+msgid "Redefinir senha"
+msgstr "Reset password"
+
+#: .\SalvePets\templates\account\password_reset.html:24
+msgid ""
+"Por favor, entre em contato caso você tenha algum problema com redefinição "
+"de senha."
+msgstr ""
+"Please contact us if you have any trouble resetting "
+"your password."
+
+#: .\SalvePets\templates\account\password_reset_done.html:6
+#: .\SalvePets\templates\account\password_reset_done.html:9
+msgid "Redifinir senha"
+msgstr "Reset password"
+
+#: .\SalvePets\templates\account\password_reset_done.html:15
+msgid ""
+"Um e-mail foi enviado para você. Por favor, verifique sua caixa de entrada."
+msgstr ""
+"We have sent you an e-mail. Please check your inbox."
+
+#: .\SalvePets\templates\account\password_reset_from_key.html:8
+msgid "Problema no token"
+msgstr "Bad token"
+
+#: .\SalvePets\templates\account\password_reset_from_key.html:12
+#, python-format
+msgid ""
+"O link para alteração da senha é inválido, possivelmente por que já foi "
+"usado. Solicite uma <a href=\"%(passwd_reset_url)s\">nova alteração de "
+"senha</a>."
+msgstr ""
+"The password reset link was invalid, possibly because it has "
+"already been used. Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
+
+#: .\SalvePets\templates\account\password_reset_from_key.html:21
+msgid "Sua senha foi alterada com sucesso."
+msgstr "Your password is now changed."
+
+#: .\SalvePets\templates\account\password_reset_from_key_done.html:8
+msgid "Sua senha foi alterada."
+msgstr "Your password is now changed."
+
+#: .\SalvePets\templates\account\signup.html:10
+msgid "Cadastro"
+msgstr "Registration"
+
+#: .\SalvePets\templates\account\signup.html:17
+#: .\SalvePets\templates\base.html:87
 msgid "Cadastrar"
 msgstr "Sign Up"
 
-#: .\SalvePets\templates\index.html:79
+#: .\SalvePets\templates\account\verification_sent.html:5
+#: .\SalvePets\templates\account\verification_sent.html:8
+msgid "Verifique seu e-mail"
+msgstr "Check your e-mail"
+
+#: .\SalvePets\templates\account\verification_sent.html:10
+msgid ""
+"Você recebeu um e-mail de confirmação. Clique no link enviado para continuar "
+"seu cadastro."
+msgstr ""
+"We have sent an e-mail to you for verification. Follow the link provided to finalize the "
+" signup process."
+
+#: .\SalvePets\templates\base.html:30
+msgid "Sobre"
+msgstr "About Us"
+
+#: .\SalvePets\templates\base.html:34 .\SalvePets\templates\base.html:75
+msgid "Adote um pet"
+msgstr "Adopt a pet"
+
+#: .\SalvePets\templates\base.html:36 .\SalvePets\templates\base.html:76
+msgid "Ajude a manter um pet"
+msgstr "Help keep a pet"
+
+#: .\SalvePets\templates\base.html:37
+msgid "Aviso Pet Encontrado"
+msgstr "Pet notice found"
+
+#: .\SalvePets\templates\base.html:38
+msgid "Aviso Pet Perdido"
+msgstr "Lost Pet warning"
+
+#: .\SalvePets\templates\index.html:30
 msgid "Pet perdido! Ajude-nos a encontrar"
 msgstr "Lost Pet! Help us find"
 
-#: .\SalvePets\templates\index.html:84
-msgid "Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade dos seu donos!"
-msgstr "This pet is missing, help us find and make happiness from their owners!"
+#: .\SalvePets\templates\index.html:35
+msgid ""
+"Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade "
+"dos seu donos!"
+msgstr ""
+"This pet is missing, help us find and make happiness from their owners!"
 
-#: .\SalvePets\templates\index.html:89
+#: .\SalvePets\templates\index.html:40
 msgid "Avise-nos"
 msgstr "Notify us"
 
-#: .\SalvePets\templates\index.html:111
+#: .\SalvePets\templates\index.html:57
 msgid "Adote este pet!"
 msgstr "Adopt a pet"
 
-#: .\SalvePets\templates\index.html:116
+#: .\SalvePets\templates\index.html:62
 msgid ""
 "Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de "
 "um novo lar, ele é amável e fofinho!"
@@ -102,42 +198,72 @@ msgstr ""
 "Adopt this cute little dog, he was found abandoned and is looking for a new "
 "home, he's lovely and cuddly!"
 
-#: .\SalvePets\templates\index.html:121
+#: .\SalvePets\templates\index.html:67
 msgid "Adote"
 msgstr "Adopt"
 
-#: .\SalvePets\templates\index.html:139
+#: .\SalvePets\templates\index.html:85
 msgid "Pet encontrado, ajude-nos a localizar o seu dono!"
 msgstr "Pet found, help us find its owner!"
 
-#: .\SalvePets\templates\index.html:144
+#: .\SalvePets\templates\index.html:90
 msgid "Anuncie um pet localizado na sua região"
 msgstr "Advertise a pet located in your region"
 
-#: .\SalvePets\templates\index.html:149
+#: .\SalvePets\templates\index.html:94
 msgid "Anuncie"
 msgstr "Advertise"
 
-#: .\SalvePets\templates\index.html:167
+#: .\SalvePets\templates\index.html:114
 msgid "Ajude a manter este lindo pet!"
 msgstr "Help keep a pet"
 
-#: .\SalvePets\templates\index.html:172
+#: .\SalvePets\templates\index.html:119
 msgid "Doe para uma instituição que cuida de animais abandonados"
 msgstr "Donate to an institution that takes care of stray animals"
 
-#: .\SalvePets\templates\index.html:177
+#: .\SalvePets\templates\index.html:124
 msgid "Doar para uma instituição!"
 msgstr "Donate to an institution!"
 
-#: .\SalvePets\templates\index.html:195
+#: .\SalvePets\templates\index.html:142
 msgid "Possui dúvidas? Pergunte para nosso chatbot!"
 msgstr "Do you have any questions? Ask our chatbot!"
 
-#: .\SalvePets\templates\index.html:200
+#: .\SalvePets\templates\index.html:147
 msgid "Inicie uma conversa on-line com o nosso chatbot."
 msgstr "Start an online conversation with our chatbot."
 
-#: .\SalvePets\templates\index.html:205
+#: .\SalvePets\templates\index.html:152
 msgid "Chamar chatbot"
 msgstr "Call chatbot"
+
+#: .\SalvePets\templates\listaPets.html:18
+#: .\SalvePets\templates\listaPets.html:25 .\SalvePets\templates\pet.html:18
+#: .\SalvePets\templates\pet.html:25
+#, fuzzy
+#| msgid "Cadastrar"
+msgid "Cadastrar Pet"
+msgstr "Register a pet"
+
+#: .\SalvePets\templates\listaPets.html:31 .\SalvePets\templates\pet.html:31
+msgid "Meus pets"
+msgstr "My pets"
+
+#: .\SalvePets\templates\listaPets.html:35 .\SalvePets\templates\pet.html:35
+#, fuzzy
+#| msgid "Cadastrar"
+msgid "Cadastrar um pet"
+msgstr "Sign Up"
+
+#: .\SalvePets\templates\listaPets.html:39 .\SalvePets\templates\pet.html:39
+#, fuzzy
+#| msgid "Aviso Pet Perdido"
+msgid "Pets perdidos"
+msgstr "Lost Pet warning"
+
+#: .\SalvePets\templates\listaPets.html:43 .\SalvePets\templates\pet.html:43
+#, fuzzy
+#| msgid "Aviso Pet Encontrado"
+msgid "Pets encontrados"
+msgstr "Pet notice found"

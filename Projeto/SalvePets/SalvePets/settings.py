@@ -184,13 +184,11 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SESSION_REMEMBER = True
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #não envia o e-mail para o usuário, após deploy precisa configurar o envio do e-mail
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = "true"
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.SignupForm'
@@ -203,7 +201,32 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 #django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+"""
+MATHEUS DIAS - 12/07/2021:
+
+Por padrão, deixo a confirmação do cadastro por e-mail e a funcionalidade de esquecer a senha desabilitado para que todos
+possam trabalhar no projeto. Mas por favor, ao fazer o pull dessa versão, adicione em seu sistema duas variáveis:
+EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD
+
+Os valores estão no primeiro link da descrição do grupo e também mandei por whatsapp.
+
+WINDOWS:
+- Para configurar, vá para o menu iniciar e pesquise por "variáveis". Clique no primeiro resultado.
+- Vá para "Variáveis de Ambiente".
+- Na parte de "Variáveis do sistema", clique em novo e no nome, digite EMAIL_HOST_USER, e no valor digite o endereço do e-mail que disponibilizei no whatsapp.
+- Repita o processo agora com o nome EMAIL_HOST_PASSWORD, e insira a senha do e-mail.
+
+Depois disso, habilite a linha EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" e comente a linha EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend".
+Habilite a linha ACCOUNT_EMAIL_VERIFICATION = "mandatory".
+
+Pronto, agora os e-mails funcionarão.
+
+
+"""
+
 # Configurações do email
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
