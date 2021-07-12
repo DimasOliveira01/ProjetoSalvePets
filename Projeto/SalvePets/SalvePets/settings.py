@@ -185,11 +185,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SESSION_REMEMBER = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #não envia o e-mail para o usuário, após deploy precisa configurar o envio do e-mail
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #não envia o e-mail para o usuário, após deploy precisa configurar o envio do e-mail
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = "true"
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.SignupForm'
 
@@ -200,3 +202,12 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 #django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Configurações do email
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST
