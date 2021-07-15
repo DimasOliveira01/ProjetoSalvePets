@@ -4,23 +4,77 @@
 
 {% block conteudo %}
 
-<section class="py-5">
-    <div class="container px-2 px-lg-5 my-2">
-        <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
-            <input type="hidden" name="next" value="{{ redirect_to }}">
-            <select name="language" id="">
-                {% get_available_languages as LANGUAGES %}
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
-                        {{ language.name_local }} ({{ language.code }})
-                    </option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Go">
-        </form>
+<section class="page-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">{% blocktrans %}Nossos serviços{% endblocktrans %}</h2>
+            <h3 class="section-subheading text-muted">{% blocktrans %}Confira as funcionalidades do projeto Salve Pets.{% endblocktrans %}</h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <a href="/lista-pet-perdido/" class="teste">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fas fa-paw fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
+            <h4 class="my-3">{% blocktrans %}Pets perdidos{% endblocktrans %}</h4>
+            <p class="text-muted">{% blocktrans %}Ajude-nos a encontrar pets desaperecidos e assim trazer felicidade aos seus donos.{% endblocktrans %}</p>
+        </div>
+        <div class="col-md-4">
+                <a href="/">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-dog fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <h4 class="my-3">{% blocktrans %}Adotar pets{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Adote lindos e amáveis pets que foram encontrados abandonados e estão a procura de um novo lar.{% endblocktrans %}</p>
+            </div>
+            <div class="col-md-4">
+                <a href="/">
+                    <span class="fa-stack fa-4x">
+                        <i id="dog" class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-bullhorn fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <h4 class="my-3">{% blocktrans %}Anunciar pet encontrado{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Anuncie o local e as características do pet encontrado por você para ajudar nas buscas ao dono.{% endblocktrans %}</p>
+            </div>
+            <div class="col-md-4">
+                <a href="/">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-dollar-sign fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <h4 class="my-3">{% blocktrans %}Patrocinar pets{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Doe para uma instituição que cuida de animais abandonados.{% endblocktrans %}</p>
+            </div>
+            <div class="col-md-4">
+                <a href="/">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-store fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <h4 class="my-3">{% blocktrans %}Loja Salve Pets{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Ajude-nos a financiar esse projeto comprando em nossa loja oficial!{% endblocktrans %}</p>
+            </div> 
+            <div class="col-md-4">
+                <a href="/">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-robot fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <h4 class="my-3">{% blocktrans %}Possui dúvidas? Pergunte para nosso chatbot!{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Inicie uma conversa on-line com o nosso chatbot.{% endblocktrans %}</p>
+            </div>
+        </div>
     </div>
 </section>
+
 <!-- Product section-->
 <section class="py-5" id="pet_perdido">
     <div class="container px-2 px-lg-5 my-2">

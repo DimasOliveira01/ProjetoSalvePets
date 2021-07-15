@@ -16,12 +16,10 @@ from .forms import PetForm
 #class HomePageView(TemplateView):
  #   template_name = "index.html"
 
-@login_required(login_url='/accounts/login/')
 def lista_pets_encontrados(request):
     pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
     return render(request, 'listaPets.html',{'pet':pet})
 
-@login_required(login_url='/accounts/login/')
 def lista_pets_perdidos(request):
     pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
     return render(request, 'listaPets.html',{'pet':pet})
