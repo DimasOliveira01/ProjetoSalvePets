@@ -14,11 +14,11 @@
         <!-- Bootstrap icons-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)--> 
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />       
+        <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />--> 
+        <!--<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />   -->     
         <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
     </head>
-    <body id="page-top">
+    <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffea85;">
             <div class="container px-4 px-lg-5">
@@ -34,12 +34,50 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#adote_pet">{% trans "Adote um pet" %}</a></li>
+                                <!--<li><hr class="dropdown-divider" /></li>-->
                                 <li><a class="dropdown-item" href="#manter_pet">{% trans "Ajude a manter um pet" %}</a></li>
                                 <li><a class="dropdown-item" href="#pet_encontrado">{% trans "Aviso Pet Encontrado" %}</a></li>
 								<li><a class="dropdown-item" href="#pet_perdido">{% trans "Aviso Pet Perdido" %}</a></li>
                                 <li><a class="dropdown-item" href="#chatbot">Chatbot</a></li>
                             </ul>
-                        </li>   
+                            
+                            <!--
+                            <form class="d-flex">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ redirect_to }}">
+                                        <select name="language" id="">
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
+                                            {% for language in languages %}
+                                                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                                    {{ language.name_local }} ({{ language.code }})
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" value="Go">
+                                    </form>
+                                </ul>
+                            </form></li>
+                            -->
+                            <!--
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for lang in languages %}
+                                <li>
+                                    <a class="dropdown-item" href="/{{ lang.code }}/">
+                                        {{ lang.name_local }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                                
+                                <li><a class="dropdown-item" href="#!">{% trans "Adote um pet" %}</a></li>
+                                <li><a class="dropdown-item" href="#!">{% trans "Ajude a manter um pet" %}</a></li>
+                            </ul>
+                            -->
+                        </li>
                     </ul>
                     <section class="py-0">
                         <div class="container px-lg-5">

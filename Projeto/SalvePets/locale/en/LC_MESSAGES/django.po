@@ -273,8 +273,6 @@ msgid "Patrocinar pets"
 msgstr "Sponsor pets"
 
 #: .\SalvePets\templates\index.html:52
-#, fuzzy
-#| msgid "Doe para uma instituição que cuida de animais abandonados"
 msgid "Doe para uma instituição que cuida de animais abandonados."
 msgstr "Donate to an institution that takes care of stray animals."
 
