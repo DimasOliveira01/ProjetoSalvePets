@@ -96,6 +96,9 @@ def pet_informacao(request, id):
 
 def index(request):
     return render(request, 'index.html')
+    
+def localizacao(request):
+    return render(request, 'localizacao.html')
 
 
 
