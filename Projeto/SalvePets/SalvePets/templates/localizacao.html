@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
+<!--<div class="container">
+    <script>
+        if('geolocation' in navigator){
+            navigator.geolocation.getCurrentPosition(function(position){
+                console.log(position)
+                alert('localização pegada')
+            }, function(error){
+                console.log(error)
+            })
+        }else{
+            alert('Não foi possível obter a sua posição!')
+        }
+    </script>
+</div>-->
+
+{% endblock %}

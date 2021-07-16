@@ -4,6 +4,9 @@ from django.db.models.deletion import CASCADE
 from django.db.models.expressions import Value
 from django.db.models.fields.related import ForeignKey
 from django.utils import timezone
+from django.contrib.gis.db import models
+from django.contrib.gis.db.models import PointField
+from django.contrib.gis.gdal import DataSource
 
 
 # from django.contrib.gis.db import models ////CORRIGIR
@@ -75,6 +78,7 @@ class Pet(models.Model):
     ativo = models.BooleanField(default=True)                                                             #campo add
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado')  #campo add
     foto = models.ImageField(upload_to='pet')                #(upload_to='<caminho a ser salvo>')                  #campo add
+    coordenada = models.PointField(default='POINT(0 0)', srid=4326)                        #campo add   default='POINT(0 0)', srid=4326
 
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
