@@ -13,8 +13,6 @@ from .forms import PetForm
 
 # Create your views here.
 
-#class HomePageView(TemplateView):
- #   template_name = "index.html"
 
 def lista_pets_encontrados(request):
     pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
@@ -43,14 +41,15 @@ def set_pet(request):
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
     observacoes=request.POST.get('observacoes')
-    comprimento=request.POST.get('comprimento')
-    largura=request.POST.get('largura')
+    #comprimento=request.POST.get('comprimento')
+    #largura=request.POST.get('largura')
     dataNascimento=request.POST.get('dataNascimento')
     raca=request.POST.get('raca')
     cor=request.POST.get('cor')
     altura=request.POST.get('altura')
     peso=request.POST.get('peso')
     encontradoPerdido=request.POST.get('encontradoPerdido')
+    #coordenada=request.POST.get('coordenada')
     foto=request.FILES.get('foto')
     user=request.user
     #alteração de cadastro
@@ -61,8 +60,6 @@ def set_pet(request):
             pet.nome=nome
             pet.descricao=descricao
             pet.observacoes=observacoes
-            pet.comprimento=comprimento
-            pet.largura=largura
             pet.dataNascimento=dataNascimento
             pet.raca=raca
             pet.cor=cor
@@ -72,11 +69,18 @@ def set_pet(request):
             if foto:
                 pet.foto = foto
             pet.save()
+            #pet.comprimento=comprimento
+            #pet.largura=largura
+            #pet.coordenada=coordenada
     else:
-        pet = Pet.objects.create(nome=nome, descricao=descricao, observacoes=observacoes, comprimento=comprimento, largura=largura,dataNascimento=dataNascimento,
-                                raca=raca,cor=cor,altura=altura,peso=peso,encontradoPerdido=encontradoPerdido,foto=foto,user=user)    #faltou encontradoPerdido
+        pet = Pet.objects.create(nome=nome, descricao=descricao, observacoes=observacoes, dataNascimento=dataNascimento, raca=raca, cor=cor, altura=altura, peso=peso, encontradoPerdido=encontradoPerdido, foto=foto, user=user)    #retirei comprimento=comprimento, largura=largura, coordenada=coordenada,
     url = '/pet-informacao/{}/'.format(pet.id)
     return redirect(url)
+
+
+
+
+
 
 @login_required(login_url='/acccounts/login')
 def deletar_pet(request, id):

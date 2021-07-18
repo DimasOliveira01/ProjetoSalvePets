@@ -13,16 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+#from SalvePets.core.views import PetCreate
 from django import urls
 from django.conf.urls import i18n
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
-from django.urls import path, include
-from django.urls import conf
+#from django.urls import path, include
+from django.urls import conf, path, include
 from django.urls.conf import include
 from core import views
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns     #imagem
 from . import settings                                                          #imagem
+
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),

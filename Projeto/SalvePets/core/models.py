@@ -68,8 +68,8 @@ class Pet(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     observacoes = models.TextField()
-    comprimento = models.DecimalField(max_digits=30, decimal_places=15)
-    largura = models.DecimalField(max_digits=30, decimal_places=15)
+    #comprimento = models.DecimalField(max_digits=30, decimal_places=15)
+    #largura = models.DecimalField(max_digits=30, decimal_places=15)
     dataNascimento = models.DateField(blank=True, null=True)
     raca = models.CharField(max_length=50)
     cor = models.CharField(max_length=30)
@@ -78,7 +78,7 @@ class Pet(models.Model):
     ativo = models.BooleanField(default=True)                                                             #campo add
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado')  #campo add
     foto = models.ImageField(upload_to='pet')                #(upload_to='<caminho a ser salvo>')                  #campo add
-    coordenada = models.PointField(default='POINT(0 0)', srid=4326)                        #campo add   default='POINT(0 0)', srid=4326
+    coordenada = models.PointField(default='POINT(-46.65580414499566 -23.565801069428833)', srid=4326)                        #campo add   default='POINT(0 0)', srid=4326
 
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
