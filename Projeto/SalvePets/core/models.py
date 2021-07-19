@@ -77,9 +77,8 @@ class Pet(models.Model):
     peso = models.DecimalField(max_digits=30, decimal_places=15)
     ativo = models.BooleanField(default=True)                                                             #campo add
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado')  #campo add
-    foto = models.ImageField(upload_to='pet')                #(upload_to='<caminho a ser salvo>')                  #campo add
+    foto = models.ImageField(upload_to='pet')  #pet                #(upload_to='<caminho a ser salvo>')                  #campo add
     coordenada = models.PointField(default='POINT(-46.65580414499566 -23.565801069428833)', srid=4326)                        #campo add   default='POINT(0 0)', srid=4326
-
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
