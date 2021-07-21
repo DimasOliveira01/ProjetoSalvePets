@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'django.contrib.gis',
+    'leaflet',
 ]
 
 MIDDLEWARE = [
