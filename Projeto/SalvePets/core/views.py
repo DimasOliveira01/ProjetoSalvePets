@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .models import Pet
 from .forms import PetForm
+#from geopy.geocoders import Nominatim
 
 
 # Create your views here.
@@ -49,6 +50,7 @@ def set_pet(request):
     altura=request.POST.get('altura')
     peso=request.POST.get('peso')
     encontradoPerdido=request.POST.get('encontradoPerdido')
+    coordenada=request.POST.get('coordenada')
     #coordenada=request.POST.get('coordenada')
     foto=request.FILES.get('foto')
     user=request.user
@@ -65,7 +67,8 @@ def set_pet(request):
             pet.cor=cor
             pet.altura=altura
             pet.peso=peso
-            pet.encontradoPerdido=encontradoPerdido
+            pet.encontradoPerdido=encontradoPerdido         
+            pet.coordenada=coordenada
             if foto:
                 pet.foto = foto
             pet.save()
@@ -73,7 +76,7 @@ def set_pet(request):
             #pet.largura=largura
             #pet.coordenada=coordenada
     else:
-        pet = Pet.objects.create(nome=nome, descricao=descricao, observacoes=observacoes, dataNascimento=dataNascimento, raca=raca, cor=cor, altura=altura, peso=peso, encontradoPerdido=encontradoPerdido, foto=foto, user=user)    #retirei comprimento=comprimento, largura=largura, coordenada=coordenada,
+        pet = Pet.objects.create(nome=nome, descricao=descricao, observacoes=observacoes, dataNascimento=dataNascimento, raca=raca, cor=cor, altura=altura, peso=peso, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)    #retirei comprimento=comprimento, largura=largura, coordenada=coordenada,
     url = '/pet-informacao/{}/'.format(pet.id)
     return redirect(url)
 
@@ -101,8 +104,9 @@ def pet_informacao(request, id):
 def index(request):
     return render(request, 'index.html')
     
-def localizacao(request):
-    return render(request, 'localizacao.html')
+
+
+
 
 
 
