@@ -1,0 +1,111 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.border-top {
+    border-top: 1px solid black !important;
+  }
+.btn {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* 2 */
+
+.btn-primary2 {
+    color: black;
+    background-color: white;
+  }
+
+.btn-primary2:hover {
+  color: #fff;
+  background-color: #262626;
+}
+
+/* 3 */
+.btn-check:focus + .btn-primary2, .btn-primary2:focus {
+  color: #fff;
+  background-color: black;
+
+}
+
+.navbar {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+
+@media (min-width: 992px) {
+  .navbar-expand-lg2 {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+  .navbar-expand-lg2 .navbar-nav {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  .navbar-expand-lg2 .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-lg2 .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .navbar-expand-lg2 .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg2 .navbar-collapse {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg2 .navbar-toggler {
+    display: none;
+  }
+}
+
+
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.95);
+}
+
+.fixed-top {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@media (min-width: 992px) {
+
+  .border-lg-0 {
+    border: 0 !important;
+  }
+
+}
