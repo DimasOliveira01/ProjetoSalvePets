@@ -59,8 +59,8 @@ class USUARIO(models.Model):
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
     receberNotificacoes = models.BooleanField(default=False)
     site = models.CharField(max_length=100, null=True)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
+    dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
+    dataModificacao = models.DateTimeField(auto_now=True, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
