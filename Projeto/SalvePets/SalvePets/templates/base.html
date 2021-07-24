@@ -134,6 +134,9 @@
                     </section>
                     <form class="d-flex">
                         {% if user.is_authenticated %}
+                        <div class="px-lg-2">
+                            <a href="/modificar-cadastro" type="button" class="btn btn-outline-dark" type="submit">{% trans "Minha conta" %}</a>
+                        </div>
                             <a href="{% url 'account_logout' %}" type="button" class="btn btn-outline-dark" type="submit">{% trans "Sair" %}</a>
                         {% else %}
                         <a href="{% url 'account_login' %}" type="button" class="btn btn-outline-dark" type="submit">{% trans "Entrar" %}</a>
