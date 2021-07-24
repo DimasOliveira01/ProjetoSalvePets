@@ -7,6 +7,10 @@ from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import PointField
 from django.contrib.gis.gdal import DataSource
+from django.contrib.auth.models import AbstractUser
+
+class UserProfile(AbstractUser, models.Model):
+    cpfCnpj = models.CharField(max_length=11, blank=True, null=True)
 
 
 # from django.contrib.gis.db import models ////CORRIGIR
