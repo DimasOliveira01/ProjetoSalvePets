@@ -1,16 +1,19 @@
 from django.db.models.fields import files
 from django.forms.forms import Form
-from django.http import request
+from django.http import request, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-from .models import Pet
-from .forms import PetForm
-#from geopy.geocoders import Nominatim
+from .models import Pet, USUARIO
+from .models import User
+from .forms import PetForm, UserForm, UsuarioForm
+from django.db import transaction
+from django.shortcuts import redirect
 
+#from geopy.geocoders import Nominatim
 
 # Create your views here.
 
@@ -103,42 +106,23 @@ def pet_informacao(request, id):
 
 def index(request):
     return render(request, 'index.html')
-    
 
-
-
-
-
-
-
-"""
-def logout_user(request):
-    logout(request)
-    #return redirect('/login/')
-    return redirect('/')
-"""
-#def login_user(request):
- #   return render(request, 'login.html')
-
-#def cadastro_usuario(request):
- #   return render(request, 'cadastro-usuario.html')
-
-#tentativa de página inicial
-#@login_required(login_url='/login/')
-#def central_do_usuario(request):
- #   return render(request, 'central-do-usuario.html')
-
-#final de tentativa
-
-#@csrf_protect
-#def submit_login(request):
-#    if request.POST:
-#        username=request.POST.get('username')
-#        password=request.POST.get('password')
-#        user = authenticate(username=username, password=password)
-#        if user is not None:
-#            login(request, user)
-#            return redirect('/')            
-#        else:
-#            messages.error(request, 'Usuário e senha inválido. Tente novamente.')
-#    return redirect('/login')
+@login_required
+@transaction.atomic
+def modificar_cadastro(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
+        if usuario_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            usuario_form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            usuario_form = UsuarioForm(instance=request.user.usuario)
+            user_form = UserForm(instance=request.user)
+    return render(request, 'modificar-cadastro.html', {
+        'usuario_form': usuario_form,
+        'user_form': user_form,
+    })

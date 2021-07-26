@@ -7,6 +7,13 @@ from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import PointField
 from django.contrib.gis.gdal import DataSource
+<<<<<<< HEAD
+=======
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+>>>>>>> c6bf39153b3286cd4a02a19592fa58b551a26867
 
 
 # from django.contrib.gis.db import models ////CORRIGIR
@@ -26,12 +33,10 @@ from django.contrib.gis.gdal import DataSource
         ('V', u'Viúvo'),
     )
 """
-"""
-class TiposUsuario(models.IntegerChoices):
-    US_NORMAL = 0, 'normal'
-    US_EMPRESA = 1, 'empresa'
-    US_INSTITUICAO = 2, 'instituição'
-"""
+TIPOS_USUARIO = (
+    (1, 'Usuário comum'),
+    (1, 'Instituição'),
+)
 PET_CHOICES = (
     ('perdido','PERDIDO'),
     ('encontrado','ENCONTRADO'),
@@ -48,13 +53,26 @@ class LOCALIZACAO(models.Model):
 
 class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
-    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-   # tipoUsuario = models.IntegerField(choices=TiposUsuario.choices)
-    nome = models.CharField(max_length=100)
-    cpfCnpj = models.CharField(max_length=11, blank=True, null=True)
-    dataNascimento = models.DateField(default=timezone.now, blank=True, null=True)
-    telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name='Nº telefone')
-    pontuacao = models.DecimalField(max_digits=30, decimal_places=15)
+    #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
+    #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
+    tipoUsuario = models.IntegerField(choices=TIPOS_USUARIO, default=1)
+    cpfCnpj = models.CharField(max_length=11, blank=False, null=True, verbose_name='CPF')
+    dataNascimento = models.DateField(blank=False, null=True, verbose_name='Data de nascimento')
+    telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name='Número de telefone')
+    pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
+    receberNotificacoes = models.BooleanField(default=False)
+    site = models.CharField(max_length=100, null=True)
+    dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
+    dataModificacao = models.DateTimeField(auto_now=True, null=True)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        USUARIO.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.usuario.save()
 
 class ABRIGO(models.Model):
     FK_idUsuario = models.ForeignKey(User, on_delete=models.CASCADE)
