@@ -7,13 +7,10 @@ from django.utils import timezone
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import PointField
 from django.contrib.gis.gdal import DataSource
-<<<<<<< HEAD
-=======
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
->>>>>>> c6bf39153b3286cd4a02a19592fa58b551a26867
 
 
 # from django.contrib.gis.db import models ////CORRIGIR
