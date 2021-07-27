@@ -65,8 +65,8 @@
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
               <li class="nav-item"><a class="nav-link fw-medium active" aria-current="page" href="/">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pets</a>
+              <li class="nav-item"><a class="nav-link" href="/sobre">Sobre</a></li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Funcionalidades</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Adote um pet</a></li>
                   <li><a class="dropdown-item" href="#">Patrocinar um pet</a></li>
@@ -82,7 +82,7 @@
                 <div class="container px-lg-4">
                     <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
                         <input type="hidden" name="next" value="{{ redirect_to }}">
-                        <select name="language" id="">
+                        <select class="form-select" name="language" id="" onchange="this.form.submit()">
                             {% get_current_language as LANGUAGE_CODE %}
                             {% get_available_languages as LANGUAGES %}
                             {% get_language_info_list for LANGUAGES as languages %}
@@ -92,7 +92,6 @@
                                 </option>
                             {% endfor %}
                         </select>
-                        <input type="submit" value="Go">
                     </form>
                 </div>
             </section>
