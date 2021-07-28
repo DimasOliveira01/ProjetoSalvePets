@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 17:53-0300\n"
+"POT-Creation-Date: 2021-07-28 19:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,7 +247,8 @@ msgid "Cadastrar Pet"
 msgstr "Register a Pet"
 
 #: .\SalvePets\templates\cadastroPet.html:21
-#: .\SalvePets\templates\index.html:21 .\SalvePets\templates\listaPets.html:38
+#: .\SalvePets\templates\index.html:21 .\SalvePets\templates\index.html:96
+#: .\SalvePets\templates\listaPets.html:38
 #: .\SalvePets\templates\listaPets.html:39 .\SalvePets\templates\pet.html:38
 #: .\SalvePets\templates\pet.html:39
 msgid "Pets perdidos"
@@ -324,6 +325,10 @@ msgstr "Coordinate"
 msgid "Alterar"
 msgstr "Alter"
 
+#: .\SalvePets\templates\emconstrucao.html:13
+msgid "Funcionalidade disponível em breve..."
+msgstr "Functionality available soon..."
+
 #: .\SalvePets\templates\index.html:10
 msgid "Nossos serviços"
 msgstr "Our services"
@@ -374,11 +379,11 @@ msgstr "Donate to an institution that takes care of stray animals."
 msgid "Ajude-nos a financiar esse projeto comprando em nossa loja oficial!"
 msgstr "Help us fund this project by shopping at our official store!"
 
-#: .\SalvePets\templates\index.html:71 .\SalvePets\templates\index.html:196
+#: .\SalvePets\templates\index.html:71 .\SalvePets\templates\index.html:198
 msgid "Possui dúvidas? Pergunte para nosso chatbot!"
 msgstr "Do you have any questions? Ask our chatbot!"
 
-#: .\SalvePets\templates\index.html:72 .\SalvePets\templates\index.html:201
+#: .\SalvePets\templates\index.html:72 .\SalvePets\templates\index.html:203
 msgid "Inicie uma conversa on-line com o nosso chatbot."
 msgstr "Start an online conversation with our chatbot."
 
@@ -409,7 +414,7 @@ msgstr ""
 "Adopt this cute little dog, he was found abandoned and is looking for a new "
 "home, he's lovely and cuddly!"
 
-#: .\SalvePets\templates\index.html:121
+#: .\SalvePets\templates\index.html:120 .\SalvePets\templates\index.html:122
 msgid "Adote"
 msgstr "Adopt"
 
@@ -425,6 +430,12 @@ msgstr "Advertise a pet located in your region"
 msgid "Anuncie"
 msgstr "Advertise"
 
+#: .\SalvePets\templates\index.html:151
+#, fuzzy
+#| msgid "Anunciar pet encontrado"
+msgid "Cadastrar pet encontrado"
+msgstr "Notify found pet"
+
 #: .\SalvePets\templates\index.html:168
 msgid "Ajude a manter este lindo pet!"
 msgstr "Help keep a pet"
@@ -433,11 +444,11 @@ msgstr "Help keep a pet"
 msgid "Doe para uma instituição que cuida de animais abandonados"
 msgstr "Donate to an institution that takes care of stray animals"
 
-#: .\SalvePets\templates\index.html:178
+#: .\SalvePets\templates\index.html:177 .\SalvePets\templates\index.html:180
 msgid "Doar para uma instituição!"
 msgstr "Donate to an institution!"
 
-#: .\SalvePets\templates\index.html:206
+#: .\SalvePets\templates\index.html:207 .\SalvePets\templates\index.html:209
 msgid "Chamar chatbot"
 msgstr "Call chatbot"
 
