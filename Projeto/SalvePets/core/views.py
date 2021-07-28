@@ -129,3 +129,7 @@ def modificar_cadastro(request):
 
 def sobre(request):
     return render(request, 'sobre.html')
+
+def em_construcao(request):
+    return render(request, 'emconstrucao.html')
+

@@ -22,7 +22,7 @@
             <p class="text-muted">{% blocktrans %}Ajude-nos a encontrar pets desaparecidos e assim trazer felicidade aos seus donos.{% endblocktrans %}</p>
         </div>
         <div class="col-md-4">
-                <a href="/">
+                <a href="/em-construcao/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-dog fa-stack-1x fa-inverse"></i>
@@ -32,7 +32,7 @@
                 <p class="text-muted">{% blocktrans %}Adote lindos e amáveis pets que foram encontrados abandonados e estão a procura de um novo lar.{% endblocktrans %}</p>
             </div>
             <div class="col-md-4">
-                <a href="/">
+                <a href="/cadastro-pet/">
                     <span class="fa-stack fa-4x">
                         <i id="dog" class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-bullhorn fa-stack-1x fa-inverse"></i>
@@ -42,7 +42,7 @@
                 <p class="text-muted">{% blocktrans %}Anuncie o local e as características do pet encontrado por você para ajudar nas buscas ao dono.{% endblocktrans %}</p>
             </div>
             <div class="col-md-4">
-                <a href="/">
+                <a href="/em-construcao/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-dollar-sign fa-stack-1x fa-inverse"></i>
@@ -52,7 +52,7 @@
                 <p class="text-muted">{% blocktrans %}Doe para uma instituição que cuida de animais abandonados.{% endblocktrans %}</p>
             </div>
             <div class="col-md-4">
-                <a href="/">
+                <a href="/em-construcao/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-store fa-stack-1x fa-inverse"></i>
@@ -62,7 +62,7 @@
                 <p class="text-muted">{% blocktrans %}Ajude-nos a financiar esse projeto comprando em nossa loja oficial!{% endblocktrans %}</p>
             </div> 
             <div class="col-md-4">
-                <a href="/">
+                <a href="/em-construcao/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-robot fa-stack-1x fa-inverse"></i>
@@ -93,7 +93,7 @@
                         
                         {% trans "Avise-nos" %}
                     </button>-->
-                    <a class="btn btn-outline-dark" href="/lista-pet-perdido/">Pets perdidos</a> 
+                    <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a> 
                 </div>
             </div>
             <div class="col-md-4" >
@@ -116,10 +116,10 @@
                 <p class="medium">{% trans "Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de um novo lar, ele é amável e fofinho!" %}</p>
                 <div class="d-flex">
                     <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <!--<i class="bi-cart-fill me-1"></i>-->
-                        {% trans "Adote" %}<!--Add to cart -->
-                    </button>
+                    <!--<button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        {% trans "Adote" %}
+                    </button>-->
+                    <a class="btn btn-outline-dark" href="/em-construcao/">{% trans "Adote" %}</a>
                 </div>
             </div>
             <div class="col-md-4" >
@@ -148,7 +148,7 @@
                         {% trans "Anuncie" %}
                     </button>-->
 
-                    <a class="btn btn-outline-dark" href="/cadastro-pet/">Cadastrar pet encontrado</a>
+                    <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar pet encontrado" %}</a>
                 </div>
             </div>
             <div class="col-md-4" >
@@ -173,10 +173,12 @@
                 <p class="medium">{% trans "Doe para uma instituição que cuida de animais abandonados" %}</p>
                 <div class="d-flex">
                     <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <!--<i class="bi-cart-fill me-1"></i>-->
-                        {% trans "Doar para uma instituição!" %}<!--Add to cart -->
-                    </button>
+                    
+                    <a class="btn btn-outline-dark" href="/em-construcao/">{% trans "Doar para uma instituição!" %}</a>
+                    
+                    <!--<button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        {% trans "Doar para uma instituição!" %}
+                    </button>-->
                 </div>
             </div>
             <div class="col-md-4" >
@@ -201,10 +203,11 @@
                 <p class="medium">{% trans "Inicie uma conversa on-line com o nosso chatbot." %}</p>
                 <div class="d-flex">
                     <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <!--<i class="bi-cart-fill me-1"></i>-->
-                        {% trans "Chamar chatbot" %}<!--Add to cart -->
-                    </button>
+                    
+                    <a class="btn btn-outline-dark" href="/em-construcao/">{% trans "Chamar chatbot" %}</a>
+                    <!--<button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        {% trans "Chamar chatbot" %}
+                    </button>-->
                 </div>
             </div>
             <div class="col-md-4" >

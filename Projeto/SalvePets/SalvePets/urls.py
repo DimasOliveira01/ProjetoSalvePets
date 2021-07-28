@@ -47,6 +47,7 @@ urlpatterns = [
     path('deletar-pet/<id>/',views.deletar_pet),
     path('modificar-cadastro/',views.modificar_cadastro),
     path('sobre/',views.sobre),
+    path('em-construcao/',views.em_construcao),
 
 ]
 
