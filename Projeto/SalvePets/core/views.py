@@ -126,3 +126,6 @@ def modificar_cadastro(request):
         'usuario_form': usuario_form,
         'user_form': user_form,
     })
+
+def sobre(request):
+    return render(request, 'sobre.html')
