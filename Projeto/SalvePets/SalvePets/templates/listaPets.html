@@ -27,19 +27,19 @@
         </form>-->
         <ul class="nav">
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">Meus pets cadastrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/cadastro-pet/">Cadastrar</a>
+                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">Pets perdidos</a>                
+                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">Pets encontrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>-->
             </li>
         </ul>
@@ -48,9 +48,9 @@
         </section>
 
     {% if request.pet.encontradoPerdido == encontrado %}
-       <h1 class="text-center">Pets Encontrados</h1>
+       <h1 class="text-center">{% trans "Pets Encontrados" %}</h1>
     {% elif request.pet.encontradoPerdido == perdido %}
-        <h1 class="text-center">Pets Perdidos</h1>  
+        <h1 class="text-center">{% trans "Pets Perdidos" %}</h1>  
     {% endif %}
     
     <div class="container mb-4">

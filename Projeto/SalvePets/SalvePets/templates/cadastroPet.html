@@ -10,39 +10,39 @@
       
         <ul class="nav">
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">Meus pets cadastrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
                 
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/cadastro-pet/">Cadastrar</a>
+                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
             
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">Pets perdidos</a>                
+                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
                 
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">Pets encontrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
                 
             </li>
         </ul>
     </div>
 
-    <h1 class="text-center">Cadastrar um Pet</h1>
+    <h1 class="text-center">{% trans "Cadastrar um Pet" %}</h1>
 
     <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
         <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
         <div class="container">
             <div class="form-group">
-                <label>Nome:</label>
+                <label>{% trans "Nome" %}:</label>
                 <input required="required" class="form-control" name="nome" type="text" value="{{ pet.nome }}">
             </div>
             <div class="form-group">
-                <label>Descrição:</label>
+                <label>{% trans "Descrição" %}:</label>
                 <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao }}</textarea>
             </div>
             <div class="form-group">
-                <label>Observações:</label>
+                <label>{% trans "Observações" %}:</label>
                 <textarea class="form-control" rows="3" name="observacoes" type="text"  >{{ pet.observacoes }}</textarea>
             </div>
             
@@ -58,37 +58,37 @@
 
 
             <div class="form-group">
-                <label>Data Nascimento:</label>
+                <label>{% trans "Data Nascimento" %}:</label>
                 <input required="required" class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento }}">
             </div>
             <div class="form-group">
-                <label>Raça:</label>
+                <label>{% trans "Raça" %}:</label>
                 <input required="required" class="form-control" name="raca" type="text" value="{{ pet.raca }}">
             </div>
             <div class="form-group">
-                <label>Cor:</label>
+                <label>{% trans "Cor" %}:</label>
                 <input required="required" class="form-control" name="cor" type="text"  value="{{ pet.cor }}">
             </div>
             <div class="form-group">
-                <label>Altura(cm):</label>
+                <label>{% trans "Altura" %}(cm):</label>
                 <input required="required" class="form-control" name="altura" type="number" value="{{ pet.altura }}">
             </div>
             <div class="form-group">
-                <label>Peso(Kg):</label>
+                <label>{% trans "Peso" %}(Kg):</label>
                 <input required="required" class="form-control" name="peso" type="number" value="{{ pet.peso }}">
             </div>
             <div class="form-group">
-                <label>Situação:</label>
+                <label>{% trans "Situação" %}:</label>
                 <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.situacao }}">
-                    <option value="encontrado">Encontrado</option>
-                    <option value="perdido">Perdido</option>
+                    <option value="encontrado">{% trans "Encontrado" %}</option>
+                    <option value="perdido">{% trans "Perdido" %}</option>
                   </select>
             </div>
             <div class="form-group">
                 {% if pet.id != null %}
-                    <p><a   href="/media/{{ pet.foto }}" target="_blank">Foto atual</a></p>
+                    <p><a   href="/media/{{ pet.foto }}" target="_blank">{% trans "Foto atual" %}</a></p>
                 {% else %}
-                    <p><label>Escolha uma imagem:</label></p>
+                    <p><label>{% trans "Escolha uma imagem" %}:</label></p>
                 {% endif %}
                 <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" >
             </div>
@@ -117,7 +117,7 @@
 
                         <div>
 
-                            <label class="required" for="id_coordenada">Coordenada:</label>
+                            <label class="required" for="id_coordenada">{% trans "Coordenada" %}:</label>
 
                             <style>
                                 #id_coordenada-map {
@@ -257,20 +257,11 @@
 
 
 
-
-
-
-
-
-
-
-
-            
             <button type="submit" class="btn btn-outline-dark mt-4">
                 {% if pet %}
-                    Alterar
+                    {% trans "Alterar" %}
                 {% else %}
-                    Cadastrar
+                    {% trans "Cadastrar" %}
                 {% endif %}
             </button>
         </div>

@@ -27,19 +27,19 @@
         </form>-->
         <ul class="nav">
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">Meus pets cadastrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/cadastro-pet/">Cadastrar</a>
+                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">Pets perdidos</a>                
+                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>-->
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">Pets encontrados</a>
+                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
                 <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>-->
             </li>
         </ul>
@@ -48,7 +48,7 @@
         </section>
 
     
-    <h1 class="text-center">Detalhes do Pet</h1>
+    <h1 class="text-center">{% trans "Detalhes do Pet" %}</h1>
 
         <div class="container mp-4 mb-4">
         <div class="row">
@@ -58,17 +58,17 @@
                 </div>
             </div>
             <div class="col-sm-8">
-                <h5><b>Descrição: </b>{{pet.descricao}}</h5>
-                <h4>Situação: <b>{{pet.encontradoPerdido}}</b></h4>
-                <h4>Contato</h4>
+                <h5><b>{% trans "Descrição" %}: </b>{{pet.descricao}}</h5>
+                <h4>{% trans "Situação" %}: <b>{{pet.encontradoPerdido}}</b></h4>
+                <h4>{% trans "Contato" %}</h4>
                 <p><b>Tel.: </b>{{usuario.telefone}}</p>
                 <p><b>E-mail: </b>{{user.email}}</p>
                 {% if request.user == pet.user %}
                 <a href="/deletar-pet/{{ pet.id }}" >   
-                    <button type="button" class="btn btn-outline-dark btn-danger">Excluir</button>
+                    <button type="button" class="btn btn-outline-dark btn-danger">{% trans "Excluir" %}</button>
                 </a>
                 <a href="/cadastro-pet/?id={{ pet.id }}">
-                    <button type="button" class="btn btn-outline-dark">Alterar</button>
+                    <button type="button" class="btn btn-outline-dark">{% trans "Alterar" %}</button>
                 </a>
                 {% endif %}
             </div>
