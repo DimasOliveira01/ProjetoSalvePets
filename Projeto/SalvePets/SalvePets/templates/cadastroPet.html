@@ -116,8 +116,52 @@
                     <div class="form-row field-coordenada">
 
                         <div>
-
+                            <p></p>
+                            <p></p>
                             <label class="required" for="id_coordenada">{% trans "Coordenada" %}:</label>
+                            
+                            
+                            
+                            
+                            <p></p>
+                            <p>Click the button to get your coordinates.</p>
+
+                            <button type="button" onclick="getLocation()">Try It</button>
+                            
+                            <p id="demo"></p>
+                            
+                            <script>
+
+
+                            var x = document.getElementById("demo");
+                            
+                            function getLocation() {
+                              if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(showPosition);
+                              } else { 
+                                x.innerHTML = "Geolocation is not supported by this browser.";
+                              }
+                            }
+                            
+                            function showPosition(position) {
+                             // x.innerHTML = "Latitude: " + position.coords.latitude + 
+                             // "<br>Longitude: " + position.coords.longitude;
+                             console.log(position.coords.latitude);
+                             console.log(position.coords.longitude);
+
+                             (function(){
+                                document.getElementById('idDoCampo').value = position.coords.latitude;
+                                })();
+
+                            }
+                            </script>
+                        <input type="text" id="idDoCampo" value="Valor Padrão"/>
+
+                        <!--<textarea id="idDoCampo" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }</textarea>
+                        -->
+
+
+
 
                             <style>
                                 #id_coordenada-map {
@@ -229,9 +273,13 @@
                             </div>
 
 
-                            <textarea id="id_coordenada" class="required django-leaflet-raw-textarea"
+                            <textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada"></textarea>
+                            <!--<textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }</textarea>
+                            -->
+                            <!--<textarea id="id_coordenada" class="required django-leaflet-raw-textarea"
                                 cols="150" rows="10"
-                                name="coordenada">"{{ pet.coordenada }}"</textarea> <!--&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.648001, -23.575882 ]-->
+                                name="coordenada">"{{ pet.coordenada }}"</textarea> -->
+                                <!--&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.648001, -23.575882 ]-->
 
 
 
@@ -248,7 +296,10 @@
                 <script id="django-admin-prepopulated-fields-constants"
                     src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
                     </script>
-
+            
+            
+        
+        
             </div>
 
 

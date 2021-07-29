@@ -133,3 +133,5 @@ def sobre(request):
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 
+def teste(request):
+    return render(request, 'teste.html')
