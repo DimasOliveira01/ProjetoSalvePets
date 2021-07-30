@@ -79,7 +79,7 @@
             </div>
             <div class="form-group">
                 <label>{% trans "Situação" %}:</label>
-                <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.situacao }}">
+                <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
                     <option value="encontrado">{% trans "Encontrado" %}</option>
                     <option value="perdido">{% trans "Perdido" %}</option>
                   </select>
@@ -148,14 +148,20 @@
                              // "<br>Longitude: " + position.coords.longitude;
                              console.log(position.coords.latitude);
                              console.log(position.coords.longitude);
-
-                             (function(){
-                                document.getElementById('idDoCampo').value = position.coords.latitude;
+                             
+                             (function coord(){
+                                document.getElementById('idDoCampo').value = `{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ ${position.coords.longitude}, ${position.coords.latitude} ] }`;
+                                return `{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ ${position.coords.longitude}, ${position.coords.latitude} ] }`;
+                                //document.getElementById('idDoCampo').value = position.coords.latitude;
                                 })();
 
                             }
                             </script>
-                        <input type="text" id="idDoCampo" value="Valor Padrão"/>
+                            
+                            <input type="text" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada" 
+                            onclick="coord()" value=""/>
+                       
+                       <input type="text" id="idDoCampo" value="Valor Padrão"/>
 
                         <!--<textarea id="idDoCampo" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }</textarea>
                         -->
@@ -273,9 +279,16 @@
                             </div>
 
 
-                            <textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada"></textarea>
-                            <!--<textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }</textarea>
-                            -->
+                            <!--<textarea id="idDoCampo" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
+                                { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
+                            </textarea>
+                            <textarea required="required" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
+                                { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
+                            </textarea>-->
+                            
+
+
+
                             <!--<textarea id="id_coordenada" class="required django-leaflet-raw-textarea"
                                 cols="150" rows="10"
                                 name="coordenada">"{{ pet.coordenada }}"</textarea> -->
