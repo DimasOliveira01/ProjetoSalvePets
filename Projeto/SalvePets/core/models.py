@@ -32,7 +32,7 @@ from django.dispatch import receiver
 """
 TIPOS_USUARIO = (
     (1, 'Usuário comum'),
-    (1, 'Instituição'),
+    (2, 'Instituição'),
 )
 PET_CHOICES = (
     ('perdido','PERDIDO'),
