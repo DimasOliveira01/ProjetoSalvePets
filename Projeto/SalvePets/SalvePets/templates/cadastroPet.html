@@ -149,19 +149,21 @@
                              console.log(position.coords.latitude);
                              console.log(position.coords.longitude);
                              
-                             (function coord(){
-                                document.getElementById('idDoCampo').value = `{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ ${position.coords.longitude}, ${position.coords.latitude} ] }`;
-                                return `{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ ${position.coords.longitude}, ${position.coords.latitude} ] }`;
+                             (function(){
+                                document.getElementById('idDoCampo').value = `[ ${position.coords.longitude} , ${position.coords.latitude} ]`;
                                 //document.getElementById('idDoCampo').value = position.coords.latitude;
                                 })();
 
                             }
                             </script>
-                            
+
+
+
                             <input type="text" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada" 
-                            onclick="coord()" value=""/>
-                       
-                       <input type="text" id="idDoCampo" value="Valor Padrão"/>
+                            value="{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }"/>
+
+
+                        <input type="text" id="idDoCampo" value="Valor Padrão"/>
 
                         <!--<textarea id="idDoCampo" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }</textarea>
                         -->
