@@ -1,13 +1,14 @@
 from django import forms
 from .models import Pet, USUARIO, User
+from django.utils.translation import ugettext_lazy as _
 
 BIRTH_YEAR_CHOICES  = []
 for i in range(1900,2021):
     BIRTH_YEAR_CHOICES.append(str(i))
 
 class SignupForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='Nome:')
-    last_name = forms.CharField(max_length=30, label='Sobrenome')
+    first_name = forms.CharField(max_length=30, label=_('Nome:'))
+    last_name = forms.CharField(max_length=30, label=_('Sobrenome'))
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']

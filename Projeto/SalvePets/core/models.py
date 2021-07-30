@@ -10,6 +10,7 @@ from django.contrib.gis.gdal import DataSource
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 
 
 
@@ -31,12 +32,12 @@ from django.dispatch import receiver
     )
 """
 TIPOS_USUARIO = (
-    (1, 'Usuário comum'),
-    (2, 'Instituição'),
+    (1, _('Usuário comum')),
+    (1, _('Instituição')),
 )
 PET_CHOICES = (
-    ('perdido','PERDIDO'),
-    ('encontrado','ENCONTRADO'),
+    (_("perdido"),_("PERDIDO")),
+    (_("encontrado"),_("ENCONTRADO")),
 )
 
 class LOCALIZACAO(models.Model):
@@ -52,13 +53,13 @@ class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
     #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    tipoUsuario = models.IntegerField(choices=TIPOS_USUARIO, default=1)
-    cpfCnpj = models.CharField(max_length=11, blank=False, null=True, verbose_name='CPF')
-    dataNascimento = models.DateField(blank=False, null=True, verbose_name='Data de nascimento')
-    telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name='Número de telefone')
+    tipoUsuario = models.IntegerField(choices=TIPOS_USUARIO, default=1, verbose_name=_("Tipo Usuário"))
+    cpfCnpj = models.CharField(max_length=11, blank=False, null=True, verbose_name=_("CPF (Somente números)"))
+    dataNascimento = models.DateField(blank=False, null=True, verbose_name=_("Data de nascimento"))
+    telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name=_("Número de telefone (Somente números)"))
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    receberNotificacoes = models.BooleanField(default=False)
-    site = models.CharField(max_length=100, null=True)
+    receberNotificacoes = models.BooleanField(default=False, verbose_name=_("Receber Notificações"))
+    site = models.CharField(max_length=100, null=True, verbose_name=_("Site"))
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
     dataModificacao = models.DateTimeField(auto_now=True, null=True)
 
