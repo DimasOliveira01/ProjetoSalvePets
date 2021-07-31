@@ -1,0 +1,13 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+{% block content %}
+{% autoescape off %}
+<tr>
+    <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
+        <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
+            {% blocktrans %}<a href="http://127.0.0.1:8000/pet-informacao/{{ id }}">Clique aqui</a>{% endblocktrans %}
+        </div>
+    </td>
+</tr>
+{% endautoescape %}
+{% endblock %}

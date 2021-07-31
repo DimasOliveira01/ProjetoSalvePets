@@ -12,6 +12,15 @@ from .models import User
 from .forms import PetForm, UserForm, UsuarioForm
 from django.db import transaction
 from django.shortcuts import redirect
+from django.db import connection
+from collections import OrderedDict
+from collections import namedtuple
+from django.core.mail import send_mail
+from django.core import mail
+from django.template.loader import get_template, render_to_string
+from django.utils.html import strip_tags
+from django.template import loader
+
 
 #from geopy.geocoders import Nominatim
 
@@ -135,3 +144,87 @@ def em_construcao(request):
 
 def teste(request):
     return render(request, 'teste.html')
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
+def namedtuplefetchall(cursor):
+    "Return all rows from a cursor as a namedtuple"
+    desc = cursor.description
+    nt_result = namedtuple('Result', [col[0] for col in desc])
+    return [nt_result(*row) for row in cursor.fetchall()]
+
+def localizacao(request):
+    if request.method == "GET":
+        #try:
+            # Conexão com o banco
+            cursor = connection.cursor()
+            
+            # Query para pegar os campos para o envio do e-mail e cálculo da distância
+            query = '''SELECT pet.id, pet.nome, usr.email, pet.foto, usuario."receberNotificacoes", pet.coordenada
+	                        FROM core_pet AS pet
+	                        INNER JOIN core_usuario AS usuario ON usuario.user_id = pet.user_id
+	                        INNER JOIN auth_user AS usr ON usr.id = usuario.user_id
+                            ORDER BY pet.id
+                            '''
+
+            # Execução da query e inserção dos dados em uma Named Tuple
+            cursor.execute(query)
+            pets = namedtuplefetchall(cursor)
+
+            # Caso existam pets no banco de dados
+            if pets:
+                distancias = []
+                count = 0
+                varios_pets = {}
+
+                # Calcula distância desse pet cadastrado com todos os outros no banco de dados
+                for i in range(len(pets) - 1):
+                    cursor.execute("SELECT ST_DistanceSphere('" + pets[0].coordenada + "','" + pets[i+1].coordenada + "')::numeric::integer")
+                    distancias.append(cursor.fetchone())
+
+                if distancias:
+                    for list in distancias:
+                        for valor in list:
+                            # Percorre por todas as distâncias para caso seja menor que 10km,
+                            # inicia o processo de envio de e-mail                    
+                            if valor <= 10000 and pets[count].receberNotificacoes == True:
+                                id = pets[count].id
+                                email = str(pets[count].email)
+                                foto = pets[count].foto
+                                nome_pet = pets[count].nome
+
+                                enviar_email_pet(id, email, foto, nome_pet)
+
+                            count = count + 1
+                else:
+                    print("Não existem outros pets para calcular as distâncias.")
+            else:
+                print("Não existem pets cadastrados.")
+        
+            return render(request, 'localizacao.html')
+            '''
+        except Exception as error:
+            print("Falha em ler o banco de dados.\n", error)
+            return render(request, 'localizacao.html')
+        finally:
+            if connection:
+                connection.close()
+            '''
+
+def enviar_email_pet(id, email, foto, nome_pet):
+    id = str(id)
+    assunto = "Seu pet foi encontrado!"
+    remetente = "atendimentoSalvePets@gmail.com"
+    destinatario = str(email)
+    nome_pet = str(nome_pet)
+    
+    html = loader.render_to_string('emails/pet_encontrado.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
+    plain_message = strip_tags(html)
+
+    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)

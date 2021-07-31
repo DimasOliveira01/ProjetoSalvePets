@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<p>Distância: 
+{% for i in mytext %}
+    {% for a in i %}
+        {{ a }}
+    {% endfor %}
+{% endfor %}
+ metros
+
+{{ request.get_host }}
+
+</p>
+
+{% endblock %}

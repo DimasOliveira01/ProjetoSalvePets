@@ -58,7 +58,7 @@ class USUARIO(models.Model):
     dataNascimento = models.DateField(blank=False, null=True, verbose_name=_("Data de nascimento"))
     telefone = models.CharField(max_length=11, blank=True, null=True, verbose_name=_("Número de telefone (Somente números)"))
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    receberNotificacoes = models.BooleanField(default=False, verbose_name=_("Receber Notificações"))
+    receberNotificacoes = models.BooleanField(default=True, verbose_name=_("Receber Notificações"))
     site = models.CharField(max_length=100, null=True, verbose_name=_("Site"))
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
     dataModificacao = models.DateTimeField(auto_now=True, null=True)
