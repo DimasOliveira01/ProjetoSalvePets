@@ -50,6 +50,7 @@ urlpatterns = [
     path('em-construcao/',views.em_construcao),
     path('teste/',views.teste),
     path('localizacao/',views.localizacao),
+    path('completar-cadastro/',views.completar_cadastro),
 
 ]
 

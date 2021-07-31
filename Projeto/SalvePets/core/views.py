@@ -15,6 +15,14 @@ from django.template import loader
 # === Funções com render simples ===
 
 def index(request):
+    #user_form = UserForm(instance=request.user)
+    #usuario_form = UsuarioForm(instance=request.user.usuario)
+    #cadastro_incompleto = False
+    #if usuario_form.cpfCnpj == "":
+    #    cadastro_incompleto = True
+    #    return render(request, 'index.html', {'cadastro_incompleto', cadastro_incompleto})
+    #else:
+    #    return render(request, 'index.html',{'cadastro_incompleto', cadastro_incompleto})
     return render(request, 'index.html')
 
 
@@ -125,7 +133,6 @@ def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     return render(request, 'pet.html', {'pet':pet})
 
-
 @login_required
 @transaction.atomic
 def modificar_cadastro(request):
@@ -146,6 +153,27 @@ def modificar_cadastro(request):
         'user_form': user_form,
     })
 
+@login_required
+@transaction.atomic
+def completar_cadastro(request):
+    if request.method == "POST":
+        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
+        if usuario_form.is_valid():
+            usuario_form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            usuario_form = UsuarioForm(instance=request.user.usuario)
+    return render(request, 'completar-cadastro.html', {
+        'usuario_form': usuario_form,
+    })
+
+def sobre(request):
+    return render(request, 'sobre.html')
+
+def em_construcao(request):
+    return render(request, 'emconstrucao.html')
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
