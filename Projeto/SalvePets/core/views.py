@@ -1,44 +1,53 @@
-from django.db.models.fields import files
-from django.forms.forms import Form
-from django.http import request, HttpResponseRedirect
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
 from .models import Pet, USUARIO
-from .models import User
-from .forms import PetForm, UserForm, UsuarioForm
+from .forms import UserForm, UsuarioForm
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
-from collections import OrderedDict
 from collections import namedtuple
-from django.core.mail import send_mail
 from django.core import mail
-from django.template.loader import get_template, render_to_string
 from django.utils.html import strip_tags
 from django.template import loader
 
+# === Funções com render simples ===
 
-#from geopy.geocoders import Nominatim
+def index(request):
+    return render(request, 'index.html')
 
-# Create your views here.
 
+def sobre(request):
+    return render(request, 'sobre.html')
+
+
+def em_construcao(request):
+    return render(request, 'emconstrucao.html')
+
+
+def teste(request):
+    return render(request, 'teste.html')
+
+# ==================================
+
+# ===      Funções gerais        ===
 
 def lista_pets_encontrados(request):
     pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
     return render(request, 'listaPets.html',{'pet':pet})
 
+
 def lista_pets_perdidos(request):
     pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
     return render(request, 'listaPets.html',{'pet':pet})
+
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
     pet=Pet.objects.filter(ativo=True, user=request.user)
     return render(request, 'listaPets.html',{'pet':pet})
+
 
 @login_required(login_url='/accounts/login')
 def cadastro_pet(request):
@@ -49,52 +58,58 @@ def cadastro_pet(request):
             return render(request,'cadastroPet.html',{'pet':pet})
     return render (request, 'cadastroPet.html')
 
+
 @login_required(login_url='/accounts/login')
 def set_pet(request):
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
-    observacoes=request.POST.get('observacoes')
-    #comprimento=request.POST.get('comprimento')
-    #largura=request.POST.get('largura')
     dataNascimento=request.POST.get('dataNascimento')
     raca=request.POST.get('raca')
     cor=request.POST.get('cor')
-    altura=request.POST.get('altura')
+    porte=request.POST.get('porte')
     peso=request.POST.get('peso')
     encontradoPerdido=request.POST.get('encontradoPerdido')
     coordenada=request.POST.get('coordenada')
-    #coordenada=request.POST.get('coordenada')
     foto=request.FILES.get('foto')
     user=request.user
-    #alteração de cadastro
+
+    # Alteração de cadastro
     pet_id=request.POST.get('pet-id')
     if pet_id:
         pet=Pet.objects.get(id=pet_id)
         if user == pet.user:
             pet.nome=nome
             pet.descricao=descricao
-            pet.observacoes=observacoes
             pet.dataNascimento=dataNascimento
             pet.raca=raca
             pet.cor=cor
-            pet.altura=altura
+            pet.porte=porte
             pet.peso=peso
             pet.encontradoPerdido=encontradoPerdido         
             pet.coordenada=coordenada
             if foto:
                 pet.foto = foto
             pet.save()
-            #pet.comprimento=comprimento
-            #pet.largura=largura
-            #pet.coordenada=coordenada
     else:
-        pet = Pet.objects.create(nome=nome, descricao=descricao, observacoes=observacoes, dataNascimento=dataNascimento, raca=raca, cor=cor, altura=altura, peso=peso, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)    #retirei comprimento=comprimento, largura=largura, coordenada=coordenada,
+        pet = Pet.objects.create(nome=nome, porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user)
+        if descricao:
+            pet.descricao = descricao
+            pet.save()
+        if dataNascimento:
+            pet.dataNascimento = dataNascimento
+            pet.save()
+        if raca:
+            pet.raca = raca
+            pet.save()
+        if cor:
+            pet.cor = cor
+            pet.save()
+        if peso:
+            pet.peso = peso
+            pet.save()
+
     url = '/pet-informacao/{}/'.format(pet.id)
     return redirect(url)
-
-
-
-
 
 
 @login_required(login_url='/acccounts/login')
@@ -105,16 +120,11 @@ def deletar_pet(request, id):
     return redirect('/lista-pet-usuario')
 
 
-
-
-
 @login_required(login_url='/accounts/login')
 def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     return render(request, 'pet.html', {'pet':pet})
 
-def index(request):
-    return render(request, 'index.html')
 
 @login_required
 @transaction.atomic
@@ -136,22 +146,6 @@ def modificar_cadastro(request):
         'user_form': user_form,
     })
 
-def sobre(request):
-    return render(request, 'sobre.html')
-
-def em_construcao(request):
-    return render(request, 'emconstrucao.html')
-
-def teste(request):
-    return render(request, 'teste.html')
-
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
@@ -159,9 +153,10 @@ def namedtuplefetchall(cursor):
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
 
+
 def localizacao(request):
     if request.method == "GET":
-        #try:
+        try:
             # Conexão com o banco
             cursor = connection.cursor()
             
@@ -199,6 +194,7 @@ def localizacao(request):
                                 foto = pets[count].foto
                                 nome_pet = pets[count].nome
 
+                                # Passa as informações do dono do pet próximo para o envio do e-mail
                                 enviar_email_pet(id, email, foto, nome_pet)
 
                             count = count + 1
@@ -208,14 +204,14 @@ def localizacao(request):
                 print("Não existem pets cadastrados.")
         
             return render(request, 'localizacao.html')
-            '''
+
         except Exception as error:
             print("Falha em ler o banco de dados.\n", error)
             return render(request, 'localizacao.html')
         finally:
             if connection:
                 connection.close()
-            '''
+
 
 def enviar_email_pet(id, email, foto, nome_pet):
     id = str(id)
@@ -227,4 +223,7 @@ def enviar_email_pet(id, email, foto, nome_pet):
     html = loader.render_to_string('emails/pet_encontrado.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
     plain_message = strip_tags(html)
 
+    # Envio do e-mail
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+# ==================================

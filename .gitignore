@@ -153,3 +153,5 @@ cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 *.pyc
+Projeto/SalvePets/core/migrations/__init__.py
+Projeto/SalvePets/core/migrations/0001_initial.py

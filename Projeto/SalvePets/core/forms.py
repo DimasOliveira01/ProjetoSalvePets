@@ -32,7 +32,7 @@ class UsuarioForm(forms.ModelForm):
     #receberNotificacoes = forms.BooleanField(required=False, label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)')
     class Meta:
         model = USUARIO
-        fields = ('cpfCnpj', 'dataNascimento', 'telefone', 'receberNotificacoes') #Retirei tipoUsuairo e site
+        fields = ('cpfCnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes') #Retirei tipoUsuairo e site
 
 
 #Classe que seria usada como "Cadastro Único" - li que é possível fazer funcionar, só preciso entender melhor como.
