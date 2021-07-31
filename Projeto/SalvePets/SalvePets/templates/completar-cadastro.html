@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block conteudo %}
+    <!-- Página de Inclusão de dados Cadastrais USUARIO-->
+    <div class="container mt-4">
+        <h2>{% trans "Completar cadastro" %}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ usuario_form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+                {% trans "Completar" %}
+            </button>
+        </form>
+
+    <!-- MÁSCARAS (tentar armazenar apenas números no BD) -->
+
+    <script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'core/js/jquery.mask.js' %}"></script>
+
+    {% block scripts %}
+        <script>  
+            $(document).ready(function(){
+                $("#id_cpfCnpj").mask("000.000.000-00");
+                $('#id_telefone').mask('(00) 0 0000-0000');
+            });
+        </script>
+    {% endblock %}
+    
+    </div>
+{% endblock %}

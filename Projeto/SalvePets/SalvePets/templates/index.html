@@ -4,6 +4,18 @@
 
 {% block conteudo %}
 
+{% if user.is_authenticated %}
+<section class="page-section-temporary py-0" id="temporaria">
+    <div class="container">
+        <div class="row gx-4 gx-lg-5 align-items-center m-0">
+            <form class="pe-lg-6 p-1 text-md-end">
+                <a href="/completar-cadastro" type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" type="submit">{% trans "Completar cadastro!" %}</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <section class="page-section" id="services">
     <div class="container">
         <div class="text-center">
