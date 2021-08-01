@@ -88,25 +88,52 @@ def set_pet(request):
     if pet_id:
         pet=Pet.objects.get(id=pet_id)
         if user == pet.user:
-            pet.nome=nome
+            if nome:
+                pet.nome=nome
+                pet.save()
+            else:
+                pet.nome="Sem nome"
+                pet.save()
+
             if descricao:
                 pet.descricao=descricao
+                pet.save()
+
             if dataNascimento:
                 pet.dataNascimento=dataNascimento
+                pet.save()
+
             if raca:
                 pet.raca=raca
+                pet.save()
+
             if cor:
                 pet.cor=cor
+                pet.save()
+
             pet.porte=porte
+            pet.save()
+
             if peso:
                 pet.peso=peso
-            pet.encontradoPerdido=encontradoPerdido         
+                pet.save()
+
+            pet.encontradoPerdido=encontradoPerdido
+            pet.save()
+
             pet.coordenada=coordenada
+            pet.save()
+
             if foto:
                 pet.foto = foto
-            pet.save()
+                pet.save()
     else:
-        pet = Pet.objects.create(nome=nome, porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        if nome:
+            pet.nome=nome
+        else:
+            pet.nome="Sem nome"
+            pet.save()
         if descricao:
             pet.descricao = descricao
             pet.save()

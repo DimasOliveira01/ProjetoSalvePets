@@ -73,7 +73,7 @@ class ABRIGO(models.Model):
 class Pet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     #FK_idAbrigo = models.ForeignKey(ABRIGO, on_delete=models.RESTRICT)      #precisa remover a FK abrigo
-    nome = models.CharField(max_length=100, blank=False, null=False)
+    nome = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
     dataNascimento = models.DateField(blank=True, null=True)
     raca = models.CharField(max_length=50, blank=True, null=True)
