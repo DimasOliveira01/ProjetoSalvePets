@@ -191,7 +191,7 @@ def notif_pet_encontrado(id):
         cursor = connection.cursor()
 
         # Retorna dados do pet que está sendo cadastrado agora
-        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email
+        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome
                         FROM core_pet AS pet
                         INNER JOIN auth_user AS usr on usr.id = pet.user_id
                         WHERE pet.id = %s'''
@@ -238,23 +238,18 @@ def notif_pet_encontrado(id):
                         # Percorre por todas as distâncias para caso seja menor que 10km,
                         # inicia o processo de envio de e-mail                    
                         if valor <= 10000 and pets[count].receberNotificacoes == True:
-                            id = pets[count].id
-                            email = str(pets[count].email)
-                            foto = pets[count].foto
-                            nome_pet = pets[count].nome
-                         
                             if pet[0].encontradoPerdido == "encontrado":
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
-                                    enviar_email_pet_encontrado(id, email, foto, nome_pet)
+                                    enviar_email_pet_encontrado(pet[0].id, str(pets[count].email), pet[0].foto, pet[0].nome)
                                 else:
                                     print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
                             else:
                                 # Armazena em lista todos os nomes e fotos dos pets para enviar por e-mail a quem está cadastrando.
                                 if pet[0].email != pets[count].email:
-                                    id_list.append(id)
-                                    nome_list.append(nome_pet)
-                                    foto_list.append(foto)
+                                    id_list.append(pets[count].id)
+                                    nome_list.append(pets[count].nome)
+                                    foto_list.append(pets[count].foto)
                                 else:
                                     print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
                         else:
