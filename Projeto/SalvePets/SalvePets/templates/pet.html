@@ -61,7 +61,7 @@
                 <h5><b>{% trans "Descrição" %}: </b>{{pet.descricao}}</h5>
                 <h4>{% trans "Situação" %}: <b>{{pet.encontradoPerdido}}</b></h4>
                 <h4>{% trans "Contato" %}</h4>
-                <p><b>Tel.: </b>{{usuario.telefone}}</p>
+                <p><b>Tel.: </b>{{user.usuario.telefone}}</p>
                 <p><b>E-mail: </b>{{user.email}}</p>
                 {% if request.user == pet.user %}
                 <a href="/deletar-pet/{{ pet.id }}" >   
