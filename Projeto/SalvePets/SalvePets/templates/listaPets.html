@@ -61,8 +61,8 @@
             {% for p in pet %}
             <div class="col-sm-4">
                 <a href="../pet-informacao/{{ p.id }}">
-                    <div class="polaroid">
-                        <img src="{{p.foto.url}}" style="width:100%">
+                    <div class="polaroid" style="width:100%; height:100%">
+                        <img src="{{p.foto.url}}" style="width:100%; height: 75%;">
                         <div class="container">
                             <br>
                             <p class="btn btn-outline-dark">{{ p.nome }}</p>
