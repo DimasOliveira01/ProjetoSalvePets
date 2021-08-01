@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.239.208.137','ec2-3-239-208-137.compute-1.amazonaws.com']
 
 #Caminho das imagens(foto)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -146,10 +146,10 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'SalvePets', 
+        'NAME': 'salvepets', 
         'USER': 'postgres', 
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1', 
+        'PASSWORD': 'salve123456',
+        'HOST': 'salvepets.cjbod3zbq85f.us-east-1.rds.amazonaws.com', 
         'PORT': '5432',
     }
 }
