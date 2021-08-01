@@ -12,6 +12,7 @@ from django.core import mail
 from django.utils.html import strip_tags
 from django.template import loader
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # === Funções com render simples ===
 
@@ -277,7 +278,7 @@ def notif_pet_encontrado(id):
 
 def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     id = str(id)
-    assunto = "Foi encontrado um pet próximo ao local em que o seu foi perdido"
+    assunto = _("Foi encontrado um pet próximo ao local em que o seu foi perdido")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     nome_pet = str(nome_pet)
@@ -290,7 +291,7 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     print("E-mail enviado com sucesso")
 
 def enviar_email_pet_perdido(id, email, foto, nome_pet):
-    assunto = "Alguns pets próximos ao seu perdido foram encontrados!"
+    assunto = _("Alguns pets próximos ao seu perdido foram encontrados!")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     
