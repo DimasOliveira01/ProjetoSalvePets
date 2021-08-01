@@ -5,9 +5,9 @@
 <tr>
     <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
         <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:left;color:#555;">
-            <p>Olá!</p>
+            <p>{% trans "Olá!" %}</p>
 
-            <p>Temos uma boa notícia! Encontramos pet(s) próximo(s) ao cadastrado por você:</p>
+            <p>{% trans "Temos uma boa notícia! Encontramos pet(s) próximo(s) ao cadastrado por você:" %}</p>
 
             <table align="center">
             {% for k in nome_pet %}
@@ -16,14 +16,14 @@
 
             <tr>
             {% for i in id %}
-                <td class="tabelaPet"><a href="http://127.0.0.1:8000/pet-informacao/{{ i }}" target="_blank">Ver pet</a></td>
+                <td class="tabelaPet"><a href="http://127.0.0.1:8000/pet-informacao/{{ i }}" target="_blank">{% trans "Ver pet" %}</a></td>
             {% endfor %}
             </tr>
             
             </table>
             
-            <p>Caso algum deles seja o seu, clique na foto e você será redirecionado à uma página onde poderá entrar em contato com a pessoa que o encontrou.</p>
-            <p>Esperamos que tudo dê certo e que você encontre seu pet!</p>
+            <p>{% trans "Caso algum deles seja o seu, clique na foto e você será redirecionado à uma página onde poderá entrar em contato com a pessoa que o encontrou." %}</p>
+            <p>{% trans "Esperamos que tudo dê certo e que você encontre seu pet!" %}</p>
         </div>
     </td>
 </tr>

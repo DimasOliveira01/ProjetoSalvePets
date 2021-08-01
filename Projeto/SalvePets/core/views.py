@@ -12,6 +12,7 @@ from django.core import mail
 from django.utils.html import strip_tags
 from django.template import loader
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # === Funções com render simples ===
 
@@ -133,7 +134,8 @@ def deletar_pet(request, id):
 @login_required(login_url='/accounts/login')
 def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
-    return render(request, 'pet.html', {'pet':pet})
+    creator = pet.user
+    return render(request, 'pet.html', {'pet':pet,'creator':creator})
 
 @login_required
 @transaction.atomic
@@ -190,7 +192,7 @@ def notif_pet_encontrado(id):
         cursor = connection.cursor()
 
         # Retorna dados do pet que está sendo cadastrado agora
-        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email
+        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome
                         FROM core_pet AS pet
                         INNER JOIN auth_user AS usr on usr.id = pet.user_id
                         WHERE pet.id = %s'''
@@ -237,23 +239,18 @@ def notif_pet_encontrado(id):
                         # Percorre por todas as distâncias para caso seja menor que 10km,
                         # inicia o processo de envio de e-mail                    
                         if valor <= 10000 and pets[count].receberNotificacoes == True:
-                            id = pets[count].id
-                            email = str(pets[count].email)
-                            foto = pets[count].foto
-                            nome_pet = pets[count].nome
-                         
                             if pet[0].encontradoPerdido == "encontrado":
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
-                                    enviar_email_pet_encontrado(id, email, foto, nome_pet)
+                                    enviar_email_pet_encontrado(pet[0].id, str(pets[count].email), pet[0].foto, pet[0].nome)
                                 else:
                                     print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
                             else:
                                 # Armazena em lista todos os nomes e fotos dos pets para enviar por e-mail a quem está cadastrando.
                                 if pet[0].email != pets[count].email:
-                                    id_list.append(id)
-                                    nome_list.append(nome_pet)
-                                    foto_list.append(foto)
+                                    id_list.append(pets[count].id)
+                                    nome_list.append(pets[count].nome)
+                                    foto_list.append(pets[count].foto)
                                 else:
                                     print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
                         else:
@@ -277,7 +274,7 @@ def notif_pet_encontrado(id):
 
 def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     id = str(id)
-    assunto = "Foi encontrado um pet próximo ao local em que o seu foi perdido"
+    assunto = _("Foi encontrado um pet próximo ao local em que o seu foi perdido")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     nome_pet = str(nome_pet)
@@ -290,7 +287,7 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     print("E-mail enviado com sucesso")
 
 def enviar_email_pet_perdido(id, email, foto, nome_pet):
-    assunto = "Alguns pets próximos ao seu perdido foram encontrados!"
+    assunto = _("Alguns pets próximos ao seu perdido foram encontrados!")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     

@@ -57,12 +57,15 @@
                     <img src="{{pet.foto.url}}" width="350" height="250" >
                 </div>
             </div>
+            <script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+            <script src="{% static 'core/js/jquery.mask.js' %}"></script>
+
             <div class="col-sm-8">
                 <h5><b>{% trans "Descrição" %}: </b>{{pet.descricao}}</h5>
                 <h4>{% trans "Situação" %}: <b>{{pet.encontradoPerdido}}</b></h4>
                 <h4>{% trans "Contato" %}</h4>
-                <p><b>Tel.: </b>{{usuario.telefone}}</p>
-                <p><b>E-mail: </b>{{user.email}}</p>
+                <p><b>Tel.:</b> <a id="telefone">{{creator.usuario.telefone}}</a></p>
+                <p><b>E-mail: </b>{{creator.email}}</p>
                 {% if request.user == pet.user %}
                 <a href="/deletar-pet/{{ pet.id }}" >   
                     <button type="button" class="btn btn-outline-dark btn-danger">{% trans "Excluir" %}</button>
@@ -72,6 +75,15 @@
                 </a>
                 {% endif %}
             </div>
+
+            {% block scripts %}
+                <script>  
+                    $(document).ready(function(){
+                        $('#telefone').mask('(00) 0 0000-0000');
+                    });
+                </script>
+            {% endblock %}
+
         </div>
     </div>
 

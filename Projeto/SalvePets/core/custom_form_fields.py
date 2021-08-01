@@ -31,7 +31,7 @@ class CpfCnpjField(forms.CharField):
         if tam!=tamCPF:
             if tam<tamCPF:
                 raise ValidationError(
-                    _('Número de dígitos (%d) inferor ao esperado: %d' % (tam, tamCPF)),
+                    _('Número de dígitos (%d) inferior ao esperado: %d' % (tam, tamCPF)),
                     code='TamDivergente',
                     params={'value': '11'},
                 )
@@ -44,7 +44,7 @@ class CpfCnpjField(forms.CharField):
         else:
             if (value=='00000000000') or (value=='11111111111') or (value=='22222222222') or (value=='33333333333') or (value=='44444444444') or (value=='55555555555'):
                 raise ValidationError(
-                    _('CPF inválido. Números identicos.'),
+                    _('CPF inválido. Números idênticos.'),
                     code='NrosIguais',
                     params={'value': '11'},
                 )
@@ -91,16 +91,17 @@ class TelefoneField(forms.Field):
         super().validate(value)
         tamTelefone = 11
         tam = len(value)
-        if tam!=tamTelefone:
-            if tam<tamTelefone:
-                raise ValidationError(
-                    _('Número de dígitos (%d) inferor ao esperado: %d' % (tam, tamTelefone)),
-                    code='TamDivergente',
-                    params={'value': '11'},
-                )
-            else:
+        if tam>0:
+            if tam!=tamTelefone:
+                if tam<tamTelefone:
                     raise ValidationError(
-                    _('Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone)),
-                    code='TamDivergente',
-                    params={'value': '11'},
-                )
+                        _('Número de dígitos (%d) inferor ao esperado: %d' % (tam, tamTelefone)),
+                        code='TamDivergente',
+                        params={'value': '11'},
+                    )
+                else:
+                        raise ValidationError(
+                        _('Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone)),
+                        code='TamDivergente',
+                        params={'value': '11'},
+                    )
