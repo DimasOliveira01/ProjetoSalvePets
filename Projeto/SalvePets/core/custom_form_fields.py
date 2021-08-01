@@ -91,16 +91,17 @@ class TelefoneField(forms.Field):
         super().validate(value)
         tamTelefone = 11
         tam = len(value)
-        if tam!=tamTelefone:
-            if tam<tamTelefone:
-                raise ValidationError(
-                    'Número de dígitos (%d) inferior ao esperado: %d' % (tam, tamTelefone),
-                    code='TamDivergente',
-                    params={'value': '11'},
-                )
-            else:
+        if tam>0:
+            if tam!=tamTelefone:
+                if tam<tamTelefone:
                     raise ValidationError(
-                    'Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone),
-                    code='TamDivergente',
-                    params={'value': '11'},
-                )
+                        _('Número de dígitos (%d) inferor ao esperado: %d' % (tam, tamTelefone)),
+                        code='TamDivergente',
+                        params={'value': '11'},
+                    )
+                else:
+                        raise ValidationError(
+                        _('Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone)),
+                        code='TamDivergente',
+                        params={'value': '11'},
+                    )

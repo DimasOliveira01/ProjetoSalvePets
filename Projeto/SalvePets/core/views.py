@@ -134,7 +134,8 @@ def deletar_pet(request, id):
 @login_required(login_url='/accounts/login')
 def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
-    return render(request, 'pet.html', {'pet':pet})
+    creator = pet.user
+    return render(request, 'pet.html', {'pet':pet,'creator':creator})
 
 @login_required
 @transaction.atomic
