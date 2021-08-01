@@ -45,18 +45,18 @@ def teste(request):
 
 def lista_pets_encontrados(request):
     pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsEncontrados.html',{'pet':pet})
 
 
 def lista_pets_perdidos(request):
     pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsPerdidos.html',{'pet':pet})
 
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
     pet=Pet.objects.filter(ativo=True, user=request.user)
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsUsuario.html',{'pet':pet})
 
 
 @login_required(login_url='/accounts/login')
