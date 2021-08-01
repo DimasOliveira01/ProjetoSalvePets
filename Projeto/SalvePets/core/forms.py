@@ -33,7 +33,7 @@ class UserForm(forms.ModelForm):
 
 class UsuarioForm(forms.ModelForm):
     cpfCnpj = CpfCnpjField(label='CPF')
-    dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y'], label='Data de Nascimento')
+    dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'], label='Data de Nascimento')
     telefone = TelefoneField(required=False, label='Nro de Telefone')
     #receberNotificacoes = forms.BooleanField(required=False, label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)')
     class Meta:
