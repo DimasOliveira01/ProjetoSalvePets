@@ -40,7 +40,11 @@
                 {% else %}
                     <p><label>{% trans "Escolha uma imagem" %}:</label></p>
                 {% endif %}
-                <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" >
+                {% if pet.id != null %}
+                    <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                {% else %}
+                    <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                {% endif %}
             </div>
             <div class="form-group">
                 <label>{% trans "Nome" %}:</label>

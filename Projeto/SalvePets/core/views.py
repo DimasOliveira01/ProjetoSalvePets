@@ -89,12 +89,17 @@ def set_pet(request):
         pet=Pet.objects.get(id=pet_id)
         if user == pet.user:
             pet.nome=nome
-            pet.descricao=descricao
-            pet.dataNascimento=dataNascimento
-            pet.raca=raca
-            pet.cor=cor
+            if descricao:
+                pet.descricao=descricao
+            if dataNascimento:
+                pet.dataNascimento=dataNascimento
+            if raca:
+                pet.raca=raca
+            if cor:
+                pet.cor=cor
             pet.porte=porte
-            pet.peso=peso
+            if peso:
+                pet.peso=peso
             pet.encontradoPerdido=encontradoPerdido         
             pet.coordenada=coordenada
             if foto:
@@ -117,6 +122,8 @@ def set_pet(request):
         if peso:
             pet.peso = peso
             pet.save()
+        
+        # Gatilho da notificação de pet encontrado/perdido
         notif_pet_encontrado(pet.id)
 
     url = '/pet-informacao/{}/'.format(pet.id)
