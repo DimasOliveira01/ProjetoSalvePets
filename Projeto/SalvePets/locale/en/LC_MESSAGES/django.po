@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-30 20:09-0300\n"
+"POT-Creation-Date: 2021-08-01 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,7 +184,7 @@ msgstr "Registration"
 
 #: .\SalvePets\templates\account\signup.html:17
 #: .\SalvePets\templates\base.html:110
-#: .\SalvePets\templates\cadastroPet.html:330
+#: .\SalvePets\templates\cadastroPet.html:319
 msgid "Cadastrar"
 msgstr "Sign Up"
 
@@ -217,7 +217,7 @@ msgstr "Adopt a pet"
 msgid "Patrocinar um pet"
 msgstr "Sponsor a pet"
 
-#: .\SalvePets\templates\base.html:73 .\SalvePets\templates\index.html:41
+#: .\SalvePets\templates\base.html:73
 msgid "Anunciar pet encontrado"
 msgstr "Notify found pet"
 
@@ -225,7 +225,7 @@ msgstr "Notify found pet"
 msgid "Anunciar pet perdido"
 msgstr "Notify lost pet"
 
-#: .\SalvePets\templates\base.html:75 .\SalvePets\templates\index.html:61
+#: .\SalvePets\templates\base.html:75 .\SalvePets\templates\index.html:79
 msgid "Loja Salve Pets"
 msgstr "Salve Pets Store"
 
@@ -247,8 +247,7 @@ msgid "Cadastrar Pet"
 msgstr "Register a Pet"
 
 #: .\SalvePets\templates\cadastroPet.html:21
-#: .\SalvePets\templates\index.html:21 .\SalvePets\templates\index.html:133
-#: .\SalvePets\templates\listaPets.html:38
+#: .\SalvePets\templates\index.html:39 .\SalvePets\templates\listaPets.html:38
 #: .\SalvePets\templates\listaPets.html:39 .\SalvePets\templates\pet.html:38
 #: .\SalvePets\templates\pet.html:39
 msgid "Pets perdidos"
@@ -265,93 +264,168 @@ msgstr "Pets found"
 msgid "Cadastrar um Pet"
 msgstr "Register a Pet"
 
-#: .\SalvePets\templates\cadastroPet.html:37
-msgid "Nome"
-msgstr "Name"
+#: .\SalvePets\templates\cadastroPet.html:38
+msgid "Alterar imagem"
+msgstr "Alter image"
 
-#: .\SalvePets\templates\cadastroPet.html:41 .\SalvePets\templates\pet.html:61
-msgid "Descrição"
-msgstr "Description"
-
-#: .\SalvePets\templates\cadastroPet.html:45
-msgid "Observações"
-msgstr "Observations"
-
-#: .\SalvePets\templates\cadastroPet.html:61
-msgid "Data Nascimento"
-msgstr "Birth date"
-
-#: .\SalvePets\templates\cadastroPet.html:65
-msgid "Raça"
-msgstr "Breed"
-
-#: .\SalvePets\templates\cadastroPet.html:69
-msgid "Cor"
-msgstr "Color"
-
-#: .\SalvePets\templates\cadastroPet.html:73
-msgid "Altura"
-msgstr "Height"
-
-#: .\SalvePets\templates\cadastroPet.html:77
-msgid "Peso"
-msgstr "Weight"
-
-#: .\SalvePets\templates\cadastroPet.html:81 .\SalvePets\templates\pet.html:62
-msgid "Situação"
-msgstr "Situation"
-
-#: .\SalvePets\templates\cadastroPet.html:83
-msgid "Encontrado"
-msgstr "Found"
-
-#: .\SalvePets\templates\cadastroPet.html:84
-msgid "Perdido"
-msgstr "Lost"
-
-#: .\SalvePets\templates\cadastroPet.html:89
-msgid "Foto atual"
-msgstr "Actual picture"
-
-#: .\SalvePets\templates\cadastroPet.html:91
+#: .\SalvePets\templates\cadastroPet.html:41
 msgid "Escolha uma imagem"
 msgstr "Choose an image"
 
-#: .\SalvePets\templates\cadastroPet.html:121
+#: .\SalvePets\templates\cadastroPet.html:46
+msgid "Nome"
+msgstr "Name"
+
+#: .\SalvePets\templates\cadastroPet.html:50 .\SalvePets\templates\pet.html:61
+msgid "Descrição"
+msgstr "Description"
+
+#: .\SalvePets\templates\cadastroPet.html:54
+msgid "Data Nascimento"
+msgstr "Birth date"
+
+#: .\SalvePets\templates\cadastroPet.html:58
+msgid "Raça"
+msgstr "Breed"
+
+#: .\SalvePets\templates\cadastroPet.html:62
+msgid "Cor"
+msgstr "Color"
+
+#: .\SalvePets\templates\cadastroPet.html:66 .\core\models.py:81
+msgid "Porte"
+msgstr "Pet Size"
+
+#: .\SalvePets\templates\cadastroPet.html:68 .\core\models.py:22
+msgid "Pequeno porte"
+msgstr "Small size"
+
+#: .\SalvePets\templates\cadastroPet.html:69 .\core\models.py:23
+msgid "Médio porte"
+msgstr "Midsize"
+
+#: .\SalvePets\templates\cadastroPet.html:70 .\core\models.py:24
+msgid "Grande porte"
+msgstr "Large size"
+
+#: .\SalvePets\templates\cadastroPet.html:74
+msgid "Peso"
+msgstr "Weight"
+
+#: .\SalvePets\templates\cadastroPet.html:78 .\SalvePets\templates\pet.html:62
+msgid "Situação"
+msgstr "Situation"
+
+#: .\SalvePets\templates\cadastroPet.html:80
+msgid "Encontrado"
+msgstr "Found"
+
+#: .\SalvePets\templates\cadastroPet.html:81
+msgid "Perdido"
+msgstr "Lost"
+
+#: .\SalvePets\templates\cadastroPet.html:110
 msgid "Coordenada"
 msgstr "Coordinate"
 
-#: .\SalvePets\templates\cadastroPet.html:328 .\SalvePets\templates\pet.html:71
+#: .\SalvePets\templates\cadastroPet.html:116
+msgid "Clique no botão para obter suas coordenadas."
+msgstr "Click the button to get your coordinates."
+
+#: .\SalvePets\templates\cadastroPet.html:118
+msgid "Clique aqui"
+msgstr "Try it"
+
+#: .\SalvePets\templates\cadastroPet.html:317 .\SalvePets\templates\pet.html:71
 msgid "Alterar"
 msgstr "Alter"
 
+#: .\SalvePets\templates\completar-cadastro.html:9
+#, fuzzy
+#| msgid "Modificar cadastro"
+msgid "Completar cadastro"
+msgstr "Modify registration"
+
+#: .\SalvePets\templates\completar-cadastro.html:16
+msgid "Completar"
+msgstr ""
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:9
+#: .\SalvePets\templates\emails\pet_perdido.html:8
+msgid "Olá!"
+msgstr "Hello!"
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:11
+msgid "Temos uma boa notícia!"
+msgstr "We have good news!"
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:13
+msgid "Um pet proxímo ao cadastrado por você nos foi informado!"
+msgstr "A pet close to the one registered by you was informed!"
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:15
+msgid "Para verificar se o pet pertence a você,"
+msgstr "To check if the pet belongs to you,"
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:15
+msgid "clique aqui"
+msgstr "click here"
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:15
+msgid "e você será encaminhado para página de detalhes do pet."
+msgstr "and you will be taken to the pet's details page."
+
+#: .\SalvePets\templates\emails\pet_encontrado.html:17
+#: .\SalvePets\templates\emails\pet_perdido.html:26
+msgid "Esperamos que tudo dê certo e que você encontre seu pet!"
+msgstr "We hope that everything works out and that you find your pet!"
+
+#: .\SalvePets\templates\emails\pet_perdido.html:10
+msgid ""
+"Temos uma boa notícia! Encontramos pet(s) próximo(s) ao cadastrado por você:"
+msgstr "We have good news! We found pet(s) close to the one registered by you:"
+
+#: .\SalvePets\templates\emails\pet_perdido.html:19
+msgid "Ver pet"
+msgstr "See pet"
+
+#: .\SalvePets\templates\emails\pet_perdido.html:25
+msgid ""
+"Caso algum deles seja o seu, clique na foto e você será redirecionado à uma "
+"página onde poderá entrar em contato com a pessoa que o encontrou."
+msgstr ""
+"If any of them are yours, click on the photo and you will be redirected to a "
+"page where you can get in touch with the person who found you."
+
 #: .\SalvePets\templates\emconstrucao.html:13
-msgid "Funcionalidade disponível em breve..."
+msgid "Funcionalidade disponível em breve."
 msgstr "Functionality available soon..."
 
-#: .\SalvePets\templates\index.html:10
+#: .\SalvePets\templates\index.html:17
+#, fuzzy
+#| msgid "Modificar cadastro"
+msgid "Completar cadastro!"
+msgstr "Modify registration"
+
+#: .\SalvePets\templates\index.html:28
 msgid "Nossos serviços"
 msgstr "Our services"
 
-#: .\SalvePets\templates\index.html:11
+#: .\SalvePets\templates\index.html:29
 msgid "Confira as funcionalidades do projeto Salve Pets."
 msgstr "Check out the features of the Salve Pets project."
 
-#: .\SalvePets\templates\index.html:22
-#, fuzzy
-#| msgid ""
-#| "Ajude-nos a encontrar pets desaperecidos e assim trazer felicidade aos "
-#| "seus donos."
+#: .\SalvePets\templates\index.html:40
 msgid ""
 "Ajude-nos a encontrar pets desaparecidos e assim trazer felicidade aos seus "
 "donos."
 msgstr "Help us find missing pets and bring happiness to their owners."
 
-#: .\SalvePets\templates\index.html:31
+#: .\SalvePets\templates\index.html:49
 msgid "Adotar pets"
 msgstr "Adopt a pet"
 
-#: .\SalvePets\templates\index.html:32
+#: .\SalvePets\templates\index.html:50
 msgid ""
 "Adote lindos e amáveis pets que foram encontrados abandonados e estão a "
 "procura de um novo lar."
@@ -359,98 +433,37 @@ msgstr ""
 "Adopt cute and loved pets that were found abandoned and are looking for a "
 "new home. "
 
-#: .\SalvePets\templates\index.html:42
+#: .\SalvePets\templates\index.html:59
+msgid "Anunciar pet"
+msgstr "Notify pet"
+
+#: .\SalvePets\templates\index.html:60
 msgid ""
-"Anuncie o local e as características do pet encontrado por você para ajudar "
-"nas buscas ao dono."
+"Anuncie o local e as características do pet encontrado ou perdido por você "
+"para ajudar nas buscas ao dono."
 msgstr ""
 "Notify the location and characteristics of the pet found by you to help in "
 "searches for the owner."
 
-#: .\SalvePets\templates\index.html:51
+#: .\SalvePets\templates\index.html:69
 msgid "Patrocinar pets"
 msgstr "Sponsor pets"
 
-#: .\SalvePets\templates\index.html:52
+#: .\SalvePets\templates\index.html:70
 msgid "Doe para uma instituição que cuida de animais abandonados."
 msgstr "Donate to an institution that takes care of stray animals."
 
-#: .\SalvePets\templates\index.html:62
+#: .\SalvePets\templates\index.html:80
 msgid "Ajude-nos a financiar esse projeto comprando em nossa loja oficial!"
 msgstr "Help us fund this project by shopping at our official store!"
 
-#: .\SalvePets\templates\index.html:71 .\SalvePets\templates\index.html:235
+#: .\SalvePets\templates\index.html:89
 msgid "Possui dúvidas? Pergunte para nosso chatbot!"
 msgstr "Do you have any questions? Ask our chatbot!"
 
-#: .\SalvePets\templates\index.html:72 .\SalvePets\templates\index.html:240
+#: .\SalvePets\templates\index.html:90
 msgid "Inicie uma conversa on-line com o nosso chatbot."
 msgstr "Start an online conversation with our chatbot."
-
-#: .\SalvePets\templates\index.html:121
-msgid "Pet perdido! Ajude-nos a encontrar"
-msgstr "Lost Pet! Help us find"
-
-#: .\SalvePets\templates\index.html:126
-msgid ""
-"Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade "
-"dos seu donos!"
-msgstr ""
-"This pet is missing, help us find and make happiness from their owners!"
-
-#: .\SalvePets\templates\index.html:131
-msgid "Avise-nos"
-msgstr "Notify us"
-
-#: .\SalvePets\templates\index.html:148
-msgid "Adote este pet!"
-msgstr "Adopt a pet"
-
-#: .\SalvePets\templates\index.html:153
-msgid ""
-"Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de "
-"um novo lar, ele é amável e fofinho!"
-msgstr ""
-"Adopt this cute little dog, he was found abandoned and is looking for a new "
-"home, he's lovely and cuddly!"
-
-#: .\SalvePets\templates\index.html:157 .\SalvePets\templates\index.html:159
-msgid "Adote"
-msgstr "Adopt"
-
-#: .\SalvePets\templates\index.html:176
-msgid "Pet encontrado, ajude-nos a localizar o seu dono!"
-msgstr "Pet found, help us find its owner!"
-
-#: .\SalvePets\templates\index.html:181
-msgid "Anuncie um pet localizado na sua região"
-msgstr "Advertise a pet located in your region"
-
-#: .\SalvePets\templates\index.html:185
-msgid "Anuncie"
-msgstr "Advertise"
-
-#: .\SalvePets\templates\index.html:188
-#, fuzzy
-#| msgid "Anunciar pet encontrado"
-msgid "Cadastrar pet encontrado"
-msgstr "Notify found pet"
-
-#: .\SalvePets\templates\index.html:205
-msgid "Ajude a manter este lindo pet!"
-msgstr "Help keep a pet"
-
-#: .\SalvePets\templates\index.html:210
-msgid "Doe para uma instituição que cuida de animais abandonados"
-msgstr "Donate to an institution that takes care of stray animals"
-
-#: .\SalvePets\templates\index.html:214 .\SalvePets\templates\index.html:217
-msgid "Doar para uma instituição!"
-msgstr "Donate to an institution!"
-
-#: .\SalvePets\templates\index.html:244 .\SalvePets\templates\index.html:246
-msgid "Chamar chatbot"
-msgstr "Call chatbot"
 
 #: .\SalvePets\templates\listaPets.html:31 .\SalvePets\templates\pet.html:31
 msgid "Meus pets"
@@ -548,61 +561,166 @@ msgstr ""
 "in order to give more assurance that these animals arebeing treated well.</"
 "p>\n"
 
-#: .\core\forms.py:10
+#: .\core\custom_form_fields.py:34
+#, python-format
+msgid "Número de dígitos (%d) inferior ao esperado: %d"
+msgstr "Number of digits (%d) less than expected: %d"
+
+#: .\core\custom_form_fields.py:40
+#, python-format
+msgid "Número de dígitos (%d) superior ao esperado: %d"
+msgstr "Number of digits (%d) higher than expected: %d"
+
+#: .\core\custom_form_fields.py:47
+msgid "CPF inválido. Números idênticos."
+msgstr "Invalid CPF. Identical numbers."
+
+#: .\core\custom_form_fields.py:72
+msgid "CPF inválido."
+msgstr "Invalid CPF."
+
+#: .\core\forms.py:16
 msgid "Nome:"
 msgstr "Name"
 
-#: .\core\forms.py:11
+#: .\core\forms.py:17
 msgid "Sobrenome"
 msgstr "Last Name"
 
-#: .\core\models.py:35
+#: .\core\forms.py:36 .\core\forms.py:49
+msgid "Data de Nascimento"
+msgstr "Birth date"
+
+#: .\core\forms.py:37 .\core\forms.py:50
+msgid "Número de Telefone"
+msgstr "Phone Number"
+
+#: .\core\forms.py:51
+msgid "Desejo receber notificações"
+msgstr "Receive Notifications"
+
+#: .\core\forms.py:51
+msgid ""
+"(Marque este campo caso deseje ser notificado sobre pets perdidos ou "
+"encontrados.)"
+msgstr ""
+"(Check this field if you want to be notified about lost pets or found.)"
+
+#: .\core\models.py:12
 msgid "Usuário comum"
 msgstr "Common user"
 
-#: .\core\models.py:36
+#: .\core\models.py:13
 msgid "Instituição"
 msgstr "Institution"
 
-#: .\core\models.py:39
+#: .\core\models.py:17
 msgid "perdido"
 msgstr "lost"
 
-#: .\core\models.py:39
+#: .\core\models.py:17
 msgid "PERDIDO"
 msgstr "LOST"
 
-#: .\core\models.py:40
+#: .\core\models.py:18
 msgid "encontrado"
 msgstr "found"
 
-#: .\core\models.py:40
+#: .\core\models.py:18
 msgid "ENCONTRADO"
 msgstr "FOUND"
 
-#: .\core\models.py:56
-msgid "Tipo Usuário"
+#: .\core\models.py:45
+msgid "Tipo de usuário"
 msgstr "User Type"
 
-#: .\core\models.py:57
-msgid "CPF (Somente números)"
+#: .\core\models.py:46
+msgid "CPF (somente números)"
 msgstr "CPF (Only numbers)"
 
-#: .\core\models.py:58
+#: .\core\models.py:47
 msgid "Data de nascimento"
 msgstr "Birth date"
 
-#: .\core\models.py:59
-msgid "Número de telefone (Somente números)"
+#: .\core\models.py:48
+msgid "Número de telefone (somente números)"
 msgstr "Phone Number (Only numbers)"
 
-#: .\core\models.py:61
-msgid "Receber Notificações"
+#: .\core\models.py:50
+msgid "Receber notificações"
 msgstr "Receive Notifications"
 
-#: .\core\models.py:62
+#: .\core\models.py:51
 msgid "Site"
 msgstr "Website"
+
+#: .\core\views.py:281
+msgid "Foi encontrado um pet próximo ao local em que o seu foi perdido"
+msgstr "A pet was found near the place where yours was lost"
+
+#: .\core\views.py:294
+msgid "Alguns pets próximos ao seu perdido foram encontrados!"
+msgstr "Some pets next to your lost one have been found!"
+
+#~ msgid "Observações"
+#~ msgstr "Observations"
+
+#~ msgid "Altura"
+#~ msgstr "Height"
+
+#~ msgid "Foto atual"
+#~ msgstr "Actual picture"
+
+#~ msgid "Pet perdido! Ajude-nos a encontrar"
+#~ msgstr "Lost Pet! Help us find"
+
+#~ msgid ""
+#~ "Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a "
+#~ "felicidade dos seu donos!"
+#~ msgstr ""
+#~ "This pet is missing, help us find and make happiness from their owners!"
+
+#~ msgid "Avise-nos"
+#~ msgstr "Notify us"
+
+#~ msgid "Adote este pet!"
+#~ msgstr "Adopt a pet"
+
+#~ msgid ""
+#~ "Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura "
+#~ "de um novo lar, ele é amável e fofinho!"
+#~ msgstr ""
+#~ "Adopt this cute little dog, he was found abandoned and is looking for a "
+#~ "new home, he's lovely and cuddly!"
+
+#~ msgid "Adote"
+#~ msgstr "Adopt"
+
+#~ msgid "Pet encontrado, ajude-nos a localizar o seu dono!"
+#~ msgstr "Pet found, help us find its owner!"
+
+#~ msgid "Anuncie um pet localizado na sua região"
+#~ msgstr "Advertise a pet located in your region"
+
+#~ msgid "Anuncie"
+#~ msgstr "Advertise"
+
+#, fuzzy
+#~| msgid "Anunciar pet encontrado"
+#~ msgid "Cadastrar pet encontrado"
+#~ msgstr "Notify found pet"
+
+#~ msgid "Ajude a manter este lindo pet!"
+#~ msgstr "Help keep a pet"
+
+#~ msgid "Doe para uma instituição que cuida de animais abandonados"
+#~ msgstr "Donate to an institution that takes care of stray animals"
+
+#~ msgid "Doar para uma instituição!"
+#~ msgstr "Donate to an institution!"
+
+#~ msgid "Chamar chatbot"
+#~ msgstr "Call chatbot"
 
 #~ msgid "Ajude a manter um pet"
 #~ msgstr "Help keep a pet"
