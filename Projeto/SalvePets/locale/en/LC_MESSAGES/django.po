@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-01 14:52-0300\n"
+"POT-Creation-Date: 2021-08-01 19:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,7 +184,7 @@ msgstr "Registration"
 
 #: .\SalvePets\templates\account\signup.html:17
 #: .\SalvePets\templates\base.html:110
-#: .\SalvePets\templates\cadastroPet.html:319
+#: .\SalvePets\templates\cadastroPet.html:279
 msgid "Cadastrar"
 msgstr "Sign Up"
 
@@ -218,8 +218,8 @@ msgid "Patrocinar um pet"
 msgstr "Sponsor a pet"
 
 #: .\SalvePets\templates\base.html:73
-msgid "Anunciar pet encontrado"
-msgstr "Notify found pet"
+msgid "Anunciar pet encontrado/perdido"
+msgstr "Notify found/lost pet"
 
 #: .\SalvePets\templates\base.html:74
 msgid "Anunciar pet perdido"
@@ -234,31 +234,57 @@ msgid "Minha conta"
 msgstr "My Account"
 
 #: .\SalvePets\templates\cadastroPet.html:13
-#: .\SalvePets\templates\listaPets.html:30 .\SalvePets\templates\pet.html:30
+#: .\SalvePets\templates\listaPets.html:30
+#: .\SalvePets\templates\listaPetsEncontrados.html:30
+#: .\SalvePets\templates\listaPetsPerdidos.html:30
+#: .\SalvePets\templates\listaPetsUsuario.html:30
+#: .\SalvePets\templates\pet.html:30
 msgid "Meus pets cadastrados"
 msgstr "My registered pets"
 
 #: .\SalvePets\templates\cadastroPet.html:17
 #: .\SalvePets\templates\listaPets.html:18
 #: .\SalvePets\templates\listaPets.html:25
-#: .\SalvePets\templates\listaPets.html:34 .\SalvePets\templates\pet.html:18
-#: .\SalvePets\templates\pet.html:25 .\SalvePets\templates\pet.html:34
+#: .\SalvePets\templates\listaPets.html:34
+#: .\SalvePets\templates\listaPetsEncontrados.html:18
+#: .\SalvePets\templates\listaPetsEncontrados.html:25
+#: .\SalvePets\templates\listaPetsEncontrados.html:34
+#: .\SalvePets\templates\listaPetsPerdidos.html:18
+#: .\SalvePets\templates\listaPetsPerdidos.html:25
+#: .\SalvePets\templates\listaPetsPerdidos.html:34
+#: .\SalvePets\templates\listaPetsUsuario.html:18
+#: .\SalvePets\templates\listaPetsUsuario.html:25
+#: .\SalvePets\templates\listaPetsUsuario.html:34
+#: .\SalvePets\templates\pet.html:18 .\SalvePets\templates\pet.html:25
+#: .\SalvePets\templates\pet.html:34
 msgid "Cadastrar Pet"
 msgstr "Register a Pet"
 
 #: .\SalvePets\templates\cadastroPet.html:21
 #: .\SalvePets\templates\index.html:39 .\SalvePets\templates\listaPets.html:38
-#: .\SalvePets\templates\listaPets.html:39 .\SalvePets\templates\pet.html:38
-#: .\SalvePets\templates\pet.html:39
+#: .\SalvePets\templates\listaPets.html:39
+#: .\SalvePets\templates\listaPetsEncontrados.html:38
+#: .\SalvePets\templates\listaPetsEncontrados.html:39
+#: .\SalvePets\templates\listaPetsPerdidos.html:38
+#: .\SalvePets\templates\listaPetsPerdidos.html:39
+#: .\SalvePets\templates\listaPetsUsuario.html:38
+#: .\SalvePets\templates\listaPetsUsuario.html:39
+#: .\SalvePets\templates\pet.html:38 .\SalvePets\templates\pet.html:39
 msgid "Pets perdidos"
 msgstr "Lost pets"
 
 #: .\SalvePets\templates\cadastroPet.html:25
 #: .\SalvePets\templates\listaPets.html:42
-#: .\SalvePets\templates\listaPets.html:43 .\SalvePets\templates\pet.html:42
-#: .\SalvePets\templates\pet.html:43
+#: .\SalvePets\templates\listaPets.html:43
+#: .\SalvePets\templates\listaPetsEncontrados.html:42
+#: .\SalvePets\templates\listaPetsEncontrados.html:43
+#: .\SalvePets\templates\listaPetsPerdidos.html:42
+#: .\SalvePets\templates\listaPetsPerdidos.html:43
+#: .\SalvePets\templates\listaPetsUsuario.html:42
+#: .\SalvePets\templates\listaPetsUsuario.html:43
+#: .\SalvePets\templates\pet.html:42 .\SalvePets\templates\pet.html:43
 msgid "Pets encontrados"
-msgstr "Pets found"
+msgstr "Found pets"
 
 #: .\SalvePets\templates\cadastroPet.html:31
 msgid "Cadastrar um Pet"
@@ -272,71 +298,63 @@ msgstr "Alter image"
 msgid "Escolha uma imagem"
 msgstr "Choose an image"
 
-#: .\SalvePets\templates\cadastroPet.html:46
+#: .\SalvePets\templates\cadastroPet.html:50
 msgid "Nome"
 msgstr "Name"
 
-#: .\SalvePets\templates\cadastroPet.html:50 .\SalvePets\templates\pet.html:61
+#: .\SalvePets\templates\cadastroPet.html:54 .\SalvePets\templates\pet.html:64
 msgid "Descrição"
 msgstr "Description"
 
-#: .\SalvePets\templates\cadastroPet.html:54
+#: .\SalvePets\templates\cadastroPet.html:58
 msgid "Data Nascimento"
 msgstr "Birth date"
 
-#: .\SalvePets\templates\cadastroPet.html:58
+#: .\SalvePets\templates\cadastroPet.html:62
 msgid "Raça"
 msgstr "Breed"
 
-#: .\SalvePets\templates\cadastroPet.html:62
+#: .\SalvePets\templates\cadastroPet.html:66
 msgid "Cor"
 msgstr "Color"
 
-#: .\SalvePets\templates\cadastroPet.html:66 .\core\models.py:81
+#: .\SalvePets\templates\cadastroPet.html:70 .\core\models.py:81
 msgid "Porte"
 msgstr "Pet Size"
 
-#: .\SalvePets\templates\cadastroPet.html:68 .\core\models.py:22
+#: .\SalvePets\templates\cadastroPet.html:72 .\core\models.py:22
 msgid "Pequeno porte"
 msgstr "Small size"
 
-#: .\SalvePets\templates\cadastroPet.html:69 .\core\models.py:23
+#: .\SalvePets\templates\cadastroPet.html:73 .\core\models.py:23
 msgid "Médio porte"
 msgstr "Midsize"
 
-#: .\SalvePets\templates\cadastroPet.html:70 .\core\models.py:24
+#: .\SalvePets\templates\cadastroPet.html:74 .\core\models.py:24
 msgid "Grande porte"
 msgstr "Large size"
 
-#: .\SalvePets\templates\cadastroPet.html:74
+#: .\SalvePets\templates\cadastroPet.html:78
 msgid "Peso"
 msgstr "Weight"
 
-#: .\SalvePets\templates\cadastroPet.html:78 .\SalvePets\templates\pet.html:62
+#: .\SalvePets\templates\cadastroPet.html:82 .\SalvePets\templates\pet.html:65
 msgid "Situação"
 msgstr "Situation"
 
-#: .\SalvePets\templates\cadastroPet.html:80
+#: .\SalvePets\templates\cadastroPet.html:84
 msgid "Encontrado"
 msgstr "Found"
 
-#: .\SalvePets\templates\cadastroPet.html:81
+#: .\SalvePets\templates\cadastroPet.html:85
 msgid "Perdido"
 msgstr "Lost"
 
-#: .\SalvePets\templates\cadastroPet.html:110
+#: .\SalvePets\templates\cadastroPet.html:114
 msgid "Coordenada"
 msgstr "Coordinate"
 
-#: .\SalvePets\templates\cadastroPet.html:116
-msgid "Clique no botão para obter suas coordenadas."
-msgstr "Click the button to get your coordinates."
-
-#: .\SalvePets\templates\cadastroPet.html:118
-msgid "Clique aqui"
-msgstr "Try it"
-
-#: .\SalvePets\templates\cadastroPet.html:317 .\SalvePets\templates\pet.html:71
+#: .\SalvePets\templates\cadastroPet.html:277 .\SalvePets\templates\pet.html:74
 msgid "Alterar"
 msgstr "Alter"
 
@@ -465,21 +483,35 @@ msgstr "Do you have any questions? Ask our chatbot!"
 msgid "Inicie uma conversa on-line com o nosso chatbot."
 msgstr "Start an online conversation with our chatbot."
 
-#: .\SalvePets\templates\listaPets.html:31 .\SalvePets\templates\pet.html:31
+#: .\SalvePets\templates\listaPets.html:31
+#: .\SalvePets\templates\listaPetsEncontrados.html:31
+#: .\SalvePets\templates\listaPetsPerdidos.html:31
+#: .\SalvePets\templates\listaPetsUsuario.html:31
+#: .\SalvePets\templates\pet.html:31
 msgid "Meus pets"
 msgstr "My pets"
 
-#: .\SalvePets\templates\listaPets.html:35 .\SalvePets\templates\pet.html:35
+#: .\SalvePets\templates\listaPets.html:35
+#: .\SalvePets\templates\listaPetsEncontrados.html:35
+#: .\SalvePets\templates\listaPetsPerdidos.html:35
+#: .\SalvePets\templates\listaPetsUsuario.html:35
+#: .\SalvePets\templates\pet.html:35
 msgid "Cadastrar um pet"
 msgstr "Register a pet"
 
 #: .\SalvePets\templates\listaPets.html:51
+#: .\SalvePets\templates\listaPetsEncontrados.html:50
 msgid "Pets Encontrados"
-msgstr "Pet Found"
+msgstr "Found pets"
 
 #: .\SalvePets\templates\listaPets.html:53
+#: .\SalvePets\templates\listaPetsPerdidos.html:50
 msgid "Pets Perdidos"
 msgstr "Lost pets"
+
+#: .\SalvePets\templates\listaPetsUsuario.html:50
+msgid "Meus Pets"
+msgstr "My pets"
 
 #: .\SalvePets\templates\modificar-cadastro.html:9
 msgid "Modificar cadastro"
@@ -493,11 +525,11 @@ msgstr "Update"
 msgid "Detalhes do Pet"
 msgstr "Pet Details"
 
-#: .\SalvePets\templates\pet.html:63
+#: .\SalvePets\templates\pet.html:66
 msgid "Contato"
 msgstr "Contact"
 
-#: .\SalvePets\templates\pet.html:68
+#: .\SalvePets\templates\pet.html:71
 msgid "Excluir"
 msgstr "Delete"
 
@@ -587,19 +619,19 @@ msgstr "Name"
 msgid "Sobrenome"
 msgstr "Last Name"
 
-#: .\core\forms.py:36 .\core\forms.py:49
+#: .\core\forms.py:37 .\core\forms.py:51
 msgid "Data de Nascimento"
 msgstr "Birth date"
 
-#: .\core\forms.py:37 .\core\forms.py:50
+#: .\core\forms.py:38 .\core\forms.py:52
 msgid "Número de Telefone"
 msgstr "Phone Number"
 
-#: .\core\forms.py:51
+#: .\core\forms.py:53
 msgid "Desejo receber notificações"
 msgstr "Receive Notifications"
 
-#: .\core\forms.py:51
+#: .\core\forms.py:53
 msgid ""
 "(Marque este campo caso deseje ser notificado sobre pets perdidos ou "
 "encontrados.)"
@@ -654,13 +686,24 @@ msgstr "Receive Notifications"
 msgid "Site"
 msgstr "Website"
 
-#: .\core\views.py:281
+#: .\core\views.py:311
 msgid "Foi encontrado um pet próximo ao local em que o seu foi perdido"
 msgstr "A pet was found near the place where yours was lost"
 
-#: .\core\views.py:294
+#: .\core\views.py:324
 msgid "Alguns pets próximos ao seu perdido foram encontrados!"
 msgstr "Some pets next to your lost one have been found!"
+
+#, fuzzy, python-format
+#~| msgid "Número de dígitos (%d) inferior ao esperado: %d"
+#~ msgid "Número de dígitos (%d) inferor ao esperado: %d"
+#~ msgstr "Number of digits (%d) less than expected: %d"
+
+#~ msgid "Clique no botão para obter suas coordenadas."
+#~ msgstr "Click the button to get your coordinates."
+
+#~ msgid "Clique aqui"
+#~ msgstr "Try it"
 
 #~ msgid "Observações"
 #~ msgstr "Observations"

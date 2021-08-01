@@ -95,13 +95,13 @@ class TelefoneField(forms.Field):
             if tam!=tamTelefone:
                 if tam<tamTelefone:
                     raise ValidationError(
-                        _('Número de dígitos (%d) inferor ao esperado: %d' % (tam, tamTelefone)),
+                        'Número de dígitos (%d) inferior ao esperado: %d' % (tam, tamTelefone),
                         code='TamDivergente',
                         params={'value': '11'},
                     )
                 else:
                         raise ValidationError(
-                        _('Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone)),
+                        'Número de dígitos (%d) superior ao esperado: %d' % (tam, tamTelefone),
                         code='TamDivergente',
                         params={'value': '11'},
                     )
