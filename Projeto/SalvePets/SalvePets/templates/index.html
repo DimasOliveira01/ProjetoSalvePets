@@ -3,6 +3,11 @@
 {% load static %}
 
 {% block conteudo %}
+<!-- Essa foi uma tentativa de inserir um botão "completar cadastro" - mas deveria ser "temporario", apenas para
+quem não tivesse o cadastro preenchido / não tivesse CPF (regra proxy que eu pensei). Não consegui implementar a regra porque
+(aparentemente) não passamos um user quando chamamos index.html.
+Faltou também aprimorar o CSS - cheguei a duplicar os componentes page-section e btn originais criando versões "temporary",
+mas algumas coisas não estavam funcionando então suspendi.
 
 {% if user.is_authenticated %}
 <section class="page-section-temporary py-0" id="temporaria">
@@ -15,6 +20,7 @@
     </div>
 </section>
 {% endif %}
+-->
 
 <section class="page-section" id="services">
     <div class="container">
