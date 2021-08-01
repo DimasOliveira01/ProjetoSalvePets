@@ -73,17 +73,17 @@ class ABRIGO(models.Model):
 class Pet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     #FK_idAbrigo = models.ForeignKey(ABRIGO, on_delete=models.RESTRICT)      #precisa remover a FK abrigo
-    nome = models.CharField(max_length=100, blank=False, null=False)
+    nome = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
     dataNascimento = models.DateField(blank=True, null=True)
     raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=30, blank=True, null=True)
     porte = models.IntegerField(choices=PORTE, default=1, verbose_name=_("Porte"), blank=False, null=False)
-    peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=False, null=False)
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado', blank=False, null=False)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
-    coordenada = models.PointField(default='POINT(-46.65580414499566 -23.565801069428833)', srid=4326, blank=False, null=False)
+    coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 

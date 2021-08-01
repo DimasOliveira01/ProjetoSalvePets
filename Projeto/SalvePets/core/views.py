@@ -45,18 +45,18 @@ def teste(request):
 
 def lista_pets_encontrados(request):
     pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsEncontrados.html',{'pet':pet})
 
 
 def lista_pets_perdidos(request):
     pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsPerdidos.html',{'pet':pet})
 
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
     pet=Pet.objects.filter(ativo=True, user=request.user)
-    return render(request, 'listaPets.html',{'pet':pet})
+    return render(request, 'listaPetsUsuario.html',{'pet':pet})
 
 
 @login_required(login_url='/accounts/login')
@@ -88,20 +88,52 @@ def set_pet(request):
     if pet_id:
         pet=Pet.objects.get(id=pet_id)
         if user == pet.user:
-            pet.nome=nome
-            pet.descricao=descricao
-            pet.dataNascimento=dataNascimento
-            pet.raca=raca
-            pet.cor=cor
+            if nome:
+                pet.nome=nome
+                pet.save()
+            else:
+                pet.nome="Sem nome"
+                pet.save()
+
+            if descricao:
+                pet.descricao=descricao
+                pet.save()
+
+            if dataNascimento:
+                pet.dataNascimento=dataNascimento
+                pet.save()
+
+            if raca:
+                pet.raca=raca
+                pet.save()
+
+            if cor:
+                pet.cor=cor
+                pet.save()
+
             pet.porte=porte
-            pet.peso=peso
-            pet.encontradoPerdido=encontradoPerdido         
+            pet.save()
+
+            if peso:
+                pet.peso=peso
+                pet.save()
+
+            pet.encontradoPerdido=encontradoPerdido
+            pet.save()
+
             pet.coordenada=coordenada
+            pet.save()
+
             if foto:
                 pet.foto = foto
-            pet.save()
+                pet.save()
     else:
-        pet = Pet.objects.create(nome=nome, porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        if nome:
+            pet.nome=nome
+        else:
+            pet.nome="Sem nome"
+            pet.save()
         if descricao:
             pet.descricao = descricao
             pet.save()
@@ -117,6 +149,8 @@ def set_pet(request):
         if peso:
             pet.peso = peso
             pet.save()
+        
+        # Gatilho da notificação de pet encontrado/perdido
         notif_pet_encontrado(pet.id)
 
     url = '/pet-informacao/{}/'.format(pet.id)

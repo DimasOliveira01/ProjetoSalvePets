@@ -159,3 +159,4 @@ Projeto/SalvePets/core/__pycache__/__init__.cpython-39.pyc
 Projeto/SalvePets/SalvePets/__pycache__/wsgi.cpython-39.pyc
 *.pyc
 Projeto/SalvePets/core/migrations/0011_auto_20210730_1741.py
+Projeto/SalvePets/core/migrations/0002_alter_pet_nome.py

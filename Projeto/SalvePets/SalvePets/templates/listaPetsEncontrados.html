@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block conteudo %}
+<style>
+.polaroid{
+    width:350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  </style>
+
+    <!-- Página de Login-->
+    <div class="container mt-4">
+        <!--<h2>{% trans "Cadastrar Pet" %}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+            {% trans "Cadastrar Pet" %}
+            </button>
+        </form>-->
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
+                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>-->
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
+                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>-->
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
+                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>-->
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>-->
+            </li>
+        </ul>
+    </div>
+        <section class="py-2">
+        </section>
+
+    <h1 class="text-center">Pets Encontrados</h1>
+
+    <div class="container mb-4">
+        <div class="row">
+            {% for p in pet %}
+            <div class="col-sm-4">
+                <a href="../pet-informacao/{{ p.id }}">
+                    <div class="polaroid">
+                        <img src="{{p.foto.url}}" style="width:100%">
+                        <div class="container">
+                            <!--<p>{{ p.nome }}</p>-->
+                            <br>
+                            <p class="btn btn-outline-dark">{{ p.nome }}</p>
+                        </div>
+                    </div>
+                </a>    
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+    
+            
+        
+    
+
+{% endblock conteudo %}
