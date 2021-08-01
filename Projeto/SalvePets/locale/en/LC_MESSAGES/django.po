@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 19:56-0300\n"
+"POT-Creation-Date: 2021-07-30 20:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,7 +184,7 @@ msgstr "Registration"
 
 #: .\SalvePets\templates\account\signup.html:17
 #: .\SalvePets\templates\base.html:110
-#: .\SalvePets\templates\cadastroPet.html:264
+#: .\SalvePets\templates\cadastroPet.html:330
 msgid "Cadastrar"
 msgstr "Sign Up"
 
@@ -247,7 +247,7 @@ msgid "Cadastrar Pet"
 msgstr "Register a Pet"
 
 #: .\SalvePets\templates\cadastroPet.html:21
-#: .\SalvePets\templates\index.html:21 .\SalvePets\templates\index.html:96
+#: .\SalvePets\templates\index.html:21 .\SalvePets\templates\index.html:133
 #: .\SalvePets\templates\listaPets.html:38
 #: .\SalvePets\templates\listaPets.html:39 .\SalvePets\templates\pet.html:38
 #: .\SalvePets\templates\pet.html:39
@@ -317,11 +317,11 @@ msgstr "Actual picture"
 msgid "Escolha uma imagem"
 msgstr "Choose an image"
 
-#: .\SalvePets\templates\cadastroPet.html:120
+#: .\SalvePets\templates\cadastroPet.html:121
 msgid "Coordenada"
 msgstr "Coordinate"
 
-#: .\SalvePets\templates\cadastroPet.html:262 .\SalvePets\templates\pet.html:71
+#: .\SalvePets\templates\cadastroPet.html:328 .\SalvePets\templates\pet.html:71
 msgid "Alterar"
 msgstr "Alter"
 
@@ -379,34 +379,34 @@ msgstr "Donate to an institution that takes care of stray animals."
 msgid "Ajude-nos a financiar esse projeto comprando em nossa loja oficial!"
 msgstr "Help us fund this project by shopping at our official store!"
 
-#: .\SalvePets\templates\index.html:71 .\SalvePets\templates\index.html:198
+#: .\SalvePets\templates\index.html:71 .\SalvePets\templates\index.html:235
 msgid "Possui dúvidas? Pergunte para nosso chatbot!"
 msgstr "Do you have any questions? Ask our chatbot!"
 
-#: .\SalvePets\templates\index.html:72 .\SalvePets\templates\index.html:203
+#: .\SalvePets\templates\index.html:72 .\SalvePets\templates\index.html:240
 msgid "Inicie uma conversa on-line com o nosso chatbot."
 msgstr "Start an online conversation with our chatbot."
 
-#: .\SalvePets\templates\index.html:84
+#: .\SalvePets\templates\index.html:121
 msgid "Pet perdido! Ajude-nos a encontrar"
 msgstr "Lost Pet! Help us find"
 
-#: .\SalvePets\templates\index.html:89
+#: .\SalvePets\templates\index.html:126
 msgid ""
 "Este cãozinho está desaparecido, ajude-nos a encontrar e fazer a felicidade "
 "dos seu donos!"
 msgstr ""
 "This pet is missing, help us find and make happiness from their owners!"
 
-#: .\SalvePets\templates\index.html:94
+#: .\SalvePets\templates\index.html:131
 msgid "Avise-nos"
 msgstr "Notify us"
 
-#: .\SalvePets\templates\index.html:111
+#: .\SalvePets\templates\index.html:148
 msgid "Adote este pet!"
 msgstr "Adopt a pet"
 
-#: .\SalvePets\templates\index.html:116
+#: .\SalvePets\templates\index.html:153
 msgid ""
 "Adote este lindo cãozinho, ele foi encontrado abandonado e está a procura de "
 "um novo lar, ele é amável e fofinho!"
@@ -414,41 +414,41 @@ msgstr ""
 "Adopt this cute little dog, he was found abandoned and is looking for a new "
 "home, he's lovely and cuddly!"
 
-#: .\SalvePets\templates\index.html:120 .\SalvePets\templates\index.html:122
+#: .\SalvePets\templates\index.html:157 .\SalvePets\templates\index.html:159
 msgid "Adote"
 msgstr "Adopt"
 
-#: .\SalvePets\templates\index.html:139
+#: .\SalvePets\templates\index.html:176
 msgid "Pet encontrado, ajude-nos a localizar o seu dono!"
 msgstr "Pet found, help us find its owner!"
 
-#: .\SalvePets\templates\index.html:144
+#: .\SalvePets\templates\index.html:181
 msgid "Anuncie um pet localizado na sua região"
 msgstr "Advertise a pet located in your region"
 
-#: .\SalvePets\templates\index.html:148
+#: .\SalvePets\templates\index.html:185
 msgid "Anuncie"
 msgstr "Advertise"
 
-#: .\SalvePets\templates\index.html:151
+#: .\SalvePets\templates\index.html:188
 #, fuzzy
 #| msgid "Anunciar pet encontrado"
 msgid "Cadastrar pet encontrado"
 msgstr "Notify found pet"
 
-#: .\SalvePets\templates\index.html:168
+#: .\SalvePets\templates\index.html:205
 msgid "Ajude a manter este lindo pet!"
 msgstr "Help keep a pet"
 
-#: .\SalvePets\templates\index.html:173
+#: .\SalvePets\templates\index.html:210
 msgid "Doe para uma instituição que cuida de animais abandonados"
 msgstr "Donate to an institution that takes care of stray animals"
 
-#: .\SalvePets\templates\index.html:177 .\SalvePets\templates\index.html:180
+#: .\SalvePets\templates\index.html:214 .\SalvePets\templates\index.html:217
 msgid "Doar para uma instituição!"
 msgstr "Donate to an institution!"
 
-#: .\SalvePets\templates\index.html:207 .\SalvePets\templates\index.html:209
+#: .\SalvePets\templates\index.html:244 .\SalvePets\templates\index.html:246
 msgid "Chamar chatbot"
 msgstr "Call chatbot"
 
@@ -468,11 +468,11 @@ msgstr "Pet Found"
 msgid "Pets Perdidos"
 msgstr "Lost pets"
 
-#: .\SalvePets\templates\modificar-cadastro.html:7
+#: .\SalvePets\templates\modificar-cadastro.html:9
 msgid "Modificar cadastro"
 msgstr "Modify registration"
 
-#: .\SalvePets\templates\modificar-cadastro.html:11
+#: .\SalvePets\templates\modificar-cadastro.html:17
 msgid "Atualizar"
 msgstr "Update"
 
@@ -547,6 +547,62 @@ msgstr ""
 "<p>Also, you can check the history of animals that pass byby the platform, "
 "in order to give more assurance that these animals arebeing treated well.</"
 "p>\n"
+
+#: .\core\forms.py:10
+msgid "Nome:"
+msgstr "Name"
+
+#: .\core\forms.py:11
+msgid "Sobrenome"
+msgstr "Last Name"
+
+#: .\core\models.py:35
+msgid "Usuário comum"
+msgstr "Common user"
+
+#: .\core\models.py:36
+msgid "Instituição"
+msgstr "Institution"
+
+#: .\core\models.py:39
+msgid "perdido"
+msgstr "lost"
+
+#: .\core\models.py:39
+msgid "PERDIDO"
+msgstr "LOST"
+
+#: .\core\models.py:40
+msgid "encontrado"
+msgstr "found"
+
+#: .\core\models.py:40
+msgid "ENCONTRADO"
+msgstr "FOUND"
+
+#: .\core\models.py:56
+msgid "Tipo Usuário"
+msgstr "User Type"
+
+#: .\core\models.py:57
+msgid "CPF (Somente números)"
+msgstr "CPF (Only numbers)"
+
+#: .\core\models.py:58
+msgid "Data de nascimento"
+msgstr "Birth date"
+
+#: .\core\models.py:59
+msgid "Número de telefone (Somente números)"
+msgstr "Phone Number (Only numbers)"
+
+#: .\core\models.py:61
+msgid "Receber Notificações"
+msgstr "Receive Notifications"
+
+#: .\core\models.py:62
+msgid "Site"
+msgstr "Website"
 
 #~ msgid "Ajude a manter um pet"
 #~ msgstr "Help keep a pet"

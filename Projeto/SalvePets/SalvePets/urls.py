@@ -49,7 +49,6 @@ urlpatterns = [
     path('sobre/',views.sobre),
     path('em-construcao/',views.em_construcao),
     path('teste/',views.teste),
-
 ]
 
 #imagem
@@ -66,14 +65,3 @@ urlpatterns += i18n_patterns (
     path('', views.index),
     path('accounts/', include("allauth.urls")),
 )
-
-"""
-urlpatterns += i18n_patterns (
-    path('', include('lang.urls', namespace='lang')),
-    path('admin/', admin.site.urls),
-    path('login/submit', views.submit_login),
-    path('logout/', views.logout_user),
-    path('', views.index),
-    path('accounts/', include("allauth.urls")),
-)
-"""

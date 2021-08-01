@@ -34,48 +34,45 @@
         <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
         <div class="container">
             <div class="form-group">
+                {% if pet.id != null %}
+                    <label>{% trans "Alterar imagem" %}:</label>
+                    <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
+                {% else %}
+                    <p><label>{% trans "Escolha uma imagem" %}:</label></p>
+                {% endif %}
+                <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" >
+            </div>
+            <div class="form-group">
                 <label>{% trans "Nome" %}:</label>
                 <input required="required" class="form-control" name="nome" type="text" value="{{ pet.nome }}">
             </div>
             <div class="form-group">
                 <label>{% trans "Descrição" %}:</label>
-                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao }}</textarea>
+                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
-            <div class="form-group">
-                <label>{% trans "Observações" %}:</label>
-                <textarea class="form-control" rows="3" name="observacoes" type="text"  >{{ pet.observacoes }}</textarea>
-            </div>
-            
-            <!--<div class="form-group">
-                <label>Comprimento(cm):</label>
-                <input required="required" class="form-control" name="comprimento" type="number" value="{{ pet.comprimento }}">
-            </div>
-            <div class="form-group">
-                <label>Largura(cm):</label>
-                <input required="required" class="form-control" name="largura" type="number" value="{{ pet.largura }}">
-            </div>-->
-
-
-
             <div class="form-group">
                 <label>{% trans "Data Nascimento" %}:</label>
-                <input required="required" class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento }}">
+                <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento|default_if_none:"" }}">
             </div>
             <div class="form-group">
                 <label>{% trans "Raça" %}:</label>
-                <input required="required" class="form-control" name="raca" type="text" value="{{ pet.raca }}">
+                <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}">
             </div>
             <div class="form-group">
                 <label>{% trans "Cor" %}:</label>
-                <input required="required" class="form-control" name="cor" type="text"  value="{{ pet.cor }}">
+                <input class="form-control" name="cor" type="text"  value="{{ pet.cor|default_if_none:"" }}">
             </div>
             <div class="form-group">
-                <label>{% trans "Altura" %}(cm):</label>
-                <input required="required" class="form-control" name="altura" type="number" value="{{ pet.altura }}">
+                <label>{% trans "Porte" %}:</label>
+                <select class="form-control mb-4" name="porte" value="{{ pet.porte }}">
+                    <option value="1">{% trans "Pequeno porte" %}</option>
+                    <option value="2">{% trans "Médio porte" %}</option>
+                    <option value="3">{% trans "Grande porte" %}</option>
+                  </select>
             </div>
             <div class="form-group">
                 <label>{% trans "Peso" %}(Kg):</label>
-                <input required="required" class="form-control" name="peso" type="number" value="{{ pet.peso }}">
+                <input class="form-control" name="peso" type="number" value="{{ pet.peso|default_if_none:"" }}">
             </div>
             <div class="form-group">
                 <label>{% trans "Situação" %}:</label>
@@ -83,14 +80,6 @@
                     <option value="encontrado">{% trans "Encontrado" %}</option>
                     <option value="perdido">{% trans "Perdido" %}</option>
                   </select>
-            </div>
-            <div class="form-group">
-                {% if pet.id != null %}
-                    <p><a   href="/media/{{ pet.foto }}" target="_blank">{% trans "Foto atual" %}</a></p>
-                {% else %}
-                    <p><label>{% trans "Escolha uma imagem" %}:</label></p>
-                {% endif %}
-                <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" >
             </div>
 
 
