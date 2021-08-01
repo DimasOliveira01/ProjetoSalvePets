@@ -111,7 +111,7 @@
                         <div>
                             <p></p>
                             <p></p>
-                            <label class="required" for="id_coordenada">{% trans "Coordenada" %}:</label>
+                            <label class="required" for="id_coordenada">{% trans "Coordenada" %}: *</label>
                             
                             
                             
@@ -152,7 +152,7 @@
 
 
 
-                            <input type="text" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada" 
+                            <input required="required" type="text" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada" 
                             value="{ &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }"/>
 
 
