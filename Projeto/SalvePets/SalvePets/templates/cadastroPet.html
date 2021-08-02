@@ -150,8 +150,6 @@
                                 geodjango_id_coordenada.geom_type = 'Point';
                                 geodjango_id_coordenada.srid = 4326;
 
-
-
                                 L.drawLocal.draw.toolbar.actions.title = "Cancel drawing";
                                 L.drawLocal.draw.toolbar.actions.text = "Cancel";
                                 L.drawLocal.draw.toolbar.undo.title = "Delete last point drawn";
@@ -190,11 +188,31 @@
 
 
                                 function id_coordenada_map_callback(map, options) {
-                                    geodjango_id_coordenada.store_class = L.FieldStore;
+
+									navigator.geolocation.getCurrentPosition(success);
+									
+									function success(pos) {
+									var crd = pos.coords;
+									lat=crd.latitude;
+									lon=crd.longitude;
+									
+									
+
+									// arbitrary js object:
+									var myJsObj = {'type':'Point', 'coordinates':[lon,lat]};
+
+									// using JSON.stringify pretty print capability:
+									var str = JSON.stringify(myJsObj, undefined, 4);
+
+									// display pretty printed object in text area:
+									document.getElementById('id_coordenada').innerHTML = str;
+									
+									geodjango_id_coordenada.store_class = L.FieldStore;
                                     geodjango_id_coordenada.precision = options.djoptions.precision;
+									
                                     (new L.GeometryField(geodjango_id_coordenada)).addTo(map);
 
-                                };
+                                };};
 
 
                             </script>
@@ -207,6 +225,8 @@
 
                                 <div id="id_coordenada-map" class="leaflet-container-default"></div>
                                 <script>
+								
+								
                                     (function () {
 
                                         function loadmap() {
@@ -234,7 +254,7 @@
                                 { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
                             </textarea>-->  
                             <textarea required="required" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
-                                { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
+                                
                             </textarea>
                             
 
