@@ -51,11 +51,11 @@
                 <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}">
             </div>
             <div class="form-group">
-                <label>{% trans "Descrição" %}:</label>
-                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
+                <label>{% trans "Informações adicionais" %}:</label>
+                <textarea placeholder="Insira mais informações sobre o pet..." class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
             <div class="form-group">
-                <label>{% trans "Data Nascimento" %}:</label>
+                <label>{% trans "Data de localização ou perda do pet" %}:</label>
                 <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento|default_if_none:"" }}">
             </div>
             <div class="form-group">
@@ -233,7 +233,7 @@
                             <!--<textarea id="idDoCampo" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
                                 { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
                             </textarea>-->  
-                            <textarea required="required" id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
+                            <textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
                                 { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
                             </textarea>
                             
