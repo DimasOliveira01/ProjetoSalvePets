@@ -38,7 +38,7 @@
                     <label>{% trans "Alterar imagem" %}:</label>
                     <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
                 {% else %}
-                    <p><label>{% trans "Escolha uma imagem" %}:</label></p>
+                    <p><label><b>{% trans "Escolha uma imagem" %}</b>:</label></p>
                 {% endif %}
                 {% if pet.id != null %}
                     <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
@@ -47,27 +47,40 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                <label>{% trans "Nome" %}:</label>
+                <label><b>{% trans "Nome" %}</b>:</label>
                 <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}">
             </div>
             <div class="form-group">
-                <label>{% trans "Informações adicionais" %}:</label>
+                <label><b>{% trans "Informações adicionais" %}</b>:</label>
                 <textarea placeholder="Insira mais informações sobre o pet..." class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
             <div class="form-group">
-                <label>{% trans "Data de localização ou perda do pet" %}:</label>
+                <label><b>{% trans "Data de localização ou perda do pet" %}</b>:</label>
                 <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento|default_if_none:"" }}">
             </div>
+
+
+
             <div class="form-group">
-                <label>{% trans "Raça" %}:</label>
+                <label><b>{% trans "Escolha uma espécie" %}</b>:</label>
+                <select class="form-control mb-4" name="especie" value="{{ pet.especie }}">
+                    <option value="1">{% trans "Cachorro" %}</option>
+                    <option value="2">{% trans "Gato" %}</option>
+                    <option value="3">{% trans "Outros" %}</option>
+                  </select>
+            </div>
+
+
+            <div class="form-group">
+                <label><b>{% trans "Raça" %}</b>:</label>
                 <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}">
             </div>
             <div class="form-group">
-                <label>{% trans "Cor" %}:</label>
+                <label><b>{% trans "Cor predominante" %}</b>:</label>
                 <input class="form-control" name="cor" type="text"  value="{{ pet.cor|default_if_none:"" }}">
             </div>
             <div class="form-group">
-                <label>{% trans "Porte" %}:</label>
+                <label><b>{% trans "Porte" %}</b>:</label>
                 <select class="form-control mb-4" name="porte" value="{{ pet.porte }}">
                     <option value="1">{% trans "Pequeno porte" %}</option>
                     <option value="2">{% trans "Médio porte" %}</option>
@@ -79,7 +92,7 @@
                 <input class="form-control" name="peso" type="number" value="{{ pet.peso|default_if_none:"" }}">
             </div>-->
             <div class="form-group">
-                <label>{% trans "Situação" %}:</label>
+                <label><b>{% trans "Escolha a situação do pet" %}</b>:</label>
                 <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
                     <option value="encontrado">{% trans "Encontrado" %}</option>
                     <option value="perdido">{% trans "Perdido" %}</option>
@@ -100,7 +113,7 @@
 
 
 
-
+<!--novaas alterações -->
 
             <div class="form-group">
                 <fieldset class="module aligned ">
@@ -111,7 +124,7 @@
                         <div>
                             <p></p>
                             <p></p>
-                            <label class="required" for="id_coordenada">{% trans "Coordenada" %}: *</label>
+                            <label class="required" for="id_coordenada"><b>{% trans "Indique a localização" %}</b>: *</label>
                             
                             
                             
@@ -190,10 +203,63 @@
 
 
                                 function id_coordenada_map_callback(map, options) {
-                                    geodjango_id_coordenada.store_class = L.FieldStore;
-                                    geodjango_id_coordenada.precision = options.djoptions.precision;
-                                    (new L.GeometryField(geodjango_id_coordenada)).addTo(map);
 
+                                    //function getLocation() {
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(success, showError);
+                                        } else { 
+                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                        }
+                                    //}
+                                    
+                                    //navigator.geolocation.getCurrentPosition(success);
+									
+									function success(pos) {
+									    var crd = pos.coords;
+									    lat=crd.latitude;
+									    lon=crd.longitude;
+									
+									    // arbitrary js object:
+									    var myJsObj = {'type':'Point', 'coordinates':[lon,lat]};
+
+									    // using JSON.stringify pretty print capability:
+									    var str = JSON.stringify(myJsObj, undefined, 4);
+
+									    // display pretty printed object in text area:
+									    document.getElementById('id_coordenada').innerHTML = str;
+									
+									    geodjango_id_coordenada.store_class = L.FieldStore;
+                                        geodjango_id_coordenada.precision = options.djoptions.precision;
+									
+                                        (new L.GeometryField(geodjango_id_coordenada)).addTo(map);
+
+                                    };
+                                    
+                                    function showError(error) {
+                                        if(error){
+                                            alert("Por favor permita a localização no seu navegador para obtermos o local próximo da perda ou localização do pet.");
+                                        }
+                                        
+									    lat=-23.561110158851235;
+									    lon=-46.6564872026675;
+									
+									    // arbitrary js object:
+									    var myJsObj = {'type':'Point', 'coordinates':[lon,lat]};
+
+									    // using JSON.stringify pretty print capability:
+									    var str = JSON.stringify(myJsObj, undefined, 4);
+
+									    // display pretty printed object in text area:
+									    document.getElementById('id_coordenada').innerHTML = str;
+									
+									    geodjango_id_coordenada.store_class = L.FieldStore;
+                                        geodjango_id_coordenada.precision = options.djoptions.precision;
+									
+                                        (new L.GeometryField(geodjango_id_coordenada)).addTo(map);
+
+
+                                    }
+                            
                                 };
 
 
@@ -234,7 +300,7 @@
                                 { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
                             </textarea>-->  
                             <textarea id="id_coordenada" class="required django-leaflet-raw-textarea" cols="150" rows="10" name="coordenada">
-                                { &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ -46.655804144995663, -23.565801069428833 ] }
+                                
                             </textarea>
                             
 
