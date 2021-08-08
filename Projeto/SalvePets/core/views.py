@@ -154,6 +154,7 @@ def set_pet(request):
         notif_pet_encontrado(pet.id)
 
     url = '/pet-informacao/{}/'.format(pet.id)
+    os.system('aws s3 sync /home/ubuntu/ProjetoSalvePets/Projeto/SalvePets/media/pet s3://bucket-salvepets')
     return redirect(url)
 
 
