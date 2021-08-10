@@ -73,7 +73,8 @@ def cadastro_pet(request):
 def set_pet(request):
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
-    dataNascimento=request.POST.get('dataNascimento')
+    dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
+    especie=request.POST.get('especie')
     raca=request.POST.get('raca')
     cor=request.POST.get('cor')
     porte=request.POST.get('porte')
@@ -99,9 +100,12 @@ def set_pet(request):
                 pet.descricao=descricao
                 pet.save()
 
-            if dataNascimento:
-                pet.dataNascimento=dataNascimento
+            if dataPerdaEncontro:
+                pet.dataPerdaEncontro=dataPerdaEncontro
                 pet.save()
+            
+            pet.especie=especie
+            pet.save()
 
             if raca:
                 pet.raca=raca
@@ -137,8 +141,11 @@ def set_pet(request):
         if descricao:
             pet.descricao = descricao
             pet.save()
-        if dataNascimento:
-            pet.dataNascimento = dataNascimento
+        if dataPerdaEncontro:
+            pet.dataPerdaEncontro = dataPerdaEncontro
+            pet.save()
+        if especie:
+            pet.especie = especie
             pet.save()
         if raca:
             pet.raca = raca
