@@ -163,3 +163,6 @@ Projeto/SalvePets/core/migrations/0002_alter_pet_nome.py
 Projeto/SalvePets/core/migrations/0002_auto_20210801_1713.py
 Projeto/SalvePets/core/migrations/0002_auto_20210807_1812.py
 Projeto/SalvePets/core/migrations/0003_alter_pet_encontradoperdido.py
+Projeto/SalvePets/core/migrations/
+Projeto/SalvePets/SalvePets/__pycache__/
+Projeto/SalvePets/core/__pycache__

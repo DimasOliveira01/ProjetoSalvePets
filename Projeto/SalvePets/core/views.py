@@ -285,28 +285,17 @@ def notif_pet_encontrado(id):
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
                                     enviar_email_pet_encontrado(pet[0].id, str(pets[count].email), pet[0].foto, pet[0].nome)
-                                else:
-                                    print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
                             else:
                                 # Armazena em lista todos os nomes e fotos dos pets para enviar por e-mail a quem está cadastrando.
                                 if pet[0].email != pets[count].email:
                                     id_list.append(pets[count].id)
                                     nome_list.append(pets[count].nome)
                                     foto_list.append(pets[count].foto)
-                                else:
-                                    print("O e-mail da pessoa que está cadastrando é igual ao que a notificação seria enviada")
-                        else:
-                            print("Pet muito distante")
                         count = count + 1
                 
                 if id_list and foto_list and nome_list:
                     # Envia lista de pets encontrados para quem cadastrou um pet perdido.
                     enviar_email_pet_perdido(id_list, str(pet[0].email), foto_list, nome_list)
-
-            else:
-                print("Não existem outros pets para calcular as distâncias.")
-        else:
-            print("Não existem pets cadastrados. É necessário pelo menos um pet perdido e um encontrado para a notificação funcionar")
     except Exception as error:
         print("Falha em ler o banco de dados.\n", error)
     finally:
@@ -326,7 +315,6 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
 
     # Envio do e-mail
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
-    print("E-mail enviado com sucesso")
 
 def enviar_email_pet_perdido(id, email, foto, nome_pet):
     assunto = _("Alguns pets próximos ao seu perdido foram encontrados!")
@@ -336,9 +324,7 @@ def enviar_email_pet_perdido(id, email, foto, nome_pet):
     html = loader.render_to_string('emails/pet_perdido.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
     plain_message = strip_tags(html)
 
-    print(id, email, foto, nome_pet)
     # Envio do e-mail
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
-    print("E-mail enviado com sucesso")
 
 # ==================================
