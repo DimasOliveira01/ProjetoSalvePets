@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
+from django.utils.translation import ugettext_lazy as _
 <!--sdfgsdfg -----dfsadfsad   -->
 {% block conteudo %}
 
@@ -51,9 +52,12 @@
                 <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}">
             </div>
             <div class="form-group">
-                <label><b>{% trans "Informações adicionais" %}</b>:</label>
-                <textarea placeholder="Insira mais informações sobre o pet..." class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
+                <label><b>{% trans "Informações adicionais (Insira mais informações sobre o pet)" %}</b>:</label>
+                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
+            <!--<script>
+                document.getElementById("infoPet").placeholder = i18n.translate("Insira mais informações sobre o pet...");
+            </script>-->
             <div class="form-group">
                 <label><b>{% trans "Data de localização ou perda do pet" %}</b>:</label>
                 <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento|default_if_none:"" }}">
