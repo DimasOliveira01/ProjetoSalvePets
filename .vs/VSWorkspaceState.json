@@ -6,9 +6,10 @@
     "\\Projeto\\SalvePets\\core",
     "\\Projeto\\SalvePets\\features",
     "\\Projeto\\SalvePets\\features\\steps",
+    "\\Projeto\\SalvePets\\locale",
     "\\Projeto\\SalvePets\\SalvePets",
+    "\\Projeto\\SalvePets\\SalvePets\\templates",
     "\\VirtualEnv"
   ],
-  "SelectedNode": "\\Projeto\\SalvePets\\manage.py",
   "PreviewInSolutionExplorer": false
 }
