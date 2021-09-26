@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.salvepets.online','salvepets.online','34.227.252.79','ec2-34-227-252-79.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['www.salvepets.online','salvepets.online','34.227.252.79']
 
 #Caminho das imagens(foto)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
