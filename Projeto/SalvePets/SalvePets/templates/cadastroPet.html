@@ -2,71 +2,99 @@
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
-from django.utils.translation import ugettext_lazy as _
-<!--sdfgsdfg -----dfsadfsad   -->
+
 {% block conteudo %}
+<script>
+
+function updateTextInput()
+{
+        var value = document.getElementById("range").value;
+
+        var img = document.getElementById('imageRange');
+
+        img.height = value
+
+}
+
+function SetSize(porte){
+
+var tamanho;
+
+    switch (porte){
+        case 'pequeno':
+            tamanho = 40
+        break;
+        case 'medio':
+            tamanho = 80
+        break;
+        case 'grande':
+            tamanho = 120
+        break;
+    }
+
+    document.getElementById("range").value = tamanho;
+    updateTextInput();
+
+}
+
+</script>
 
     <!-- Página de Login-->
-    <div class="container mt-4">
-      
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
-                
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
-            
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
-                
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
-                
-            </li>
-        </ul>
-    </div>
+<div class="container mt-4">
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active"><b>{% trans "Cadastrar pet" %}</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+        </li>
+    </ul>
+</div>
 
-    <h1 class="text-center">{% trans "Cadastrar um Pet" %}</h1>
 
     <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
         <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
         <div class="container">
+        <p><h3>{% trans "Cadastrar um pet" %}</h3></p>
             <div class="form-group">
                 {% if pet.id != null %}
-                    <label>{% trans "Alterar imagem" %}:</label>
+                    <label><b>{% trans "Alterar imagem" %}:</b></label>
                     <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
                 {% else %}
-                    <p><label><b>{% trans "Escolha uma imagem" %}</b>:</label></p>
+                    <label><b>{% trans "Foto" %}</b>:</label><br>
                 {% endif %}
                 {% if pet.id != null %}
-                    <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                    <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}">
                 {% else %}
                     <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
                 {% endif %}
             </div>
+            <br>
             <div class="form-group">
                 <label><b>{% trans "Nome" %}</b>:</label>
-                <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}">
+                <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}" placeholder="Caso não saiba, mantenha este campo vazio">
             </div>
+            <br>
             <div class="form-group">
-                <label><b>{% trans "Informações adicionais (Insira mais informações sobre o pet)" %}</b>:</label>
-                <textarea class="form-control" rows="3" name="descricao" type="text">{{ pet.descricao|default_if_none:"" }}</textarea>
+                <label><b>{% trans "Detalhes" %}</b>:</label>
+                <textarea class="form-control" rows="3" name="descricao" type="text" placeholder="Tente inserir o máximo de detalhes sobre o pet">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
-            <!--<script>
-                document.getElementById("infoPet").placeholder = i18n.translate("Insira mais informações sobre o pet...");
-            </script>-->
+            <br>
             <div class="form-group">
-                <label><b>{% trans "Data de localização ou perda do pet" %}</b>:</label>
+                <label><b>{% trans "Data de localização ou perda" %}</b>:</label>
                 <input class="form-control" name="dataNascimento" type="date" value="{{ pet.dataNascimento|default_if_none:"" }}">
             </div>
-
+            <br>
 
 
             <div class="form-group">
-                <label><b>{% trans "Escolha uma espécie" %}</b>:</label>
+                <label><b>{% trans "Espécie" %}</b>:</label>
                 <select class="form-control mb-4" name="especie" value="{{ pet.especie }}">
                     <option value="1">{% trans "Cachorro" %}</option>
                     <option value="2">{% trans "Gato" %}</option>
@@ -74,36 +102,54 @@ from django.utils.translation import ugettext_lazy as _
                   </select>
             </div>
 
-
             <div class="form-group">
                 <label><b>{% trans "Raça" %}</b>:</label>
                 <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}">
             </div>
+            <br>
+            <div class="form-group">
+                <label><b>{% trans "Sexo" %}</b>:</label>
+                    <select class="form-control mb-4" name="sexo" value="{{ pet.sexo }}">
+                    <option value="1">{% trans "Macho" %}</option>
+                    <option value="2">{% trans "Fêmea" %}</option>
+                    <option value="3">{% trans "Não sei" %}</option>
+                </select>
+            </div>
+            <br>
             <div class="form-group">
                 <label><b>{% trans "Cor predominante" %}</b>:</label>
                 <input class="form-control" name="cor" type="text"  value="{{ pet.cor|default_if_none:"" }}">
             </div>
+            <br>
             <div class="form-group">
-                <label><b>{% trans "Porte" %}</b>:</label>
-                <select class="form-control mb-4" name="porte" value="{{ pet.porte }}">
-                    <option value="1">{% trans "Pequeno porte" %}</option>
-                    <option value="2">{% trans "Médio porte" %}</option>
-                    <option value="3">{% trans "Grande porte" %}</option>
-                  </select>
-            </div>
-            <!--<div class="form-group">
-                <label>{% trans "Peso" %}(Kg):</label>
-                <input class="form-control" name="peso" type="number" value="{{ pet.peso|default_if_none:"" }}">
-            </div>-->
+                <label><b>{% trans "Porte" %}</b>:</label><br>
+                <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
+                <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
+                <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
+                
+                <table class="fixed">
+                    <tr>
+                        <td><img src="{% static 'core/assets/img/human.png' %}" height="150" /></td>
+                        <td style="vertical-align:bottom; padding-left: 15px"><img id="imageRange" src="{% static 'core/assets/img/dog.png' %}" height="
+                        {% if pet.porte %}
+	                        {{pet.porte}}
+                        {% else %}
+                            80
+                        {% endif %}
+                        " /></td>
+                    </tr>
+                </table>
+                <input class="form-range" style="width:250px" id="range" type="range" min="40" step="0" max="120" oninput="updateTextInput();" name="porte" value="{{ pet.porte|default_if_none:120 }}" > 
+
             <div class="form-group">
-                <label><b>{% trans "Escolha a situação do pet" %}</b>:</label>
+                <label><b>{% trans "Situação do pet" %}</b>:</label>
                 <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
                     <option value="encontrado">{% trans "Encontrado" %}</option>
                     <option value="perdido">{% trans "Perdido" %}</option>
-                  </select>
+                </select>
             </div>
 
-
+        
 
 
 
@@ -275,7 +321,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
-                                <div id="id_coordenada-map" class="leaflet-container-default"></div>
+                                <div id="id_coordenada-map" class="leaflet-container-default w-100"></div>
                                 <script>
                                     (function () {
 
@@ -342,13 +388,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
-            <button type="submit" class="btn btn-outline-dark mt-4">
+            <button type="submit" class="btn btn-outline-dark mt-4 w-100">
                 {% if pet %}
                     {% trans "Alterar" %}
                 {% else %}
                     {% trans "Cadastrar" %}
                 {% endif %}
             </button>
+        </div>
         </div>
     </form>
  <!-- 
@@ -357,4 +404,5 @@ from django.utils.translation import ugettext_lazy as _
     <input type='submit' value='Save' />
 </form>
 -->
+<br><br>
 {% endblock %}

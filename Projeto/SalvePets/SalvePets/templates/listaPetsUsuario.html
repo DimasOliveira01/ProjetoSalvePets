@@ -14,42 +14,25 @@
   </style>
 
     <!-- Página de Login-->
-    <div class="container mt-4">
-        <!--<h2>{% trans "Cadastrar Pet" %}</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <section class="py-2">
-            </section>
-            <button class="btn btn-outline-dark" type="submit"> 
-            {% trans "Cadastrar Pet" %}
-            </button>
-        </form>-->
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-usuario/">{% trans "Meus pets cadastrados" %}</a>
-                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Meus pets" %} </button>-->
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/cadastro-pet/">{% trans "Cadastrar Pet" %}</a>
-                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Cadastrar um pet" %} </button>-->
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>                
-                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets perdidos" %} </button>-->
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
-                <!--<button class="btn btn-outline-dark" type="submit"> {% trans "Pets encontrados" %} </button>-->
-            </li>
-        </ul>
-    </div>
-        <section class="py-2">
-        </section>
-
-    <h1 class="text-center">{% trans "Meus Pets" %}</h1>
-    
-    <div class="container mb-4">
+<div class="container mt-4">
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active"><b>{% trans "Meus pets" %}</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/cadastro-pet/">{% trans "Cadastrar pet" %}</b></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+        </li>
+    </ul>
+</div>
+  
+    <div class="container">
+    <p><h3>{% trans "Meus pets" %}</h3></p>
         <div class="row">
             {% for p in pet %}
             <div class="col-sm-4">

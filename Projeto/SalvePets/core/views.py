@@ -76,6 +76,7 @@ def set_pet(request):
     dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
     especie=request.POST.get('especie')
     raca=request.POST.get('raca')
+    sexo=request.POST.get('sexo')
     cor=request.POST.get('cor')
     porte=request.POST.get('porte')
     peso=request.POST.get('peso')
@@ -110,6 +111,9 @@ def set_pet(request):
             if raca:
                 pet.raca=raca
                 pet.save()
+            
+            pet.sexo=sexo
+            pet.save()
 
             if cor:
                 pet.cor=cor
@@ -132,7 +136,7 @@ def set_pet(request):
                 pet.foto = foto
                 pet.save()
     else:
-        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada, sexo=sexo)
         if nome:
             pet.nome=nome
         else:
@@ -213,12 +217,6 @@ def completar_cadastro(request):
     return render(request, 'completar-cadastro.html', {
         'usuario_form': usuario_form,
     })
-
-def sobre(request):
-    return render(request, 'sobre.html')
-
-def em_construcao(request):
-    return render(request, 'emconstrucao.html')
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
@@ -304,7 +302,7 @@ def notif_pet_encontrado(id):
 
 def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     id = str(id)
-    assunto = _("Foi encontrado um pet próximo ao local em que o seu foi perdido")
+    assunto = _("Encontramos um pet semelhante ao seu")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     nome_pet = str(nome_pet)
@@ -316,7 +314,7 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 def enviar_email_pet_perdido(id, email, foto, nome_pet):
-    assunto = _("Alguns pets próximos ao seu perdido foram encontrados!")
+    assunto = _("Novos pets parecidos com o seu foram encontrados")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     

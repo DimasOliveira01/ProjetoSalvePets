@@ -18,16 +18,16 @@ PET_CHOICES = (
     (_("encontrado"),_("ENCONTRADO")),
 )
 
-PORTE = (
-    (1,_("Pequeno porte")),
-    (2,_("Médio porte")),
-    (3,_("Grande porte")),
-)
-
 ESPECIE = (
     (1,_("Cachorro")),
     (2,_("Gato")),
     (3,_("Outros")),
+)
+
+SEXO = (
+    (1,_("Macho")),
+    (2,_("Fêmea")),
+    (3,_("Não sei")),
 )
 # ============================
 
@@ -106,7 +106,7 @@ class Pet(models.Model):
     especie = models.IntegerField(choices=ESPECIE, default=1, verbose_name=_("Especie"), blank=False, null=False)
     raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=30, blank=True, null=True)
-    porte = models.IntegerField(choices=PORTE, default=1, verbose_name=_("Porte"), blank=False, null=False)
+    porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
     #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=False, null=False)
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado', blank=False, null=False)
@@ -114,6 +114,7 @@ class Pet(models.Model):
     coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
+    sexo = models.IntegerField(choices=SEXO, default=1, verbose_name=_("Sexo"), blank=True, null=True)
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
