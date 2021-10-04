@@ -105,32 +105,37 @@ def set_pet(request):
                 pet.dataPerdaEncontro=dataPerdaEncontro
                 pet.save()
             
-            pet.especie=especie
-            pet.save()
+            if especie:
+                pet.especie=especie
+                pet.save()
 
             if raca:
                 pet.raca=raca
                 pet.save()
             
-            pet.sexo=sexo
-            pet.save()
+            if sexo:
+                pet.sexo=sexo
+                pet.save()
 
             if cor:
                 pet.cor=cor
                 pet.save()
 
-            pet.porte=porte
-            pet.save()
+            if porte:
+                pet.porte=porte
+                pet.save()
 
             if peso:
                 pet.peso=peso
                 pet.save()
 
-            pet.encontradoPerdido=encontradoPerdido
-            pet.save()
+            if encontradoPerdido:
+                pet.encontradoPerdido=encontradoPerdido
+                pet.save()
 
-            pet.coordenada=coordenada
-            pet.save()
+            if coordenada:
+                pet.coordenada=coordenada
+                pet.save()
 
             if foto:
                 pet.foto = foto

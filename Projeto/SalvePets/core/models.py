@@ -93,7 +93,6 @@ class Pet(models.Model):
     coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-
 '''
 
 
