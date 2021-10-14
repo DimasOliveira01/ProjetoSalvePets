@@ -100,14 +100,14 @@ var tamanho;
             <div class="form-group">
                 <label><b>{% trans "Espécie" %}</b>:</label>
                 <select class="form-control mb-4" name="especie" value="{{ pet.especie }}">
-                    <option value="1"
-                        {% if pet.especie == 1 %} selected="selected" {% endif %}
+                    <option value="Cachorro"
+                        {% if pet.especie == "Cachorro" %} selected="selected" {% endif %}
                     >{% trans "Cachorro" %}</option>
-                    <option value="2"
-                        {% if pet.especie == 2 %} selected="selected" {% endif %}
+                    <option value="Gato"
+                        {% if pet.especie == "Gato" %} selected="selected" {% endif %}
                     >{% trans "Gato" %}</option>
-                    <option value="3"
-                        {% if pet.especie == 3 %} selected="selected" {% endif %}
+                    <option value="Outros"
+                        {% if pet.especie == "Outros" %} selected="selected" {% endif %}
                     >{% trans "Outros" %}</option>
                   </select>
             </div>
@@ -120,14 +120,14 @@ var tamanho;
             <div class="form-group">
                 <label><b>{% trans "Sexo" %}</b>:</label>
                 <select class="form-control mb-4" name="sexo" value="{{ pet.sexo }}">
-                    <option value="1"
-                        {% if pet.sexo == 1 %} selected="selected" {% endif %}
+                    <option value="Macho"
+                        {% if pet.sexo == "Macho" %} selected="selected" {% endif %}
                     >{% trans "Macho" %}</option>
-                    <option value="2"
-                        {% if pet.sexo == 2 %} selected="selected" {% endif %}
+                    <option value="Fêmea"
+                        {% if pet.sexo == "Fêmea" %} selected="selected" {% endif %}
                     >{% trans "Fêmea" %}</option>
-                    <option value="3"
-                        {% if pet.sexo == 3 %} selected="selected" {% endif %}
+                    <option value="Não sei"
+                        {% if pet.sexo == "Não sei" %} selected="selected" {% endif %}
                     >{% trans "Não sei" %}</option>
                 </select>
             </div>
@@ -160,11 +160,11 @@ var tamanho;
             <div class="form-group">
                 <label><b>{% trans "Situação do pet" %}</b>:</label>
                 <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
-                    <option value="encontrado"
-                        {% if pet.encontradoPerdido == "encontrado" %} selected="selected" {% endif %}
+                    <option value="Encontrado"
+                        {% if pet.encontradoPerdido == "Encontrado" %} selected="selected" {% endif %}
                     >{% trans "Encontrado" %}</option>
-                    <option value="perdido"
-                        {% if pet.encontradoPerdido == "perdido" %} selected="selected" {% endif %}
+                    <option value="Perdido"
+                        {% if pet.encontradoPerdido == "Perdido" %} selected="selected" {% endif %}
                     >{% trans "Perdido" %}</option>
                 </select>
             </div>
@@ -307,7 +307,7 @@ var tamanho;
                                     
                                     function showError(error) {
                                         if(error){
-                                            alert("Por favor permita a localização no seu navegador para obtermos o local próximo da perda ou localização do pet.");
+                                            alert("Por favor, permita a localização no seu navegador.");
                                         }
                                         
 									    lat=-23.561110158851235;

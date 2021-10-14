@@ -13,6 +13,8 @@ from django.utils.html import strip_tags
 from django.template import loader
 import os
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
+from datetime import timedelta
 
 # === Funções com render simples ===
 
@@ -236,7 +238,7 @@ def notif_pet_encontrado(id):
         cursor = connection.cursor()
 
         # Retorna dados do pet que está sendo cadastrado agora
-        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome
+        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome, pet."dataPerdaEncontro", pet.especie, pet.porte
                         FROM core_pet AS pet
                         INNER JOIN auth_user AS usr on usr.id = pet.user_id
                         WHERE pet.id = %s'''
@@ -249,17 +251,25 @@ def notif_pet_encontrado(id):
         else:
             encontradoPerdido_pesquisar = "perdido"
 
+        if pet[0].dataPerdaEncontro:
+            perdido_inicio = pet[0].dataPerdaEncontro - timedelta(days = 60)
+            perdido_fim = pet[0].dataPerdaEncontro + timedelta(days = 60)
+        else:
+            perdido_inicio = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
+            perdido_fim = datetime.strptime('2100-01-01', '%Y-%m-%d').date()
+
         # Query para pegar os campos para o envio do e-mail e cálculo da distância
         query = '''SELECT pet.id, pet.nome, usr.email, pet.foto, usuario."receberNotificacoes", pet.coordenada
                         FROM core_pet AS pet
                         INNER JOIN core_usuario AS usuario ON usuario.user_id = pet.user_id
                         INNER JOIN auth_user AS usr ON usr.id = usuario.user_id
-                        WHERE pet."encontradoPerdido" = %s
+                        WHERE pet."encontradoPerdido" = %s AND pet."dataPerdaEncontro" BETWEEN %s AND %s
+                            AND pet.especie = %s AND pet.porte BETWEEN %s and %s
                         ORDER BY pet.id
                         '''
 
         # Execução da query e inserção dos dados em uma Named Tuple
-        cursor.execute(query,[encontradoPerdido_pesquisar])
+        cursor.execute(query,[encontradoPerdido_pesquisar, perdido_inicio, perdido_fim, pet[0].especie, pet[0].porte - 30, pet[0].porte + 30 ])
         pets = namedtuplefetchall(cursor)
 
         # Caso existam pets no banco de dados
