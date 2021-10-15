@@ -24,6 +24,7 @@
     .module .leaflet-draw ul li {
     li  st-style-type: none;
     }
+    
 </style>
 
 <!-- Guias -->
@@ -58,15 +59,15 @@
         <!-- Imagem -->
         <div class="form-group">
             {% if pet.id != null %}
-                <label><b>{% trans "Alterar imagem" %}:</b></label>
+                <label><b>{% trans "Alterar imagem" %}: *</b></label>
                 <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
             {% else %}
                 <label><b>{% trans "Foto" %}</b>: *</label><br>
             {% endif %}
             {% if pet.id != null %}
-                <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}">
+                <input type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
             {% else %}
-                <input required="required" type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                <input required="required" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}" >
             {% endif %}
         </div>
         <br>
@@ -95,7 +96,7 @@
         <!-- Espécie -->
         <div class="form-group">
             <label><b>{% trans "Espécie" %}</b>: *</label>
-            <select class="form-control mb-4" name="especie" value="{{ pet.especie }}">
+            <select class="form-select" name="especie" value="{{ pet.especie }}">
                 <option value="Cachorro"
                     {% if pet.especie == "Cachorro" %} selected="selected" {% endif %}
                     >{% trans "Cachorro" %}
@@ -110,7 +111,7 @@
                 </option>
             </select>
         </div>
-
+        <br>
         <!-- Raça -->
         <div class="form-group">
             <label><b>{% trans "Raça" %}</b>:</label>
@@ -121,7 +122,7 @@
         <!-- Sexo -->
         <div class="form-group">
             <label><b>{% trans "Sexo" %}</b>:</label>
-            <select class="form-control mb-4" name="sexo" value="{{ pet.sexo }}">
+            <select class="form-select" name="sexo" value="{{ pet.sexo }}">
                 <option value="Macho"
                     {% if pet.sexo == "Macho" %} selected="selected" {% endif %}
                     >{% trans "Macho" %}
@@ -136,7 +137,8 @@
                 </option>
             </select>
         </div>
-
+        <br>
+        
         <!-- Cor predominante -->
         <div class="form-group">
             <label><b>{% trans "Cor predominante" %}</b>:</label>
@@ -169,7 +171,7 @@
         <!-- Situação do pet -->
         <div class="form-group">
             <label><b>{% trans "Situação do pet" %}</b>: *</label>
-            <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
+            <select class="form-select" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
                 <option value="Encontrado"
                     {% if pet.encontradoPerdido == "Encontrado" %} selected="selected" {% endif %}
                     >{% trans "Encontrado" %}
@@ -207,6 +209,7 @@
 
     function updateTextInput()
     {
+        
         var value = document.getElementById("range").value;
         var img = document.getElementById('imageRange');
         img.height = value

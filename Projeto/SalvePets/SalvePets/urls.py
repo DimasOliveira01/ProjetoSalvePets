@@ -48,7 +48,6 @@ urlpatterns = [
     path('modificar-cadastro/',views.modificar_cadastro),
     path('sobre/',views.sobre),
     path('em-construcao/',views.em_construcao),
-    path('teste/',views.teste),
     path('completar-cadastro/',views.completar_cadastro),
 ]
 
