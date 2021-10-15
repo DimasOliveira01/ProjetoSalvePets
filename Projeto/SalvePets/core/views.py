@@ -46,12 +46,12 @@ def teste(request):
 # ===      Funções gerais        ===
 
 def lista_pets_encontrados(request):
-    pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
+    pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
     return render(request, 'listaPetsEncontrados.html',{'pet':pet})
 
 
 def lista_pets_perdidos(request):
-    pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
+    pet=Pet.objects.filter(encontradoPerdido='Perdido', ativo=True)
     return render(request, 'listaPetsPerdidos.html',{'pet':pet})
 
 
