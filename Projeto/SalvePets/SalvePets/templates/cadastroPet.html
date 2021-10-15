@@ -61,7 +61,7 @@
                 <label><b>{% trans "Alterar imagem" %}:</b></label>
                 <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
             {% else %}
-                <label><b>{% trans "Foto" %}</b>:</label><br>
+                <label><b>{% trans "Foto" %}</b>: *</label><br>
             {% endif %}
             {% if pet.id != null %}
                 <input type="file" class="form-control-file border" name="foto" accept="image/*" value="{{ pet.foto }}">
@@ -94,7 +94,7 @@
 
         <!-- Espécie -->
         <div class="form-group">
-            <label><b>{% trans "Espécie" %}</b>:</label>
+            <label><b>{% trans "Espécie" %}</b>: *</label>
             <select class="form-control mb-4" name="especie" value="{{ pet.especie }}">
                 <option value="Cachorro"
                     {% if pet.especie == "Cachorro" %} selected="selected" {% endif %}
@@ -145,7 +145,7 @@
         <br>
         <!-- Porte -->
         <div class="form-group">
-            <label><b>{% trans "Porte" %}</b>:</label><br>
+            <label><b>{% trans "Porte" %}</b>: *</label><br>
             <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
             <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
             <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
@@ -168,7 +168,7 @@
 
         <!-- Situação do pet -->
         <div class="form-group">
-            <label><b>{% trans "Situação do pet" %}</b>:</label>
+            <label><b>{% trans "Situação do pet" %}</b>: *</label>
             <select class="form-control mb-4" name="encontradoPerdido" value="{{ pet.encontradoPerdido }}">
                 <option value="Encontrado"
                     {% if pet.encontradoPerdido == "Encontrado" %} selected="selected" {% endif %}
@@ -200,10 +200,7 @@
         </button>
     </div>
 </form>
-<p id="demo"></p>
-<p id="demo1"></p>
-<p id="demo2"></p>
-<p id="demo3"></p>
+
 <br><br>
 
 <script>
