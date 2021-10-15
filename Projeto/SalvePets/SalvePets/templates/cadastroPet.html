@@ -54,7 +54,11 @@
     {% csrf_token %}
     <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
     <div class="container">
-        <p><h3>{% trans "Cadastrar um pet" %}</h3></p>
+        {% if pet.id != null %}
+            <p><h3>{% trans "Alterar pet" %}</h3></p>
+        {% else %}
+            <p><h3>{% trans "Cadastrar um pet" %}</h3></p>
+        {% endif %}
 
         <!-- Imagem -->
         <div class="form-group">
@@ -167,7 +171,8 @@
             </table>
             <input class="form-range" style="width:250px" id="range" type="range" min="40" step="0" max="120" oninput="updateTextInput();" name="porte" value="{{ pet.porte|default_if_none:120 }}" >
         </div>
-
+        <br>
+        
         <!-- Situação do pet -->
         <div class="form-group">
             <label><b>{% trans "Situação do pet" %}</b>: *</label>
@@ -183,6 +188,7 @@
             </select>
         </div>
 
+        <br>
         <!-- Geolocalização -->
         <div class="form-group">
             <label class="required" for="id_coordenada"><b>{% trans "Indique a localização" %}</b>: *</label>
