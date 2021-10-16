@@ -145,15 +145,29 @@ DATABASES = {
 #
 # Atualize o banco de dados pelo pgAdmin e você verá as tabelas.
 
+#PROD
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'salvepets', 
+#         'USER': 'postgres', 
+#         'PASSWORD': 'salve123456',
+#         'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com', 
+#         'PORT': '5432',
+#     }
+# }
 
+#DEV
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'salvepets', 
         'USER': 'postgres', 
-        'PASSWORD': 'salve123456',
-        'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com', 
+        'PASSWORD': '123456',
+        #'HOST': 'postgres_container', 
+        'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
 }
