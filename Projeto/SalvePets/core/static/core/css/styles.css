@@ -4284,10 +4284,12 @@ textarea.form-control-lg {
   color: #fff;
 }
 
+
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 33.3333333333%;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -4443,6 +4445,7 @@ textarea.form-control-lg {
     border-bottom-left-radius: 0;
   }
 }
+
 
 .accordion-button {
   position: relative;
@@ -11360,8 +11363,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ced4da;
 }
 
+
 .footer {
   text-align: center;
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+

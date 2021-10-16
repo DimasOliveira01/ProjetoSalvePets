@@ -9,25 +9,25 @@ from django.utils.translation import ugettext_lazy as _
 # ===       Escolhas       ===
 
 TIPOS_USUARIO = (
-    (1, _('Usuário comum')),
-    (2, _('Instituição')),
+    ('Usuário comum', _('Usuário comum')),
+    ('Instituição', _('Instituição')),
 )
 
 PET_CHOICES = (
-    (_("perdido"),_("PERDIDO")),
-    (_("encontrado"),_("ENCONTRADO")),
-)
-
-PORTE = (
-    (1,_("Pequeno porte")),
-    (2,_("Médio porte")),
-    (3,_("Grande porte")),
+    (_("Perdido"),_("PERDIDO")),
+    (_("Encontrado"),_("ENCONTRADO")),
 )
 
 ESPECIE = (
-    (1,_("Cachorro")),
-    (2,_("Gato")),
-    (3,_("Outros")),
+    ("Cachorro",_("Cachorro")),
+    ("Gato",_("Gato")),
+    ("Outros",_("Outros")),
+)
+
+SEXO = (
+    ("Macho",_("Macho")),
+    ("Fêmea",_("Fêmea")),
+    ("Não sei",_("Não sei")),
 )
 # ============================
 
@@ -48,7 +48,7 @@ class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
     #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    tipoUsuario = models.IntegerField(choices=TIPOS_USUARIO, default=1, verbose_name=_("Tipo de usuário"), blank=False, null=False)
+    tipoUsuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
     cpfCnpj = models.CharField(max_length=11, verbose_name=_("CPF (somente números)"), blank=False, null=False)
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
     telefone = models.CharField(max_length=11, verbose_name=_("Número de telefone (somente números)"), blank=True, null=True)
@@ -65,6 +65,11 @@ def create_user_profile(sender, instance, created, **kwargs):
         USUARIO.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        INSTITUICAO.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.usuario.save()
 
@@ -75,27 +80,6 @@ class ABRIGO(models.Model):
     email = models.CharField(max_length=100)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-#teste
-'''
-class Pet(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #FK_idAbrigo = models.ForeignKey(ABRIGO, on_delete=models.RESTRICT)      #precisa remover a FK abrigo
-    nome = models.CharField(max_length=100, blank=True, null=True)
-    descricao = models.TextField(blank=True, null=True)
-    dataNascimento = models.DateField(blank=True, null=True)
-    raca = models.CharField(max_length=50, blank=True, null=True)
-    cor = models.CharField(max_length=30, blank=True, null=True)
-    porte = models.IntegerField(choices=PORTE, default=1, verbose_name=_("Porte"), blank=False, null=False)
-    #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    ativo = models.BooleanField(default=True, blank=False, null=False)
-    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado', blank=False, null=False)
-    foto = models.ImageField(upload_to='pet', blank=False, null=False)
-    coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-'''
-
 
 class Pet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -103,17 +87,18 @@ class Pet(models.Model):
     nome = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
     dataPerdaEncontro = models.DateField(blank=True, null=True)
-    especie = models.IntegerField(choices=ESPECIE, default=1, verbose_name=_("Especie"), blank=False, null=False)
+    especie = models.CharField(max_length=50, choices=ESPECIE, default="Cachorro", verbose_name=_("Espécie"), blank=False, null=False)
     raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=30, blank=True, null=True)
-    porte = models.IntegerField(choices=PORTE, default=1, verbose_name=_("Porte"), blank=False, null=False)
+    porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
     #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=False, null=False)
-    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='encontrado', blank=False, null=False)
+    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='Encontrado', blank=False, null=False)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
     coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
+    sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
@@ -162,6 +147,7 @@ class ANUNCIO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
+"""  COMENTADO POR BRUNNO (MODELS DO E-COMMERCE ESTÃO NO ARQUIVO MODELS NA PASTA PRODUCTS)
 class OPCAO_ENTREGA(models.Model):
     opcaoEntrega = models.CharField(max_length=50)
     prazoEntrega = models.IntegerField()
@@ -193,6 +179,7 @@ class PEDIDO(models.Model):
     status = models.CharField(max_length=50)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
+"""
 
 class AVALIACAO(models.Model):
     FK_idUsuario = models.ManyToManyField(User)
@@ -201,4 +188,17 @@ class AVALIACAO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
-# ============================
+
+
+# ============================Projeto Integrado II
+
+class INSTITUICAO(models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    ativo = models.BooleanField(default=True, blank=False, null=False)
+    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
+    nome_instituicao = models.CharField(max_length=50, null=True)
+    razao_social = models.CharField(max_length=50, null=True)
+    cnpj = models.CharField(max_length=18, null=True)
+    telefone = models.CharField(max_length=16, null=True)
+    email = models.CharField(max_length=50, null=True)
+    

@@ -166,3 +166,4 @@ Projeto/SalvePets/core/migrations/0003_alter_pet_encontradoperdido.py
 Projeto/SalvePets/core/migrations/
 Projeto/SalvePets/SalvePets/__pycache__/
 Projeto/SalvePets/core/__pycache__
+.vscode/settings.json

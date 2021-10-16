@@ -10,7 +10,7 @@
         <meta name="author" content="" />
         <title>Salve Pets</title>
         <!-- Favicon-->
-        <link rel="icon" href="https://image.flaticon.com/icons/png/512/194/194279.png">
+        <link id="icon" rel="icon" href="{% static 'core/assets/img/icon-dark.png' %}">
         <!-- Bootstrap icons-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)--> 
@@ -18,7 +18,14 @@
         <!--<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />   -->     
         <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
         <link href="{% static 'core/css/navbar.css' %}" rel="stylesheet" />
+        <script>
+            let matched = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+            if(matched)
+	            document.getElementById("icon").href = "{% static 'core/assets/img/icon-white.png' %}"
+            else
+	            document.getElementById("icon").href = "{% static 'core/assets/img/icon-dark.png' %}"
+        </script>
 
 
 
@@ -72,8 +79,9 @@
                   <li><a class="dropdown-item" href="/em-construcao/">{% trans "Patrocinar um pet" %}</a></li>
                   <li><a class="dropdown-item" href="/cadastro-pet">{% trans "Cadastrar pet encontrado/perdido" %}</a></li>
                   <!--<li><a class="dropdown-item" href="/cadastro-pet">{% trans "Anunciar pet perdido" %}</a></li>-->
-                  <li><a class="dropdown-item" href="/em-construcao/">{% trans "Loja Salve Pets" %}</a></li>
-                  <li><a class="dropdown-item" href="/em-construcao/">Chatbot</a></li>
+                  <li><a class="dropdown-item" href="{% url 'products:list' %}">{% trans "Loja Salve Pets" %}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'cart:detail' %}">{% trans "Meu Carrinho" %}</a></li>                  
+                  <li><a class="dropdown-item" href="/em-construcao/">{% trans "FAQ" %}</a></li>
                 </ul>
                </ul>
             </li>
