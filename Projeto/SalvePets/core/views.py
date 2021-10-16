@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Pet, USUARIO
-from .forms import UserForm, UsuarioForm
+from .models import Pet, USUARIO, INSTITUICAO
+from .forms import UserForm, UsuarioForm, InstituicaoForm
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -13,6 +13,14 @@ from django.utils.html import strip_tags
 from django.template import loader
 import os
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
+from datetime import timedelta
+
+
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.conf import settings
 
 # === Funções com render simples ===
 
@@ -39,20 +47,19 @@ def em_construcao(request):
 #    return render(request, 'home_ecommerce.html')
 
 
-def teste(request):
-    return render(request, 'teste.html')
+
 
 # ==================================
 
 # ===      Funções gerais        ===
 
 def lista_pets_encontrados(request):
-    pet=Pet.objects.filter(encontradoPerdido='encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
+    pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
     return render(request, 'listaPetsEncontrados.html',{'pet':pet})
 
 
 def lista_pets_perdidos(request):
-    pet=Pet.objects.filter(encontradoPerdido='perdido', ativo=True)
+    pet=Pet.objects.filter(encontradoPerdido='Perdido', ativo=True)
     return render(request, 'listaPetsPerdidos.html',{'pet':pet})
 
 
@@ -79,6 +86,7 @@ def set_pet(request):
     dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
     especie=request.POST.get('especie')
     raca=request.POST.get('raca')
+    sexo=request.POST.get('sexo')
     cor=request.POST.get('cor')
     porte=request.POST.get('porte')
     peso=request.POST.get('peso')
@@ -107,35 +115,43 @@ def set_pet(request):
                 pet.dataPerdaEncontro=dataPerdaEncontro
                 pet.save()
             
-            pet.especie=especie
-            pet.save()
+            if especie:
+                pet.especie=especie
+                pet.save()
 
             if raca:
                 pet.raca=raca
+                pet.save()
+            
+            if sexo:
+                pet.sexo=sexo
                 pet.save()
 
             if cor:
                 pet.cor=cor
                 pet.save()
 
-            pet.porte=porte
-            pet.save()
+            if porte:
+                pet.porte=porte
+                pet.save()
 
             if peso:
                 pet.peso=peso
                 pet.save()
 
-            pet.encontradoPerdido=encontradoPerdido
-            pet.save()
+            if encontradoPerdido:
+                pet.encontradoPerdido=encontradoPerdido
+                pet.save()
 
-            pet.coordenada=coordenada
-            pet.save()
+            if coordenada:
+                pet.coordenada=coordenada
+                pet.save()
 
             if foto:
                 pet.foto = foto
                 pet.save()
     else:
-        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada)
+        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada, sexo=sexo)
         if nome:
             pet.nome=nome
         else:
@@ -217,6 +233,7 @@ def completar_cadastro(request):
         'usuario_form': usuario_form,
     })
 
+
 """
 def sobre(request):
     return render(request, 'sobre.html')
@@ -224,6 +241,7 @@ def sobre(request):
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 """
+
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
     desc = cursor.description
@@ -237,7 +255,7 @@ def notif_pet_encontrado(id):
         cursor = connection.cursor()
 
         # Retorna dados do pet que está sendo cadastrado agora
-        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome
+        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome, pet."dataPerdaEncontro", pet.especie, pet.porte
                         FROM core_pet AS pet
                         INNER JOIN auth_user AS usr on usr.id = pet.user_id
                         WHERE pet.id = %s'''
@@ -250,17 +268,25 @@ def notif_pet_encontrado(id):
         else:
             encontradoPerdido_pesquisar = "perdido"
 
+        if pet[0].dataPerdaEncontro:
+            perdido_inicio = pet[0].dataPerdaEncontro - timedelta(days = 60)
+            perdido_fim = pet[0].dataPerdaEncontro + timedelta(days = 60)
+        else:
+            perdido_inicio = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
+            perdido_fim = datetime.strptime('2100-01-01', '%Y-%m-%d').date()
+
         # Query para pegar os campos para o envio do e-mail e cálculo da distância
         query = '''SELECT pet.id, pet.nome, usr.email, pet.foto, usuario."receberNotificacoes", pet.coordenada
                         FROM core_pet AS pet
                         INNER JOIN core_usuario AS usuario ON usuario.user_id = pet.user_id
                         INNER JOIN auth_user AS usr ON usr.id = usuario.user_id
-                        WHERE pet."encontradoPerdido" = %s
+                        WHERE pet."encontradoPerdido" = %s AND pet."dataPerdaEncontro" BETWEEN %s AND %s
+                            AND pet.especie = %s AND pet.porte BETWEEN %s and %s
                         ORDER BY pet.id
                         '''
 
         # Execução da query e inserção dos dados em uma Named Tuple
-        cursor.execute(query,[encontradoPerdido_pesquisar])
+        cursor.execute(query,[encontradoPerdido_pesquisar, perdido_inicio, perdido_fim, pet[0].especie, pet[0].porte - 30, pet[0].porte + 30 ])
         pets = namedtuplefetchall(cursor)
 
         # Caso existam pets no banco de dados
@@ -308,7 +334,7 @@ def notif_pet_encontrado(id):
 
 def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     id = str(id)
-    assunto = _("Foi encontrado um pet próximo ao local em que o seu foi perdido")
+    assunto = _("Encontramos um pet semelhante ao seu")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     nome_pet = str(nome_pet)
@@ -320,7 +346,7 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 def enviar_email_pet_perdido(id, email, foto, nome_pet):
-    assunto = _("Alguns pets próximos ao seu perdido foram encontrados!")
+    assunto = _("Novos pets parecidos com o seu foram encontrados")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     
@@ -331,3 +357,56 @@ def enviar_email_pet_perdido(id, email, foto, nome_pet):
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 # ==================================
+#Funções Projeto Integrado II
+
+#Formulário para solicitar cadastro de Instituição
+
+def cadastro_empresa(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = "Solicitação de cadastro de empresa" 
+			body = {
+			'nome_fantasia': form.cleaned_data['nome_fantasia'], 
+			'razao_social': form.cleaned_data['razao_social'], 
+            'numero_cnpj': form.cleaned_data['numero_cnpj'],
+            'numero_telefone': form.cleaned_data['numero_telefone'],
+			'email_address': form.cleaned_data['email_address'], 
+			}
+			message = "\n".join(body.values())
+
+			try:
+				send_mail(subject, message, settings.EMAIL_HOST_USER, ['atendimentoSalvePets@gmail.com'],
+            fail_silently=False) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return render(request, "index.html")
+            #return redirect ("sobre.html")
+            
+	form = ContactForm()
+	return render(request, "instituicao/formInstituicao.html", {'form':form})
+
+
+
+
+@login_required
+@transaction.atomic
+def completar_cadastro_instituicao(request):
+    if request.method == "POST":
+        form = InstituicaoForm(request.POST, instance=request.user.instituicao)
+        if form.is_valid():
+            form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            form = InstituicaoForm(instance=request.user.instituicao)
+    return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
+        'form': form
+    })
+
+
+
+def teste(request):
+    return render(request, 'teste.html')
+ 
