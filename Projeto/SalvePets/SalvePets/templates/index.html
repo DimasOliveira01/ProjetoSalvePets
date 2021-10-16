@@ -70,7 +70,7 @@ mas algumas coisas não estavam funcionando então suspendi.
                 <p class="text-muted">{% blocktrans %}Doe para uma instituição que cuida de animais abandonados.{% endblocktrans %}</p>
             </div>
             <div class="col-md-4">
-                <a href="/em-construcao/">
+                <a href="{% url 'products:list' %}">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-store fa-stack-1x fa-inverse"></i>
@@ -83,11 +83,11 @@ mas algumas coisas não estavam funcionando então suspendi.
                 <a href="/em-construcao/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
-                        <i class="fas fa-robot fa-stack-1x fa-inverse"></i>
+                        <i class="fas fa-question fa-stack-1x fa-inverse"></i>
                     </span>
                 </a>
-                <h4 class="my-3">{% blocktrans %}Possui dúvidas? Pergunte para nosso chatbot!{% endblocktrans %}</h4>
-                <p class="text-muted">{% blocktrans %}Inicie uma conversa on-line com o nosso chatbot.{% endblocktrans %}</p>
+                <h4 class="my-3">{% blocktrans %}FAQ{% endblocktrans %}</h4>
+                <p class="text-muted">{% blocktrans %}Procure a resposta para sua dúvida aqui em nosso FAQ.{% endblocktrans %}</p>
             </div>
         </div>
     </div>
