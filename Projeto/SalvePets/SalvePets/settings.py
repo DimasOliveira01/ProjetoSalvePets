@@ -156,7 +156,7 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'SalvePets', 
+        'NAME': 'salvepets', 
         'USER': 'postgres', 
         'PASSWORD': '123456',
         'HOST': '127.0.0.1', 
