@@ -86,8 +86,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.gis',
     'leaflet',
-<<<<<<< HEAD
-=======
 
     #apps de terceiros
     "debug_toolbar",
@@ -97,7 +95,6 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "products.apps.ProductsConfig",
     "cart.apps.CartConfig",
->>>>>>> 9c8906700b4e056d604ad15a534aa79e8eaf9f1f
 ]
 
 MIDDLEWARE = [
@@ -109,10 +106,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-=======
     "debug_toolbar.middleware.DebugToolbarMiddleware",
->>>>>>> 9c8906700b4e056d604ad15a534aa79e8eaf9f1f
 ]
 
 ROOT_URLCONF = 'SalvePets.urls'
