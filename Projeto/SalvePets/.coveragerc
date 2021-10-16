@@ -1,0 +1,7 @@
+[run]
+omit =
+    *env*,
+    *migrations*,
+    *tests*,
+    SalvePets*,
+    conftest.py

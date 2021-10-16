@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 #from SalvePets.core.views import PetCreate
+import debug_toolbar
 from django import urls
 from django.conf.urls import i18n
 from django.contrib import admin
@@ -24,11 +25,16 @@ from django.urls.conf import include
 from core import views
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns     #imagem
 from . import settings                                                          #imagem
+from django.conf import settings #e-commerce (imagens)
+from django.conf.urls.static import static  #e-commerce (imagens)
 
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
+    path("", include("pages.urls")),
+    path("products/", include("products.urls")),
+    path("cart/", include("cart.urls")),
     #path('login/', views.login_user),
     #path('login/submit', views.submit_login),
     #path('logout/', views.logout_user),
@@ -48,6 +54,10 @@ urlpatterns = [
     path('modificar-cadastro/',views.modificar_cadastro),
     path('sobre/',views.sobre),
     path('em-construcao/',views.em_construcao),
+
+    #path('ecommerce/',views.e_commerce),
+    path('teste/',views.teste),
+
     path('completar-cadastro/',views.completar_cadastro),
     path('formulario-empresa/', views.cadastro_empresa),
     path('modificar-cadastro-instituicao/', views.completar_cadastro_instituicao),
@@ -68,3 +78,9 @@ urlpatterns += i18n_patterns (
     path('', views.index),
     path('accounts/', include("allauth.urls")),
 )
+
+
+#e-commerce (imagens)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

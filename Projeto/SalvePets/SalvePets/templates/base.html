@@ -79,8 +79,9 @@
                   <li><a class="dropdown-item" href="/em-construcao/">{% trans "Patrocinar um pet" %}</a></li>
                   <li><a class="dropdown-item" href="/cadastro-pet">{% trans "Cadastrar pet encontrado/perdido" %}</a></li>
                   <!--<li><a class="dropdown-item" href="/cadastro-pet">{% trans "Anunciar pet perdido" %}</a></li>-->
-                  <li><a class="dropdown-item" href="/em-construcao/">{% trans "Loja Salve Pets" %}</a></li>
-                  <li><a class="dropdown-item" href="/em-construcao/">Chatbot</a></li>
+                  <li><a class="dropdown-item" href="{% url 'products:list' %}">{% trans "Loja Salve Pets" %}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'cart:detail' %}">{% trans "Meu Carrinho" %}</a></li>                  
+                  <li><a class="dropdown-item" href="/em-construcao/">{% trans "FAQ" %}</a></li>
                 </ul>
                </ul>
             </li>

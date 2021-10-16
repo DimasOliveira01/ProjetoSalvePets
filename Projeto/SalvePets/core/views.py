@@ -43,6 +43,9 @@ def sobre(request):
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 
+#def e_commerce(request):
+#    return render(request, 'home_ecommerce.html')
+
 
 
 
@@ -229,6 +232,15 @@ def completar_cadastro(request):
     return render(request, 'completar-cadastro.html', {
         'usuario_form': usuario_form,
     })
+
+
+"""
+def sobre(request):
+    return render(request, 'sobre.html')
+
+def em_construcao(request):
+    return render(request, 'emconstrucao.html')
+"""
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
