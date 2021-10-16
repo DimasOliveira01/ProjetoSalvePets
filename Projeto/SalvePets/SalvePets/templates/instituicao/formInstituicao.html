@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block conteudo %}
+
+<div style="margin:80px">
+  <h1>Cadastro de empresa</h1>
+  <h4>Solicite acesso na plataforma para anunciar a adoção de animais pela sua Instituição</h4>
+  <p>
+    Entraremos em contato para solicitar toda a documentação necessária. 
+  </p>
+  <form method="POST">
+      {% csrf_token %}
+          {{form|crispy}}
+          <section class="py-2">
+          </section>
+          <button class="btn btn-outline-dark" type="submit">Enviar</button>
+  </form>
+</div>
+
+<script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'core/js/jquery.mask.js' %}"></script>
+
+{% block scripts %}
+    <script>  
+        $(document).ready(function(){
+            $("#id_numero_cnpj").mask("00.000.000/0000-00");
+            $("#id_numero_telefone").mask("(00) 0 0000-0000");
+        });
+    </script>
+{% endblock %}
+
+{% endblock conteudo %}

@@ -65,6 +65,11 @@ def create_user_profile(sender, instance, created, **kwargs):
         USUARIO.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        INSTITUICAO.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.usuario.save()
 
@@ -142,6 +147,7 @@ class ANUNCIO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
+"""  COMENTADO POR BRUNNO (MODELS DO E-COMMERCE ESTÃO NO ARQUIVO MODELS NA PASTA PRODUCTS)
 class OPCAO_ENTREGA(models.Model):
     opcaoEntrega = models.CharField(max_length=50)
     prazoEntrega = models.IntegerField()
@@ -173,6 +179,7 @@ class PEDIDO(models.Model):
     status = models.CharField(max_length=50)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
+"""
 
 class AVALIACAO(models.Model):
     FK_idUsuario = models.ManyToManyField(User)
@@ -194,4 +201,4 @@ class INSTITUICAO(models.Model):
     cnpj = models.CharField(max_length=18, null=True)
     telefone = models.CharField(max_length=16, null=True)
     email = models.CharField(max_length=50, null=True)
-
+    
