@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#PROD
+#ALLOWED_HOSTS = ['www.salvepets.online','salvepets.online','34.227.252.79']
+
+#DEV
+ALLOWED_HOSTS = ['127.0.0.1']
 
 #Caminho das imagens(foto)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -157,7 +161,20 @@ DATABASES = {
 #
 # Atualize o banco de dados pelo pgAdmin e você verá as tabelas.
 
+#PROD
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'salvepets', 
+#         'USER': 'postgres', 
+#         'PASSWORD': 'salve123456',
+#         'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com', 
+#         'PORT': '5432',
+#     }
+# }
 
+#DEV
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -165,6 +182,7 @@ DATABASES = {
 <<<<<<< HEAD
         'NAME': 'salvepets', 
         'USER': 'postgres', 
+<<<<<<< HEAD
         'PASSWORD': 'salve123456',
         'HOST': 'salvepets.cjbod3zbq85f.us-east-1.rds.amazonaws.com', 
 =======
@@ -173,6 +191,11 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': '127.0.0.1', 
 >>>>>>> 9c8906700b4e056d604ad15a534aa79e8eaf9f1f
+=======
+        'PASSWORD': '123456',
+        #'HOST': 'postgres_container', 
+        'HOST': '127.0.0.1', 
+>>>>>>> branch_wls2_dev_gawan
         'PORT': '5432',
     }
 }
