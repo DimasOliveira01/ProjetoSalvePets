@@ -86,11 +86,13 @@ INSTALLED_APPS = [
     #apps de terceiros
     "debug_toolbar",
     "widget_tweaks",
+    "localflavor",
     #e-commerce
     #"users.apps.UsersConfig",
     "pages.apps.PagesConfig",
     "products.apps.ProductsConfig",
     "cart.apps.CartConfig",
+    "orders.apps.OrdersConfig",
 ]
 
 MIDDLEWARE = [
