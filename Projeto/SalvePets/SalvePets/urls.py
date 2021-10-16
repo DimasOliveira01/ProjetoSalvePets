@@ -49,6 +49,9 @@ urlpatterns = [
     path('sobre/',views.sobre),
     path('em-construcao/',views.em_construcao),
     path('completar-cadastro/',views.completar_cadastro),
+    path('formulario-empresa/', views.cadastro_empresa),
+    path('modificar-cadastro-instituicao/', views.completar_cadastro_instituicao),
+    
 ]
 
 #imagem
