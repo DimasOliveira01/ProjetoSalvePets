@@ -395,17 +395,9 @@ def completar_cadastro_instituicao(request):
     if request.method == "POST":
         form = InstituicaoForm(request.POST)
         if form.is_valid():
-            form.save()
-            user=request.user.usuario
-            #instituicao=request.instituicao
-            instituicao=INSTITUICAO.objects.filter(FK_instituicao_id = instituicao.id)
-            '''instituicao = INSTITUICAO.objects.get(FK_instituicao_id = instituicao.id, user=request.user.usuario)'''
-            usuario = USUARIO.objects.get(id = user.id)
-            usuario.FK_instituicao_id = instituicao.id
-            usuario.save()
-
-
-
+            instancia = form.save()
+            usuario = request.user.usuario
+            USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
             return render(request, 'index.html')
         else:
             messages.error(request, ('Please correct the error below.'))

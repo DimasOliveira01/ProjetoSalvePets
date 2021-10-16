@@ -51,6 +51,7 @@ class AVALIACAO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
+
 class INSTITUICAO(models.Model):
     ativo = models.BooleanField(default=True, blank=False, null=False)
     FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
@@ -195,9 +196,3 @@ class PEDIDO(models.Model):
 
 
 
-
-
-# ============================Projeto Integrado II
-
-
-    
