@@ -27,11 +27,7 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#PROD
-#ALLOWED_HOSTS = ['www.salvepets.online','salvepets.online','34.227.252.79']
-
-#DEV
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 #Caminho das imagens(foto)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -86,6 +82,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.gis',
     'leaflet',
+
+    #apps de terceiros
+    "debug_toolbar",
+    "widget_tweaks",
+    #e-commerce
+    #"users.apps.UsersConfig",
+    "pages.apps.PagesConfig",
+    "products.apps.ProductsConfig",
+    "cart.apps.CartConfig",
 ]
 
 MIDDLEWARE = [
@@ -97,6 +102,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'SalvePets.urls'
@@ -145,28 +151,14 @@ DATABASES = {
 #
 # Atualize o banco de dados pelo pgAdmin e você verá as tabelas.
 
-#PROD
-# DATABASES = {
-#     'default': {
-#         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'salvepets', 
-#         'USER': 'postgres', 
-#         'PASSWORD': 'salve123456',
-#         'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com', 
-#         'PORT': '5432',
-#     }
-# }
 
-#DEV
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'salvepets', 
+        'NAME': 'SalvePets', 
         'USER': 'postgres', 
         'PASSWORD': '123456',
-        #'HOST': 'postgres_container', 
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
@@ -198,7 +190,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -216,7 +209,17 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+#*********************************E-COMMERCE*****************************************
+#STATICFILES_DIRS = [BASE_DIR / "static"]
+#STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = os.path.join(BASE_DIR , 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
+#************************************************************************************
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -260,4 +263,17 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST 
+
+
+#***************** e-commerce *******************
+#AUTH_USER_MODEL = "users.User"
+
+# Cart
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20
+
+#************************************************
+
+
