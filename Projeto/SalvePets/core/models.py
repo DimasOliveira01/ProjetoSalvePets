@@ -111,7 +111,7 @@ class PATROCINIO(models.Model):
     valor = models.DecimalField(max_digits=30, decimal_places=15)
     data = models.DateField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)    
+    dataModificacao = models.DateTimeField(auto_now=True)
 
 class ADOCAO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
@@ -181,4 +181,17 @@ class AVALIACAO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
-# ============================
+
+
+# ============================Projeto Integrado II
+
+class INSTITUICAO(models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    ativo = models.BooleanField(default=True, blank=False, null=False)
+    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
+    nome_instituicao = models.CharField(max_length=50, null=True)
+    razao_social = models.CharField(max_length=50, null=True)
+    cnpj = models.CharField(max_length=18, null=True)
+    telefone = models.CharField(max_length=16, null=True)
+    email = models.CharField(max_length=50, null=True)
+
