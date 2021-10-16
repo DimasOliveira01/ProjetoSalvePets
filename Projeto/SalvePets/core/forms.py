@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pet, USUARIO, User
+from .models import Pet, USUARIO, User, ADOCAO, INSTITUICAO
 from .custom_form_fields import CpfCnpjField, TelefoneField
 from django.utils.translation import ugettext_lazy as _
 
@@ -25,6 +25,8 @@ class PetForm(forms.ModelForm):
     class Meta:
         model = Pet
         fields = '__all__'
+
+
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -52,3 +54,26 @@ class ExtendedSignupForm(SignupForm):
     telefone = forms.CharField(required=False, max_length=16, label=_('Número de Telefone'))
     receberNotificacoes = forms.BooleanField(required=False, label = _('Desejo receber notificações'), help_text=_('(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)'))
     #siteUrl = forms.URLField(initial='http://', label='URL do seu Site')
+
+
+
+
+
+#Projeto integrado II
+class ContactForm(forms.Form):
+    nome_fantasia = forms.CharField(max_length = 50)
+    razao_social = forms.CharField(max_length = 50)
+    numero_cnpj = forms.CharField(max_length = 18)
+    numero_telefone = forms.CharField(max_length = 16)
+    email_address = forms.EmailField(max_length = 150)
+
+
+class AdocaoForm(forms.ModelForm):
+    class Meta:
+        model = ADOCAO
+        fields = '__all__'
+
+class InstituicaoForm(forms.ModelForm):
+    class Meta:
+        model = INSTITUICAO
+        fields = ('nome_instituicao', 'razao_social', 'cnpj', 'telefone', 'email')

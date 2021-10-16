@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Pet, USUARIO
-from .forms import UserForm, UsuarioForm
+from .models import Pet, USUARIO, INSTITUICAO
+from .forms import UserForm, UsuarioForm, InstituicaoForm
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -13,6 +13,12 @@ from django.utils.html import strip_tags
 from django.template import loader
 import os
 from django.utils.translation import ugettext_lazy as _
+
+
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.conf import settings
 
 # === Funções com render simples ===
 
@@ -36,8 +42,7 @@ def em_construcao(request):
     return render(request, 'emconstrucao.html')
 
 
-def teste(request):
-    return render(request, 'teste.html')
+
 
 # ==================================
 
@@ -327,3 +332,56 @@ def enviar_email_pet_perdido(id, email, foto, nome_pet):
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 # ==================================
+#Funções Projeto Integrado II
+
+#Formulário para solicitar cadastro de Instituição
+
+def cadastro_empresa(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = "Solicitação de cadastro de empresa" 
+			body = {
+			'nome_fantasia': form.cleaned_data['nome_fantasia'], 
+			'razao_social': form.cleaned_data['razao_social'], 
+            'numero_cnpj': form.cleaned_data['numero_cnpj'],
+            'numero_telefone': form.cleaned_data['numero_telefone'],
+			'email_address': form.cleaned_data['email_address'], 
+			}
+			message = "\n".join(body.values())
+
+			try:
+				send_mail(subject, message, settings.EMAIL_HOST_USER, ['atendimentoSalvePets@gmail.com'],
+            fail_silently=False) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return render(request, "index.html")
+            #return redirect ("sobre.html")
+            
+	form = ContactForm()
+	return render(request, "instituicao/formInstituicao.html", {'form':form})
+
+
+
+
+@login_required
+@transaction.atomic
+def completar_cadastro_instituicao(request):
+    if request.method == "POST":
+        form = InstituicaoForm(request.POST, instance=request.user.instituicao)
+        if form.is_valid():
+            form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            form = InstituicaoForm(instance=request.user.instituicao)
+    return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
+        'form': form
+    })
+
+
+
+def teste(request):
+    return render(request, 'teste.html')
+ 
