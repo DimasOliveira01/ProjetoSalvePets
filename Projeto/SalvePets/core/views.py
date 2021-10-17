@@ -402,14 +402,14 @@ def completar_cadastro_instituicao(request):
         else:
             messages.error(request, ('Please correct the error below.'))
     else:
-            form = InstituicaoForm()
+        form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form
     })
 
-'''emp = Employee.objects.get(pk = emp_id)
-emp.name = 'Somename'
-emp.save()
+'''
+pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True)
+instituicao=INSTITUICAO.objects.filter(encontradoPerdido='Encontrado', ativo=True)
 '''
 
 def teste(request):
