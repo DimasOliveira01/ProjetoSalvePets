@@ -7,4 +7,5 @@ omit =
     *urls.py,
     *wsgi.py,
     manage.py,
-    *registry*
+    *registry*,
+    *custom_form_fields*
