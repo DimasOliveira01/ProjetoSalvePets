@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block conteudo %}
+    <!-- Página de adição de usário na instituição-->
+    <div class="container mt-4">
+        <h2>{% trans "Adicionar usuário na minha Instituição" %}</h2>
+        <!--Mensagem caso o usuário informe um usuário inexistente-->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+                {% trans "Atualizar" %}
+            </button>
+        </form>
+
+    <script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'core/js/jquery.mask.js' %}"></script>
+
+    {% block scripts %}
+        <script>  
+            $(document).ready(function(){
+                $("#id_cpf").mask("000.000.000-00");
+            });
+        </script>
+    {% endblock %}
+    </div>
+{% endblock %}
