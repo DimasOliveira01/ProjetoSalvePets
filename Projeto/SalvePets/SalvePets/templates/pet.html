@@ -3,29 +3,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 {% block conteudo %}
-<style>
-.polaroid{
-    width:350px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-.main_image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 400px;
-    width: 100%;
-    overflow: hidden
-}
-
-
-</style>
 
     <!-- Página de Login-->
-    <div class="container mt-4">
+<div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
             <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
@@ -41,120 +22,102 @@
         </li>
     </ul>
 </div>
-        <div class="container">
-    <div class="container mt-5 mb-5">
-    <p><h3>{% trans "Detalhes do pet" %}</h3></p>
-    <div class="card">
-    
-        <div class="row g-0">
-            <div class="col-md-6 border-end">
-                <div class="d-flex flex-column justify-content-center">
-                    <div class="main_image"> <img src="{{pet.foto.url}}" id="main_product_image" width="350"> </div>
-                    
+
+<main>
+    <div class="container">
+        <p><h3>{% trans "Detalhes do pet" %}</h3></p>
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div id="mdb-lightbox-ui">
+                    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="pswp__scroll-wrap">
+                        <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <div class="pswp__counter"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="p-3 right-side">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3>{{pet.nome}}</h3> <span class="heart"><i class='bx bx-heart'></i></span>
-                    </div>
-                    <div class="mt-2 pr-3 content">
-                        <p>{{pet.descricao}}</p>
-                    </div>
-                    <div class="mt-2"> <span class="fw-light">Características</span>
-                    <table class="table">
-                        <tr>
-                            <th scope="row">Data de localização/perda:</th>
-                            <td>{{pet.dataPerdaEncontro|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Espécie:</th>
-                            <td>{{pet.especie|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Raça:</th>
-                            <td>{{pet.raca|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sexo:</th>
-                            <td>{{pet.sexo|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Cor predominante:</th>
-                            <td>{{pet.cor|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Porte:</th>
-                            <td>
-                                {% if pet.porte >= 40 and pet.porte <= 60%}
-                                    Pequeno porte
-                                {% elif pet.porte > 60 and pet.porte <= 100 %}
-                                    Médio porte
-                                {% else %}
-                                    Grande porte
-                                {% endif %}
-                                <br>
-                                (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Última localização:</th>
-                            <td>(desenvolver)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Situação:</th>
-                            <td>{{pet.encontradoPerdido|default_if_none:"-"}}</td>
-                        </tr>
-                    </table>
-                     </div>
-                    <div class="mt-4"> <span class="fw-light">Contato</span>
-                    <table class="table">
-                        <tr>
-                            <th scope="row">E-mail:</th>
-                            <td>{{creator.email|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Telefone:</th>
-                            <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
-                        </tr>
-                    </table>
-                    </div>
-
-                {% if request.user == pet.user %}
-                <a href="/deletar-pet/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
-                <a href="/cadastro-pet/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
-                {% endif %}
+        </div>
+        <div class="mdb-lightbox" data-pswp-uid="1">
+            <div class="row product-gallery mx-1">
+                <div class="col-12 mb-0">
+                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
+                        <a href="{{pet.foto.url}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(1);">
+                        </a>
+                    </figure>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
-<script type='text/javascript'>function changeImage(element) {
+    <div class="col-md-6">
+        <h5>{{pet.nome}}</h5>
+        <p class="mb-2 text-muted text-uppercase small">{{pet.encontradoPerdido|default_if_none:"-"}}</p>
+        <p class="pt-1">{{pet.descricao}}</p>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Data de localização/perda:</th>
+                        <td>{{pet.dataPerdaEncontro|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <td>{{pet.raca|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <td>{{pet.sexo|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Cor predominante:</th>
+                        <td>{{pet.cor|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <td>
+                            {% if pet.porte >= 40 and pet.porte <= 60%}
+                                Pequeno porte
+                            {% elif pet.porte > 60 and pet.porte <= 100 %}
+                                Médio porte
+                            {% else %}
+                                Grande porte
+                            {% endif %}
+                            <br>
+                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Última localização:</th>
+                        <td>(desenvolver)</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <td>{{pet.especie|default_if_none:"-"}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-var main_prodcut_image = document.getElementById('main_product_image');
-main_prodcut_image.src = element.src;
-
-
-}</script>
-
-
-
-            {% block scripts %}
-                <script>  
-                    $(document).ready(function(){
-                        $('#telefone').mask('(00) 0 0000-0000');
-                    });
-                </script>
-            {% endblock %}
-
+            <div class="mt-4"> <span class="fw-light">Contato</span>
+                <table class="table">
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">E-mail:</th>
+                        <td>{{creator.email|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Telefone:</th>
+                        <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
+        {% if request.user == pet.user %}
+            <a href="/deletar-pet/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+            <a href="/cadastro-pet/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
+        {% endif %}
     </div>
-
-    
-    
-            
-        
-    
+</main>
+<br>
 
 {% endblock conteudo %}
