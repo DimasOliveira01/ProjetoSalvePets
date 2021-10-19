@@ -393,19 +393,34 @@ def cadastro_empresa(request):
 @transaction.atomic
 def completar_cadastro_instituicao(request):
     if request.method == "POST":
-        form = InstituicaoForm(request.POST, instance=request.user.instituicao)
-        if form.is_valid():
-            form.save()            
-            return render(request, 'index.html')
+        if request.user.usuario.FK_instituicao:
+
+            instance=request.user.usuario.FK_instituicao
+            product = INSTITUICAO.objects.get(id=instance.id)
+
+            form = InstituicaoForm(request.POST, instance=product)
+            if form.is_valid():
+                form.save()
+                return render(request, 'index.html')
         else:
-            messages.error(request, ('Please correct the error below.'))
+            form = InstituicaoForm(request.POST)
+            if form.is_valid():
+                instancia = form.save()
+                usuario = request.user.usuario
+                USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
+                return render(request, 'index.html')
+            else:
+                messages.error(request, ('Please correct the error below.'))
     else:
-            form = InstituicaoForm(instance=request.user.instituicao)
+        form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form
     })
 
-
+'''emp = Employee.objects.get(pk = emp_id)
+emp.name = 'Somename'
+emp.save()
+'''
 
 def teste(request):
     return render(request, 'teste.html')
