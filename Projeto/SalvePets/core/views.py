@@ -425,3 +425,5 @@ emp.save()
 def teste(request):
     return render(request, 'teste.html')
  
+def adotar(request):
+    return render(request, 'adotar/cadastro_adotar.html')
