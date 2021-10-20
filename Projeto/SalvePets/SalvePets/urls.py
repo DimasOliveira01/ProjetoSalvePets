@@ -35,6 +35,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
+    path("orders/", include("orders.urls")),
     #path('login/', views.login_user),
     #path('login/submit', views.submit_login),
     #path('logout/', views.logout_user),
