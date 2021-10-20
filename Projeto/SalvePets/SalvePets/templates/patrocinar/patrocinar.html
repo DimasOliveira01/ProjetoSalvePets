@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<main>
+    <div class="container">
+        <p><h3>{% trans "Contribuir" %}</h3></p>
+        <div class="row">
+            <div class="col-md-6 mb-0 mb-md-0">
+                <div id="mdb-lightbox-ui">
+                    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="pswp__scroll-wrap">
+                        <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <div class="pswp__counter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdb-lightbox" data-pswp-uid="1">
+            <div class="row product-gallery mx-1">
+                <div class="col-12 mb-0">
+                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
+                        <a href="{{pet.foto.url}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(1);">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h5 class="text-capitalize">{{pet.nome}}</h5>
+        <p class="mb-2 text-muted text-uppercase small">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</p>
+        <p class="pt-1 text-capitalize">{{pet.descricao}}</p>
+        <label><b>{% trans "Doar para instituição" %}</b></label>
+        <div class="input-group mb-3">
+        
+            <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+            </div>
+            
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>20</option>
+                <option value="5">50</option>
+                <option value="100">100</option>
+            </select>
+
+            <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+            </div>
+        </div>
+         <label><b>{% trans "Patrocinar pet" %}</b></label>
+        <div class="input-group mb-3">
+        
+            <div class="input-group-prepend">
+                <span class="input-group-text">R$</span>
+            </div>
+            
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>20</option>
+                <option value="5">50</option>
+                <option value="100">100</option>
+            </select>
+
+            <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+            </div>
+        </div>
+    </div>
+</main>
+<br>
+
+{% endblock conteudo %}

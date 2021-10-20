@@ -63,6 +63,8 @@ urlpatterns = [
     path('modificar-cadastro-instituicao/', views.completar_cadastro_instituicao),
     path('adotar/', views.adotar),
     path('adicionar-usuario-instituicao/', views.adicionar_usuario_instituicao),
+    path('patrocinar/', views.lista_patrocinar),
+    path('patrocinar/<id>/', views.patrocinar),
     
 ]
 

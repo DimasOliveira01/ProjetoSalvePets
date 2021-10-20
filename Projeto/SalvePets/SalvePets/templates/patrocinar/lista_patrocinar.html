@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<div class="container">
+    <p><h3>{% trans "Pets disponíveis para doação" %}</h3></p>
+    <p>Você pode ajudar diretamente uma instituição que abriga animais com o valor que desejar.<p>
+        <div class="row">
+        
+            {% for p, i in lista_patrocinio %}
+            
+            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">    
+            <a href="../pet-informacao/{{ p.id }}">
+                <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
+            </a>
+            <div class="card-body">
+                <p class="card-text text-muted text-uppercase small">{{i.nome_instituicao}}</p>
+                <h5 class="card-title">{{ p.nome }}</h5>
+                <p class="card-text">{{p.descricao}}</p>
+                <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mb-1" style="background-color:#FAA307">Detalhes</a>
+                <a href="../patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+</div>
+{% endblock %}
