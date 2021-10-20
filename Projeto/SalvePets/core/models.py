@@ -106,12 +106,13 @@ class Pet(models.Model):
     porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
     #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=False, null=False)
-    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='Encontrado', blank=False, null=False)
+    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, blank=True, null=True)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
-    coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
+    coordenada = models.PointField(srid=4326, blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
     sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
+    dataNascimento = models.DateField(blank=True, null=True)
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
