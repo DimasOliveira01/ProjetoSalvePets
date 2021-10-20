@@ -93,7 +93,7 @@
         <!-- Data de localização ou perda -->
         <div class="form-group">
             <label><b>{% trans "Data de localização ou perda" %}</b>:</label>
-            <input class="form-control" name="dataPerdaEncontro" type="date" value="{{ pet.dataPerdaEncontro | date:'Y-m-d' }}">
+            <input id="datefield" class="form-control" name="dataPerdaEncontro" type="date" value="{{ pet.dataPerdaEncontro | date:'Y-m-d' }}">
         </div>
         <br>
 
@@ -361,5 +361,21 @@
             else if (window.jQuery) jQuery(window).on(loadevents.join(' '), loadmap);
         }
     )();
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+    dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+    mm = '0' + mm;
+    } 
+        
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("max", today);
 </script>
 {% endblock %}

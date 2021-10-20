@@ -130,7 +130,7 @@ class PATROCINIO(models.Model):
     valor = models.DecimalField(max_digits=30, decimal_places=15)
     data = models.DateField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)    
+    dataModificacao = models.DateTimeField(auto_now=True)
 
 class ADOCAO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)

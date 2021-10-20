@@ -35,20 +35,22 @@
     <p><h3>{% trans "Pets perdidos" %}</h3></p>
         <div class="row">
             {% for p in pet %}
-            <div class="col-sm-4">
-                <a href="../pet-informacao/{{ p.id }}">
-                    <div class="polaroid" style="width:100%; height:100%">
-                        <img src="{{p.foto.url}}" style="width:100%; height:75%">
-                        <div class="container">
-                            <br>
-                            <p class="btn btn-outline-dark">{{ p.nome }}</p>
-                        </div>
-                    </div>
-                </a>    
+            
+            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
+            <a href="../pet-informacao/{{ p.id }}">
+                <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ p.nome }}</h5>
+                <p class="card-text">{{p.descricao}}</p>
+                <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
             </div>
+            </div>
+            
             {% endfor %}
         </div>
     </div>
+
 
     
     
