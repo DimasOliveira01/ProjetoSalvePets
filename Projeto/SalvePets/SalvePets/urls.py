@@ -35,6 +35,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
+    path("orders/", include("orders.urls")),
     #path('login/', views.login_user),
     #path('login/submit', views.submit_login),
     #path('logout/', views.logout_user),
@@ -61,6 +62,8 @@ urlpatterns = [
     path('completar-cadastro/',views.completar_cadastro),
     path('formulario-empresa/', views.cadastro_empresa),
     path('modificar-cadastro-instituicao/', views.completar_cadastro_instituicao),
+    path('adotar/', views.adotar),
+    path('adicionar-usuario-instituicao/', views.adicionar_usuario_instituicao),
     
 ]
 

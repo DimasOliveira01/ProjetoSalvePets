@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -48,30 +48,43 @@ class LOCALIZACAO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
 
+class AVALIACAO(models.Model):
+    FK_idUsuario = models.ManyToManyField(User)
+    nota = models.DecimalField(max_digits=30, decimal_places=15)
+    comentario = models.TextField()
+    dataCriacao = models.DateTimeField(auto_now_add=True)
+    dataModificacao = models.DateTimeField(auto_now=True)
+
+
+class INSTITUICAO(models.Model):
+    ativo = models.BooleanField(default=True, blank=False, null=False)
+    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
+    nome_instituicao = models.CharField(max_length=50, null=True)
+    razao_social = models.CharField(max_length=50, null=True)
+    cnpj = models.CharField(max_length=18, null=True)
+    telefone = models.CharField(max_length=16, null=True)
+    email = models.CharField(max_length=50, null=True)
+
 class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
     #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
     tipoUsuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
-    cpfCnpj = models.CharField(max_length=11, verbose_name=_("CPF (somente números)"), blank=False, null=False)
+    cpfCnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False, null=False)
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
-    telefone = models.CharField(max_length=11, verbose_name=_("Número de telefone (somente números)"), blank=True, null=True)
+    telefone = models.CharField(max_length=16, verbose_name=_("Número de telefone (somente números)"), blank=True, null=True)
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
     receberNotificacoes = models.BooleanField(default=True, verbose_name=_("Receber notificações"), blank=False, null=False)
     site = models.CharField(max_length=100, verbose_name=_("Site"), blank=True, null=True)
     idImagem = models.ImageField(upload_to='usuario', blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
     dataModificacao = models.DateTimeField(auto_now=True, null=True)
+    FK_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         USUARIO.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        INSTITUICAO.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -97,12 +110,13 @@ class Pet(models.Model):
     porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
     #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=False, null=False)
-    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, default='Encontrado', blank=False, null=False)
+    encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, blank=True, null=True)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
-    coordenada = models.PointField(default='POINT(-46.65647647383157, -23.561051152327074)', srid=4326, blank=False, null=False)
+    coordenada = models.PointField(srid=4326, blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
     sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
+    dataNascimento = models.DateField(blank=True, null=True)
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
@@ -120,7 +134,7 @@ class PATROCINIO(models.Model):
     valor = models.DecimalField(max_digits=30, decimal_places=15)
     data = models.DateField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)    
+    dataModificacao = models.DateTimeField(auto_now=True)
 
 class ADOCAO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
@@ -185,24 +199,5 @@ class PEDIDO(models.Model):
     dataModificacao = models.DateTimeField(auto_now=True)
 """
 
-class AVALIACAO(models.Model):
-    FK_idUsuario = models.ManyToManyField(User)
-    nota = models.DecimalField(max_digits=30, decimal_places=15)
-    comentario = models.TextField()
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
 
 
-
-# ============================Projeto Integrado II
-
-class INSTITUICAO(models.Model):
-    user = models.OneToOneField(User, on_delete=CASCADE)
-    ativo = models.BooleanField(default=True, blank=False, null=False)
-    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
-    nome_instituicao = models.CharField(max_length=50, null=True)
-    razao_social = models.CharField(max_length=50, null=True)
-    cnpj = models.CharField(max_length=18, null=True)
-    telefone = models.CharField(max_length=16, null=True)
-    email = models.CharField(max_length=50, null=True)
-    

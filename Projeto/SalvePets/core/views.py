@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
+from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Pet, USUARIO, INSTITUICAO
-from .forms import UserForm, UsuarioForm, InstituicaoForm
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -393,20 +394,75 @@ def cadastro_empresa(request):
 @transaction.atomic
 def completar_cadastro_instituicao(request):
     if request.method == "POST":
-        form = InstituicaoForm(request.POST, instance=request.user.instituicao)
-        if form.is_valid():
-            form.save()            
-            return render(request, 'index.html')
+        if request.user.usuario.FK_instituicao:
+
+            instance=request.user.usuario.FK_instituicao
+            product = INSTITUICAO.objects.get(id=instance.id)
+
+            form = InstituicaoForm(request.POST, instance=product)
+            if form.is_valid():
+                form.save()
+                return render(request, 'index.html')
         else:
-            messages.error(request, ('Please correct the error below.'))
+            form = InstituicaoForm(request.POST)
+            if form.is_valid():
+                instancia = form.save()
+                usuario = request.user.usuario
+                USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
+                return render(request, 'index.html')
+            else:
+                messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
-            form = InstituicaoForm(instance=request.user.instituicao)
+        form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form
     })
 
-
+'''
+pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True)
+instituicao=INSTITUICAO.objects.filter(encontradoPerdido='Encontrado', ativo=True)
+'''
 
 def teste(request):
     return render(request, 'teste.html')
  
+def adotar(request):
+    return render(request, 'adotar/cadastro_adotar.html')
+
+@login_required
+@transaction.atomic
+def adicionar_usuario_instituicao(request):
+    if (request.user.usuario.FK_instituicao_id != None):
+        form = AdicionarUsuarioInstituicaoForm()
+        if request.method == "POST":
+            #obtêm o dado do usuário logado
+            usuario = request.user.usuario
+            #obtêm o dado enviado no POST
+            cpf=request.POST.get('cpf')
+            #Obtêm o objeto usuario que tem o mesmo cpf do POST
+            res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+            if len(res_filtro)>0:
+                id_instituicao = USUARIO.objects.filter(id=usuario.id)
+                USUARIO.objects.filter(cpfCnpj=cpf).update(FK_instituicao_id=id_instituicao[0].FK_instituicao_id)
+                #form = AdicionarUsuarioInstituicaoForm(request.POST)
+                #print (request.POST.get('cpf'))
+                return render(request, 'index.html')
+            else:
+                messages.error(request, 'Por favor selecione um usuário existente!') 
+        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
+            'form': form
+        })
+    else:
+        #print('ola else')
+        return render(request, 'instituicao/acesso-proibido.html')
+
+
+''' print('cpf enviado no post = ', cpf)
+    id_instituicao = USUARIO.objects.filter(id=usuario.id)
+    print ('id da instituicao do usuario = ', id_instituicao[0].FK_instituicao_id)
+    res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+    print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
+    len(res_filtro)
+    print('tamanhao do vetor: ', len(res_filtro))
+    #USUARIO.objects.filter(request.POST.get('cpf')==teste)
+'''
