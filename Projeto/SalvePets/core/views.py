@@ -29,7 +29,7 @@ def index(request):
     #user_form = UserForm(instance=request.user)
     #usuario_form = UsuarioForm(instance=request.user.usuario)
     #cadastro_incompleto = False
-    #if usuario_form.cpfCnpj == "":
+    #if usuario_form.cpfcnpj == "":
     #    cadastro_incompleto = True
     #    return render(request, 'index.html', {'cadastro_incompleto', cadastro_incompleto})
     #else:
@@ -394,9 +394,9 @@ def cadastro_empresa(request):
 @transaction.atomic
 def completar_cadastro_instituicao(request):
     if request.method == "POST":
-        if request.user.usuario.FK_instituicao:
+        if request.user.usuario.fk_instituicao:
 
-            instance=request.user.usuario.FK_instituicao
+            instance=request.user.usuario.fk_instituicao
             product = INSTITUICAO.objects.get(id=instance.id)
 
             form = InstituicaoForm(request.POST, instance=product)
@@ -408,12 +408,12 @@ def completar_cadastro_instituicao(request):
             if form.is_valid():
                 instancia = form.save()
                 usuario = request.user.usuario
-                USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
+                USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
                 return render(request, 'index.html')
             else:
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
-        form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
+        form = InstituicaoForm(instance=request.user.usuario.fk_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form
     })
@@ -432,7 +432,7 @@ def adotar(request):
 @login_required
 @transaction.atomic
 def adicionar_usuario_instituicao(request):
-    if (request.user.usuario.FK_instituicao_id != None):
+    if (request.user.usuario.fk_instituicao_id != None):
         form = AdicionarUsuarioInstituicaoForm()
         if request.method == "POST":
             #obtêm o dado do usuário logado
@@ -440,10 +440,10 @@ def adicionar_usuario_instituicao(request):
             #obtêm o dado enviado no POST
             cpf=request.POST.get('cpf')
             #Obtêm o objeto usuario que tem o mesmo cpf do POST
-            res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
             if len(res_filtro)>0:
                 id_instituicao = USUARIO.objects.filter(id=usuario.id)
-                USUARIO.objects.filter(cpfCnpj=cpf).update(FK_instituicao_id=id_instituicao[0].FK_instituicao_id)
+                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
                 #form = AdicionarUsuarioInstituicaoForm(request.POST)
                 #print (request.POST.get('cpf'))
                 return render(request, 'index.html')
@@ -456,11 +456,58 @@ def adicionar_usuario_instituicao(request):
         #print('ola else')
         return render(request, 'instituicao/acesso-proibido.html')
 
+@login_required
+@transaction.atomic
+def listar_usuario_instituicao(request):
+    cursor = connection.cursor()
+    id_inst=request.user.usuario.fk_instituicao_id
+    #usuario=USUARIO.objects.filter(User__type=User.is_active) #tipoUsuario='Usuário comum'
+    #user=User.objects.filter(tipoUsuario='Usuário comum')
+    query = ''' select tab1.first_name as nome1, tab1.last_name as nome2, tab2.cpfcnpj as cpf,
+                tab2.id, tab2.fk_instituicao_id from auth_user as tab1 
+                inner join core_usuario as tab2 on (tab1.id=tab2.user_id) 
+                where tab2.fk_instituicao_id is Not NULL and tab2.fk_instituicao_id = %s'''
+    cursor.execute(query, [id_inst])
+    usuario = namedtuplefetchall(cursor)
+    if len(usuario)==0:
+        messages.error(request, 'Nenhum usuário existente!')
+    return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario}) 
+
+@login_required(login_url='/acccounts/login')
+@transaction.atomic
+def deletar_usuario_instituicao(request, id):
+    USUARIO.objects.filter(id=id).update(fk_instituicao_id=None)
+    return redirect('/listar-usuario-instituicao/')
+
+'''@login_required(login_url='/acccounts/login')
+    def deletar_pet(request, id):
+        pet=Pet.objects.get(id=id)
+        if pet.user == request.user:
+            pet.delete()
+        return redirect('/lista-pet-usuario')'''
+
+'''def modificar_cadastro(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
+        if usuario_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            usuario_form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            usuario_form = UsuarioForm(instance=request.user.usuario)
+            user_form = UserForm(instance=request.user)
+    return render(request, 'modificar-cadastro.html', {
+        'usuario_form': usuario_form,
+        'user_form': user_form,
+    })'''
 
 ''' print('cpf enviado no post = ', cpf)
     id_instituicao = USUARIO.objects.filter(id=usuario.id)
-    print ('id da instituicao do usuario = ', id_instituicao[0].FK_instituicao_id)
-    res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+    print ('id da instituicao do usuario = ', id_instituicao[0].fk_instituicao_id)
+    res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
     print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
     len(res_filtro)
     print('tamanhao do vetor: ', len(res_filtro))

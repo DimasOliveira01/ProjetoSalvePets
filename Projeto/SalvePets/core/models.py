@@ -5,6 +5,7 @@ from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+from localflavor.br.models import BRCPFField, BRPostalCodeField, BRStateField, BRCNPJField
 
 # ===       Escolhas       ===
 
@@ -58,15 +59,23 @@ class INSTITUICAO(models.Model):
     nome_instituicao = models.CharField(max_length=50, null=True)
     razao_social = models.CharField(max_length=50, null=True)
     cnpj = models.CharField(max_length=18, null=True)
+    #cnpj=BRCNPJField("CNPJ", null=True)
     telefone = models.CharField(max_length=16, null=True)
     email = models.CharField(max_length=50, null=True)
+    postal_code = BRPostalCodeField("CEP")
+    address = models.CharField("Endereço", max_length=250)
+    number = models.CharField("Número", max_length=250)
+    complement = models.CharField("Complemento", max_length=250, blank=True)
+    district = models.CharField("Bairro", max_length=250)
+    state = BRStateField("Estado")
+    city = models.CharField("Cidade", max_length=250)
 
 class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
     #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    tipoUsuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
-    cpfCnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False, null=False)
+    tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
+    cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False, null=False)
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
     telefone = models.CharField(max_length=16, verbose_name=_("Número de telefone (somente números)"), blank=True, null=True)
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
@@ -75,7 +84,7 @@ class USUARIO(models.Model):
     idImagem = models.ImageField(upload_to='usuario', blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
     dataModificacao = models.DateTimeField(auto_now=True, null=True)
-    FK_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    fk_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
