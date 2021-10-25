@@ -6,9 +6,9 @@
 {% block conteudo %}
 
 <main>
-    <div class="container">
-        <p><h3>{% trans "Contribuir" %}</h3></p>
+    <div class="container">        
         <div class="row">
+        <p><h3>{% trans "Contribuir" %}</h3></p>
             <div class="col-md-6 mb-0 mb-md-0">
                 <div id="mdb-lightbox-ui">
                     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -21,56 +21,227 @@
                 </div>
             </div>
         </div>
+
+        <!-- Parte esquerda patrocínio pet -->
         <div class="mdb-lightbox" data-pswp-uid="1">
-            <div class="row product-gallery mx-1">
+            <div class="row product-gallery">
                 <div class="col-12 mb-0">
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
-                        <a href="{{pet.foto.url}}" data-size="710x823">
-                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(1);">
+                        <a href="/pet-informacao/{{pet.id}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 450px; transform-origin: center center; transform: scale(1);">
                         </a>
                     </figure>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Parte direita patrocínio pet -->
     <div class="col-md-6">
         <h5 class="text-capitalize">{{pet.nome}}</h5>
         <p class="mb-2 text-muted text-uppercase small">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</p>
-        <p class="pt-1 text-capitalize">{{pet.descricao}}</p>
-        <label><b>{% trans "Doar para instituição" %}</b></label>
-        <div class="input-group mb-3">
-        
-            <div class="input-group-prepend">
-                <span class="input-group-text">R$</span>
-            </div>
-            
-            <select class="custom-select" id="inputGroupSelect01">
-                <option selected>20</option>
-                <option value="5">50</option>
-                <option value="100">100</option>
-            </select>
+        <p class="pt-1">{{pet.descricao}}</p>
 
-            <div class="input-group-append">
-                <span class="input-group-text">.00</span>
+        <!-- NAV -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:#495057">Doar</button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:#495057">Ajudar</button>
+                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:#495057">Patrocinar</button>
+            </div>
+        </nav>
+        <!-- / NAV / -->
+
+        <div class="tab-content" id="nav-tabContent">
+        <br>
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                
+                <!-- CA2 - Doar para este abrigo -->
+                <label><h6>{% trans "Doar para "  %} <span class="text-capitalize">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</span></h6></label>
+                <p>Você pode realizar uma doação para a instituição que está tomando conta deste pet.</p>
+                <p>Por favor, selecione a quantidade desejada.</p>
+
+                    <!--
+                    Então ele é redirecionado para a tela com três valores padrão e um campo para
+                    preenchimento de valor: 20 (pré-selecionado), 50, 100 e em branco
+                    -->
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked onclick="atualizarDoacao(20)">
+                    <label class="form-check-label" for="inlineRadio1">R$ 20</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"  onclick="atualizarDoacao(50)">
+                    <label class="form-check-label" for="inlineRadio2">R$ 50</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="atualizarDoacao(100)">
+                    <label class="form-check-label" for="inlineRadio3">R$ 100</label>
+                </div>
+                <br><br>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a id="doar" href="https://pag.ae/7XDvbF6CG/button" class="btn btn-light" role="button" target="_blank" style="border-color:gray; font-weight:normal;">{% trans "Doar R$ 20" %}</a>
+                    <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                        <input type="hidden" name="currency" value="BRL" />
+                        <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                        <input type="hidden" name="iot" value="button" />
+                        <button type="submit" id="doar" style="background-color: #fbba00; color:black; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-color:gray; font-weight:normal;" class="btn btn-primary" >{% trans "Doar outro valor" %}</button>
+                    </form>
+                </div>
+                <br>
+                <!-- / CA2 - Doar para este abrigo / -->
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+               
+                <!-- CA4 - Ajude este pet -->
+                <label><h6>{% trans "Ajude o pet" %}</h6></label>
+                <p>Você também pode contribuir com os custos mensais do pet.</p>
+                <p>É possível pagar os custos de limpeza, alimentação, medicamentos e diária de internação. E claro, se preferir, pode inclusive pagar por todos esses itens juntos.</p>
+                    
+                    <!--
+                    Então ele é redirecionado para a tela com a lista de opções "fixas" escolhidas pelo
+                    Abrigo e valor: Limpeza, Alimentação, Medicamentos e Diária de Internação
+                    -->
+                
+                <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
+                <br><br>
+                <!-- / CA4 - Ajude este pet / -->
+
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                
+                <!-- CA6 - Patrocine este pet -->
+                <label><h6>{% trans "Patrocine o pet" %}</h6></label><br>
+                <p>Também é possível ajudar o pet cobrindo seus custos mensais definidos pela instituição que está tomando conta dele.</p>
+                <p>Para apoiá-lo, selecione uma das opções abaixo:</p>
+                    <!--
+                    Então ele é redirecionado para a tela com os custos mensais daquele pet e os períodos
+                    de contribuição disponíveis                    
+                    -->
+
+                <form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
+                    <input type="hidden" name="code" value="7B645836A7A75F73348FAFA2430F1399" />
+                    <input type="hidden" name="iot" value="button" />
+                    <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/205x30-contratar-azul.gif" name="submit" width="205" height="30" />
+                </form>
+                <!--
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 50 mensais</button>
+                    <button onclick="Definir_preco_assinatura('100')" type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 100 mensais</button>
+                    <button type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 200 mensais</button>
+                </div>-->
+                <!-- / CA6 - Patrocine este pet / -->
+
             </div>
         </div>
-         <label><b>{% trans "Patrocinar pet" %}</b></label>
-        <div class="input-group mb-3">
-        
-            <div class="input-group-prepend">
-                <span class="input-group-text">R$</span>
-            </div>
-            
-            <select class="custom-select" id="inputGroupSelect01">
-                <option selected>20</option>
-                <option value="5">50</option>
-                <option value="100">100</option>
-            </select>
 
-            <div class="input-group-append">
-                <span class="input-group-text">.00</span>
+        <!-- Modal: CA4 - Ajude este pet -->
+        <div class="modal fade" id="ajudar_pet" tabindex="-1" aria-labelledby="ajudar_petLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ajudar_petLabel">Patrocínio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Limpeza</th>
+                                    <td>R$ 50,00</td>
+                                    <td>
+                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                                            <input type="hidden" name="currency" value="BRL" />
+                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                                            <input type="hidden" name="iot" value="button" />
+                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Alimentação</th>
+                                    <td>R$ 50,00</td>
+                                    <td>
+                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                                            <input type="hidden" name="currency" value="BRL" />
+                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                                            <input type="hidden" name="iot" value="button" />
+                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Medicamentos</th>
+                                    <td>R$ 50,00</td>
+                                    <td>
+                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                                            <input type="hidden" name="currency" value="BRL" />
+                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                                            <input type="hidden" name="iot" value="button" />
+                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Diária de internação</th>
+                                    <td>R$ 50,00</td>
+                                    <td>
+                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                                            <input type="hidden" name="currency" value="BRL" />
+                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                                            <input type="hidden" name="iot" value="button" />
+                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">TOTAL</th>
+                                    <td><strong>R$ 200,00</strong></td>
+                                    <td>
+                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                                            <input type="hidden" name="currency" value="BRL" />
+                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                                            <input type="hidden" name="iot" value="button" />
+                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- / Modal: CA4 - Ajude este pet / -->
+
+        <!-- Modal: CA6 - Patrocine este pet -->
+        <div class="modal fade" id="patrocinar_pet" tabindex="-1" aria-labelledby="patrocinar_petLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="patrocinar_petLabel">Patrocínio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        patrocinar
+                    </div>
+                    <div class="modal-footer">
+                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                            <input type="hidden" name="currency" value="BRL" />
+                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
+                            <input type="hidden" name="iot" value="button" />
+                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal: CA6 - Patrocine este pet / -->
+    
     </div>
 </main>
 <br>

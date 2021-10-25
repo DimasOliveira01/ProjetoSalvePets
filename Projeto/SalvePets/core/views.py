@@ -238,7 +238,6 @@ def completar_cadastro(request):
 """
 def sobre(request):
     return render(request, 'sobre.html')
-
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 """
@@ -481,7 +480,6 @@ def lista_patrocinar(request):
     lista_patrocinio = zip(pet , instituicao)
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet, 'usuario': usuario, 'instituicao':instituicao, 'lista_patrocinio': lista_patrocinio})
 
-@login_required(login_url='/accounts/login')
 def patrocinar(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     usuario = USUARIO.objects.get(user_id=pet.user_id)
