@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<style>
+    #id_coordenada-map {
+        width: min(calc(100vw - 30px), 720px);
+        height: 400px;
+    }
+
+    #id_coordenada {
+     display: none;
+    }
+
+    /* Fixes for Django base.css */
+    .module .leaflet-draw ul {
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .module .leaflet-draw ul li {
+    li  st-style-type: none;
+    }
+    
+</style>
+
+<!-- Formulário -->
+<form enctype="multipart/form-data" action="submit", method="POST">
+    {% csrf_token %}
+    <input type="number" class="form-control" name="pet-id" value="{{ pet.id }}" hidden>
+    <div class="container">
+        {% if pet.id != null %}
+            <p><h3>{% trans "Alterar pet" %}</h3></p>
+        {% else %}
+            <p><h3>{% trans "Cadastrar um pet" %}</h3></p>
+        {% endif %}
+
+        <!-- Imagem -->
+        <div class="form-group">
+            {% if pet.id != null %}
+                <label><b>{% trans "Alterar imagem" %}: *</b></label>
+                <p><a href="/media/{{ pet.foto }}" target="_blank"><img src="/media/{{ pet.foto }}" style="width:100%; max-width:300px;"></a></p>
+            {% else %}
+                <label><b>{% trans "Foto" %}</b>: *</label><br>
+            {% endif %}
+            {% if pet.id != null %}
+                <input type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
+            {% else %}
+                <input required="required" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}" >
+            {% endif %}
+        </div>
+        <br>
+
+        <!-- Nome -->
+        <div class="form-group">
+            <label><b>{% trans "Nome" %}</b>:</label>
+            <input class="form-control" name="nome" type="text" value="{{ pet.nome|default_if_none:"Sem nome" }}" placeholder="Caso não saiba, mantenha este campo vazio">
+        </div>
+        <br>
+
+        <!-- Detalhes -->
+        <div class="form-group">
+            <label><b>{% trans "Detalhes" %}</b>:</label>
+            <textarea class="form-control" rows="3" name="descricao" type="text" placeholder="Tente inserir o máximo de detalhes sobre o pet">{{ pet.descricao|default_if_none:"" }}</textarea>
+        </div>
+        <br>
+
+        <!-- Espécie -->
+        <div class="form-group">
+            <label><b>{% trans "Espécie" %}</b>: *</label>
+            <select class="form-select" name="especie" value="{{ pet.especie }}">
+                <option value="Cachorro"
+                    {% if pet.especie == "Cachorro" %} selected="selected" {% endif %}
+                    >{% trans "Cachorro" %}
+                </option>
+                <option value="Gato"
+                    {% if pet.especie == "Gato" %} selected="selected" {% endif %}
+                    >{% trans "Gato" %}
+                </option>
+                <option value="Outros"
+                    {% if pet.especie == "Outros" %} selected="selected" {% endif %}
+                    >{% trans "Outros" %}
+                </option>
+            </select>
+        </div>
+        <br>
+        <!-- Raça -->
+        <div class="form-group">
+            <label><b>{% trans "Raça" %}</b>:</label>
+            <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}">
+        </div>
+        <br>
+
+        <!-- Sexo -->
+        <div class="form-group">
+            <label><b>{% trans "Sexo" %}</b>:</label>
+            <select class="form-select" name="sexo" value="{{ pet.sexo }}">
+                <option value="Macho"
+                    {% if pet.sexo == "Macho" %} selected="selected" {% endif %}
+                    >{% trans "Macho" %}
+                </option>
+                <option value="Fêmea"
+                    {% if pet.sexo == "Fêmea" %} selected="selected" {% endif %}
+                    >{% trans "Fêmea" %}
+                </option>
+                <option value="Não sei"
+                    {% if pet.sexo == "Não sei" %} selected="selected" {% endif %}
+                    >{% trans "Não sei" %}
+                </option>
+            </select>
+        </div>
+        <br>
+
+        <!-- Porte -->
+        <div class="form-group">
+            <label><b>{% trans "Porte" %}</b>: *</label><br>
+            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
+            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
+            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
+
+            <table class="fixed">
+                <tr>
+                    <td><img src="{% static 'core/assets/img/human.png' %}" height="150" /></td>
+                    <td style="vertical-align:bottom; padding-left: 15px"><img id="imageRange" src="{% static 'core/assets/img/dog.png' %}" height="
+                        {% if pet.porte %}
+                            {{pet.porte}}
+                        {% else %}
+                            80
+                        {% endif %}
+                        " />
+                    </td>
+                </tr>
+            </table>
+            <input class="form-range" style="width:250px" id="range" type="range" min="40" step="0" max="120" oninput="updateTextInput();" name="porte" value="{{ pet.porte|default_if_none:120 }}" >
+        </div>
+        <br>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-outline-dark mt-4 w-100">
+            {% if pet %}
+                {% trans "Alterar" %}
+            {% else %}
+                {% trans "Cadastrar" %}
+            {% endif %}
+        </button>
+    </div>
+</form>
+
+<br><br>
+
+<script>
+
+    function updateTextInput()
+    {
+        
+        var value = document.getElementById("range").value;
+        var img = document.getElementById('imageRange');
+        img.height = value
+    }
+
+    function SetSize(porte)
+    {
+        var tamanho;
+
+        switch (porte){
+            case 'pequeno':
+                tamanho = 40
+                break;
+            case 'medio':
+                tamanho = 80
+                break;
+            case 'grande':
+                tamanho = 120
+                break;
+        }
+
+        document.getElementById("range").value = tamanho;
+        updateTextInput();
+    }
+
+</script>
+{% endblock %}

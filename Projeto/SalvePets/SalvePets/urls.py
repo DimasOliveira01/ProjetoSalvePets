@@ -58,14 +58,19 @@ urlpatterns = [
 
     #path('ecommerce/',views.e_commerce),
     path('teste/',views.teste),
-
+    #path('adotar/', views.adotar),
     path('completar-cadastro/',views.completar_cadastro),
     path('formulario-empresa/', views.cadastro_empresa),
     path('modificar-cadastro-instituicao/', views.completar_cadastro_instituicao),
-    path('adotar/', views.adotar),
     path('adicionar-usuario-instituicao/', views.adicionar_usuario_instituicao),
     path('listar-usuario-instituicao/', views.listar_usuario_instituicao),
     path('deletar-usuario-instituicao/<id>/',views.deletar_usuario_instituicao),
+    path('cadastro-pet-instituicao/', views.cadastro_pet_instituicao),
+    path('cadastro-pet-instituicao/submit',views.set_pet_instituicao),
+    path('pet-informacao-instituicao/<id>/',views.pet_informacao_instituicao),
+    path('lista-pet-instituicao/',views.lista_pets_instituicao),
+    path('deletar-pet-instituicao/<id>/',views.deletar_pet_instituicao),
+
     
 ]
 

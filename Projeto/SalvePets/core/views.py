@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Pet, USUARIO, INSTITUICAO
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -66,7 +66,7 @@ def lista_pets_perdidos(request):
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
-    pet=Pet.objects.filter(ativo=True, user=request.user)
+    pet=Pet.objects.filter(ativo=True, user=request.user,fk_id_instituicao=None)
     return render(request, 'listaPetsUsuario.html',{'pet':pet})
 
 
@@ -479,30 +479,108 @@ def deletar_usuario_instituicao(request, id):
     USUARIO.objects.filter(id=id).update(fk_instituicao_id=None)
     return redirect('/listar-usuario-instituicao/')
 
-'''@login_required(login_url='/acccounts/login')
-    def deletar_pet(request, id):
-        pet=Pet.objects.get(id=id)
+@login_required(login_url='/accounts/login')
+def cadastro_pet_instituicao(request):
+    pet_id=request.GET.get('id')
+    if pet_id:
+        pet=Pet.objects.get(id=pet_id)
         if pet.user == request.user:
-            pet.delete()
-        return redirect('/lista-pet-usuario')'''
+            return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet})
+    return render (request, 'instituicao/cadastro-pet-instituicao.html')
 
-'''def modificar_cadastro(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST, instance=request.user)
-        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
-        if usuario_form.is_valid() and user_form.is_valid():
-            user_form.save()
-            usuario_form.save()            
-            return render(request, 'index.html')
-        else:
-            messages.error(request, ('Please correct the error below.'))
+@login_required(login_url='/acccounts/login')
+def set_pet_instituicao(request):
+    nome=request.POST.get('nome')
+    descricao=request.POST.get('descricao')
+    especie=request.POST.get('especie')
+    raca=request.POST.get('raca')
+    sexo=request.POST.get('sexo')
+    porte=request.POST.get('porte')
+    foto=request.FILES.get('foto')
+    user=request.user
+    fk_id_instituicao_id=request.user.usuario.fk_instituicao_id
+
+    # Alteração de cadastro
+    pet_id=request.POST.get('pet-id')
+    if pet_id:
+        pet=Pet.objects.get(id=pet_id)
+        if user == pet.user:
+            if nome:
+                pet.nome=nome
+                pet.save()
+            else:
+                pet.nome="Sem nome"
+                pet.save()
+
+            if descricao:
+                pet.descricao=descricao
+                pet.save()
+            
+            if especie:
+                pet.especie=especie
+                pet.save()
+
+            if raca:
+                pet.raca=raca
+                pet.save()
+            
+            if sexo:
+                pet.sexo=sexo
+                pet.save()
+
+            if porte:
+                pet.porte=porte
+                pet.save()
+
+            if foto:
+                pet.foto = foto
+                pet.save()
     else:
-            usuario_form = UsuarioForm(instance=request.user.usuario)
-            user_form = UserForm(instance=request.user)
-    return render(request, 'modificar-cadastro.html', {
-        'usuario_form': usuario_form,
-        'user_form': user_form,
-    })'''
+        pet = Pet.objects.create(porte=porte, foto=foto, user=user, sexo=sexo, fk_id_instituicao_id=fk_id_instituicao_id)
+        if nome:
+            pet.nome=nome
+        else:
+            pet.nome="Sem nome"
+            pet.save()
+        if descricao:
+            pet.descricao = descricao
+            pet.save()
+        if especie:
+            pet.especie = especie
+            pet.save()
+        if raca:
+            pet.raca = raca
+            pet.save()
+
+    url = '/pet-informacao-instituicao/{}/'.format(pet.id)
+    return redirect (url)
+
+@login_required(login_url='/accounts/login')
+def pet_informacao_instituicao(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+    print(id_user)
+    print(inst.nome_instituicao)
+    return render(request, 'instituicao/pet-instituicao.html', {'pet':pet,'inst':inst,'usuario':usuario})
+
+def lista_pets_instituicao(request):
+    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True)
+    return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet})
+
+
+@login_required(login_url='/accounts/login')
+def lista_pets_usuario_instituicao(request):
+    pet=Pet.objects.filter(ativo=True, user=request.user)
+    return render(request, 'listaPetsUsuario.html',{'pet':pet})
+
+@login_required(login_url='/acccounts/login')
+def deletar_pet_instituicao(request, id):
+    pet=Pet.objects.get(id=id)
+    if pet.user == request.user:
+        pet.delete()
+    return redirect('/lista-pet-instituicao/')
 
 ''' print('cpf enviado no post = ', cpf)
     id_instituicao = USUARIO.objects.filter(id=usuario.id)

@@ -1,3 +1,4 @@
+from django.forms.forms import Form
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
 from django import forms
@@ -103,7 +104,7 @@ class InstituicaoForm(forms.ModelForm):
             Submit(
                 "submit",
                 "Atualizar",
-                css_class="btn btn-success btn-lg btn-block",
+                css_class="btn btn-outline-dark",
             )
         )
         self.helper.layout = Layout(
@@ -136,3 +137,8 @@ class InstituicaoForm(forms.ModelForm):
 
 class AdicionarUsuarioInstituicaoForm(forms.Form):
     cpf = forms.CharField(max_length=14)
+
+class AdicionarPetInstituicao(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ['foto', 'nome', 'descricao', 'especie', 'raca', 'sexo', 'porte', 'dataNascimento']
