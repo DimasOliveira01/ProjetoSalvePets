@@ -19,17 +19,6 @@ function validateSize(input) {
     var aviso = document.getElementById("tamanhoImagem")
     var foto = document.getElementById("foto")
 
-    // Não permite imagens maiores que 2 MB pelo front-end
-    if (fileSize > 2) {
-        aviso.innerHTML = "O tamanho da imagem deve ser menor que 2 MB";
-        aviso.className = "alert alert-danger";
-        aviso.setAttribute("role", "alert");
-        foto.value = ""
-    } else {
-        aviso.innerHTML = "";
-        aviso.className = "";
-    }
-
     // Só permite imagens jpeg, jpg, png, bmp pelo front-end
     if (/\.(jpe?g|png|bmp)$/i.test(input.files[0].name) == false){
         aviso.innerHTML = "Os formatos de imagem permitidos são PNG, JPG, JPEG e BMP.";
@@ -37,7 +26,17 @@ function validateSize(input) {
         aviso.setAttribute("role", "alert");
         foto.value = ""
     } else {
-        aviso.innerHTML = "";
-        aviso.className = "";
+        // Não permite imagens maiores que 2 MB pelo front-end
+        if (fileSize > 2) {
+            aviso.innerHTML = "O tamanho da imagem deve ser menor que 2 MB";
+            aviso.className = "alert alert-danger";
+            aviso.setAttribute("role", "alert");
+            foto.value = ""
+        } else {
+            aviso.innerHTML = "";
+            aviso.className = "";
+        }
     }
+
+
 }

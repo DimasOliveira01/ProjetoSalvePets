@@ -73,7 +73,7 @@
                 <label><b>{% trans "Foto" %}</b>: *</label><br>
             {% endif %}
             {% if pet.id != null %}
-                <input id="foto" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
+                <input id="foto" type="file" class="form-control" name="foto" accept="image/*" onchange="validateSize(this)" value="{{ pet.foto }}">
             {% else %}
                 <input id="foto" required="required" type="file" class="form-control" name="foto" accept="image/*" onchange="validateSize(this)" value="{{ pet.foto }}" >
             {% endif %}

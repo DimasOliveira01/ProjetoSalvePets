@@ -98,8 +98,23 @@ def set_pet(request):
 
     # Alteração de cadastro
     pet_id=request.POST.get('pet-id')
+
     if pet_id:
         pet=Pet.objects.get(id=pet_id)
+        
+        # Tamanho máximo de arquivo
+        if foto:
+            MAX_SIZE = 2097152
+            file = request.FILES['foto']
+            extensao = os.path.splitext(file.name)[1]
+            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+
+            if not extensao in extensao_valida:
+                return redirect('/cadastro-pet/?id={}'.format(pet.id))
+
+            if file.size > MAX_SIZE:
+                return redirect('/cadastro-pet/?id={}'.format(pet.id))
+
         if user == pet.user:
             if nome:
                 pet.nome=nome
@@ -152,20 +167,20 @@ def set_pet(request):
                 pet.foto = foto
                 pet.save()
     else:
-        # Tamanho máximo de arquivo
-        MAX_SIZE = 2097152
-        file = request.FILES['foto']
-        extensao = os.path.splitext(file.name)[1]
-        extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+        if foto:
+            MAX_SIZE = 2097152
+            file = request.FILES['foto']
+            extensao = os.path.splitext(file.name)[1]
+            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
 
-        if not extensao in extensao_valida:
-            erro = "Os formatos de imagem permitidos são PNG, JPG, JPEG e BMP."
-            return render(request, 'cadastroPet.html', {'erro': erro})
+            if not extensao in extensao_valida:
+                erro = "Os formatos de imagem permitidos são PNG, JPG, JPEG e BMP."
+                return render(request, 'cadastroPet.html', {'erro': erro})
 
-        if file.size > MAX_SIZE:
-            erro = "O tamanho da imagem deve ser menor que 2 MB"
-            return render(request, 'cadastroPet.html', {'erro': erro})
-            
+            if file.size > MAX_SIZE:
+                erro = "O tamanho da imagem deve ser menor que 2 MB"
+                return render(request, 'cadastroPet.html', {'erro': erro})
+
         pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada, sexo=sexo)
         if nome:
             pet.nome=nome
