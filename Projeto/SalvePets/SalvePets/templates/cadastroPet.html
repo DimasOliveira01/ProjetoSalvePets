@@ -27,6 +27,10 @@
     
 </style>
 
+<script type="text/javascript">
+
+    </script>
+
 <!-- Guias -->
 <div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
@@ -69,12 +73,19 @@
                 <label><b>{% trans "Foto" %}</b>: *</label><br>
             {% endif %}
             {% if pet.id != null %}
-                <input type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
+                <input id="foto" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
             {% else %}
-                <input required="required" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                <input id="foto" required="required" type="file" class="form-control" name="foto" accept="image/*" onchange="validateSize(this)" value="{{ pet.foto }}" >
             {% endif %}
+
+            <br>
+
+            {% if erro %}
+                <div class="alert alert-danger" role="alert">{{erro}}</div>
+            {% endif %}
+            <div id="tamanhoImagem"></div>
         </div>
-        <br>
+        
 
         <!-- Nome -->
         <div class="form-group">
@@ -146,7 +157,14 @@
         <!-- Cor predominante -->
         <div class="form-group">
             <label><b>{% trans "Cor predominante" %}</b>:</label>
-            <input class="form-control" name="cor" type="text"  value="{{ pet.cor|default_if_none:"" }}">
+            <input class="form-control" name="cor" type="text" list="cores" value="{{ pet.cor|default_if_none:"" }}">
+            <datalist id="cores">
+                <option value="Branco"></option>
+                <option value="Preto"></option>
+                <option value="Caramelo"></option>
+                <option value="Vermelho"></option>
+                <option value="Marrom"></option>
+            </datalist>
         </div>
         <br>
         <!-- Porte -->
