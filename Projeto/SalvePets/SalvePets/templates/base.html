@@ -21,6 +21,7 @@
         <link href="/static/leaflet/draw/leaflet.draw.css" type="text/css" media="screen" rel="stylesheet">
 
         <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <script src="{% static 'core/js/main.js' %}"></script>
@@ -47,6 +48,13 @@
 	            document.getElementById("icon").href = "{% static 'core/assets/img/icon-white.png' %}"
             else
 	            document.getElementById("icon").href = "{% static 'core/assets/img/icon-dark.png' %}"
+        
+            // Previnir focus ao sair de modal
+            window.onload = function() {
+               $('.modal').on('hidden.bs.modal',function(event){
+                    event.stopImmediatePropagation();
+                });
+            }
         </script>
 
     </head>
@@ -109,7 +117,7 @@
                             <a href="/modificar-cadastro" type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" type="submit">{% trans "Minha conta" %}</a>
                         </form>
                         <form class="ps-lg-2 p-1" >
-                            <button type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" data-bs-toggle="modal" data-bs-target="#sair">{% trans "Sair" %}</button>
+                            <button type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" data-bs-toggle="modal" data-bs-target="#sair" >{% trans "Sair" %}</button>
                         </form>
                     {% else %}
                         <form class="ps-lg-2 p-1" >
@@ -152,10 +160,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <form method="POST" action="{% url 'account_logout' %}">
-                                {% csrf_token %}
-                                <button class="btn btn-danger">{% trans "Sair" %}</button>
-                            </form>
+                        <form method="POST" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-danger">{% trans "Sair" %}</button>
+                        </form>
                     </div>
                 </div>
             </div>
