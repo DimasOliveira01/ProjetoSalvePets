@@ -627,8 +627,8 @@ def lista_patrocinar(request):
     pet=Pet.objects.filter(ativo=True)
     for p in pet:
         usuario.append(USUARIO.objects.get(user_id=p.user_id))
-        if usuario[i].FK_instituicao_id:
-            instituicao.append(INSTITUICAO.objects.get(id=usuario[i].FK_instituicao_id))
+        if usuario[i].fk_instituicao_id:
+            instituicao.append(INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id))
         i = i + 1
     lista_patrocinio = zip(pet , instituicao)
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet, 'usuario': usuario, 'instituicao':instituicao, 'lista_patrocinio': lista_patrocinio})
@@ -636,5 +636,5 @@ def lista_patrocinar(request):
 def patrocinar(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     usuario = USUARIO.objects.get(user_id=pet.user_id)
-    instituicao = INSTITUICAO.objects.get(id=usuario.FK_instituicao_id)
+    instituicao = INSTITUICAO.objects.get(id=usuario.fk_instituicao_id)
     return render(request, 'patrocinar/patrocinar.html',{'pet':pet, 'usuario':usuario, 'instituicao':instituicao})
