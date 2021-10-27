@@ -66,6 +66,7 @@ urlpatterns = [
     path('patrocinar/', views.lista_patrocinar),
     path('patrocinar/<id>/', views.patrocinar),
 
+  
     path('listar-usuario-instituicao/', views.listar_usuario_instituicao),
     path('deletar-usuario-instituicao/<id>/',views.deletar_usuario_instituicao),
     path('cadastro-pet-instituicao/', views.cadastro_pet_instituicao),
@@ -73,6 +74,7 @@ urlpatterns = [
     path('pet-informacao-instituicao/<id>/',views.pet_informacao_instituicao),
     path('lista-pet-instituicao/',views.lista_pets_instituicao),
     path('deletar-pet-instituicao/<id>/',views.deletar_pet_instituicao),    
+
 ]
 
 #imagem
