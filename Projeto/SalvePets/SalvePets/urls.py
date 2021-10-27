@@ -36,6 +36,7 @@ urlpatterns = [
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
     path("orders/", include("orders.urls")),
+    path("payments/", include("payments.urls")),
     #path('login/', views.login_user),
     #path('login/submit', views.submit_login),
     #path('logout/', views.logout_user),
@@ -55,6 +56,7 @@ urlpatterns = [
     path('modificar-cadastro/',views.modificar_cadastro),
     path('sobre/',views.sobre),
     path('em-construcao/',views.em_construcao),
+    path('faq/',views.faq),
 
     #path('ecommerce/',views.e_commerce),
     path('teste/',views.teste),

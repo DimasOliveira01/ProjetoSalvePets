@@ -22,7 +22,7 @@ class TestHomePageView:
         assert home_response.status_code == 200
 
     def test_template(self, home_response):
-        assertTemplateUsed(home_response, "home_ecommerce.html")
+        assertTemplateUsed(home_response, "products/product_list.html")
 
 
 #class TestAboutView:
@@ -35,3 +35,4 @@ class TestHomePageView:
 
 #    def test_template(self, about_response):
 #        assertTemplateUsed(about_response, "about.html")
+

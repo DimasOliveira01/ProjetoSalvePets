@@ -44,9 +44,8 @@ def sobre(request):
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 
-#def e_commerce(request):
-#    return render(request, 'home_ecommerce.html')
-
+def faq(request):
+    return render(request, 'faq.html')
 
 
 
