@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block conteudo %}
+<style>
+.polaroid{
+    width:350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  </style>
+
+  
+    <div class="container">
+    <p><h3>{% trans "Lista de usuários da Instituição" %}</h3></p>
+        <div class="row">
+
+            <!--Mensagem caso não exista usuário-->
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% for p in usuario %}
+            
+            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p class="card-title"><b>Usuário:</b> {{ p.nome1 }} {{ p.nome2 }} </p>
+                    <p class="card-title"><b>CPF:</b> {{ p.cpf }}</p>
+                    <!--<p class="card-title"><b>Cadastro:</b> {{ p.id }}</p>-->
+                    <!--<button class="btn btn-outline-dark" type="submit"> 
+                    {% trans "Deletar" %}
+                    </button>-->
+                    <a href="/deletar-usuario-instituicao/{{ p.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+                </form>
+                <!--<a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100">Deletar</a>-->
+            </div>
+            </div>
+            
+<!--
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit"> 
+                {% trans "Atualizar" %}
+            </button>
+        </form>
+-->
+
+
+
+
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    
+    
+            
+        
+    
+
+{% endblock conteudo %}

@@ -5,7 +5,7 @@
 
 {% block conteudo %}
 
-    <!-- Página de Login-->
+    <!-- Página de Login
 <div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
@@ -22,11 +22,10 @@
         </li>
     </ul>
 </div>
-
+-->
 <main>
-
     <div class="container">
-        <p><h3>{% trans "Detalhes do pet" %}</h3></p>
+        <p><h3>{% trans "Detalhes do pet para adoção" %}</h3></p>
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <div id="mdb-lightbox-ui">
@@ -41,28 +40,23 @@
             </div>
         </div>
         <div class="mdb-lightbox" data-pswp-uid="1">
-            <div class="row product-gallery">
+            <div class="row product-gallery mx-1">
                 <div class="col-12 mb-0">
-                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 500px">
-                        <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 500px; transform-origin: center center; transform: scale(1);">
+                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
+                        <a href="{{pet.foto.url}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(0.7);">
+                        </a>
                     </figure>
-                    <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
                 </div>
-                
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <h5 class="text-capitalize">{{pet.nome}}</h5>
-        <p class="mb-2 text-muted text-uppercase small">{{pet.encontradoPerdido|default_if_none:"-"}}</p>
-        <p class="pt-1">{{pet.descricao|default_if_none:"-"}}</p>
+        <h5>{{pet.nome}}</h5>
+        <p class="pt-1">{{pet.descricao}}</p>
         <div class="table-responsive">
             <table class="table">
                 <tbody>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Data de localização/perda:</th>
-                        <td>{{pet.dataPerdaEncontro|default_if_none:"-"}}</td>
-                    </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Raça:</th>
                         <td>{{pet.raca|default_if_none:"-"}}</td>
@@ -70,10 +64,6 @@
                     <tr>
                         <th class="pl-0 w-25" scope="row">Sexo:</th>
                         <td>{{pet.sexo|default_if_none:"-"}}</td>
-                    </tr>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Cor predominante:</th>
-                        <td>{{pet.cor|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Porte:</th>
@@ -85,13 +75,9 @@
                             {% else %}
                                 Grande porte
                             {% endif %}
-                            <br>
+                            
                             (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
                         </td>
-                    </tr>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Última localização:</th>
-                        <td>(desenvolver)</td>
                     </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Espécie:</th>
@@ -100,48 +86,33 @@
                 </tbody>
             </table>
 
-            <div class="mt-4"> <span class="fw-light">Contato</span>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Contato da Instituição</span></h6>
                 <table class="table">
                     <tr>
                         <th class="pl-0 w-25" scope="row">E-mail:</th>
-                        <td>{{creator.email|default_if_none:"-"}}</td>
+                        <td>{{inst.email|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Telefone:</th>
-                        <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
+                        <td>{{inst.telefone|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Cidade:</th>
+                        <td>{{inst.city|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Estado:</th>
+                        <td>{{inst.state|default_if_none:"-"}}</td>
                     </tr>
                 </table>
             </div>
         </div>
-        {% if request.user == pet.user %}
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluir_pet">{% trans "Excluir" %}</button>
-            <a href="/cadastro-pet/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
+        {% if usuario.fk_instituicao_id == pet.fk_id_instituicao_id %}
+            <a href="/deletar-pet-instituicao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+            <a href="/cadastro-pet-instituicao/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
         {% endif %}
     </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="excluir_pet" tabindex="-1" aria-labelledby="excluir_petLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="excluir_petLabel">Excluir pet</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir o pet?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <a href="/deletar-pet/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 </main>
 <br>
-
 
 {% endblock conteudo %}

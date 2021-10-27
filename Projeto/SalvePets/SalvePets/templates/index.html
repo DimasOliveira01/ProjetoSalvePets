@@ -8,7 +8,6 @@ quem não tivesse o cadastro preenchido / não tivesse CPF (regra proxy que eu p
 (aparentemente) não passamos um user quando chamamos index.html.
 Faltou também aprimorar o CSS - cheguei a duplicar os componentes page-section e btn originais criando versões "temporary",
 mas algumas coisas não estavam funcionando então suspendi.
-
 {% if user.is_authenticated %}
 <section class="page-section-temporary py-0" id="temporaria">
     <div class="container">
@@ -60,7 +59,7 @@ mas algumas coisas não estavam funcionando então suspendi.
                 <p class="text-muted">{% blocktrans %}Cadastre o local e as características do pet encontrado ou perdido para ajudar nas buscas.{% endblocktrans %}</p>
             </div>
             <div class="col-md-4">
-                <a href="/em-construcao/">
+                <a href="/patrocinar/">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x" style="color:#fbba00"></i>
                         <i class="fas fa-dollar-sign fa-stack-1x fa-inverse"></i>
