@@ -1,7 +1,11 @@
+from django.forms.forms import Form
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
 from django import forms
 from .models import Pet, USUARIO, User, ADOCAO, INSTITUICAO
-#from .custom_form_fields import CpfCnpjField, TelefoneField
+#from .custom_form_fields import cpfcnpjField, TelefoneField
 from django.utils.translation import ugettext_lazy as _
+
 
 
 # Criar Array de Ano de Nascimento - não sei se faz sentido mover pra arquivo separado..
@@ -34,21 +38,21 @@ class UserForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name')
 
 class UsuarioForm(forms.ModelForm):
-    #cpfCnpj = CpfCnpjField(label='CPF')
+    #cpfcnpj = CpfcnpjField(label='CPF')
     #dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'], label=_('Data de Nascimento'))
     dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), label=_('Data de Nascimento'))
     #telefone = TelefoneField(required=False, label=_('Número de Telefone'))
     #receberNotificacoes = forms.BooleanField(required=False, label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)')
     class Meta:
         model = USUARIO
-        fields = ('cpfCnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes') #Retirei tipoUsuairo
+        fields = ('cpfcnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes') #Retirei tipoUsuairo
 
 
 #Classe que seria usada como "Cadastro Único" - li que é possível fazer funcionar, só preciso entender melhor como.
 #Por enquanto não está implementada no Settings, então não é utilizada
 
 class ExtendedSignupForm(SignupForm):
-    cpfCnpj = forms.CharField(max_length=14, label='CPF')
+    cpfcnpj = forms.CharField(max_length=14, label='CPF')
     #dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y'], label=_('Data de Nascimento'))
     dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), label=_('Data de Nascimento'))
     telefone = forms.CharField(required=False, max_length=16, label=_('Número de Telefone'))
@@ -76,7 +80,65 @@ class AdocaoForm(forms.ModelForm):
 class InstituicaoForm(forms.ModelForm):
     class Meta:
         model = INSTITUICAO
-        fields = ('nome_instituicao', 'razao_social', 'cnpj', 'telefone', 'email')
+        fields = [
+            'nome_instituicao',
+            'razao_social',
+            'cnpj',
+            'telefone',
+            'email',
+            'postal_code',
+            'address',
+            'number',
+            'complement',
+            'district',
+            'state',
+            'city',
+        ]
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.form_action = "."
+        self.helper.add_input(
+            Submit(
+                "submit",
+                "Atualizar",
+                css_class="btn btn-outline-dark",
+            )
+        )
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "cnpj",
+                "nome_instituicao",
+                "razao_social",
+                "telefone",
+                "email",
+                Div(
+                    Field("postal_code", onchange="getAddress()", wrapper_class="col"),
+                    Field("state", wrapper_class="col"),
+                    Field("city", wrapper_class="col"),
+                    css_class="row",
+                ),
+                Div(
+                    Field("address", wrapper_class="col"),
+                    Field("district", wrapper_class="col"),
+                    css_class="row",
+                ),
+                Div(
+                    Field("number", wrapper_class="col"),
+                    Field("complement", wrapper_class="col"),
+                    css_class="row",
+                ),
+                css_class="border-bottom mb-3",
+            )
+        )
 
 class AdicionarUsuarioInstituicaoForm(forms.Form):
     cpf = forms.CharField(max_length=14)
+
+class AdicionarPetInstituicao(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ['foto', 'nome', 'descricao', 'especie', 'raca', 'sexo', 'porte', 'dataNascimento']
