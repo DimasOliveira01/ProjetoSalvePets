@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Pet, USUARIO, INSTITUICAO
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -29,7 +29,7 @@ def index(request):
     #user_form = UserForm(instance=request.user)
     #usuario_form = UsuarioForm(instance=request.user.usuario)
     #cadastro_incompleto = False
-    #if usuario_form.cpfCnpj == "":
+    #if usuario_form.cpfcnpj == "":
     #    cadastro_incompleto = True
     #    return render(request, 'index.html', {'cadastro_incompleto', cadastro_incompleto})
     #else:
@@ -65,7 +65,7 @@ def lista_pets_perdidos(request):
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario(request):
-    pet=Pet.objects.filter(ativo=True, user=request.user)
+    pet=Pet.objects.filter(ativo=True, user=request.user,fk_id_instituicao=None)
     return render(request, 'listaPetsUsuario.html',{'pet':pet})
 
 
@@ -97,8 +97,23 @@ def set_pet(request):
 
     # Alteração de cadastro
     pet_id=request.POST.get('pet-id')
+
     if pet_id:
         pet=Pet.objects.get(id=pet_id)
+        
+        # Tamanho máximo de arquivo
+        if foto:
+            MAX_SIZE = 2097152
+            file = request.FILES['foto']
+            extensao = os.path.splitext(file.name)[1]
+            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+
+            if not extensao in extensao_valida:
+                return redirect('/cadastro-pet/?id={}'.format(pet.id))
+
+            if file.size > MAX_SIZE:
+                return redirect('/cadastro-pet/?id={}'.format(pet.id))
+
         if user == pet.user:
             if nome:
                 pet.nome=nome
@@ -151,6 +166,20 @@ def set_pet(request):
                 pet.foto = foto
                 pet.save()
     else:
+        if foto:
+            MAX_SIZE = 2097152
+            file = request.FILES['foto']
+            extensao = os.path.splitext(file.name)[1]
+            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+
+            if not extensao in extensao_valida:
+                erro = "Os formatos de imagem permitidos são PNG, JPG, JPEG e BMP."
+                return render(request, 'cadastroPet.html', {'erro': erro})
+
+            if file.size > MAX_SIZE:
+                erro = "O tamanho da imagem deve ser menor que 2 MB"
+                return render(request, 'cadastroPet.html', {'erro': erro})
+
         pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada, sexo=sexo)
         if nome:
             pet.nome=nome
@@ -237,7 +266,6 @@ def completar_cadastro(request):
 """
 def sobre(request):
     return render(request, 'sobre.html')
-
 def em_construcao(request):
     return render(request, 'emconstrucao.html')
 """
@@ -393,9 +421,9 @@ def cadastro_empresa(request):
 @transaction.atomic
 def completar_cadastro_instituicao(request):
     if request.method == "POST":
-        if request.user.usuario.FK_instituicao:
+        if request.user.usuario.fk_instituicao:
 
-            instance=request.user.usuario.FK_instituicao
+            instance=request.user.usuario.fk_instituicao
             product = INSTITUICAO.objects.get(id=instance.id)
 
             form = InstituicaoForm(request.POST, instance=product)
@@ -407,12 +435,12 @@ def completar_cadastro_instituicao(request):
             if form.is_valid():
                 instancia = form.save()
                 usuario = request.user.usuario
-                USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
+                USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
                 return render(request, 'index.html')
             else:
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
-        form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
+        form = InstituicaoForm(instance=request.user.usuario.fk_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form
     })
@@ -431,7 +459,7 @@ def adotar(request):
 @login_required
 @transaction.atomic
 def adicionar_usuario_instituicao(request):
-    if (request.user.usuario.FK_instituicao_id != None):
+    if (request.user.usuario.fk_instituicao_id != None):
         form = AdicionarUsuarioInstituicaoForm()
         if request.method == "POST":
             #obtêm o dado do usuário logado
@@ -439,10 +467,10 @@ def adicionar_usuario_instituicao(request):
             #obtêm o dado enviado no POST
             cpf=request.POST.get('cpf')
             #Obtêm o objeto usuario que tem o mesmo cpf do POST
-            res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
             if len(res_filtro)>0:
                 id_instituicao = USUARIO.objects.filter(id=usuario.id)
-                USUARIO.objects.filter(cpfCnpj=cpf).update(FK_instituicao_id=id_instituicao[0].FK_instituicao_id)
+                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
                 #form = AdicionarUsuarioInstituicaoForm(request.POST)
                 #print (request.POST.get('cpf'))
                 return render(request, 'index.html')
@@ -455,13 +483,158 @@ def adicionar_usuario_instituicao(request):
         #print('ola else')
         return render(request, 'instituicao/acesso-proibido.html')
 
+@login_required
+@transaction.atomic
+def listar_usuario_instituicao(request):
+    cursor = connection.cursor()
+    id_inst=request.user.usuario.fk_instituicao_id
+    #usuario=USUARIO.objects.filter(User__type=User.is_active) #tipoUsuario='Usuário comum'
+    #user=User.objects.filter(tipoUsuario='Usuário comum')
+    query = ''' select tab1.first_name as nome1, tab1.last_name as nome2, tab2.cpfcnpj as cpf,
+                tab2.id, tab2.fk_instituicao_id from auth_user as tab1 
+                inner join core_usuario as tab2 on (tab1.id=tab2.user_id) 
+                where tab2.fk_instituicao_id is Not NULL and tab2.fk_instituicao_id = %s'''
+    cursor.execute(query, [id_inst])
+    usuario = namedtuplefetchall(cursor)
+    if len(usuario)==0:
+        messages.error(request, 'Nenhum usuário existente!')
+    return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario}) 
+
+@login_required(login_url='/acccounts/login')
+@transaction.atomic
+def deletar_usuario_instituicao(request, id):
+    USUARIO.objects.filter(id=id).update(fk_instituicao_id=None)
+    return redirect('/listar-usuario-instituicao/')
+
+@login_required(login_url='/accounts/login')
+def cadastro_pet_instituicao(request):
+    pet_id=request.GET.get('id')
+    if pet_id:
+        pet=Pet.objects.get(id=pet_id)
+        if pet.user == request.user:
+            return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet})
+    return render (request, 'instituicao/cadastro-pet-instituicao.html')
+
+@login_required(login_url='/acccounts/login')
+def set_pet_instituicao(request):
+    nome=request.POST.get('nome')
+    descricao=request.POST.get('descricao')
+    especie=request.POST.get('especie')
+    raca=request.POST.get('raca')
+    sexo=request.POST.get('sexo')
+    porte=request.POST.get('porte')
+    foto=request.FILES.get('foto')
+    user=request.user
+    fk_id_instituicao_id=request.user.usuario.fk_instituicao_id
+
+    # Alteração de cadastro
+    pet_id=request.POST.get('pet-id')
+    if pet_id:
+        pet=Pet.objects.get(id=pet_id)
+        if user == pet.user:
+            if nome:
+                pet.nome=nome
+                pet.save()
+            else:
+                pet.nome="Sem nome"
+                pet.save()
+
+            if descricao:
+                pet.descricao=descricao
+                pet.save()
+            
+            if especie:
+                pet.especie=especie
+                pet.save()
+
+            if raca:
+                pet.raca=raca
+                pet.save()
+            
+            if sexo:
+                pet.sexo=sexo
+                pet.save()
+
+            if porte:
+                pet.porte=porte
+                pet.save()
+
+            if foto:
+                pet.foto = foto
+                pet.save()
+    else:
+        pet = Pet.objects.create(porte=porte, foto=foto, user=user, sexo=sexo, fk_id_instituicao_id=fk_id_instituicao_id)
+        if nome:
+            pet.nome=nome
+        else:
+            pet.nome="Sem nome"
+            pet.save()
+        if descricao:
+            pet.descricao = descricao
+            pet.save()
+        if especie:
+            pet.especie = especie
+            pet.save()
+        if raca:
+            pet.raca = raca
+            pet.save()
+
+    url = '/pet-informacao-instituicao/{}/'.format(pet.id)
+    return redirect (url)
+
+@login_required(login_url='/accounts/login')
+def pet_informacao_instituicao(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+    print(id_user)
+    print(inst.nome_instituicao)
+    return render(request, 'instituicao/pet-instituicao.html', {'pet':pet,'inst':inst,'usuario':usuario})
+
+def lista_pets_instituicao(request):
+    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True)
+    return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet})
+
+
+@login_required(login_url='/accounts/login')
+def lista_pets_usuario_instituicao(request):
+    pet=Pet.objects.filter(ativo=True, user=request.user)
+    return render(request, 'listaPetsUsuario.html',{'pet':pet})
+
+@login_required(login_url='/acccounts/login')
+def deletar_pet_instituicao(request, id):
+    pet=Pet.objects.get(id=id)
+    if pet.user == request.user:
+        pet.delete()
+    return redirect('/lista-pet-instituicao/')
 
 ''' print('cpf enviado no post = ', cpf)
     id_instituicao = USUARIO.objects.filter(id=usuario.id)
-    print ('id da instituicao do usuario = ', id_instituicao[0].FK_instituicao_id)
-    res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
+    print ('id da instituicao do usuario = ', id_instituicao[0].fk_instituicao_id)
+    res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
     print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
     len(res_filtro)
     print('tamanhao do vetor: ', len(res_filtro))
     #USUARIO.objects.filter(request.POST.get('cpf')==teste)
 '''
+
+def lista_patrocinar(request):
+    usuario = []
+    instituicao = []
+    i = 0
+
+    pet=Pet.objects.filter(ativo=True)
+    for p in pet:
+        usuario.append(USUARIO.objects.get(user_id=p.user_id))
+        if usuario[i].FK_instituicao_id:
+            instituicao.append(INSTITUICAO.objects.get(id=usuario[i].FK_instituicao_id))
+        i = i + 1
+    lista_patrocinio = zip(pet , instituicao)
+    return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet, 'usuario': usuario, 'instituicao':instituicao, 'lista_patrocinio': lista_patrocinio})
+
+def patrocinar(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    usuario = USUARIO.objects.get(user_id=pet.user_id)
+    instituicao = INSTITUICAO.objects.get(id=usuario.FK_instituicao_id)
+    return render(request, 'patrocinar/patrocinar.html',{'pet':pet, 'usuario':usuario, 'instituicao':instituicao})
