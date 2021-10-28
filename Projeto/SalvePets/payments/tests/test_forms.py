@@ -26,7 +26,7 @@ def test_clean_transaction_amount(item):
     )
     assert not form.is_valid()
     assert form.errors["transaction_amount"] == [
-        "Transaction Amount não bate com o banco de dados!"
+        "Transaction Amount não é igual ao valor no banco de dados"
     ]
 
 

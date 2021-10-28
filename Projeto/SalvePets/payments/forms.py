@@ -26,7 +26,7 @@ class PaymentForm(forms.ModelForm):
         transaction_amount = self.cleaned_data["transaction_amount"]
         if float(transaction_amount) != float(self.order.get_total_price()):
             raise forms.ValidationError(
-                "Transaction Amount não bate com o banco de dados!"
+                "Transaction Amount não é igual ao valor no banco de dados"
             )
         return transaction_amount
 
