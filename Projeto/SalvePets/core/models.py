@@ -122,6 +122,9 @@ class Pet(models.Model):
     dataModificacao = models.DateTimeField(auto_now=True)
     sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
     dataNascimento = models.DateField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.nome
 
 class PET_PERDIDO_ENCONTRADO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
@@ -135,11 +138,16 @@ class PET_PERDIDO_ENCONTRADO(models.Model):
 class PATROCINIO(models.Model):
     FK_idUsuario = models.ManyToManyField(User)
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
-    observacoes = models.TextField()
-    valor = models.DecimalField(max_digits=30, decimal_places=15)
+    observacoes = models.TextField(blank=True, null= True)
+    valor = models.DecimalField(max_digits=6, decimal_places=2)
     data = models.DateField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
+    publico = models.BooleanField(default=True, blank=False, null= False)
+    pago = models.BooleanField(default=False, blank=False, null= False)
+
+    class Meta:
+        ordering = ['data']
 
 class ADOCAO(models.Model):
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)

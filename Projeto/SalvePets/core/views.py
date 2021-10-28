@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
 from django.db.models.fields import NullBooleanField
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Pet, USUARIO, INSTITUICAO
+from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
 from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao
 from django.db import transaction
 from django.shortcuts import redirect
@@ -633,8 +634,59 @@ def lista_patrocinar(request):
     lista_patrocinio = zip(pet , instituicao)
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet, 'usuario': usuario, 'instituicao':instituicao, 'lista_patrocinio': lista_patrocinio})
 
+@login_required(login_url='/accounts/login/')
 def patrocinar(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     usuario = USUARIO.objects.get(user_id=pet.user_id)
     instituicao = INSTITUICAO.objects.get(id=usuario.fk_instituicao_id)
     return render(request, 'patrocinar/patrocinar.html',{'pet':pet, 'usuario':usuario, 'instituicao':instituicao})
+
+def patrocinar_send(request, id):
+
+    valor = float(request.POST.get('valor'))
+    patrocinio = PATROCINIO(
+        FK_idPet = Pet.objects.get(id=id),
+        valor = valor,
+        data = datetime.today().strftime('%Y-%m-%d')
+    )
+    patrocinio.save()
+
+    patrocinio.FK_idUsuario.add(request.user)
+
+    if valor == 20:
+        destino = 'https://pag.ae/7XDvbF6CG/button'
+    elif valor == 50:
+        destino = 'https://pag.ae/7XDvnBuw4/button'
+    elif valor == 100:
+        destino = 'https://pag.ae/7XDvnLTsK/button'
+    else:
+        destino = '/meus-patrocinios/'
+
+    aviso = "Por favor, efetue sua doação. Em um prazo de até 48 horas, iremos confirmar a transação e ela poderá constar nessa página."
+
+    if valor != 0:
+        return redirect(destino)
+    else:
+        pets = []
+        user = request.user
+        patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+
+        for p in patrocinios:
+            pets.append(Pet.objects.get(id=p.FK_idPet_id))
+
+        lista = zip(patrocinios , pets)
+        return render(request, 'patrocinar/meus_patrocinios.html',{'aviso':aviso, 'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
+
+@login_required(login_url='/accounts/login/')
+def meus_patrocinios(request):
+
+    pets = []
+    user = request.user
+    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+
+    for p in patrocinios:
+        pets.append(Pet.objects.get(id=p.FK_idPet_id))
+
+    lista = zip(patrocinios , pets)
+
+    return render(request, 'patrocinar/meus_patrocinios.html', {'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
