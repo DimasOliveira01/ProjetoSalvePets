@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <!-- Página de Login
+<div class="container mt-4">
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/cadastro-pet/">{% trans "Cadastrar pet" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+        </li>
+    </ul>
+</div>
+-->
+<main>
+    <div class="container">
+        <p><h3>{% trans "Detalhes do pet para adoção" %}</h3></p>
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div id="mdb-lightbox-ui">
+                    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="pswp__scroll-wrap">
+                        <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <div class="pswp__counter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdb-lightbox" data-pswp-uid="1">
+            <div class="row product-gallery mx-1">
+                <div class="col-12 mb-0">
+                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
+                        <a href="{{pet.foto.url}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(0.7);">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h5>{{pet.nome}}</h5>
+        <p class="pt-1">{{pet.descricao}}</p>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <td>{{pet.raca|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <td>{{pet.sexo|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <td>
+                            {% if pet.porte >= 40 and pet.porte <= 60%}
+                                Pequeno porte
+                            {% elif pet.porte > 60 and pet.porte <= 100 %}
+                                Médio porte
+                            {% else %}
+                                Grande porte
+                            {% endif %}
+                            
+                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <td>{{pet.especie|default_if_none:"-"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Contato da Instituição</span></h6>
+                <table class="table">
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">E-mail:</th>
+                        <td>{{inst.email|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Telefone:</th>
+                        <td>{{inst.telefone|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Cidade:</th>
+                        <td>{{inst.city|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Estado:</th>
+                        <td>{{inst.state|default_if_none:"-"}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% if usuario.fk_instituicao_id == pet.fk_id_instituicao_id %}
+            <a href="/deletar-pet-instituicao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+            <a href="/cadastro-pet-instituicao/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
+        {% endif %}
+    </div>
+</main>
+<br>
+
+{% endblock conteudo %}

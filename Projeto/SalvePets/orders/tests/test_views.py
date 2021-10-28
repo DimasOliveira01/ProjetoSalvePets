@@ -15,26 +15,14 @@ def test_status_code(client):
     assert response.status_code == 200
 
 
-def test_order_create_form_valid(client, product):
-    form_data = {
-        "cpf": "401.142.450-10",
-        "name": "Fulano",
-        "email": "test@fulano.com",
-        "postal_code": "76900-649",
-        "address": "Rua Castro Alves",
-        "number": "123",
-        "district": "Jardim dos Migrantes",
-        "state": "RO",
-        "city": "Ji-Paraná",
-    }
-
-    response = client.post(reverse("orders:create"), data=form_data, follow=True)
-    assertTemplateUsed(response, "index.html")
+def test_order_create_form_valid(order_form_data, client, product):
+    response = client.post(reverse("orders:create"), data=order_form_data, follow=True)
+    assertTemplateUsed(response, "products/product_list.html")
 
     client.post(
         reverse("cart:add", kwargs={"product_id": product.id}),
         data={"quantity": 1, "override": False},
     )
 
-    response = client.post(reverse("orders:create"), form_data, follow=True)
-    assertTemplateUsed(response, "orders/order_created.html")
+    response = client.post(reverse("orders:create"), order_form_data, follow=True)
+    assertTemplateUsed(response, "payments/payment_form.html")

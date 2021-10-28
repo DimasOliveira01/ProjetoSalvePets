@@ -32,21 +32,20 @@
 </div>
   
     <div class="container">
-    <p><h3>{% trans "Pets perdidos" %}</h3></p>
+        <p><h3>{% trans "Pets perdidos" %}</h3></p>
         <div class="row">
-            {% for p in pet %}
-            
-            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-            <a href="../pet-informacao/{{ p.id }}">
-                <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">{{ p.nome }}</h5>
-                <p class="card-text">{{p.descricao}}</p>
-                <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
-            </div>
-            </div>
-            
+            {% for p in pet %}            
+                <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
+                    <a href="../pet-informacao/{{ p.id }}">
+                        <img src="{{p.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <p class="mb-2 text-muted text-uppercase small">{{p.encontradoPerdido}}</p>
+                        <h5 class="card-title">{{ p.nome }}</h5>
+                        <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
+                        <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
+                    </div>
+                </div>            
             {% endfor %}
         </div>
     </div>

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import environ
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,6 +94,7 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
+    "payments.apps.PaymentsConfig",
 ]
 
 MIDDLEWARE = [
@@ -276,6 +278,17 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST
 CART_SESSION_ID = "cart"
 CART_ITEM_MAX_QUANTITY = 20
 
+
+# Mercado Pago
+#isso aqui pode dar erro no deploy e ai precisaria configurar essas variáveis de ambiente q estão no arquivo .env em algum lugar na aws
+#env = environ.Env()
+####env.read_env(str(BASE_DIR / ".env"))
+#env.read_env(os.path.join(BASE_DIR , ".env"))
+#MERCADO_PAGO_PUBLIC_KEY = env("MERCADO_PAGO_PUBLIC_KEY")
+#MERCADO_PAGO_ACCESS_TOKEN = env("MERCADO_PAGO_ACCESS_TOKEN")
+
+MERCADO_PAGO_PUBLIC_KEY = str(os.environ.get("MERCADO_PAGO_PUBLIC_KEY"))
+MERCADO_PAGO_ACCESS_TOKEN = str(os.environ.get("MERCADO_PAGO_ACCESS_TOKEN"))
 #************************************************
 
 
