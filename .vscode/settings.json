@@ -3,6 +3,7 @@
     "python.linting.enabled": true,
     "python.linting.pylintArgs": [
         "--errors-only",
-        "--load-plugins=pylint_django"
+        "--load-plugins=pylint_django",
+        "--load-plugins", "pylint_django", "--django-settings-module=.settings", "--load-plugins", "pylint_django.checkers.migrations", "--disable=C0114, C0115, W0222", "--disable=imported-auth-user", "--disable=invalid-name", "--disable=line-too-long"
     ]
 }
