@@ -14,6 +14,17 @@ Produtos
 {% block conteudo %}
 
 <div class="container my-3">
+    <!--
+    <div class="row">
+        <form action="." method="GET" class="form-inline">
+            <div class="col-sm-6">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Buscar produto">
+                <input type="submit" class="btn btn-primary" value="Buscar" style="margin-left: 10px;">
+            </div>
+        </form>
+    </div>
+    -->
+
     <div class="row">        
         <div class="col-lg-3">
         <!--<div class="col-sm-3">BRUNNO-->
@@ -31,9 +42,10 @@ Produtos
                 {% endfor %}
             </ul>
         </div>
+    
         <!--</div>BRUNNO-->
 
-        <!--<div class="col-lg-9">-->
+        <div class="col-lg-9">
         <!--<div class="container mb-4">BRUNNO-->
             <div class="row">
             <!--<div class="card-deck mb-3">-->
@@ -76,7 +88,7 @@ Produtos
             {% if is_paginated %}
             {% include "pagination.html" with page=page_obj %}
             {% endif %}
-        <!--</div>-->
+        </div>
         <!--</div>BRUNNO-->
     </div>
 </div>
