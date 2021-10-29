@@ -6,7 +6,19 @@
 {% block conteudo %}
 
 <main>
-    <div class="container">        
+    <div class="container">
+        <!-- Guias -->
+        <div class="container mt-4">
+            <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Meus patrocínios" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/patrocinar/" selected>{% trans "Patrocinar pets" %}</a>
+                </li>
+            </ul>
+        </div>
+
         <div class="row">
         <p><h3>{% trans "Contribuir" %}</h3></p>
             <div class="col-md-6 mb-0 mb-md-0">
@@ -80,12 +92,20 @@
                 </div>
                 <br><br>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a id="doar" href="https://pag.ae/7XDvbF6CG/button" class="btn btn-light" role="button" target="_blank" style="border-color:gray; font-weight:normal;">{% trans "Doar R$ 20" %}</a>
-                    <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
+                        <form enctype="multipart/form-data" action="submit", method="POST" target="_blank">
+                            {% csrf_token %}
+                            <input type="hidden" name="valor" id="valor" value="20" />
+                            <button id="doar" type="submit" class="btn btn-light w-100" style="border-color:gray; font-weight:normal; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">{% trans "Doar R$ 20" %}</button>
+                        </form>
+                        <form id="form1" enctype="multipart/form-data" action="submit", method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="valor" id="valor" value="0" />
+                        </form>
+                    <form id="form2" action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
                         <input type="hidden" name="currency" value="BRL" />
                         <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
                         <input type="hidden" name="iot" value="button" />
-                        <button type="submit" id="doar" style="background-color: #fbba00; color:black; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-color:gray; font-weight:normal;" class="btn btn-primary" >{% trans "Doar outro valor" %}</button>
+                        <button type="button" onclick="submitForms()" id="doar" style="background-color: #fbba00; color:black; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-color:gray; font-weight:normal;" class="btn btn-primary" >{% trans "Doar outro valor" %}</button>
                     </form>
                 </div>
                 <br>
@@ -241,7 +261,7 @@
             </div>
         </div>
         <!-- / Modal: CA6 - Patrocine este pet / -->
-    
+
     </div>
 </main>
 <br>
