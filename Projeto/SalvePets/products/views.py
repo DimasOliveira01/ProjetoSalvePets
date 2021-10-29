@@ -1,3 +1,4 @@
+from django.http import request
 from cart.forms import CartAddProductForm
 from django.shortcuts import render
 
@@ -18,6 +19,10 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = Product.available.all()
+
+        #search = request.GET.get('search')
+        #if search:
+        #    queryset = objects.filter(produto=search)
 
         category_slug = self.kwargs.get("slug")
         if category_slug:

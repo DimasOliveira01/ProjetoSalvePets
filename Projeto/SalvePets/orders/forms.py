@@ -29,7 +29,7 @@ class OrderCreateForm(forms.ModelForm):
         self.helper.add_input(
             Submit(
                 "submit",
-                "Finalizar compra",
+                "Ir para pagamento",
                 css_class="btn btn-success btn-lg btn-block",
             )
         )

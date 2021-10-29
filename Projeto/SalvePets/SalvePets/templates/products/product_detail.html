@@ -24,7 +24,7 @@
             <p>{{ product.description }}</p>
             <!--{{form}}-->
             <form class="form-group" action="{% url 'cart:add' product.id %}" method="post">
-                <p class="form-inline">
+                <p class="form-inline col-sm-3">
                     {{ form.quantity.label_tag }}
                     {% render_field form.quantity class+="form-control ml-sm-3" %}
                     {{ form.override }}
