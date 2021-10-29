@@ -162,7 +162,8 @@ DATABASES = {
         'NAME': 'salvepets', 
         'USER': 'postgres', 
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1', 
+        'HOST': 'postgis_container', 
+        #'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
 }
