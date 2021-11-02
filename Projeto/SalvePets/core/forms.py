@@ -14,8 +14,6 @@ BIRTH_YEAR_CHOICES  = []
 for i in range(1900,2021):
     BIRTH_YEAR_CHOICES.append(str(i))
 
-# Forms - pra mim isso aqui é o "Controller" do projeto. Masterizar isso é garantia de sucesso.
-
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=30, label=_('Nome:'))
     last_name = forms.CharField(max_length=30, label=_('Sobrenome'))

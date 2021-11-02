@@ -1,3 +1,4 @@
+from django.db.models.expressions import Value
 from django.http import request
 from cart.forms import CartAddProductForm
 from django.shortcuts import render
@@ -19,7 +20,12 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = Product.available.all()
-        #queryset = queryset.order_by('price')     
+        #queryset = queryset.order_by('price')
+        # 
+        #filtro_preco = self.request.GET.get('filtro_preco')     
+        #if filtro_preco:
+        #    if COMO PEGAR O VALUE DO SELECT DA TEMPLATE?
+        #       queryset = queryset.order_by('price') #ORDENA A LISTA DE PRODUTOS
 
         search = self.request.GET.get('search')
         if search:

@@ -58,7 +58,6 @@ urlpatterns = [
     path('em-construcao/',views.em_construcao),
     path('faq/',views.faq),
 
-    #path('ecommerce/',views.e_commerce),
     path('teste/',views.teste),
     #path('adotar/', views.adotar),
     path('completar-cadastro/',views.completar_cadastro),
