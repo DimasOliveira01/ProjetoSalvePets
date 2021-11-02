@@ -107,7 +107,7 @@ def set_pet(request):
             MAX_SIZE = 2097152
             file = request.FILES['foto']
             extensao = os.path.splitext(file.name)[1]
-            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+            extensao_valida = ['.png', '.jpg', '.jpeg', '.bmp']
 
             if not extensao in extensao_valida:
                 return redirect('/cadastro-pet/?id={}'.format(pet.id))
@@ -171,7 +171,8 @@ def set_pet(request):
             MAX_SIZE = 2097152
             file = request.FILES['foto']
             extensao = os.path.splitext(file.name)[1]
-            extensao_valida = ['.png', '.jpg', 'jpeg', 'bmp']
+            print(extensao)
+            extensao_valida = ['.png', '.jpg', '.jpeg', '.bmp']
 
             if not extensao in extensao_valida:
                 erro = "Os formatos de imagem permitidos são PNG, JPG, JPEG e BMP."

@@ -95,18 +95,12 @@
                         <form enctype="multipart/form-data" action="submit", method="POST" target="_blank">
                             {% csrf_token %}
                             <input type="hidden" name="valor" id="valor" value="20" />
-                            <button id="doar" type="submit" class="btn btn-light w-100" style="border-color:gray; font-weight:normal; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">{% trans "Doar R$ 20" %}</button>
+                            <button id="doar" type="submit" class="btn btn-primary w-100" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray";>{% trans "Doar R$ 20" %}</button>
                         </form>
                         <form id="form1" enctype="multipart/form-data" action="submit", method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="valor" id="valor" value="0" />
                         </form>
-                    <form id="form2" action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                        <input type="hidden" name="currency" value="BRL" />
-                        <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                        <input type="hidden" name="iot" value="button" />
-                        <button type="button" onclick="submitForms()" id="doar" style="background-color: #fbba00; color:black; border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-color:gray; font-weight:normal;" class="btn btn-primary" >{% trans "Doar outro valor" %}</button>
-                    </form>
                 </div>
                 <br>
                 <!-- / CA2 - Doar para este abrigo / -->
@@ -124,7 +118,7 @@
                     Abrigo e valor: Limpeza, Alimentação, Medicamentos e Diária de Internação
                     -->
                 
-                <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
+                <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary"tyle="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
                 <br><br>
                 <!-- / CA4 - Ajude este pet / -->
 
