@@ -139,7 +139,7 @@ class PET_PERDIDO_ENCONTRADO(models.Model):
 
 class PATROCINIO(models.Model):
     FK_idUsuario = models.ManyToManyField(User)
-    FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
+    FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     observacoes = models.TextField(blank=True, null= True)
     valor = models.DecimalField(max_digits=6, decimal_places=2)
     data = models.DateField(blank=True, null=True)

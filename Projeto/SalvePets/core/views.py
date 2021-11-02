@@ -700,7 +700,12 @@ def patrocinar(request, id):
 
 def patrocinar_send(request, id):
 
+    user = request.user
     valor = float(request.POST.get('valor'))
+    patrocinio_existe = PATROCINIO.objects.filter(FK_idUsuario = user, FK_idPet = Pet.objects.get(id=id))
+
+    # TERMINAR 
+
     patrocinio = PATROCINIO(
         FK_idPet = Pet.objects.get(id=id),
         valor = valor,
@@ -725,8 +730,7 @@ def patrocinar_send(request, id):
         return redirect(destino)
     else:
         pets = []
-        user = request.user
-        patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+        patrocinios = PATROCINIO.objects.get(FK_idUsuario = user, pago = True)
 
         for p in patrocinios:
             pets.append(Pet.objects.get(id=p.FK_idPet_id))

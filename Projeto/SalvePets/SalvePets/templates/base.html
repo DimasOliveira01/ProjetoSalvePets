@@ -59,7 +59,9 @@
 
     </head>
     <body>
+        
         <nav class="navbar navbar-expand-lg2 navbar-light fixed-top py-0 backdrop" data-navbar-on-scroll="data-navbar-on-scroll" style="background-color: #fbba00">
+            
             <div class="container">
                 <!-- Logo -->
                 <a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="/"><img class="me-3" src="{% static 'core/assets/img/logo1.png' %}" alt="" /></a>
@@ -73,19 +75,21 @@
                         <!-- Sobre -->
                         <li class="nav-item"><a class="nav-link" href="/sobre">{% trans "Sobre" %}</a></li>
 
-                        <!-- Funcionalidades -->
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% trans "Funcionalidades" %}</a>
+                        <!-- Serviços -->
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% trans "Serviços" %}</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!-- Adote um pet -->
-                                <li><a class="dropdown-item" href="/lista-pet-adocao/">{% trans "Adote um pet" %}</a></li>
-                                <!-- Patrocinar um pet -->
-                                <li><a class="dropdown-item" href="/patrocinar/">{% trans "Patrocinar um pet" %}</a></li>
-                                <!-- Cadastrar pet encontrado/perdido -->
-                                <li><a class="dropdown-item" href="/cadastro-pet">{% trans "Cadastrar pet encontrado/perdido" %}</a></li>
+                                <!-- Ver pets perdidos -->
+                                <li><a class="dropdown-item" href="/lista-pet-perdido">{% trans "Ver pets perdidos" %}</a></li>
+                                <!-- Ver pets encontrados -->
+                                <li><a class="dropdown-item" href="/lista-pet-encontrado">{% trans "Ver pets encontrados" %}</a></li>
+                                <!-- Adotar pets -->
+                                <li><a class="dropdown-item" href="#">{% trans "Adotar pets" %}</a></li>
+                                <!-- Cadastrar pet perdido ou encontrado -->
+                                <li><a class="dropdown-item" href="/cadastro-pet">{% trans "Cadastrar pet perdido ou encontrado" %}</a></li>
+                                <!-- Patrocinar pets -->
+                                <li><a class="dropdown-item" href="/patrocinar">{% trans "Patrocinar pets" %}</a></li>
                                 <!-- Loja Salve Pets -->
                                 <li><a class="dropdown-item" href="{% url 'products:list' %}">{% trans "Loja Salve Pets" %}</a></li>
-                                <!-- Meu Carrinho -->
-                                <li><a class="dropdown-item" href="{% url 'cart:detail' %}">{% trans "Meu Carrinho" %}</a></li>
                                 <!-- FAQ -->              
                                 <li><a class="dropdown-item" href="/faq/">{% trans "FAQ" %}</a></li>
                             </ul>
@@ -112,8 +116,11 @@
                     </section>
 
                     <!-- Botões de minha conta/sair/entrar/cadastrar -->
+                    <form class="ps-lg-5 p-1" >
+                            <a href="{% url 'cart:detail' %}" type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" type="submit" alt="Carrinho" title="Carrinho"><i class="fas fa-shopping-cart"></i></a>
+                    </form>
                     {% if user.is_authenticated %}
-                        <form class="ps-lg-5 p-1">
+                        <form class="ps-lg-2 p-1">
                             <a href="/modificar-cadastro" type="button" class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0" type="submit">{% trans "Minha conta" %}</a>
                         </form>
                         <form class="ps-lg-2 p-1" >
@@ -132,12 +139,14 @@
         </nav>
 
         <!-- Conteúdo -->
-        {% block conteudo %}
+        <div class="min-vh-100">
+            {% block conteudo %}
 
-        {% endblock conteudo %}
-
+            {% endblock conteudo %}
+        </div>
+      
         <!-- Footer -->
-        <footer class="py-5" style="margin-bottom:0; margin-top: 250px; background-color: #fbba00;">
+        <footer class="py-5" style="background-color: #fbba00;">
             <div class="container">
                 <p class="m-0 text-center text-black" style="background-color: #fbba00;">
                     Copyright &copy; Salve Pets 2021
@@ -147,7 +156,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Footer: Sair -->
+        <!-- Modal: Sair -->
         <div class="modal fade" id="sair" tabindex="-1" aria-labelledby="sairLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
