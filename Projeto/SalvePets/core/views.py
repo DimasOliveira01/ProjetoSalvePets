@@ -1,27 +1,25 @@
+import os
+from datetime import datetime
+from datetime import timedelta
+from collections import namedtuple
 from django.contrib.auth.models import User
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Pet, USUARIO, INSTITUICAO
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm
+from django.conf import settings
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.utils.translation import gettext_lazy as _
 from django.db import transaction
-from django.shortcuts import redirect
 from django.db import connection
-from collections import namedtuple
 from django.core import mail
 from django.utils.html import strip_tags
 from django.template import loader
-import os
-from django.utils.translation import ugettext_lazy as _
-from datetime import datetime
-from datetime import timedelta
-
-
 from .forms import ContactForm
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.conf import settings
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm
+from .models import Pet, USUARIO, INSTITUICAO
+
 
 # === Funções com render simples ===
 
@@ -55,12 +53,13 @@ def em_construcao(request):
 # ===      Funções gerais        ===
 
 def lista_pets_encontrados(request):
-    pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True) #& Pet.objects.filter(ativo=True) # & encontradoPerdido='encontrado' ativo=True
+    pet=Pet.objects.filter(encontrado_perdido='Encontrado', ativo=True)
+    #& Pet.objects.filter(ativo=True) # & encontrado_perdido='encontrado' ativo=True
     return render(request, 'listaPetsEncontrados.html',{'pet':pet})
 
 
 def lista_pets_perdidos(request):
-    pet=Pet.objects.filter(encontradoPerdido='Perdido', ativo=True)
+    pet=Pet.objects.filter(encontrado_perdido='Perdido', ativo=True)
     return render(request, 'listaPetsPerdidos.html',{'pet':pet})
 
 
@@ -84,14 +83,14 @@ def cadastro_pet(request):
 def set_pet(request):
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
-    dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
+    data_perda_encontro=request.POST.get('dataPerdaEncontro')
     especie=request.POST.get('especie')
     raca=request.POST.get('raca')
     sexo=request.POST.get('sexo')
     cor=request.POST.get('cor')
     porte=request.POST.get('porte')
     peso=request.POST.get('peso')
-    encontradoPerdido=request.POST.get('encontradoPerdido')
+    encontrado_perdido=request.POST.get('encontradoPerdido')
     coordenada=request.POST.get('coordenada')
     foto=request.FILES.get('foto')
     user=request.user
@@ -112,10 +111,10 @@ def set_pet(request):
                 pet.descricao=descricao
                 pet.save()
 
-            if dataPerdaEncontro:
-                pet.dataPerdaEncontro=dataPerdaEncontro
+            if data_perda_encontro:
+                pet.data_perda_encontro=data_perda_encontro
                 pet.save()
-            
+
             if especie:
                 pet.especie=especie
                 pet.save()
@@ -123,7 +122,7 @@ def set_pet(request):
             if raca:
                 pet.raca=raca
                 pet.save()
-            
+
             if sexo:
                 pet.sexo=sexo
                 pet.save()
@@ -140,8 +139,8 @@ def set_pet(request):
                 pet.peso=peso
                 pet.save()
 
-            if encontradoPerdido:
-                pet.encontradoPerdido=encontradoPerdido
+            if encontrado_perdido:
+                pet.encontrado_perdido=encontrado_perdido
                 pet.save()
 
             if coordenada:
@@ -152,7 +151,8 @@ def set_pet(request):
                 pet.foto = foto
                 pet.save()
     else:
-        pet = Pet.objects.create(porte=porte, encontradoPerdido=encontradoPerdido, foto=foto, user=user, coordenada=coordenada, sexo=sexo)
+        pet = Pet.objects.create(porte=porte, encontrado_perdido=encontrado_perdido, foto=foto,
+                                 user=user, coordenada=coordenada, sexo=sexo)
         if nome:
             pet.nome=nome
         else:
@@ -161,8 +161,8 @@ def set_pet(request):
         if descricao:
             pet.descricao = descricao
             pet.save()
-        if dataPerdaEncontro:
-            pet.dataPerdaEncontro = dataPerdaEncontro
+        if data_perda_encontro:
+            pet.data_perda_encontro = data_perda_encontro
             pet.save()
         if especie:
             pet.especie = especie
@@ -176,7 +176,7 @@ def set_pet(request):
         if peso:
             pet.peso = peso
             pet.save()
-        
+
         # Gatilho da notificação de pet encontrado/perdido
         notif_pet_encontrado(pet.id)
 
@@ -206,13 +206,13 @@ def modificar_cadastro(request):
         usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
         if usuario_form.is_valid() and user_form.is_valid():
             user_form.save()
-            usuario_form.save()            
+            usuario_form.save()
             return render(request, 'index.html')
-        else:
-            messages.error(request, ('Please correct the error below.'))
+
+        messages.error(request, ('Please correct the error below.'))
     else:
-            usuario_form = UsuarioForm(instance=request.user.usuario)
-            user_form = UserForm(instance=request.user)
+        usuario_form = UsuarioForm(instance=request.user.usuario)
+        user_form = UserForm(instance=request.user)
     return render(request, 'modificar-cadastro.html', {
         'usuario_form': usuario_form,
         'user_form': user_form,
@@ -224,12 +224,12 @@ def completar_cadastro(request):
     if request.method == "POST":
         usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
         if usuario_form.is_valid():
-            usuario_form.save()            
+            usuario_form.save()
             return render(request, 'index.html')
-        else:
-            messages.error(request, ('Please correct the error below.'))
+
+        messages.error(request, ('Please correct the error below.'))
     else:
-            usuario_form = UsuarioForm(instance=request.user.usuario)
+        usuario_form = UsuarioForm(instance=request.user.usuario)
     return render(request, 'completar-cadastro.html', {
         'usuario_form': usuario_form,
     })
@@ -256,28 +256,31 @@ def notif_pet_encontrado(id):
         cursor = connection.cursor()
 
         # Retorna dados do pet que está sendo cadastrado agora
-        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email, pet.foto, pet.nome, pet."dataPerdaEncontro", pet.especie, pet.porte
+        pet_query = '''SELECT pet.id, pet.coordenada, pet."encontradoPerdido", usr.email,
+                        pet.foto, pet.nome, pet."dataPerdaEncontro", pet.especie, pet.porte
                         FROM core_pet AS pet
                         INNER JOIN auth_user AS usr on usr.id = pet.user_id
                         WHERE pet.id = %s'''
         cursor.execute(pet_query,[id])
         pet = namedtuplefetchall(cursor)
-        
-        # Garante que a pessoa que cadastrou um pet perdido vai receber e-mails apenas de pets encontrados próximos a região, e vise-versa.
-        if pet[0].encontradoPerdido == "perdido":
-            encontradoPerdido_pesquisar = "encontrado"
-        else:
-            encontradoPerdido_pesquisar = "perdido"
 
-        if pet[0].dataPerdaEncontro:
-            perdido_inicio = pet[0].dataPerdaEncontro - timedelta(days = 60)
-            perdido_fim = pet[0].dataPerdaEncontro + timedelta(days = 60)
+        """Garante que a pessoa que cadastrou um pet perdido vai receber e-mails apenas de pets
+        encontrados próximos a região, e vice-versa."""
+        if pet[0].encontrado_perdido == "perdido":
+            encontrado_perdido_pesquisar = "encontrado"
+        else:
+            encontrado_perdido_pesquisar = "perdido"
+
+        if pet[0].data_perda_encontro:
+            perdido_inicio = pet[0].data_perda_encontro - timedelta(days = 60)
+            perdido_fim = pet[0].data_perda_encontro + timedelta(days = 60)
         else:
             perdido_inicio = datetime.strptime('2000-01-01', '%Y-%m-%d').date()
             perdido_fim = datetime.strptime('2100-01-01', '%Y-%m-%d').date()
 
         # Query para pegar os campos para o envio do e-mail e cálculo da distância
-        query = '''SELECT pet.id, pet.nome, usr.email, pet.foto, usuario."receberNotificacoes", pet.coordenada
+        query = '''SELECT pet.id, pet.nome, usr.email, pet.foto, usuario."receberNotificacoes",
+                        pet.coordenada
                         FROM core_pet AS pet
                         INNER JOIN core_usuario AS usuario ON usuario.user_id = pet.user_id
                         INNER JOIN auth_user AS usr ON usr.id = usuario.user_id
@@ -287,7 +290,9 @@ def notif_pet_encontrado(id):
                         '''
 
         # Execução da query e inserção dos dados em uma Named Tuple
-        cursor.execute(query,[encontradoPerdido_pesquisar, perdido_inicio, perdido_fim, pet[0].especie, pet[0].porte - 30, pet[0].porte + 30 ])
+        cursor.execute(query,[encontrado_perdido_pesquisar,
+                              perdido_inicio, perdido_fim,
+                              pet[0].especie, pet[0].porte - 30, pet[0].porte + 30 ])
         pets = namedtuplefetchall(cursor)
 
         # Caso existam pets no banco de dados
@@ -301,28 +306,31 @@ def notif_pet_encontrado(id):
             # Calcula distância desse pet cadastrado com todos os outros no banco de dados
             for i in range(len(pets)):
                 if pet[0].id != pets[i].id:
-                    cursor.execute("SELECT ST_DistanceSphere('" + pet[0].coordenada + "','" + pets[i].coordenada + "')::numeric::integer")
+                    cursor.execute("SELECT ST_DistanceSphere('" + pet[0].coordenada + "','" +
+                                   pets[i].coordenada + "')::numeric::integer")
                     distancias.append(cursor.fetchone())
-            
+
             # Se o cálculo retornou algo
             if distancias:
                 for list in distancias:
                     for valor in list:
                         # Percorre por todas as distâncias para caso seja menor que 10km,
-                        # inicia o processo de envio de e-mail                    
-                        if valor <= 10000 and pets[count].receberNotificacoes == True:
-                            if pet[0].encontradoPerdido == "encontrado":
+                        # inicia o processo de envio de e-mail          
+                        if valor <= 10000 and pets[count].receberNotificacoes is True:
+                            if pet[0].encontrado_perdido == "encontrado":
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
-                                    enviar_email_pet_encontrado(pet[0].id, str(pets[count].email), pet[0].foto, pet[0].nome)
+                                    enviar_email_pet_encontrado(pet[0].id, str(pets[count].email),
+                                                                pet[0].foto, pet[0].nome)
                             else:
-                                # Armazena em lista todos os nomes e fotos dos pets para enviar por e-mail a quem está cadastrando.
+                                """Armazena em lista todos os nomes e fotos dos pets para enviar
+                               por e-mail a quem está cadastrando."""
                                 if pet[0].email != pets[count].email:
                                     id_list.append(pets[count].id)
                                     nome_list.append(pets[count].nome)
                                     foto_list.append(pets[count].foto)
                         count = count + 1
-                
+
                 if id_list and foto_list and nome_list:
                     # Envia lista de pets encontrados para quem cadastrou um pet perdido.
                     enviar_email_pet_perdido(id_list, str(pet[0].email), foto_list, nome_list)
@@ -339,8 +347,9 @@ def enviar_email_pet_encontrado(id, email, foto, nome_pet):
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
     nome_pet = str(nome_pet)
-    
-    html = loader.render_to_string('emails/pet_encontrado.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
+
+    html = loader.render_to_string('emails/pet_encontrado.html',
+                                   {'id': id, 'foto': foto, 'nome_pet': nome_pet})
     plain_message = strip_tags(html)
 
     # Envio do e-mail
@@ -350,8 +359,9 @@ def enviar_email_pet_perdido(id, email, foto, nome_pet):
     assunto = _("Novos pets parecidos com o seu foram encontrados")
     remetente = os.environ.get("EMAIL_HOST_USER")
     destinatario = str(email)
-    
-    html = loader.render_to_string('emails/pet_perdido.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
+
+    html = loader.render_to_string('emails/pet_perdido.html',
+                                   {'id': id, 'foto': foto, 'nome_pet': nome_pet})
     plain_message = strip_tags(html)
 
     # Envio do e-mail
@@ -363,29 +373,30 @@ def enviar_email_pet_perdido(id, email, foto, nome_pet):
 #Formulário para solicitar cadastro de Instituição
 
 def cadastro_empresa(request):
-	if request.method == 'POST':
-		form = ContactForm(request.POST)
-		if form.is_valid():
-			subject = "Solicitação de cadastro de empresa" 
-			body = {
-			'nome_fantasia': form.cleaned_data['nome_fantasia'], 
-			'razao_social': form.cleaned_data['razao_social'], 
-            'numero_cnpj': form.cleaned_data['numero_cnpj'],
-            'numero_telefone': form.cleaned_data['numero_telefone'],
-			'email_address': form.cleaned_data['email_address'], 
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = "Solicitação de cadastro de empresa"
+            body = {
+			    'nome_fantasia': form.cleaned_data['nome_fantasia'],
+			    'razao_social': form.cleaned_data['razao_social'],
+                'numero_cnpj': form.cleaned_data['numero_cnpj'],
+                'numero_telefone': form.cleaned_data['numero_telefone'],
+			    'email_address': form.cleaned_data['email_address'],
 			}
-			message = "\n".join(body.values())
+            message = "\n".join(body.values())
 
-			try:
-				send_mail(subject, message, settings.EMAIL_HOST_USER, ['atendimentoSalvePets@gmail.com'],
-            fail_silently=False) 
-			except BadHeaderError:
-				return HttpResponse('Invalid header found.')
-			return render(request, "index.html")
+            try:
+                send_mail(subject, message, settings.EMAIL_HOST_USER,
+                 ['atendimentoSalvePets@gmail.com'],
+                 fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return render(request, "index.html")
             #return redirect ("sobre.html")
-            
-	form = ContactForm()
-	return render(request, "instituicao/formInstituicao.html", {'form':form})
+
+    form = ContactForm()
+    return render(request, "instituicao/formInstituicao.html", {'form':form})
 
 
 
@@ -410,8 +421,8 @@ def completar_cadastro_instituicao(request):
                 usuario = request.user.usuario
                 USUARIO.objects.filter(id=usuario.id).update(FK_instituicao_id=instancia.id)
                 return render(request, 'index.html')
-            else:
-                messages.error(request, ('Por favor corriga o erro abaixo!'))
+
+            messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
         form = InstituicaoForm(instance=request.user.usuario.FK_instituicao)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
@@ -419,20 +430,20 @@ def completar_cadastro_instituicao(request):
     })
 
 '''
-pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True)
-instituicao=INSTITUICAO.objects.filter(encontradoPerdido='Encontrado', ativo=True)
+pet=Pet.objects.filter(encontrado_perdido='Encontrado', ativo=True)
+instituicao=INSTITUICAO.objects.filter(encontrado_perdido='Encontrado', ativo=True)
 '''
 
 def teste(request):
     return render(request, 'teste.html')
- 
+
 def adotar(request):
     return render(request, 'adotar/cadastro_adotar.html')
 
 @login_required
 @transaction.atomic
 def adicionar_usuario_instituicao(request):
-    if (request.user.usuario.FK_instituicao_id != None):
+    if request.user.usuario.FK_instituicao_id is not None:
         form = AdicionarUsuarioInstituicaoForm()
         if request.method == "POST":
             #obtêm o dado do usuário logado
@@ -443,18 +454,19 @@ def adicionar_usuario_instituicao(request):
             res_filtro = USUARIO.objects.filter(cpfCnpj=cpf)
             if len(res_filtro)>0:
                 id_instituicao = USUARIO.objects.filter(id=usuario.id)
-                USUARIO.objects.filter(cpfCnpj=cpf).update(FK_instituicao_id=id_instituicao[0].FK_instituicao_id)
+                USUARIO.objects.filter(cpfCnpj=cpf).update(
+                    FK_instituicao_id=id_instituicao[0].FK_instituicao_id)
                 #form = AdicionarUsuarioInstituicaoForm(request.POST)
                 #print (request.POST.get('cpf'))
                 return render(request, 'index.html')
-            else:
-                messages.error(request, 'Por favor selecione um usuário existente!') 
-        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
+
+            messages.error(request, 'Por favor selecione um usuário existente!')
+        return render(request, 'instituicao/adicionar-usuario-instituicao.html',{
             'form': form
         })
-    else:
-        #print('ola else')
-        return render(request, 'instituicao/acesso-proibido.html')
+
+    #print('ola else')
+    return render(request, 'instituicao/acesso-proibido.html')
 
 
 ''' print('cpf enviado no post = ', cpf)
@@ -464,5 +476,4 @@ def adicionar_usuario_instituicao(request):
     print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
     len(res_filtro)
     print('tamanhao do vetor: ', len(res_filtro))
-    #USUARIO.objects.filter(request.POST.get('cpf')==teste)
-'''
+    #USUARIO.objects.filter(request.POST.get('cpf')==teste) '''

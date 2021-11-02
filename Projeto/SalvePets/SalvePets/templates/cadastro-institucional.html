@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block conteudo %}
+
+    <!-- Página de Cadastro Institucional-->
+    <div class="container mt-4">
+        <h2>Cadastro</h2>
+        <form method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="jaEfMZoegzAdzfi7CrUbikVPQfVs2dPztQXzryzsBk1BGyL8Mogv9Xk45vbSGRT6">
+
+
+            <div id="div_id_email" class="form-group">
+                <label for="id_email" class=" requiredField">
+                    E-mail<span class="asteriskField">*</span>
+                </label> <div class=""> <input type="email" name="email" placeholder="Endereço de e-mail" autocomplete="email" class="textinput textInput form-control" required id="id_email"> </div>
+            </div> <div id="div_id_first_name" class="form-group">
+                <label for="id_first_name" class=" requiredField">
+                    Nome:<span class="asteriskField">*</span>
+                </label> <div class=""> <input type="text" name="first_name" maxlength="30" class="textinput textInput form-control" required id="id_first_name"> </div>
+            </div> <div id="div_id_last_name" class="form-group">
+                <label for="id_last_name" class=" requiredField">
+                    Sobrenome<span class="asteriskField">*</span>
+                </label> <div class=""> <input type="text" name="last_name" maxlength="30" class="textinput textInput form-control" required id="id_last_name"> </div>
+            </div> <div id="div_id_password1" class="form-group">
+                <label for="id_password1" class=" requiredField">
+                    Senha<span class="asteriskField">*</span>
+                </label> <div class=""> <input type="password" name="password1" placeholder="Senha" autocomplete="new-password" class="textinput textInput form-control" required id="id_password1"> </div>
+            </div> <div id="div_id_password2" class="form-group">
+                <label for="id_password2" class=" requiredField">
+                    Senha (novamente)<span class="asteriskField">*</span>
+                </label> <div class=""> <input type="password" name="password2" placeholder="Senha (novamente)" class="textinput textInput form-control" required id="id_password2"> </div>
+            </div>
+
+            <section class="py-2">
+            </section>
+            <button class="btn btn-outline-dark" type="submit">
+                Cadastrar
+            </button>
+        </form>
+    </div>
