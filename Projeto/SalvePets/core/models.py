@@ -55,11 +55,11 @@ class AVALIACAO(models.Model):
 
 class INSTITUICAO(models.Model):
     ativo = models.BooleanField(default=True, blank=False, null=False)
-    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True)
+    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True, blank=True)
     nome_instituicao = models.CharField(max_length=50, null=True)
     razao_social = models.CharField(max_length=50, null=True)
-    cnpj = models.CharField(max_length=18, null=True)
-    #cnpj=BRCNPJField("CNPJ", null=True)
+    #cnpj = models.CharField(max_length=18, null=True)
+    cnpj=BRCNPJField("CNPJ", null=True)
     telefone = models.CharField(max_length=16, null=True)
     email = models.CharField(max_length=50, null=True)
     postal_code = BRPostalCodeField("CEP")
@@ -69,6 +69,7 @@ class INSTITUICAO(models.Model):
     district = models.CharField("Bairro", max_length=250)
     state = BRStateField("Estado")
     city = models.CharField("Cidade", max_length=250)
+    
 
 class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
@@ -85,6 +86,7 @@ class USUARIO(models.Model):
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
     dataModificacao = models.DateTimeField(auto_now=True, null=True)
     fk_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    is_admin_instituicao=models.BooleanField(default=False, blank=False, null=False)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

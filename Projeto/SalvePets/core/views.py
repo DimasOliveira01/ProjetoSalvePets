@@ -460,7 +460,7 @@ def adotar(request):
 @login_required
 @transaction.atomic
 def adicionar_usuario_instituicao(request):
-    if (request.user.usuario.fk_instituicao_id != None):
+    if (request.user.usuario.is_admin_instituicao == True):
         form = AdicionarUsuarioInstituicaoForm()
         if request.method == "POST":
             #obtêm o dado do usuário logado
@@ -487,19 +487,22 @@ def adicionar_usuario_instituicao(request):
 @login_required
 @transaction.atomic
 def listar_usuario_instituicao(request):
-    cursor = connection.cursor()
-    id_inst=request.user.usuario.fk_instituicao_id
-    #usuario=USUARIO.objects.filter(User__type=User.is_active) #tipoUsuario='Usuário comum'
-    #user=User.objects.filter(tipoUsuario='Usuário comum')
-    query = ''' select tab1.first_name as nome1, tab1.last_name as nome2, tab2.cpfcnpj as cpf,
-                tab2.id, tab2.fk_instituicao_id from auth_user as tab1 
-                inner join core_usuario as tab2 on (tab1.id=tab2.user_id) 
-                where tab2.fk_instituicao_id is Not NULL and tab2.fk_instituicao_id = %s'''
-    cursor.execute(query, [id_inst])
-    usuario = namedtuplefetchall(cursor)
-    if len(usuario)==0:
-        messages.error(request, 'Nenhum usuário existente!')
-    return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario}) 
+    if(request.user.usuario.is_admin_instituicao == True):
+        cursor = connection.cursor()
+        id_inst=request.user.usuario.fk_instituicao_id
+        #usuario=USUARIO.objects.filter(User__type=User.is_active) #tipoUsuario='Usuário comum'
+        #user=User.objects.filter(tipoUsuario='Usuário comum')
+        query = ''' select tab1.first_name as nome1, tab1.last_name as nome2, tab2.cpfcnpj as cpf,
+                    tab2.id, tab2.fk_instituicao_id from auth_user as tab1 
+                    inner join core_usuario as tab2 on (tab1.id=tab2.user_id) 
+                    where tab2.fk_instituicao_id is Not NULL and tab2.fk_instituicao_id = %s'''
+        cursor.execute(query, [id_inst])
+        usuario = namedtuplefetchall(cursor)
+        if len(usuario)==0:
+            messages.error(request, 'Nenhum usuário existente!')
+        return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario})
+    else:
+       return render(request, 'instituicao/acesso-proibido.html') 
 
 @login_required(login_url='/acccounts/login')
 @transaction.atomic
@@ -509,12 +512,24 @@ def deletar_usuario_instituicao(request, id):
 
 @login_required(login_url='/accounts/login')
 def cadastro_pet_instituicao(request):
-    pet_id=request.GET.get('id')
-    if pet_id:
-        pet=Pet.objects.get(id=pet_id)
-        if pet.user == request.user:
-            return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet})
-    return render (request, 'instituicao/cadastro-pet-instituicao.html')
+    cursor = connection.cursor()
+    id_inst=request.user.usuario.fk_instituicao_id
+    query = '''select * from core_usuario where fk_instituicao_id=%s and is_admin_instituicao=True'''
+    cursor.execute(query, [id_inst])
+    usuario = namedtuplefetchall(cursor)
+    if len(usuario)>0:
+        existe_admin=1
+    else:
+        existe_admin=0
+    if(request.user.usuario.fk_instituicao_id != None and existe_admin==1):
+        pet_id=request.GET.get('id')
+        if pet_id:
+            pet=Pet.objects.get(id=pet_id)
+            if pet.user == request.user:
+                return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet})
+        return render (request, 'instituicao/cadastro-pet-instituicao.html')
+    else:
+        return render(request, 'instituicao/acesso-proibido.html')
 
 @login_required(login_url='/acccounts/login')
 def set_pet_instituicao(request):
@@ -594,10 +609,18 @@ def pet_informacao_instituicao(request, id):
     return render(request, 'instituicao/pet-instituicao.html', {'pet':pet,'inst':inst,'usuario':usuario})
 
 def lista_pets_instituicao(request):
+    if(request.user.usuario.fk_instituicao_id != None):
+        id_instituicao_usuario=request.user.usuario.fk_instituicao_id
+        pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, fk_id_instituicao_id=id_instituicao_usuario)
+        return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet})
+    else:
+        return render(request, 'instituicao/acesso-proibido.html')
+
+def lista_pets_adocao(request):
     pet=Pet.objects.filter(encontradoPerdido=None, ativo=True)
-    return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet})
+    return render(request, 'instituicao/lista-pet-adocao.html',{'pet':pet})
 
-
+#conferir esta função, mas acho que precisa retirar
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario_instituicao(request):
     pet=Pet.objects.filter(ativo=True, user=request.user)
@@ -609,6 +632,40 @@ def deletar_pet_instituicao(request, id):
     if pet.user == request.user:
         pet.delete()
     return redirect('/lista-pet-instituicao/')
+
+@login_required(login_url='/acccounts/login')
+def administrativo_instituicao(request):
+    if (request.user.usuario.is_admin_instituicao == True):
+        return render(request, 'instituicao/administrativoInstituicao.html')
+    else:
+        return render(request, 'instituicao/acesso-proibido.html')
+
+"""@login_required
+@transaction.atomic
+def adicionar_usuario_instituicao(request):
+    if (request.user.usuario.fk_instituicao_id != None):
+        form = AdicionarUsuarioInstituicaoForm()
+        if request.method == "POST":
+            #obtêm o dado do usuário logado
+            usuario = request.user.usuario
+            #obtêm o dado enviado no POST
+            cpf=request.POST.get('cpf')
+            #Obtêm o objeto usuario que tem o mesmo cpf do POST
+            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
+            if len(res_filtro)>0:
+                id_instituicao = USUARIO.objects.filter(id=usuario.id)
+                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
+                #form = AdicionarUsuarioInstituicaoForm(request.POST)
+                #print (request.POST.get('cpf'))
+                return render(request, 'index.html')
+            else:
+                messages.error(request, 'Por favor selecione um usuário existente!') 
+        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
+            'form': form
+        })
+    else:
+        #print('ola else')
+        return render(request, 'instituicao/acesso-proibido.html')"""
 
 ''' print('cpf enviado no post = ', cpf)
     id_instituicao = USUARIO.objects.filter(id=usuario.id)

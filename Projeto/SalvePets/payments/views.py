@@ -8,6 +8,12 @@ from django.utils.functional import cached_property
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, TemplateView
+from django.core import mail
+from django.utils.html import strip_tags
+from django.template import loader
+import os
+from django.utils.translation import ugettext_lazy as _
+from django.http import request
 
 from orders.models import Order
 
@@ -61,6 +67,18 @@ class PaymentPendingView(TemplateView):
 
 class PaymentSuccessView(TemplateView):
     template_name = "payments/success.html"
+    
+    #id = str(id)
+    assunto = _("Pedido Recebido!")
+    remetente = os.environ.get("EMAIL_HOST_USER")
+    #destinatario = str(request.user.email)
+    destinatario = str("brunnopg28@hotmail.com")
+    
+    html = loader.render_to_string('emailPedido.html')
+    plain_message = strip_tags(html)
+
+    # Envio do e-mail
+    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 
 @csrf_exempt

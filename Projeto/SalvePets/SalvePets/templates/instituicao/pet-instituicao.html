@@ -86,16 +86,8 @@
                 </tbody>
             </table>
 
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Contato da Instituição</span></h6>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Local da Instituição</span></h6>
                 <table class="table">
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">E-mail:</th>
-                        <td>{{inst.email|default_if_none:"-"}}</td>
-                    </tr>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Telefone:</th>
-                        <td>{{inst.telefone|default_if_none:"-"}}</td>
-                    </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Cidade:</th>
                         <td>{{inst.city|default_if_none:"-"}}</td>
@@ -106,13 +98,55 @@
                     </tr>
                 </table>
             </div>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
+                <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
+                    <div class="g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback="verifyCaptcha">
+                        <!--  
+                        <tr>
+                            <th class="pl-0 w-25" scope="row">E-mail:</th>
+                            <td>{{inst.email|default_if_none:"-"}}</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row">Telefone:</th>
+                            <td>{{inst.telefone|default_if_none:"-"}}</td>
+                        </tr>
+                        -->
+                    </div>
+                    <div id="g-recaptcha-error"></div>
+                    <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
+                </form>
+            </div>
         </div>
+        <div class="mt-4">
         {% if usuario.fk_instituicao_id == pet.fk_id_instituicao_id %}
             <a href="/deletar-pet-instituicao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
             <a href="/cadastro-pet-instituicao/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
         {% endif %}
+        </div>
     </div>
 </main>
 <br>
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+var recaptcha_response = '';
+function submitUserForm() {
+    if(recaptcha_response.length > 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"> <tr> <th class="pl-0 w-25" scope="row">E-mail:</th> <td>{{inst.email|default_if_none:"-"}}</td> </tr> <tr><th class="pl-0 w-25" scope="row">Telefone:</th> <td>{{inst.telefone|default_if_none:"-"}}</td> </tr> </table>';
+        return false;
+    }
+    return true;
+}
+ 
+function verifyCaptcha(token) {
+    recaptcha_response = token;
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
 
 {% endblock conteudo %}
