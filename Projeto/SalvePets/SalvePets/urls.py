@@ -77,7 +77,9 @@ urlpatterns = [
     path('lista-pet-instituicao/',views.lista_pets_instituicao),
     path('deletar-pet-instituicao/<id>/',views.deletar_pet_instituicao),
     path('patrocinar/<id>/submit',views.patrocinar_send),
-    path('meus-patrocinios/',views.meus_patrocinios), 
+    path('meus-patrocinios/',views.meus_patrocinios),
+    path('administrativo-instituicao/',views.administrativo_instituicao),
+    path('lista-pet-adocao/',views.lista_pets_adocao),
 
 ]
 

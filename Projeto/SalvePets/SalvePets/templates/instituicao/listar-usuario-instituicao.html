@@ -11,11 +11,36 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
   }
-  </style>
+</style>
 
   
     <div class="container">
-    <p><h3>{% trans "Lista de usuários da Instituição" %}</h3></p>
+    <!-- Guias -->
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/" selected>{% trans "Cadastro da Instituição" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
+            </li>
+        </ul>
+    </div>
+    <section class="py-2">
+    </section>
+        <p><h3>{% trans "Lista de usuários da Instituição" %}</h3></p>
         <div class="row">
 
             <!--Mensagem caso não exista usuário-->

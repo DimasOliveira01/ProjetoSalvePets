@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <!-- Guias -->
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/" selected>{% trans "Cadastro da Instituição" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
+            </li>
+        </ul>
+    </div>
+    <section class="py-2">
+    <div class="container">
+        <section class="py-2">
+        </section>
+        <h3 class="row h-100 justify-content-center align-items-center">{% trans "Seja bem vindo ao módulo administrativo:" %}</h3>
+        <p >O Salve Pets somente aceita o cadastro de pessoas jurídicas idôneas, por esta razão somente aceitamos
+            o cadastro de pessoas jurídica. Após o cadastro da sua Instituição realizaremos um análise e em até 
+            dois dias úteis você receberá a confirmação da aprovação ou negação do seu cadastro.
+        </p>
+        <p><b>Somente após a aprovação que a sua empresa terá acesso ao módula administrativo.</b></p>
+    </div>
+
+{% endblock %}
