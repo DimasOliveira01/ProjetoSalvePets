@@ -43,6 +43,17 @@ class PaymentCreateView(CreateView):
 
         if status == "approved":
             redirect_url = "payments:success"
+            
+            email = self.request.user.email
+            #id = str(id)
+            assunto = _("Pedido Recebido!")
+            remetente = os.environ.get("EMAIL_HOST_USER")
+            destinatario = str(email)            
+            html = loader.render_to_string('emailPedido.html')
+            plain_message = strip_tags(html)
+            # Envio do e-mail
+            mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
         if status == "in_process":
             redirect_url = "payments:pending"
 
@@ -64,22 +75,9 @@ class PaymentFailureView(TemplateView):
 class PaymentPendingView(TemplateView):
     template_name = "payments/pending.html"
 
-
 class PaymentSuccessView(TemplateView):
-    template_name = "payments/success.html"
-    
-    #id = str(id)
-    assunto = _("Pedido Recebido!")
-    remetente = os.environ.get("EMAIL_HOST_USER")
-    #destinatario = str(request.user.email)
-    destinatario = str("brunnopg28@hotmail.com")
-    
-    html = loader.render_to_string('emailPedido.html')
-    plain_message = strip_tags(html)
-
-    # Envio do e-mail
-    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
-
+    template_name = "payments/success.html"    
+        
 
 @csrf_exempt
 @require_POST
@@ -90,3 +88,5 @@ def payment_webhook(request):
         form.save()
 
     return JsonResponse({})
+
+
