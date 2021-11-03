@@ -14,12 +14,14 @@
             <li class="nav-item">
                 <a class="nav-link active" style="color:#495057" href="/modificar-cadastro-instituicao/" selected>{% trans "Cadastro da Instituição" %}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
-            </li>
+            {% if usuario.is_admin_instituicao %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link " style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
             </li>
