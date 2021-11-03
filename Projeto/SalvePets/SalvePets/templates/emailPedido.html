@@ -1,0 +1,21 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+{% block content %}
+{% autoescape off %}
+<tr>
+    <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
+        <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
+
+            <p>{% trans "Olá!" %}</p>
+
+            <p>{% trans "Temos uma boa notícia!" %}</p>
+
+            <p>{% trans "Já recebemos o seu pedido e o seu pagamento foi aprovado!" %}</p>
+            
+            <p>{% trans "Logo o seu pedido estará na sua casa, qualquer dúvida não hesite em entrar em contato com a nossa equipe!" %}</p>
+
+        </div>
+    </td>
+</tr>
+{% endautoescape %}
+{% endblock %}

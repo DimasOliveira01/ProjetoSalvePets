@@ -29,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+#SE O DEBUG FOR = False DEVE SER SETADO UM VALOR NO ALLOWED_HOSTS
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1']  
+
 #Caminho das imagens(foto)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -84,7 +87,7 @@ INSTALLED_APPS = [
     'leaflet',
 
     #apps de terceiros
-    #"debug_toolbar",
+    "debug_toolbar",
     "widget_tweaks",
     "localflavor",
     #e-commerce
@@ -105,7 +108,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #"debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'SalvePets.urls'

@@ -102,7 +102,7 @@ function setCardTokenAndPay(status, response) {
         doSubmit = true
         form.submit()
     } else {
-        alert("Verifique os dados preenchidos!\n" + JSON.stringify(response, null, 4))
-        //alert("Dados de pagamento inválidos.\n Verifique os dados preenchidos!")
+        //alert("Verifique os dados preenchidos!\n" + JSON.stringify(response, null, 4))
+        alert("Dados de pagamento inválidos.\n Verifique os dados preenchidos!")
     }
 }
