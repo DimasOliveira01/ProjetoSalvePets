@@ -443,8 +443,10 @@ def completar_cadastro_instituicao(request):
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
         form = InstituicaoForm(instance=request.user.usuario.fk_instituicao)
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
-        'form': form
+        'form': form, 'usuario':usuario
     })
 
 '''
@@ -478,12 +480,14 @@ def adicionar_usuario_instituicao(request):
                 return render(request, 'index.html')
             else:
                 messages.error(request, 'Por favor selecione um usuário existente!') 
+        id_user=request.user.id
+        usuario=USUARIO.objects.get(id=id_user)
         return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
-            'form': form
+            'form': form, 'usuario': usuario
         })
     else:
-        #print('ola else')
-        return render(request, 'instituicao/acesso-proibido.html')
+        user=request.user.usuario
+        return render(request, 'instituicao/acesso-proibido.html',{'user':user})
 
 @login_required
 @transaction.atomic
@@ -501,7 +505,9 @@ def listar_usuario_instituicao(request):
         usuario = namedtuplefetchall(cursor)
         if len(usuario)==0:
             messages.error(request, 'Nenhum usuário existente!')
-        return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario})
+        id_user=request.user.id
+        usuario1=USUARIO.objects.get(id=id_user)
+        return render(request, 'instituicao/listar-usuario-instituicao.html',{'usuario':usuario, 'usuario1': usuario1})
     else:
        return render(request, 'instituicao/acesso-proibido.html') 
 
@@ -522,13 +528,16 @@ def cadastro_pet_instituicao(request):
         existe_admin=1
     else:
         existe_admin=0
+    
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
     if(request.user.usuario.fk_instituicao_id != None and existe_admin==1):
         pet_id=request.GET.get('id')
         if pet_id:
             pet=Pet.objects.get(id=pet_id)
             if pet.user == request.user:
-                return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet})
-        return render (request, 'instituicao/cadastro-pet-instituicao.html')
+                return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet,'usuario': usuario})
+        return render (request, 'instituicao/cadastro-pet-instituicao.html',{'usuario': usuario})
     else:
         return render(request, 'instituicao/acesso-proibido.html')
 
@@ -613,7 +622,9 @@ def lista_pets_instituicao(request):
     if(request.user.usuario.fk_instituicao_id != None):
         id_instituicao_usuario=request.user.usuario.fk_instituicao_id
         pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, fk_id_instituicao_id=id_instituicao_usuario)
-        return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet})
+        id_user=request.user.id
+        usuario=USUARIO.objects.get(id=id_user)
+        return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet, 'usuario': usuario})
     else:
         return render(request, 'instituicao/acesso-proibido.html')
 
@@ -636,10 +647,9 @@ def deletar_pet_instituicao(request, id):
 
 @login_required(login_url='/acccounts/login')
 def administrativo_instituicao(request):
-    if (request.user.usuario.is_admin_instituicao == True):
-        return render(request, 'instituicao/administrativoInstituicao.html')
-    else:
-        return render(request, 'instituicao/acesso-proibido.html')
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+    return render(request, 'instituicao/administrativoInstituicao.html',{'usuario':usuario})
 
 """@login_required
 @transaction.atomic
