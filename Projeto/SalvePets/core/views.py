@@ -222,7 +222,7 @@ def deletar_pet(request, id):
     return redirect('/lista-pet-usuario')
 
 
-@login_required(login_url='/accounts/login')
+#@login_required(login_url='/accounts/login')
 def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     creator = pet.user
@@ -617,6 +617,15 @@ def pet_informacao_instituicao(request, id):
     print(id_user)
     print(inst.nome_instituicao)
     return render(request, 'instituicao/pet-instituicao.html', {'pet':pet,'inst':inst,'usuario':usuario})
+
+
+def pet_informacao_instituicao_adocao(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
+    #id_user=request.user.id
+    #print(id_user)
+    #print(inst.nome_instituicao)
+    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst})
 
 def lista_pets_instituicao(request):
     if(request.user.usuario.fk_instituicao_id != None):
