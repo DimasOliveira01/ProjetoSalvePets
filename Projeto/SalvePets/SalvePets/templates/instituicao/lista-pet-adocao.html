@@ -38,13 +38,13 @@
             {% for p in pet %}
             
             <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-            <a href="../pet-informacao-instituicao/{{ p.id }}">
+            <a href="/pet-informacao-instituicao-adocao/{{ p.id }}">
                 <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
             </a>
             <div class="card-body">
                 <h5 class="card-title">{{ p.nome }}</h5>
                 <p class="card-text">{{p.descricao}}</p>
-                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
+                <a href="/pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
             </div>
             </div>
             
