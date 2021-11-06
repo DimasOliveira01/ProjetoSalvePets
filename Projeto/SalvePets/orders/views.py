@@ -9,14 +9,15 @@ from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import Item, Order
 
+
 class OrderCreateView(CreateView):
     model = Order
     form_class = OrderCreateForm
-    
     def form_valid(self, form):
         cart = Cart(self.request)
         if cart:
             order = form.save()
+
             for item in cart:
                 Item.objects.create(
                     order=order,
@@ -26,6 +27,8 @@ class OrderCreateView(CreateView):
                 )
             cart.clear()
             self.request.session["order_id"] = order.id
+            #resp = self.request.session["cpf"] = self.request.user.usuario.cpfcnpj
+            #print(resp)
             return redirect(reverse("payments:process"))
         return redirect(reverse("pages:home_ecommerce"))
 

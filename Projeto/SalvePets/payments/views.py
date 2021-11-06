@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.http import request
 
 from orders.models import Order
+from orders.models import Item
 
 from .forms import PaymentForm, UpdatePaymentForm
 from .models import Payment
@@ -44,13 +45,19 @@ class PaymentCreateView(CreateView):
         if status == "approved":
             redirect_url = "payments:success"
             
+            order_id = self.request.session.get("order_id")
+            order = get_object_or_404(Order, id=order_id)
+            itens = get_object_or_404(Item, id=order_id)
+
             email = self.request.user.email
             #id = str(id)
             assunto = _("Pedido Recebido!")
             remetente = os.environ.get("EMAIL_HOST_USER")
             destinatario = str(email)            
-            html = loader.render_to_string('emailPedido.html')
+            #html = loader.render_to_string('emails/pet_encontrado.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
+            html = loader.render_to_string('emailPedido.html', {'id':order_id, 'order': order, 'price': order.get_total_price, 'nome': order.name, 'cep':order.postal_code, 'endereco':order.address,'cidade': order.city, 'estado': order.state, 'bairro': order.district,'numero': order.number,'complemento': order.complement,'item': itens.product, 'qtd': itens.quantity})
             plain_message = strip_tags(html)
+
             # Envio do e-mail
             mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 

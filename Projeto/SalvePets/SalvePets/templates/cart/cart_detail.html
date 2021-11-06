@@ -34,7 +34,7 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-sm-6">
-                                {% render_field item.update_quantity_form.quantity class+="form-control" %}
+                                {% render_field item.update_quantity_form.quantity class+="form-control" style+="text-align:right"%}
                             </div>
                             <div class="col">
                                 <input class="btn btn-info" type="submit" value="Atualizar">
@@ -43,8 +43,8 @@
                         {{ item.update_quantity_form.override }}
                     </form>
                 </td>
-                <td class="align-middle">R$ {{ item.price }}</td>
-                <td class="align-middle">R$ {{ item.total_price }}</td>
+                <td class="align-middle" style="text-align:right;">R$ {{ item.price }}</td>
+                <td class="align-middle" style="text-align:right;">R$ {{ item.total_price }}</td>
                 <td class="align-middle text-right">
                     <form action="{% url 'cart:remove' product.id %}" method="post">
                         {% csrf_token %}
@@ -58,7 +58,7 @@
                 <td class="font-weight-bold">Total</td>
                 <td></td>
                 <td></td>
-                <td class="font-weight-bold">R$ {{ cart.get_total_price }}</td>
+                <td class="font-weight-bold" style="text-align:right">R$ {{ cart.get_total_price }}</td>
                 <td></td>
             </tr>
         </tbody>
@@ -70,7 +70,7 @@
         <a class=" btn btn-primary" href="{% url 'products:list' %}">
             Continuar comprando
         </a>
-
+        
         <a class="btn btn-success {% if not cart %}disabled{% endif %}" href="{% url 'orders:create' %}">
             Finalizar compra
         </a>
