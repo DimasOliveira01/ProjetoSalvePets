@@ -29,12 +29,12 @@
                 <fieldset class="border-bottom mb-3">
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input id="email" name="email" required="true" type="text" value="{{ order.email }}" class="form-control" />
+                        <input id="email" name="email" required="true" type="text" value="{{user.email}}" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="docNumber">CPF</label>
                         <input id="docNumber" required="true" name="doc_number" data-checkout="docNumber" type="text"
-                            value="{{ order.cpf }}" class="form-control" />
+                            value="{{user.usuario.cpfcnpj}}" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="cardholderName">Titular do cartão</label>
