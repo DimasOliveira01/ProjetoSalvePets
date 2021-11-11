@@ -52,7 +52,10 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h5>{{pet.nome}}</h5>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
+        <section class="py-2">
+        </section>
+        <h5>{{pet.nome}}</h5> 
         <p class="pt-1">{{pet.descricao}}</p>
         <div class="table-responsive">
             <table class="table">
@@ -101,16 +104,6 @@
             <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
                 <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
                     <div class="g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback="verifyCaptcha">
-                        <!--  
-                        <tr>
-                            <th class="pl-0 w-25" scope="row">E-mail:</th>
-                            <td>{{inst.email|default_if_none:"-"}}</td>
-                        </tr>
-                        <tr>
-                            <th class="pl-0 w-25" scope="row">Telefone:</th>
-                            <td>{{inst.telefone|default_if_none:"-"}}</td>
-                        </tr>
-                        -->
                     </div>
                     <div id="g-recaptcha-error"></div>
                     <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
@@ -120,6 +113,27 @@
     </div>
 </main>
 <br>
+
+<!-- Modal -->
+<div class="modal fade" id="adotar_pet" tabindex="-1" aria-labelledby="adotar_petLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adotar_petLabel">Adotar pet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja adotar este pet?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a href="/solicitar-adocao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Adotar" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!------------------------------------------------------>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
