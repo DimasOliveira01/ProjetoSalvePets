@@ -1,15 +1,14 @@
-{% extends "base.html" %}
-{% load i18n %}
-{% load static %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
 
 {% block conteudo %}
-
     <!-- Guias -->
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link active" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
+                <a class="nav-link" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/" selected>{% trans "Cadastro da Instituição" %}</a>
@@ -26,20 +25,15 @@
                 <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
+                <a class="nav-link active" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
             </li>
         </ul>
     </div>
     <section class="py-2">
-    <div class="container">
-        <section class="py-2">
-        </section>
-        <h3 class="row h-100 justify-content-center align-items-center">{% trans "Seja bem vindo ao módulo administrativo:" %}</h3>
-        <p >O Salve Pets somente aceita o cadastro de pessoas jurídicas idôneas, por esta razão somente aceitamos
-            o cadastro de pessoas jurídicas. Após o cadastro da sua Instituição realizaremos uma análise e em até 
-            dois dias úteis você receberá a confirmação da aprovação ou negação do seu cadastro.
-        </p>
-        <p><b>Somente após a aprovação que a sua Instituição terá acesso ao módula administrativo.</b></p>
+    </section>
+    <!-- Página de adição de usário na instituição-->
+    <div class="container mt-4">
+        <h2>Desculpa, mas você não pode ter acesso a esta página... :(</h2>
+        <p>A sua Instituição somente terá acesso ao cadastro de Pets para adoção após a aprovação do SalvePets.</p>
     </div>
-
 {% endblock %}
