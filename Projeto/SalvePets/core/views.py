@@ -858,3 +858,4 @@ def meus_patrocinios(request):
     lista = zip(patrocinios , pets)
 
     return render(request, 'patrocinar/meus_patrocinios.html', {'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
+

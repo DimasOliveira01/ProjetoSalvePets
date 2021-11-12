@@ -12,6 +12,17 @@
     {% if cart %}
     <div class="row">
         <div class="col-lg-6">
+            <!--<form action="." method="post" id="orderForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" required="true" type="text" value="{{user.email}}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="docNumber">CPF</label>
+                    <input id="docNumber" required="true" name="doc_number" data-checkout="docNumber" type="text"
+                        value="{{user.usuario.cpfcnpj}}" class="form-control" />
+                </div>
+            </form>-->
             {% crispy form %}
         </div>
         <div class="col-lg-6">

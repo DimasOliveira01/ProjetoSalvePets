@@ -56,6 +56,7 @@ def test_status_code(client):
     assert response.status_code == 405
 
 
+"""
 def test_payment_success(client_with_order, mocker):
     mocker.patch(
         "mercadopago.resources.Payment.create",
@@ -73,6 +74,7 @@ def test_payment_success(client_with_order, mocker):
         reverse("payments:process"), payment_data, follow=True
     )
     assertTemplateUsed(response, "payments/success.html")
+"""
 
 
 def test_payment_failure(client_with_order, mocker):

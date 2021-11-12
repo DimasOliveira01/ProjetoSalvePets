@@ -1,21 +1,33 @@
 {% extends "account/email/base_message.html" %}
 {% load i18n %}
 {% block content %}
+{% with total_price=order.get_total_price %}
 {% autoescape off %}
 <tr>
     <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
         <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
 
-            <p>{% trans "Olá!" %}</p>
-
-            <p>{% trans "Temos uma boa notícia!" %}</p>
+            <p>{% trans "Olá"%} {{nome}}!</p>
 
             <p>{% trans "Já recebemos o seu pedido e o seu pagamento foi aprovado!" %}</p>
             
             <p>{% trans "Logo o seu pedido estará na sua casa, qualquer dúvida não hesite em entrar em contato com a nossa equipe!" %}</p>
 
+            <p><b>{% trans "Identificação do seu pedido:" %} {{order}}</b></p>
+            <p><b>{% trans "Informações de Entrega:" %}</b></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light" style="text-align: left;">CEP: {{cep}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Endereço: {{endereco}} {{numero}} {{complemento}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Estado: {{estado}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Cidade: {{cidade}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Bairro: {{bairro}}</li>
+            </ul>          
+            
+            {% include "order_summary.html" with items=order.items.all total_price=total_price %}
+            <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>
         </div>
     </td>
 </tr>
 {% endautoescape %}
+{% endwith %}
 {% endblock %}
