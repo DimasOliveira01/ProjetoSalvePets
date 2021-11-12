@@ -118,10 +118,12 @@
             </div>
         </div>
         <div class="mt-4">
-        {% if usuario.fk_instituicao_id == pet.fk_id_instituicao_id %}
-            <a href="/deletar-pet-instituicao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
-            <a href="/cadastro-pet-instituicao/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
-        {% endif %}
+        {% if usuario %}
+            {% if usuario.fk_instituicao_id == pet.fk_id_instituicao_id %}
+                <a href="/deletar-pet-instituicao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+                <a href="/cadastro-pet-instituicao/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
+            {% endif %}
+        {% endif %}    
         </div>
     </div>
 </main>
