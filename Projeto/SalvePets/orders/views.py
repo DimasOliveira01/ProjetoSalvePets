@@ -13,10 +13,17 @@ from .models import Item, Order
 class OrderCreateView(CreateView):
     model = Order
     form_class = OrderCreateForm
+
     def form_valid(self, form):
         cart = Cart(self.request)
-        if cart:
+        if cart: 
             order = form.save()
+            print("Order id",order.id)
+
+            usuario = self.request.user
+
+            print("Id usuario", usuario.id)
+            Order.objects.filter(id=order.id).update(FK_iduser=usuario.id)
 
             for item in cart:
                 Item.objects.create(
@@ -27,8 +34,7 @@ class OrderCreateView(CreateView):
                 )
             cart.clear()
             self.request.session["order_id"] = order.id
-            #resp = self.request.session["cpf"] = self.request.user.usuario.cpfcnpj
-            #print(resp)
+
             return redirect(reverse("payments:process"))
         return redirect(reverse("pages:home_ecommerce"))
 

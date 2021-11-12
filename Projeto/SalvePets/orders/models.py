@@ -5,9 +5,11 @@ from localflavor.br.models import BRCPFField, BRPostalCodeField, BRStateField
 from model_utils.models import TimeStampedModel
 
 from products.models import Product
+from core.models import User
 
 
 class Order(TimeStampedModel):
+    FK_iduser = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     cpf = BRCPFField("CPF")
     name = models.CharField("Nome Completo", max_length=250)
     email = models.EmailField()
