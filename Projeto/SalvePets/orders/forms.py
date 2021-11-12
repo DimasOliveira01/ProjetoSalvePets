@@ -9,9 +9,7 @@ class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = [
-            "cpf",
             "name",
-            "email",
             "postal_code",
             "address",
             "number",
@@ -36,9 +34,7 @@ class OrderCreateForm(forms.ModelForm):
         self.helper.layout = Layout(
             Fieldset(
                 "",
-                "cpf",
                 "name",
-                "email",
                 Div(
                     Field("postal_code", onchange="getAddress()", wrapper_class="col"),
                     Field("state", wrapper_class="col"),

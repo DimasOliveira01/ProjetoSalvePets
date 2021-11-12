@@ -18,11 +18,9 @@ class OrderCreateView(CreateView):
         cart = Cart(self.request)
         if cart: 
             order = form.save()
-            print("Order id",order.id)
 
             usuario = self.request.user
 
-            print("Id usuario", usuario.id)
             Order.objects.filter(id=order.id).update(FK_iduser=usuario.id)
 
             for item in cart:

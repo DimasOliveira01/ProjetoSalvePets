@@ -10,9 +10,7 @@ from core.models import User
 
 class Order(TimeStampedModel):
     FK_iduser = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    cpf = BRCPFField("CPF")
     name = models.CharField("Nome Completo", max_length=250)
-    email = models.EmailField()
     postal_code = BRPostalCodeField("CEP")
     address = models.CharField("Endereço", max_length=250)
     number = models.CharField("Número", max_length=250)

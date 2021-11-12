@@ -24,6 +24,7 @@
             </ul>          
             
             {% include "order_summary.html" with items=order.items.all total_price=total_price %}
+            <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>
         </div>
     </td>
 </tr>
