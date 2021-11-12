@@ -83,8 +83,25 @@ class PaymentPendingView(TemplateView):
     template_name = "payments/pending.html"
 
 class PaymentSuccessView(TemplateView):
+<<<<<<< HEAD
     template_name = "payments/success.html"    
         
+=======
+    template_name = "payments/success.html"
+    
+    #id = str(id)
+    assunto = _("Pedido Recebido!")
+    remetente = os.environ.get("EMAIL_HOST_USER")
+    #destinatario = str(request.user.email)
+    #destinatario = str("brunnopg28@hotmail.com")
+    
+    html = loader.render_to_string('emailPedido.html')
+    plain_message = strip_tags(html)
+
+    # Envio do e-mail
+    #mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+>>>>>>> 2ed9244c70435e6f5baf47dd3948e411f0f0953d
 
 @csrf_exempt
 @require_POST

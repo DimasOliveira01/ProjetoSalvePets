@@ -81,6 +81,32 @@
         </div>
         <br>
 
+        <!--Ativo
+        <div class="form-group">
+            <label class="form-check-label"><b>{% trans "Ativo" %}</b>:</label>
+            <input class="checkboxinput form-check-input" name="ativo" type="checkbox" value="{{pet.ativo|default_if_none:"checked" }}">
+        </div>
+        
+        <div class="form-group"> 
+            <div id="div_id_receberNotificacoes" class="form-check"> 
+                <input type="checkbox" name="ativo" class="checkboxinput form-check-input" value="{{pet.ativo}}" id="id_receberNotificacoes" checked=""> 
+                <label for="id_receberNotificacoes" class="form-check-label">
+                    Receber notificações
+                </label> 
+            </div> 
+        </div>
+        -->
+        <div class="form-row field-ativo">
+            <div class="checkbox-row">
+                <label class="vCheckboxLabel" for="id_ativo"><b>Ativo</b>:</label>
+                {% if pet.ativo == True  %}
+                    <input class="checkboxinput form-check-input" type="checkbox" name="ativo" id="id_ativo" checked>
+                {% else %}
+                    <input class="checkboxinput form-check-input" type="checkbox" name="ativo" id="id_ativo">
+                {% endif %}          
+            </div>
+        </div>
+        <br>
         <!-- Nome -->
         <div class="form-group">
             <label><b>{% trans "Nome" %}</b>:</label>
