@@ -597,18 +597,22 @@ def set_pet_instituicao(request):
                 pet.foto = foto
                 pet.save()
     else:
+        if ativo=='on':
+            ativo=True
+        else:
+            ativo=False
+        
         pet = Pet.objects.create(ativo=ativo, porte=porte, foto=foto, user=user, sexo=sexo, fk_id_instituicao_id=fk_id_instituicao_id)
         if nome:
             pet.nome=nome
         else:
             pet.nome="Sem nome"
             pet.save()
-        if ativo=='on':
-            pet.ativo=True
+
+        if ativo:
+            pet.ativo=ativo
             pet.save()
-        else:
-            pet.ativo=False 
-            pet.save()
+        
         if descricao:
             pet.descricao = descricao
             pet.save()
@@ -656,7 +660,7 @@ def lista_pets_instituicao(request):
     usuario=USUARIO.objects.get(id=id_user)
     if(request.user.usuario.fk_instituicao_id != None  and existe_admin==1):
         id_instituicao_usuario=request.user.usuario.fk_instituicao_id
-        pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, fk_id_instituicao_id=id_instituicao_usuario)
+        pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
         id_user=request.user.id
         usuario=USUARIO.objects.get(id=id_user)
         return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet, 'usuario': usuario})

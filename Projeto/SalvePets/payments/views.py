@@ -72,13 +72,13 @@ class PaymentSuccessView(TemplateView):
     assunto = _("Pedido Recebido!")
     remetente = os.environ.get("EMAIL_HOST_USER")
     #destinatario = str(request.user.email)
-    destinatario = str("brunnopg28@hotmail.com")
+    #destinatario = str("brunnopg28@hotmail.com")
     
     html = loader.render_to_string('emailPedido.html')
     plain_message = strip_tags(html)
 
     # Envio do e-mail
-    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+    #mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 
 @csrf_exempt
