@@ -13,8 +13,8 @@
             
             <p>{% trans "Logo o seu pedido estará na sua casa, qualquer dúvida não hesite em entrar em contato com a nossa equipe!" %}</p>
 
-            <p><b>Identificação do seu pedido: {{order}}</b></p>
-            <p><b>Informações de Entrega:</b></p>
+            <p><b>{% trans "Identificação do seu pedido:" %} {{order}}</b></p>
+            <p><b>{% trans "Informações de Entrega:" %}</b></p>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light" style="text-align: left;">CEP: {{cep}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">Endereço: {{endereco}} {{numero}} {{complemento}}</li>
@@ -24,6 +24,7 @@
             </ul>          
             
             {% include "order_summary.html" with items=order.items.all total_price=total_price %}
+            <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>
         </div>
     </td>
 </tr>
