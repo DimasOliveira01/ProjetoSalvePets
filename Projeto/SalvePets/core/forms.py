@@ -140,3 +140,11 @@ class AdicionarPetInstituicao(forms.ModelForm):
     class Meta:
         model = Pet
         fields = ['foto', 'nome', 'descricao', 'especie', 'raca', 'sexo', 'porte', 'dataNascimento']
+
+
+class SolicitarAdocaoForm(forms.Form):
+    nome = forms.CharField(max_length = 50)
+    numero_celular = forms.CharField(max_length = 16)
+    email = forms.EmailField(max_length = 150)
+
+

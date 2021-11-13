@@ -83,8 +83,7 @@ class PaymentPendingView(TemplateView):
     template_name = "payments/pending.html"
 
 class PaymentSuccessView(TemplateView):
-    template_name = "payments/success.html"    
-        
+    template_name = "payments/success.html"           
 
 @csrf_exempt
 @require_POST

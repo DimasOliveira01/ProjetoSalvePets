@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <!-- Página de Login
+<div class="container mt-4">
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/cadastro-pet/">{% trans "Cadastrar pet" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-perdido/">{% trans "Pets perdidos" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+        </li>
+    </ul>
+</div>
+-->
+<main>
+    <div class="container">
+        <p><h3>{% trans "Detalhes do pet para adoção" %}</h3></p>
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div id="mdb-lightbox-ui">
+                    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="pswp__scroll-wrap">
+                        <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <div class="pswp__counter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdb-lightbox" data-pswp-uid="1">
+            <div class="row product-gallery mx-1">
+                <div class="col-12 mb-0">
+                    <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
+                        <a href="{{pet.foto.url}}" data-size="710x823">
+                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(0.7);">
+                        </a>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
+        <section class="py-2">
+        </section>
+        <h5>{{pet.nome}}</h5> 
+        <p class="pt-1">{{pet.descricao}}</p>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <td>{{pet.raca|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <td>{{pet.sexo|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <td>
+                            {% if pet.porte >= 40 and pet.porte <= 60%}
+                                Pequeno porte
+                            {% elif pet.porte > 60 and pet.porte <= 100 %}
+                                Médio porte
+                            {% else %}
+                                Grande porte
+                            {% endif %}
+                            
+                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <td>{{pet.especie|default_if_none:"-"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Local da Instituição</span></h6>
+                <table class="table">
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Cidade:</th>
+                        <td>{{inst.city|default_if_none:"-"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">Estado:</th>
+                        <td>{{inst.state|default_if_none:"-"}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
+                <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
+                    <div class="g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback="verifyCaptcha">
+                    </div>
+                    <div id="g-recaptcha-error"></div>
+                    <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<br>
+
+<!-- Modal -->
+<div class="modal fade" id="adotar_pet" tabindex="-1" aria-labelledby="adotar_petLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adotar_petLabel">Adotar pet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja adotar este pet?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a href="/solicitar-adocao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Adotar" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+var recaptcha_response = '';
+function submitUserForm() {
+    if(recaptcha_response.length > 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"> <tr> <th class="pl-0 w-25" scope="row">E-mail:</th> <td>{{inst.email|default_if_none:"-"}}</td> </tr> <tr><th class="pl-0 w-25" scope="row">Telefone:</th> <td>{{inst.telefone|default_if_none:"-"}}</td> </tr> </table>';
+        return false;
+    }
+    return true;
+}
+ 
+function verifyCaptcha(token) {
+    recaptcha_response = token;
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+
+{% endblock conteudo %}

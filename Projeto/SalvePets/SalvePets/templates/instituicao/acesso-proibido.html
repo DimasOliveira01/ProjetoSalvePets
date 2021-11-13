@@ -8,19 +8,21 @@
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link  active" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
+                <a class="nav-link" style="color:#495057" href="/administrativo-instituicao/" selected>{% trans "Informações gerais" %}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/" selected>{% trans "Cadastro da Instituição" %}</a>
             </li>
+            {% if usuario.is_admin_instituicao %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
+                <a class="nav-link active" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
@@ -32,5 +34,6 @@
     <!-- Página de adição de usário na instituição-->
     <div class="container mt-4">
         <h2>Desculpa, mas você não pode ter acesso a esta página... :(</h2>
+        <p>A sua Instituição somente terá acesso ao cadastro de Pets para adoção após a aprovação do SalvePets.</p>
     </div>
 {% endblock %}

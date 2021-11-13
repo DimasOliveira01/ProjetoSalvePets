@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm
 from django.db import transaction
 from django.shortcuts import redirect
 from django.db import connection
@@ -20,7 +20,7 @@ from datetime import timedelta
 
 
 from .forms import ContactForm
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
 
@@ -222,7 +222,7 @@ def deletar_pet(request, id):
     return redirect('/lista-pet-usuario')
 
 
-@login_required(login_url='/accounts/login')
+#@login_required(login_url='/accounts/login')
 def pet_informacao(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     creator = pet.user
@@ -544,6 +544,7 @@ def cadastro_pet_instituicao(request):
 @login_required(login_url='/acccounts/login')
 def set_pet_instituicao(request):
     nome=request.POST.get('nome')
+    ativo=request.POST.get('ativo')
     descricao=request.POST.get('descricao')
     especie=request.POST.get('especie')
     raca=request.POST.get('raca')
@@ -563,6 +564,13 @@ def set_pet_instituicao(request):
                 pet.save()
             else:
                 pet.nome="Sem nome"
+                pet.save()
+
+            if ativo=='on':
+                pet.ativo=True
+                pet.save()
+            else:
+                pet.ativo=False 
                 pet.save()
 
             if descricao:
@@ -589,12 +597,22 @@ def set_pet_instituicao(request):
                 pet.foto = foto
                 pet.save()
     else:
-        pet = Pet.objects.create(porte=porte, foto=foto, user=user, sexo=sexo, fk_id_instituicao_id=fk_id_instituicao_id)
+        if ativo=='on':
+            ativo=True
+        else:
+            ativo=False
+        
+        pet = Pet.objects.create(ativo=ativo, porte=porte, foto=foto, user=user, sexo=sexo, fk_id_instituicao_id=fk_id_instituicao_id)
         if nome:
             pet.nome=nome
         else:
             pet.nome="Sem nome"
             pet.save()
+
+        if ativo:
+            pet.ativo=ativo
+            pet.save()
+        
         if descricao:
             pet.descricao = descricao
             pet.save()
@@ -610,7 +628,7 @@ def set_pet_instituicao(request):
 
 @login_required(login_url='/accounts/login')
 def pet_informacao_instituicao(request, id):
-    pet = Pet.objects.get(ativo=True, id=id)
+    pet = Pet.objects.get(id=id)
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
@@ -618,15 +636,36 @@ def pet_informacao_instituicao(request, id):
     print(inst.nome_instituicao)
     return render(request, 'instituicao/pet-instituicao.html', {'pet':pet,'inst':inst,'usuario':usuario})
 
+
+def pet_informacao_instituicao_adocao(request, id):
+    pet = Pet.objects.get(ativo=True, id=id)
+    inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
+    #id_user=request.user.id
+    #print(id_user)
+    #print(inst.nome_instituicao)
+    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst})
+
 def lista_pets_instituicao(request):
-    if(request.user.usuario.fk_instituicao_id != None):
+    cursor = connection.cursor()
+    id_inst=request.user.usuario.fk_instituicao_id
+    query = '''select * from core_usuario where fk_instituicao_id=%s and is_admin_instituicao=True'''
+    cursor.execute(query, [id_inst])
+    usuario = namedtuplefetchall(cursor)
+    if len(usuario)>0:
+        existe_admin=1
+    else:
+        existe_admin=0
+    
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+    if(request.user.usuario.fk_instituicao_id != None  and existe_admin==1):
         id_instituicao_usuario=request.user.usuario.fk_instituicao_id
-        pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, fk_id_instituicao_id=id_instituicao_usuario)
+        pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
         id_user=request.user.id
         usuario=USUARIO.objects.get(id=id_user)
         return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet, 'usuario': usuario})
     else:
-        return render(request, 'instituicao/acesso-proibido.html')
+        return render(request, 'instituicao/acesso-proibido-lista-pet.html')
 
 def lista_pets_adocao(request):
     pet=Pet.objects.filter(encontradoPerdido=None, ativo=True)
@@ -650,6 +689,63 @@ def administrativo_instituicao(request):
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
     return render(request, 'instituicao/administrativoInstituicao.html',{'usuario':usuario})
+'''
+@login_required
+def solicitar_adocao(request):
+    user = request.user
+    form_usuario = UserForm()
+    if request.method == 'POST':
+        form = SolicitarAdocaoForm(request.POST)
+        if form.is_valid():
+            subject = "Solicitação de adoção de Pet"
+            body = {'nome': form.cleaned_data['nome'], 'numero_celular': form.cleaned_data['numero_celular'], 'email': form.cleaned_data['email'],}
+            message = '\n'.join(body.values())
+            try:
+                send_mail(subject, message, settings.EMAIL_HOST_USER, ['COLOCAR EMAIL DA INSTITUICAO'], fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found')
+            return render(request, "index.html")
+    form = SolicitarAdocaoForm()
+    return render(request, 'instituicao/solicitar-adocao.html', {'form':form})
+'''
+@login_required
+def solicitar_adocao(request, id):
+    user = request.user
+    pet=Pet.objects.get(id=id)
+    instituicao= INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
+    subject = "Solicitação de adoção de Pet"
+    body = {'Código do Pet': id, 'nome': user.first_name, 'numero_celular': user.usuario.telefone, 'email': user.email}
+    message = '\n'.join(body.values())
+    try:
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [instituicao[0].email], fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found')
+    return render(request, "instituicao/solicitar-adocao.html")
+
+'''def deletar_pet(request, id):
+    pet=Pet.objects.get(id=id)
+    if pet.user == request.user:
+        pet.delete()
+    return redirect('/lista-pet-usuario')'''
+
+'''@transaction.atomic
+def modificar_cadastro(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
+        if usuario_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            usuario_form.save()            
+            return render(request, 'index.html')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+            usuario_form = UsuarioForm(instance=request.user.usuario)
+            user_form = UserForm(instance=request.user)
+    return render(request, 'modificar-cadastro.html', {
+        'usuario_form': usuario_form,
+        'user_form': user_form,
+    })'''
 
 """@login_required
 @transaction.atomic
