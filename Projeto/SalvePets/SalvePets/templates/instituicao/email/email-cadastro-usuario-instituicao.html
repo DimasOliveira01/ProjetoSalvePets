@@ -1,0 +1,20 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+{% block content %}
+{% with total_price=order.get_total_price %}
+{% autoescape off %}
+<tr>
+    <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
+        <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
+            <p>Olá {{user}}</p>
+            
+            <p>"Você foi adicionado na Instituição: " {{instituicao}}</p>
+
+            <p><b>Caso não trabalhe nesta Instituicão entre imediatamente em contato com o Salve Pets através do e-mail atendimentosalvepets@gmail.com</b></p>       
+            
+        </div>
+    </td>
+</tr>
+{% endautoescape %}
+{% endwith %}
+{% endblock %}

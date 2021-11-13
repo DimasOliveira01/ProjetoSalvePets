@@ -1,0 +1,33 @@
+{% extends "account/email/base_message.html" %}
+{% load i18n %}
+{% block content %}
+{% with total_price=order.get_total_price %}
+{% autoescape off %}
+<tr>
+    <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
+        <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
+
+            <p>{% trans "Solicitação de cadastro de uma nova Instituição" %}</p>
+
+            <p><b>{% trans "Informações para análise:" %}</b></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light" style="text-align: left;">Nome Instituição: {{instituicao.nome_instituicao}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Razão Social: {{instituicao.razao_social}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">CNPJ: {{instituicao.cnpj}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Telefone: {{instituicao.telefone}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">E-mail: {{instituicao.email}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Endereço: {{instituicao.address}}, {{instituicao.number}} - {{instituicao.complement}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Estado: {{instituicao.state}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Cidade: {{instituicao.city}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">Bairro: {{instituicao.district}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">CEP: {{instituicao.postal_code}}</li>
+            </ul>          
+            
+            <!--{% include "order_summary.html" with items=order.items.all total_price=total_price %}
+            <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>-->
+        </div>
+    </td>
+</tr>
+{% endautoescape %}
+{% endwith %}
+{% endblock %}
