@@ -847,7 +847,7 @@ def lista_patrocinar(request):
     instituicao = []
     i = 0
 
-    pet=Pet.objects.filter(ativo=True)
+    pet=Pet.objects.filter(ativo=True, encontradoPerdido=None)  #adicionei esta condição encontradoPerdido=None
     for p in pet:
         usuario.append(USUARIO.objects.get(user_id=p.user_id))
         if usuario[i].fk_instituicao_id:
