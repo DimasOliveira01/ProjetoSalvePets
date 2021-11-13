@@ -431,13 +431,41 @@ def completar_cadastro_instituicao(request):
             form = InstituicaoForm(request.POST, instance=product)
             if form.is_valid():
                 form.save()
+
+                instituicao=INSTITUICAO.objects.get(id=instance.id)
+                email = os.environ.get("EMAIL_HOST_USER")
+                assunto = _("Solicitação de cadastro de Instituição!")
+                remetente = os.environ.get("EMAIL_HOST_USER")
+                destinatario = str(email)            
+                html = loader.render_to_string('instituicao/email/email-solicitacao-cadastro-instituicao.html', {'instituicao': instituicao})
+                plain_message = strip_tags(html)
+
+                # Envio do e-mail
+                mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
                 return render(request, 'index.html')
+            else:
+                messages.error(request, ('Por favor corriga o erro abaixo!'))
         else:
             form = InstituicaoForm(request.POST)
             if form.is_valid():
                 instancia = form.save()
                 usuario = request.user.usuario
                 USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
+
+                instance=request.user.usuario.fk_instituicao
+                instituicao=INSTITUICAO.objects.get(id=instance.id)
+                email = os.environ.get("EMAIL_HOST_USER")
+                assunto = _("Solicitação de cadastro de Instituição!")
+                remetente = os.environ.get("EMAIL_HOST_USER")
+                destinatario = str(email)            
+                html = loader.render_to_string('instituicao/email/email-solicitacao-cadastro-instituicao.html', {'instituicao': instituicao})
+                plain_message = strip_tags(html)
+
+                # Envio do e-mail
+                mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+
                 return render(request, 'index.html')
             else:
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
@@ -448,6 +476,17 @@ def completar_cadastro_instituicao(request):
     return render(request, 'instituicao/modificar-cadastro-instituicao.html', {
         'form': form, 'usuario':usuario
     })
+
+''' print('cpf enviado no post = ', cpf)
+    id_instituicao = USUARIO.objects.filter(id=usuario.id)
+    print ('id da instituicao do usuario = ', id_instituicao[0].fk_instituicao_id)
+    res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
+    print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
+    len(res_filtro)
+    print('tamanhao do vetor: ', len(res_filtro))
+    #USUARIO.objects.filter(request.POST.get('cpf')==teste)
+    INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
+'''
 
 '''
 pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True)
@@ -472,12 +511,30 @@ def adicionar_usuario_instituicao(request):
             cpf=request.POST.get('cpf')
             #Obtêm o objeto usuario que tem o mesmo cpf do POST
             res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
+            
+            #print(user[0].email)
             if len(res_filtro)>0:
+                user=User.objects.filter(id=res_filtro[0].user_id)
                 id_instituicao = USUARIO.objects.filter(id=usuario.id)
                 USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
                 #form = AdicionarUsuarioInstituicaoForm(request.POST)
                 #print (request.POST.get('cpf'))
-                return render(request, 'index.html')
+                
+                instituicao=INSTITUICAO.objects.filter(id=id_instituicao[0].fk_instituicao_id)
+                email = user[0].email
+                msgm=("Solicitação de cadastro na Instituição: " + str(instituicao[0].nome_instituicao))
+                assunto = _(msgm)
+                remetente = os.environ.get("EMAIL_HOST_USER")
+                destinatario = str(email)            
+                html = loader.render_to_string('instituicao/email/email-cadastro-usuario-instituicao.html', {'user': user[0].first_name, 'instituicao': instituicao[0].nome_instituicao})
+                plain_message = strip_tags(html)
+
+                # Envio do e-mail
+                mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+                
+
+                return render(request, 'instituicao/mensagem/confirmacao-cadastro.html')
             else:
                 messages.error(request, 'Por favor selecione um usuário existente!') 
         id_user=request.user.id
@@ -720,7 +777,7 @@ def solicitar_adocao(request, id):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [instituicao[0].email], fail_silently=False)
     except BadHeaderError:
         return HttpResponse('Invalid header found')
-    return render(request, "instituicao/solicitar-adocao.html")
+    return render(request, "instituicao/mensagem/solicitar-adocao.html")
 
 '''def deletar_pet(request, id):
     pet=Pet.objects.get(id=id)
@@ -782,6 +839,7 @@ def adicionar_usuario_instituicao(request):
     len(res_filtro)
     print('tamanhao do vetor: ', len(res_filtro))
     #USUARIO.objects.filter(request.POST.get('cpf')==teste)
+    INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
 '''
 
 def lista_patrocinar(request):
@@ -789,7 +847,7 @@ def lista_patrocinar(request):
     instituicao = []
     i = 0
 
-    pet=Pet.objects.filter(ativo=True)
+    pet=Pet.objects.filter(ativo=True, encontradoPerdido=None)  #adicionei esta condição encontradoPerdido=None
     for p in pet:
         usuario.append(USUARIO.objects.get(user_id=p.user_id))
         if usuario[i].fk_instituicao_id:
