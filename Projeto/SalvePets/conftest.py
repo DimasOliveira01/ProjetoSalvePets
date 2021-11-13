@@ -32,9 +32,7 @@ def item():
 @pytest.fixture
 def order_form_data():
     return {
-        "cpf": "401.142.450-10",
         "name": "Fulano",
-        "email": "test@fulano.com",
         "postal_code": "76900-649",
         "address": "Rua Castro Alves",
         "number": "123",
