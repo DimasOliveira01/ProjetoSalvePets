@@ -6,9 +6,9 @@ from ..models import Item, Order
 
 
 class OrderFactory(factory.django.DjangoModelFactory):
-    cpf = factory.Faker("cpf", locale="pt_BR")
+    #cpf = factory.Faker("cpf", locale="pt_BR")
     name = factory.Faker("name")
-    email = factory.Faker("email")
+    #email = factory.Faker("email")
     postal_code = factory.Faker("postcode", locale="pt_BR")
     address = factory.Faker("street_name", locale="pt_BR")
     number = factory.Faker("building_number", locale="pt_BR")
