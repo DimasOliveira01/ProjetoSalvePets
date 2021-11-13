@@ -46,7 +46,7 @@
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 500px">
                         <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 500px; transform-origin: center center; transform: scale(1);">
                     </figure>
-                    <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    <!--<a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>-->
                 </div>
                 
             </div>
@@ -100,7 +100,25 @@
                 </tbody>
             </table>
 
-            <div class="mt-4"> <span class="fw-light">Contato</span>
+
+
+
+
+            <div class="mt-4"> <h6><span class="pl-0 w-25">Contato</span></h6>
+                <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
+                    <div class="g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback="verifyCaptcha">
+                    <!--<div class="g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback="verifyCaptcha">-->
+                    </div>
+                    <div id="g-recaptcha-error"></div>
+                    <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
+                </form>
+            </div>
+
+
+
+
+
+            <!--<div class="mt-4"> <span class="fw-light">Contato</span>
                 <table class="table">
                     <tr>
                         <th class="pl-0 w-25" scope="row">E-mail:</th>
@@ -111,13 +129,14 @@
                         <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
                     </tr>
                 </table>
-            </div>
+            </div>-->
         </div>
+        <br>
         {% if request.user == pet.user %}
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluir_pet">{% trans "Excluir" %}</button>
             <a href="/cadastro-pet/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
         {% endif %}
-    </div>
+    </div> 
 
 
 <!-- Modal -->
@@ -143,5 +162,25 @@
 </main>
 <br>
 
+
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+var recaptcha_response = '';
+function submitUserForm() {
+    if(recaptcha_response.length > 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"><tr><th class="pl-0 w-25" scope="row">E-mail:</th><td>{{creator.email|default_if_none:"-"}}</td></tr><tr><th class="pl-0 w-25" scope="row">Telefone:</th><td>{{creator.usuario.telefone|default_if_none:"-"}}</td></tr></table>';
+        return false;
+    }
+    return true;
+}
+ 
+function verifyCaptcha(token) {
+    recaptcha_response = token;
+    document.getElementById('g-recaptcha-error').innerHTML = '';
+}
+</script>
+
+<!------------------------------------------------------>
 
 {% endblock conteudo %}
