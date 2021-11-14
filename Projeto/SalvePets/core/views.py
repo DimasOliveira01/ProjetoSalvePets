@@ -443,7 +443,7 @@ def completar_cadastro_instituicao(request):
                 # Envio do e-mail
                 mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
-                return render(request, 'index.html')
+                return render(request, 'instituicao/administrativoInstituicao.html')
             else:
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
         else:
@@ -452,9 +452,8 @@ def completar_cadastro_instituicao(request):
                 instancia = form.save()
                 usuario = request.user.usuario
                 USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
-
-                instance=request.user.usuario.fk_instituicao
-                instituicao=INSTITUICAO.objects.get(id=instance.id)
+                
+                instituicao=INSTITUICAO.objects.get(id=instancia.id)
                 email = os.environ.get("EMAIL_HOST_USER")
                 assunto = _("Solicitação de cadastro de Instituição!")
                 remetente = os.environ.get("EMAIL_HOST_USER")
@@ -466,7 +465,7 @@ def completar_cadastro_instituicao(request):
                 mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
 
-                return render(request, 'index.html')
+                return render(request, 'instituicao/administrativoInstituicao.html')
             else:
                 messages.error(request, ('Por favor corriga o erro abaixo!'))
     else:
@@ -768,6 +767,21 @@ def solicitar_adocao(request):
 @login_required
 def solicitar_adocao(request, id):
     user = request.user
+    usuario = request.user.usuario
+    pet = Pet.objects.get(id=id)
+    instituicao=INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
+    email = instituicao[0].email
+    assunto = _("Solicitação de adoção de Pet")
+    remetente = os.environ.get("EMAIL_HOST_USER")
+    destinatario = str(email)            
+    html = loader.render_to_string('instituicao/email/email-solicitar-adocao.html', {'user': user, 'usuario': usuario, 'pet': pet})
+    plain_message = strip_tags(html)
+
+    # Envio do e-mail
+    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+    '''
+    user = request.user
     pet=Pet.objects.get(id=id)
     instituicao= INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
     subject = "Solicitação de adoção de Pet"
@@ -777,6 +791,7 @@ def solicitar_adocao(request, id):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [instituicao[0].email], fail_silently=False)
     except BadHeaderError:
         return HttpResponse('Invalid header found')
+    '''
     return render(request, "instituicao/mensagem/solicitar-adocao.html")
 
 '''def deletar_pet(request, id):
