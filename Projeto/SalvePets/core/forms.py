@@ -1,3 +1,4 @@
+from django.db.models.fields import CharField
 from django.forms.forms import Form
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
@@ -39,7 +40,7 @@ class UsuarioForm(forms.ModelForm):
     #cpfcnpj = CpfcnpjField(label='CPF')
     #dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'], label=_('Data de Nascimento'))
     dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), label=_('Data de Nascimento'))
-    #telefone = TelefoneField(required=False, label=_('Número de Telefone'))
+    telefone = forms.CharField(required=True, label=_('Número de Celular'))
     #receberNotificacoes = forms.BooleanField(required=False, label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)')
     class Meta:
         model = USUARIO
