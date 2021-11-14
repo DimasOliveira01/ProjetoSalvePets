@@ -41,3 +41,46 @@ function validateSize(input) {
         }
     }
 }
+
+function updateTextInput()
+{
+    var value = document.getElementById("range").value;
+    var img = document.getElementById('imageRange');
+    img.height = value
+
+    if (value >= 40 && value < 67){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary active")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary")
+    }
+    else if (value >= 67 && value < 94){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary active")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary")
+    }
+    else if (value >= 94 && value <= 120){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary active")
+    }
+}
+
+function SetSize(porte)
+{
+    var tamanho;
+
+    switch (porte){
+        case 'pequeno':
+            tamanho = 40
+            break;
+        case 'medio':
+            tamanho = 80
+            break;
+        case 'grande':
+            tamanho = 120
+            break;
+    }
+
+    document.getElementById("range").value = tamanho;
+    updateTextInput();
+}

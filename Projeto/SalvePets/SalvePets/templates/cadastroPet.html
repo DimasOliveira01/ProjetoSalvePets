@@ -27,10 +27,6 @@
     
 </style>
 
-<script type="text/javascript">
-
-    </script>
-
 <!-- Guias -->
 <div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
@@ -170,9 +166,9 @@
         <!-- Porte -->
         <div class="form-group">
             <label><b>{% trans "Porte" %}</b>: *</label><br>
-            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
-            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
-            <button class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
+            <button id="btn-pequeno-porte" class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
+            <button id="btn-medio-porte" class="btn btn-primary active" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
+            <button id="btn-grande-porte" class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
 
             <table class="fixed">
                 <tr>
@@ -230,35 +226,6 @@
 <br><br>
 
 <script>
-
-    function updateTextInput()
-    {
-        
-        var value = document.getElementById("range").value;
-        var img = document.getElementById('imageRange');
-        img.height = value
-    }
-
-    function SetSize(porte)
-    {
-        var tamanho;
-
-        switch (porte){
-            case 'pequeno':
-                tamanho = 40
-                break;
-            case 'medio':
-                tamanho = 80
-                break;
-            case 'grande':
-                tamanho = 120
-                break;
-        }
-
-        document.getElementById("range").value = tamanho;
-        updateTextInput();
-    }
-
 
     var geodjango_id_coordenada = {};
     geodjango_id_coordenada.fieldid = 'id_coordenada';
