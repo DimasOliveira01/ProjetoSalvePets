@@ -5,7 +5,7 @@
 {% block head_title %}{% trans "Confirmar endereço de e-mail" %}{% endblock %}
 
 {% block conteudo %}
-
+<div class="container mt-4">
     <h2>{% trans "Confirmar endereço de e-mail" %}</h2>
 
     {% if confirmation %}
@@ -19,5 +19,5 @@
         {% url 'account_email' as email_url %}
         <p>{% blocktrans %}Esse link de confirmação de e-mail expirou ou é inválido. Por favor, <a href="{{ email_url }}">, solicite uma nova confirmação de e-mail</a>.{% endblocktrans %}</p>
     {% endif %}
-
+</div>
 {% endblock %}
