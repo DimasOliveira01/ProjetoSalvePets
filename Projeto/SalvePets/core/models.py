@@ -35,6 +35,7 @@ SEXO = (
 # ===       Tabelas        ===
 
 class INSTITUICAO(models.Model):
+    """ Modelo de dados de instituição """
     ativo = models.BooleanField(default=True, blank=False, null=False)
     nome_instituicao = models.CharField(max_length=50, null=True)
     razao_social = models.CharField(max_length=50, null=True)
@@ -51,22 +52,30 @@ class INSTITUICAO(models.Model):
 
 
 class AVALIACAO(models.Model):
+    """ Modelo de dados de avaliação """
     FK_idInstituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
     FK_idAvaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
     nota = models.DecimalField(max_digits=30, decimal_places=15)
     comentario = models.TextField()
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-    
+
 
 class USUARIO(models.Model):
+    """ Modelo de dados de usuário """
     user = models.OneToOneField(User, on_delete=CASCADE)
-    tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
-    cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False, null=False)
+    tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum',
+                                   verbose_name=_("Tipo de usuário"), blank=False, null=False)
+    cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,
+                               null=False)
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
-    telefone = models.CharField(max_length=16, verbose_name=_("Número de celular (somente números)"), blank=True, null=True)
+    telefone = models.CharField(max_length=16,
+                                verbose_name=_("Número de celular (somente números)"), blank=True,
+                                null=True)
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    receberNotificacoes = models.BooleanField(default=True, verbose_name=_("Receber notificações"), blank=False, null=False)
+    receberNotificacoes = models.BooleanField(default=True,
+                                              verbose_name=_("Receber notificações"), blank=False,
+                                              null=False)
     site = models.CharField(max_length=100, verbose_name=_("Site"), blank=True, null=True)
     idImagem = models.ImageField(upload_to='usuario', blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
@@ -84,12 +93,15 @@ def save_user_profile(sender, instance, **kwargs):
     instance.usuario.save()
 
 class Pet(models.Model):
+    """ Modelo de dados de pet """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, blank=True, null=True)
+    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, blank=True,
+                                          null=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
     dataPerdaEncontro = models.DateField(blank=True, null=True)
-    especie = models.CharField(max_length=50, choices=ESPECIE, default="Cachorro", verbose_name=_("Espécie"), blank=False, null=False)
+    especie = models.CharField(max_length=50, choices=ESPECIE, default="Cachorro",
+                               verbose_name=_("Espécie"), blank=False, null=False)
     raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=30, blank=True, null=True)
     porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
@@ -99,13 +111,15 @@ class Pet(models.Model):
     coordenada = models.PointField(srid=4326, blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-    sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
+    sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"),
+                            blank=True, null=True)
     dataNascimento = models.DateField(blank=True, null=True)
-    
+
     def __str__(self):
-        return self.nome
+        return f'{self.nome}'
 
 class PATROCINIO(models.Model):
+    """ Modelo de dados de patrocínio """
     FK_idUsuario = models.ManyToManyField(User)
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     observacoes = models.TextField(blank=True, null= True)
@@ -120,6 +134,7 @@ class PATROCINIO(models.Model):
         ordering = ['data']
 
 class ADOCAO(models.Model):
+    """ Modelo de dados de adoção """
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
     FK_idUsuario = models.ForeignKey(User, on_delete=models.RESTRICT)
     status = models.CharField(max_length=20)

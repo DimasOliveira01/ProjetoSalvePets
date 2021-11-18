@@ -1,11 +1,13 @@
+from django import forms
+from django.utils.translation import ugettext_lazy as _
 from django.db.models.fields import CharField
 from django.forms.forms import Form
+from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
-from django import forms
-from .models import Pet, USUARIO, User, ADOCAO, INSTITUICAO
+from .models import Pet, USUARIO, ADOCAO, INSTITUICAO
 #from .custom_form_fields import cpfcnpjField, TelefoneField
-from django.utils.translation import ugettext_lazy as _
+
 
 
 
@@ -16,6 +18,7 @@ for i in range(1900,2021):
     BIRTH_YEAR_CHOICES.append(str(i))
 
 class SignupForm(forms.Form):
+    """ Formulário de login """
     first_name = forms.CharField(max_length=30, label=_('Nome:'))
     last_name = forms.CharField(max_length=30, label=_('Sobrenome'))
 
@@ -25,6 +28,7 @@ class SignupForm(forms.Form):
         user.save()
 
 class PetForm(forms.ModelForm):
+    """ Formulário de pet """
     class Meta:
         model = Pet
         fields = '__all__'
@@ -37,25 +41,40 @@ class UserForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name')
 
 class UsuarioForm(forms.ModelForm):
+    """ Formulário de inclusão de usuário """
     #cpfcnpj = CpfcnpjField(label='CPF')
-    #dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'], label=_('Data de Nascimento'))
-    dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), label=_('Data de Nascimento'))
+    '''dataNascimento = forms.DateField(required=True,
+    widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'],
+    label=_('Data de Nascimento'))'''
+    dataNascimento = forms.DateField(required=True,
+                                     widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
+                                     label=_('Data de Nascimento'))
     telefone = forms.CharField(required=True, label=_('Número de Celular'))
-    #receberNotificacoes = forms.BooleanField(required=False, label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)')
+    '''receberNotificacoes = forms.BooleanField(required=False,
+    label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser
+    notificado sobre pets perdidos ou encontrados.)')'''
     class Meta:
         model = USUARIO
-        fields = ('cpfcnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes') #Retirei tipoUsuairo
+        #Retirei tipoUsuario
+        fields = ('cpfcnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes')
 
-
-#Classe que seria usada como "Cadastro Único" - li que é possível fazer funcionar, só preciso entender melhor como.
-#Por enquanto não está implementada no Settings, então não é utilizada
 
 class ExtendedSignupForm(SignupForm):
+    """ Classe que seria usada como "Cadastro Único" - li que é possível fazer funcionar,
+só preciso entender melhor como. Por enquanto não está implementada no Settings,
+então não é utilizada """
     cpfcnpj = forms.CharField(max_length=14, label='CPF')
-    #dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y'], label=_('Data de Nascimento'))
-    dataNascimento = forms.DateField(required=True, widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES), label=_('Data de Nascimento'))
+    '''dataNascimento = forms.DateField(required=True,
+    widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y'],
+    label=_('Data de Nascimento'))'''
+    dataNascimento = forms.DateField(required=True,
+                                     widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
+                                     label=_('Data de Nascimento'))
     telefone = forms.CharField(required=False, max_length=16, label=_('Número de Telefone'))
-    receberNotificacoes = forms.BooleanField(required=False, label = _('Desejo receber notificações'), help_text=_('(Marque este campo caso deseje ser notificado sobre pets perdidos ou encontrados.)'))
+    receberNotificacoes = forms.BooleanField(required=False, label =
+                                             _('Desejo receber notificações'),
+                                             help_text=_('(Marque este campo caso deseje ser'+
+                                             'notificado sobre pets perdidos ou encontrados.)'))
     #siteUrl = forms.URLField(initial='http://', label='URL do seu Site')
 
 
@@ -64,6 +83,7 @@ class ExtendedSignupForm(SignupForm):
 
 #Projeto integrado II
 class ContactForm(forms.Form):
+    """ Formulário de endereço """
     nome_fantasia = forms.CharField(max_length = 50)
     razao_social = forms.CharField(max_length = 50)
     numero_cnpj = forms.CharField(max_length = 18)
@@ -72,11 +92,13 @@ class ContactForm(forms.Form):
 
 
 class AdocaoForm(forms.ModelForm):
+    """ Formulário de adoção """
     class Meta:
         model = ADOCAO
         fields = '__all__'
 
 class InstituicaoForm(forms.ModelForm):
+    """ Formulário de cadastro de instituição """
     class Meta:
         model = INSTITUICAO
         fields = [
@@ -93,7 +115,7 @@ class InstituicaoForm(forms.ModelForm):
             'state',
             'city',
         ]
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -135,17 +157,18 @@ class InstituicaoForm(forms.ModelForm):
         )
 
 class AdicionarUsuarioInstituicaoForm(forms.Form):
+    """ Formulário de inclusão de usuário vinculado a uma instituição """
     cpf = forms.CharField(max_length=14)
 
 class AdicionarPetInstituicao(forms.ModelForm):
+    """ Formulário de inclusão de pet vinculado a uma instituição """
     class Meta:
         model = Pet
         fields = ['foto', 'nome', 'descricao', 'especie', 'raca', 'sexo', 'porte', 'dataNascimento']
 
 
 class SolicitarAdocaoForm(forms.Form):
+    """ Formulário de solicitação de adoção """
     nome = forms.CharField(max_length = 50)
     numero_celular = forms.CharField(max_length = 16)
     email = forms.EmailField(max_length = 150)
-
-

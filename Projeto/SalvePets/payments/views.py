@@ -1,4 +1,5 @@
 import json
+import os
 
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -11,7 +12,6 @@ from django.views.generic import CreateView, TemplateView
 from django.core import mail
 from django.utils.html import strip_tags
 from django.template import loader
-import os
 from django.utils.translation import ugettext_lazy as _
 from django.http import request
 
@@ -23,6 +23,7 @@ from .models import Payment
 
 
 class PaymentCreateView(CreateView):
+    """ Criação de tela do pagamento """
     model = Payment
     form_class = PaymentForm
 
@@ -44,7 +45,7 @@ class PaymentCreateView(CreateView):
 
         if status == "approved":
             redirect_url = "payments:success"
-            
+
             order_id = self.request.session.get("order_id")
             order = get_object_or_404(Order, id=order_id)
             #itens = get_object_or_404(Item, id=order_id)
@@ -53,9 +54,16 @@ class PaymentCreateView(CreateView):
             #id = str(id)
             assunto = _("Pedido Recebido!")
             remetente = os.environ.get("EMAIL_HOST_USER")
-            destinatario = str(email)            
-            #html = loader.render_to_string('emails/pet_encontrado.html', {'id': id, 'foto': foto, 'nome_pet': nome_pet})
-            html = loader.render_to_string('emailPedido.html', {'id':order_id, 'order': order, 'price': order.get_total_price, 'nome': order.name, 'cep':order.postal_code, 'endereco':order.address,'cidade': order.city, 'estado': order.state, 'bairro': order.district,'numero': order.number,'complemento': order.complement})
+            destinatario = str(email)  
+            """ html = loader.render_to_string('emails/pet_encontrado.html',
+            {'id': id, 'foto': foto, 'nome_pet': nome_pet}) """
+            html = loader.render_to_string('emailPedido.html',
+                                           {'id':order_id, 'order': order,
+                                            'price': order.get_total_price, 'nome': order.name,
+                                            'cep':order.postal_code, 'endereco':order.address,
+                                            'cidade': order.city, 'estado': order.state,
+                                            'bairro': order.district,'numero': order.number,
+                                            'complemento': order.complement})
             plain_message = strip_tags(html)
 
             # Envio do e-mail
@@ -76,13 +84,16 @@ class PaymentCreateView(CreateView):
 
 
 class PaymentFailureView(TemplateView):
+    """ Tela de erro no pagamento """
     template_name = "payments/failure.html"
 
 
 class PaymentPendingView(TemplateView):
+    """ Tela de pagamento pendente """
     template_name = "payments/pending.html"
 
 class PaymentSuccessView(TemplateView):
+    """ Tela de pagamento realizado com sucesso """
     template_name = "payments/success.html"           
 
 @csrf_exempt
@@ -94,5 +105,3 @@ def payment_webhook(request):
         form.save()
 
     return JsonResponse({})
-
-

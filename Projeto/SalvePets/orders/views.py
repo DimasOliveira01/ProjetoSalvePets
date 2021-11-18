@@ -11,12 +11,13 @@ from .models import Item, Order
 
 
 class OrderCreateView(CreateView):
+    """ Cria a tela de compra de produtos """
     model = Order
     form_class = OrderCreateForm
 
     def form_valid(self, form):
         cart = Cart(self.request)
-        if cart: 
+        if cart:
             order = form.save()
 
             usuario = self.request.user
