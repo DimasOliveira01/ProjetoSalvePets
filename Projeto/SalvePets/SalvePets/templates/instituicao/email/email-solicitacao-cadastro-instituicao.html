@@ -8,6 +8,11 @@
         <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
 
             <p>{% trans "Solicitação de cadastro de uma nova Instituição" %}</p>
+            <p><b>{% trans "Usuário:" %}</b></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light" style="text-align: left;">Nome: {{user.first_name}} {{user.last_name}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">CPF: {{usuario.cpfcnpj}}</li>
+            </ul> 
 
             <p><b>{% trans "Informações para análise:" %}</b></p>
             <ul class="list-group list-group-flush">

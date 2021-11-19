@@ -60,7 +60,26 @@
     </div>
     <section class="py-2">
     </section>
-    <p><h3>{% trans "Lista de Pets da Instituição" %}</h3></p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <section class="py-2">
+        </section>
+        <button class="btn btn-outline-dark align-center" type="submit"> 
+            {% trans "Pesquisar" %}
+        </button>
+    </form>
+    
+    <section class="py-2">
+    </section>
+
+    {% if verifica_pesquisa %}
+        <h3><a href="../lista-pet-instituicao/">Listar todos os Pets</a></h3>
+        <p><h3>{% trans "Resultado da pesquisa" %}</h3></p>
+    {% else %}
+        <p><h3>{% trans "Lista de Pets da Instituição" %}</h3></p>
+    {% endif %}
         <div class="row">
             {% for p in pet %}
             
@@ -71,6 +90,13 @@
             <div class="card-body">
                 <h5 class="card-title">{{ p.nome }}</h5>
                 <p class="card-text">{{p.descricao}}</p>
+                <p class="card-text">
+                    {% if p.ativo %}
+                        <b>Ativo</b>
+                    {% else %}
+                        <b>Inativo</b>
+                    {% endif %}
+                </p>
                 <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
             </div>
             </div>

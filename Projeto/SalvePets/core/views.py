@@ -21,7 +21,7 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from .forms import ContactForm
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm
 from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
 
 # === Funções com render simples ===
@@ -462,13 +462,15 @@ def completar_cadastro_instituicao(request):
             if form.is_valid():
                 form.save()
 
+                usuario=request.user.usuario
+                user=request.user
                 instituicao=INSTITUICAO.objects.get(id=instance.id)
                 email = os.environ.get("EMAIL_HOST_USER")
                 assunto = _("Solicitação de cadastro de Instituição!")
                 remetente = os.environ.get("EMAIL_HOST_USER")
                 destinatario = str(email)
                 html = loader.render_to_string('instituicao/email/email-solicitacao-cadastro-instituicao.html',
-                                               {'instituicao': instituicao})
+                                               {'instituicao': instituicao, 'usuario':usuario, 'user': user})
                 plain_message = strip_tags(html)
 
                 # Envio do e-mail
@@ -767,10 +769,59 @@ def lista_pets_instituicao(request):
         pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
         id_user=request.user.id
         usuario=USUARIO.objects.get(id=id_user)
-        return render(request, 'instituicao/lista-pets-instituicao.html',{'pet':pet,
+        form = PesquisarPetForm()
+        if request.method == "POST":
+            #obtêm o dado enviado no POST
+            id_pet=request.POST.get('id_pet')
+            pet = Pet.objects.filter(id=id_pet)
+            verifica_pesquisa=True
+            return render(request, 'instituicao/lista-pets-instituicao.html',{'verifica_pesquisa':verifica_pesquisa, 'form': form, 'pet':pet,
+                                                                          'usuario': usuario})
+        else:
+            verifica_pesquisa=False
+            return render(request, 'instituicao/lista-pets-instituicao.html',{'verifica_pesquisa':verifica_pesquisa,'form': form, 'pet':pet,
                                                                           'usuario': usuario})
     #else:
     return render(request, 'instituicao/acesso-proibido-lista-pet.html')
+
+
+
+"""
+def adicionar_usuario_instituicao(request):
+    if request.user.usuario.is_admin_instituicao is True:
+        form = AdicionarUsuarioInstituicaoForm()
+        if request.method == "POST":
+            #obtêm o dado do usuário logado
+            usuario = request.user.usuario
+            #obtêm o dado enviado no POST
+            cpf=request.POST.get('cpf')
+            #Obtêm o objeto usuario que tem o mesmo cpf do POST
+            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
+
+            #print(user[0].email)
+            if len(res_filtro)>0:
+                user=User.objects.filter(id=res_filtro[0].user_id)
+                id_instituicao = USUARIO.objects.filter(id=usuario.id)
+                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
+                #form = AdicionarUsuarioInstituicaoForm(request.POST)
+                #print (request.POST.get('cpf'))
+                
+                return render(request, 'instituicao/mensagem/confirmacao-cadastro.html')
+            #else:
+            messages.error(request, 'Por favor selecione um usuário existente!')
+        id_user=request.user.id
+        usuario=USUARIO.objects.get(id=id_user)
+        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
+            'form': form, 'usuario': usuario
+        })
+    #else:
+    user=request.user.usuario
+    return render(request, 'instituicao/acesso-proibido.html',{'user':user})
+"""
+
+
+
+
 
 def lista_pets_adocao(request):
     """ Tela que exibe a lista de pets a serem adotados """
