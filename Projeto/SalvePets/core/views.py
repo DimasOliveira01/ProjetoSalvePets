@@ -773,7 +773,7 @@ def lista_pets_instituicao(request):
         if request.method == "POST":
             #obtêm o dado enviado no POST
             id_pet=request.POST.get('id_pet')
-            pet = Pet.objects.filter(id=id_pet)
+            pet = Pet.objects.filter(id=id_pet, fk_id_instituicao_id=id_instituicao_usuario)
             verifica_pesquisa=True
             return render(request, 'instituicao/lista-pets-instituicao.html',{'verifica_pesquisa':verifica_pesquisa, 'form': form, 'pet':pet,
                                                                           'usuario': usuario})

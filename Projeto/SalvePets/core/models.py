@@ -5,7 +5,7 @@ from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
-from localflavor.br.models import BRPostalCodeField, BRStateField, BRCNPJField
+from localflavor.br.models import BRCPFField, BRPostalCodeField, BRStateField, BRCNPJField
 
 # ===       Escolhas       ===
 
@@ -66,8 +66,8 @@ class USUARIO(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum',
                                    verbose_name=_("Tipo de usuário"), blank=False, null=False)
-    cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,
-                               null=False)
+    #cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,null=False)
+    cpfcnpj = BRCPFField("CPF")
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
     telefone = models.CharField(max_length=16,
                                 verbose_name=_("Número de celular (somente números)"), blank=True,
