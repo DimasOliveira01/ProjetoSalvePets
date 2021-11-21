@@ -49,6 +49,9 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/cadastrar-doacao/">{% trans "Cadastrar doação" %}</a>
+                </li>
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
@@ -70,9 +73,7 @@
             {% trans "Pesquisar" %}
         </button>
     </form>
-    
-    <section class="py-2">
-    </section>
+
 
     {% if verifica_pesquisa %}
         <h3><a href="../lista-pet-instituicao/">Listar todos os Pets</a></h3>
@@ -80,31 +81,31 @@
     {% else %}
         <p><h3>{% trans "Lista de Pets da Instituição" %}</h3></p>
     {% endif %}
-        <div class="row">
-            {% for p in pet %}
-            
-            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-            <a href="../pet-informacao-instituicao/{{ p.id }}">
-                <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">{{ p.nome }}</h5>
-                <p class="card-text">{{p.descricao}}</p>
-                <p class="card-text">
-                    {% if p.ativo %}
-                        <b>Ativo</b>
-                    {% else %}
-                        <b>Inativo</b>
-                    {% endif %}
-                </p>
-                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
-            </div>
-            </div>
-            
-            {% endfor %}
-        </div>
-    </div>
 
+        <div class="container">
+                <div class="row">
+                    {% for p in pet %}            
+                        <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
+                            <a href="../pet-informacao-instituicao/{{ p.id }}">
+                                <img src="{{p.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <p class="mb-2 text-muted text-uppercase small">
+                                {% if p.ativo %}
+                                    Ativo
+                                {% else %}
+                                    Inativo
+                                {% endif %}</p>
+                                <h5 class="card-title">{{ p.nome }}</h5>
+                                <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
+                                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
+                            </div>
+                        </div>            
+                    {% endfor %}
+                </div>
+            </div>
+
+        
 
     
     

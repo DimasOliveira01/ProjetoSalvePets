@@ -1,18 +1,14 @@
 function atualizarDoacao(v)
 {
-    document.getElementById('doar').innerHTML = "Doar R$ " + v;
     switch(v){
         case 20:
-            document.getElementById("doar").href="https://pag.ae/7XDvbF6CG/button";
-            document.getElementById("valor").value=20  
+            document.getElementById("doacao_simples_input").value=20 
             break;
         case 50:
-            document.getElementById("doar").href="https://pag.ae/7XDvnBuw4/button";
-            document.getElementById("valor").value=50
+            document.getElementById("doacao_simples_input").value=50
             break;
         case 100:
-            document.getElementById("doar").href="https://pag.ae/7XDvnLTsK/button";
-            document.getElementById("valor").value=100
+            document.getElementById("doacao_simples_input").value=100
             break;
     }
 }

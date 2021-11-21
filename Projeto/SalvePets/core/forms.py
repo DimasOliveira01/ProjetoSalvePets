@@ -176,3 +176,61 @@ class SolicitarAdocaoForm(forms.Form):
     nome = forms.CharField(max_length = 50)
     numero_celular = forms.CharField(max_length = 16)
     email = forms.EmailField(max_length = 150)
+
+class DoacaoCadastroForm(forms.ModelForm):
+    class Meta:
+        model = INSTITUICAO
+        fields = [
+            'doacao_valor_20_link',
+            'doacao_valor_50_link',
+            'doacao_valor_100_link',
+            'doacao_limpeza_link',
+            'doacao_limpeza_valor',
+            'doacao_alimentacao_link',
+            'doacao_alimentacao_valor',
+            'doacao_medicamentos_link',
+            'doacao_medicamentos_valor',
+            'doacao_diaria_internacao_link',
+            'doacao_diaria_internacao_valor',
+            'doacao_patrocinio_codigo',
+            'doacao_patrocinio_valor',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.form_action = "."
+        self.helper.add_input(
+            Submit(
+                "submit",
+                "Atualizar",
+                css_class="btn btn-outline-dark",
+            )
+        )
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                Div(
+                    Field("doacao_limpeza_link", wrapper_class="col"),
+                    Field("doacao_limpeza_valor", wrapper_class="col"),
+                    css_class="row",
+                ),
+                Div(
+                    Field("doacao_alimentacao_link", wrapper_class="col"),
+                    Field("doacao_alimentacao_valor", wrapper_class="col"),
+                    css_class="row",
+                ),
+                Div(
+                    Field("doacao_medicamentos_link", wrapper_class="col"),
+                    Field("doacao_medicamentos_valor", wrapper_class="col"),
+                    css_class="row",
+                ),
+                Div(
+                    Field("doacao_diaria_internacao_link", wrapper_class="col"),
+                    Field("doacao_diaria_internacao_valor", wrapper_class="col"),
+                    css_class="row",
+                ),
+                css_class="border-bottom mb-3",
+            )
+        )

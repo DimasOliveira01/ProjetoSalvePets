@@ -5,6 +5,47 @@
 
 {% block conteudo %}
 
+<script>
+
+function submit_limpeza(){
+    document.getElementById("limpeza1").submit();
+    document.getElementById("limpeza2").submit();
+}
+
+function submit_alimentacao(){
+    document.getElementById("alimentacao1").submit();
+    document.getElementById("alimentacao2").submit();
+}
+
+function submit_medicamentos(){
+    document.getElementById("medicamentos1").submit();
+    document.getElementById("medicamentos2").submit();
+}
+
+function submit_diaria_internacao(){
+    document.getElementById("diaria_internacao1").submit();
+    document.getElementById("diaria_internacao2").submit();
+}
+function submit_doacao_simples(v){
+
+    switch(v){
+        case 20:
+            document.getElementById("doacao_simples_input").value=20 
+            break;
+        case 50:
+            document.getElementById("doacao_simples_input").value=50
+            break;
+        case 100:
+            document.getElementById("doacao_simples_input").value=100
+            break;
+    }
+
+    document.getElementById("doacao_simples_1").submit();
+    document.getElementById("doacao_simples_2").submit();
+}
+
+</script>
+
 <main>
     <div class="container">
         <!-- Guias -->
@@ -78,29 +119,20 @@
                     preenchimento de valor: 20 (pré-selecionado), 50, 100 e em branco
                     -->
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked onclick="atualizarDoacao(20)">
-                    <label class="form-check-label" for="inlineRadio1">R$ 20</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"  onclick="atualizarDoacao(50)">
-                    <label class="form-check-label" for="inlineRadio2">R$ 50</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="atualizarDoacao(100)">
-                    <label class="form-check-label" for="inlineRadio3">R$ 100</label>
-                </div>
-                <br><br>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                        <form enctype="multipart/form-data" action="submit", method="POST" target="_blank">
-                            {% csrf_token %}
-                            <input type="hidden" name="valor" id="valor" value="20" />
-                            <button id="doar" type="submit" class="btn btn-primary w-100" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray";>{% trans "Doar R$ 20" %}</button>
-                        </form>
-                        <form id="form1" enctype="multipart/form-data" action="submit", method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="valor" id="valor" value="0" />
-                        </form>
+                    <form id="doacao_simples_1" enctype="multipart/form-data" action="submit", method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="doacao_simples_input" id="doacao_simples_input" value="20" />
+                    </form>
+                    <form id="doacao_simples_2_20" enctype="multipart/form-data" action="{{instituicao.doacao_valor_20_link}}" target="_blank">
+                        <button id="doacao_simples_btn" onclick="submit_doacao_simples(20)" type="submit" class="btn btn-primary w-100" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;">{% trans "Doar R$ 20" %}</button>
+                    </form>
+                    <form id="doacao_simples_2_50" enctype="multipart/form-data" action="{{instituicao.doacao_valor_50_link}}" target="_blank">
+                        <button id="doacao_simples_btn" onclick="submit_doacao_simples(50)" type="submit" class="btn btn-primary w-100" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray">{% trans "Doar R$ 50" %}</button>
+                    </form>
+                    <form id="doacao_simples_2_100" enctype="multipart/form-data" action="{{instituicao.doacao_valor_100_link}}" target="_blank">
+                        <button id="doacao_simples_btn" onclick="submit_doacao_simples(100)" type="submit" class="btn btn-primary w-100" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray">{% trans "Doar R$ 100" %}</button>
+                    </form>
                 </div>
                 <br>
                 <!-- / CA2 - Doar para este abrigo / -->
@@ -118,7 +150,7 @@
                     Abrigo e valor: Limpeza, Alimentação, Medicamentos e Diária de Internação
                     -->
                 
-                <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary"tyle="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
+                <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
                 <br><br>
                 <!-- / CA4 - Ajude este pet / -->
 
@@ -135,7 +167,7 @@
                     -->
 
                 <form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
-                    <input type="hidden" name="code" value="7B645836A7A75F73348FAFA2430F1399" />
+                    <input type="hidden" name="code" value="{{instituicao.doacao_patrocinio_codigo}}" />
                     <input type="hidden" name="iot" value="button" />
                     <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/205x30-contratar-azul.gif" name="submit" width="205" height="30" />
                 </form>
@@ -163,61 +195,53 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Limpeza</th>
-                                    <td>R$ 50,00</td>
-                                    <td>
-                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                                            <input type="hidden" name="currency" value="BRL" />
-                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                                            <input type="hidden" name="iot" value="button" />
-                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                    <td>R$ {{instituicao.doacao_limpeza_valor|default_if_none:""}}</td>
+                                    <td>                            
+                                        <form id="limpeza1" enctype="multipart/form-data" action="submit", method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="limpeza" id="limpeza" value="limpeza" />
+                                        </form>               
+                                        <form id="limpeza2" enctype="multipart/form-data" action="{{instituicao.doacao_limpeza_link}}" target="_blank">
+                                            <button name="limpeza" id="limpeza" value="limpeza" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_limpeza()">{% trans "Patrocinar" %}</button>
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Alimentação</th>
-                                    <td>R$ 50,00</td>
+                                    <td>R$ {{instituicao.doacao_alimentacao_valor|default_if_none:""}}</td>
                                     <td>
-                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                                            <input type="hidden" name="currency" value="BRL" />
-                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                                            <input type="hidden" name="iot" value="button" />
-                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        <form id="alimentacao1" enctype="multipart/form-data" action="submit", method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="alimentacao" id="alimentacao" value="alimentacao" />
+                                        </form>               
+                                        <form id="alimentacao2" enctype="multipart/form-data" action="{{instituicao.doacao_alimentacao_link}}" target="_blank">
+                                            <button name="alimentacao" id="alimentacao" value="alimentacao" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_alimentacao()">{% trans "Patrocinar" %}</button>
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Medicamentos</th>
-                                    <td>R$ 50,00</td>
+                                    <td>R$ {{instituicao.doacao_medicamentos_valor|default_if_none:""}}</td>
                                     <td>
-                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                                            <input type="hidden" name="currency" value="BRL" />
-                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                                            <input type="hidden" name="iot" value="button" />
-                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        <form id="medicamentos1" enctype="multipart/form-data" action="submit", method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="medicamentos" id="medicamentos" value="medicamentos" />
+                                        </form>               
+                                        <form id="medicamentos2" enctype="multipart/form-data" action="{{instituicao.doacao_medicamentos_link}}" target="_blank">
+                                            <button name="medicamentos" id="medicamentos" value="medicamentos" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_medicamentos()">{% trans "Patrocinar" %}</button>
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Diária de internação</th>
-                                    <td>R$ 50,00</td>
+                                    <td>R$ {{instituicao.doacao_diaria_internacao_valor|default_if_none:""}}</td>
                                     <td>
-                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                                            <input type="hidden" name="currency" value="BRL" />
-                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                                            <input type="hidden" name="iot" value="button" />
-                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">TOTAL</th>
-                                    <td><strong>R$ 200,00</strong></td>
-                                    <td>
-                                        <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
-                                            <input type="hidden" name="currency" value="BRL" />
-                                            <input type="hidden" name="receiverEmail" value="m.augusto.nd@gmail.com" />
-                                            <input type="hidden" name="iot" value="button" />
-                                            <button class="btn btn-primary" style="background-color:#FAA307" action="submit">{% trans "Patrocinar" %}</button>
+                                        <form id="diaria_internacao1" enctype="multipart/form-data" action="submit", method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="diaria_internacao" id="diaria_internacao" value="diaria_internacao" />
+                                        </form>               
+                                        <form id="diaria_internacao2" enctype="multipart/form-data" action="{{instituicao.doacao_diaria_internacao_link}}" target="_blank">
+                                            <button name="diaria_internacao" id="diaria_internacao" value="diaria_internacao" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_diaria_internacao()">{% trans "Patrocinar" %}</button>
                                         </form>
                                     </td>
                                 </tr>
