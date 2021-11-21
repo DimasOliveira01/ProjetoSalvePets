@@ -123,11 +123,11 @@
                         <form class="ps-lg-2 p-1">
                             <div class="dropdown">
                                 <button class="btn btn-lg btn-primary2 rounded-pill bg-gradient order-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Meu perfil
+                                    {% trans "Meu perfil" %}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/completar-cadastro/">Minha conta pessoal</a>
-                                    <a class="dropdown-item" href="/modificar-cadastro-instituicao/">Minha conta institucional</a>
+                                    <a class="dropdown-item" href="/completar-cadastro/">{% trans "Minha conta pessoal" %}</a>
+                                    <a class="dropdown-item" href="/modificar-cadastro-instituicao/">{% trans "Minha conta institucional" %}</a>
                                     <!--<a class="dropdown-item" href="#">Something else here</a>-->
                                 </div>
                             </div>
@@ -171,14 +171,14 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="sairLabel">Sair</h5>
+                        <h5 class="modal-title" id="sairLabel">{% trans "Sair" %}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Você tem certeza que deseja sair?
+                        {% trans "Você tem certeza que deseja sair?" %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
                         <form method="POST" action="{% url 'account_logout' %}">
                             {% csrf_token %}
                             <button class="btn btn-danger">{% trans "Sair" %}</button>
