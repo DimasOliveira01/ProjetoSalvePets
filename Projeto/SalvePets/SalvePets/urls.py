@@ -81,6 +81,8 @@ urlpatterns = [
     path('lista-pet-adocao/',views.lista_pets_adocao),
     path('pet-informacao-instituicao-adocao/<id>/',views.pet_informacao_instituicao_adocao),
     path('solicitar-adocao/<id>/',views.solicitar_adocao),
+    path('cadastrar-doacao/',views.cadastrar_doacao),
+    path('listar-doacoes/',views.listar_doacoes),
     
 
     

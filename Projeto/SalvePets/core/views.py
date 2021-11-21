@@ -21,7 +21,7 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from .forms import ContactForm
-from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm
+from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm, DoacaoCadastroForm
 from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
 
 # === Funções com render simples ===
@@ -998,46 +998,63 @@ def patrocinar(request, id):
 
 def patrocinar_send(request, id):
     """ Função que faz o envio de patrocínio/doação """
+    
+    limpeza = request.POST.get('limpeza')
+    alimentacao = request.POST.get('alimentacao')
+    medicamentos = request.POST.get('medicamentos')
+    diaria_internacao = request.POST.get('diaria_internacao')
+    
     user = request.user
-    valor = float(request.POST.get('valor'))
-    patrocinio_existe = PATROCINIO.objects.filter(FK_idUsuario = user,
-                                                  FK_idPet = Pet.objects.get(id=id))
+    pet = Pet.objects.get(ativo=True, id=id)
+    instituicao=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
 
+    patrocinio_existe = PATROCINIO.objects.filter(FK_idUsuario = user,
+        FK_idPet = Pet.objects.get(id=id))
     # TERMINAR
+
+    if limpeza:
+        print('limpeza')
+        doacao_tipo = 'limpeza'
+        valor = instituicao.doacao_limpeza_valor
+    elif alimentacao:
+        print('alimentacao')
+        doacao_tipo = 'alimentacao'
+        valor = instituicao.doacao_alimentacao_valor
+    elif medicamentos:
+        print('medicamentos')
+        doacao_tipo = 'medicamentos'
+        valor = instituicao.doacao_medicamentos_valor
+    elif diaria_internacao:
+        print('diaria_internacao')
+        doacao_tipo = 'diaria_internacao'
+        valor = instituicao.doacao_diaria_internacao_valor
+    else:
+        doacao_tipo = 'doacao_simples'
+        print(request.POST.get('doacao_simples_input'))
+        valor = float(request.POST.get('doacao_simples_input'))
 
     patrocinio = PATROCINIO(
         FK_idPet = Pet.objects.get(id=id),
         valor = valor,
+        doacao_tipo = doacao_tipo,
         data = datetime.today().strftime('%Y-%m-%d')
     )
     patrocinio.save()
 
     patrocinio.FK_idUsuario.add(request.user)
 
-    if valor == 20:
-        destino = 'https://pag.ae/7XDvbF6CG/button'
-    elif valor == 50:
-        destino = 'https://pag.ae/7XDvnBuw4/button'
-    elif valor == 100:
-        destino = 'https://pag.ae/7XDvnLTsK/button'
-    else:
-        destino = '/meus-patrocinios/'
-
     aviso = "Por favor, efetue sua doação. Em um prazo de até 48 horas, iremos confirmar a transação e ela poderá constar nessa página."
 
-    if valor != 0:
-        return redirect(destino)
-    else:
-        pets = []
-        patrocinios = PATROCINIO.objects.get(FK_idUsuario = user, pago = True)
+    pets = []
+    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
 
-        for p in patrocinios:
-            pets.append(Pet.objects.get(id=p.FK_idPet_id))
+    for p in patrocinios:
+        pets.append(Pet.objects.get(id=p.FK_idPet_id))
 
-        lista = zip(patrocinios , pets)
-        return render(request, 'patrocinar/meus_patrocinios.html',{'aviso':aviso,
-                                                                   'patrocinios': patrocinios,
-                                                                   'pets':pets, 'lista':lista})
+    lista = zip(patrocinios , pets)
+    return render(request, 'patrocinar/meus_patrocinios.html',{'aviso':aviso,
+                                                            'patrocinios': patrocinios,
+                                                            'pets':pets, 'lista':lista})
 
 @login_required(login_url='/accounts/login/')
 def meus_patrocinios(request):
@@ -1053,3 +1070,49 @@ def meus_patrocinios(request):
 
     return render(request, 'patrocinar/meus_patrocinios.html',
                   {'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
+
+def cadastrar_doacao(request):
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+
+    if request.method == "POST":
+        if request.user.usuario.fk_instituicao:
+            instance=request.user.usuario.fk_instituicao
+            product = INSTITUICAO.objects.get(id=instance.id)
+
+            form = DoacaoCadastroForm(request.POST, instance=product)
+            if form.is_valid():
+                form.save()
+
+            return render(request, 'instituicao/doacao/cadastrar-doacao.html', {
+            'form': form
+    })
+    else:
+        form = DoacaoCadastroForm(instance=request.user.usuario.fk_instituicao)
+
+        return render(request, 'instituicao/doacao/cadastrar-doacao.html', {
+            'form': form,
+            'usuario': usuario
+    })
+    
+@login_required(login_url='/accounts/login/')
+def listar_doacoes(request):
+
+    id_user=request.user.id
+    usuario=USUARIO.objects.get(id=id_user)
+    if(request.user.usuario.fk_instituicao_id is not None):
+        id_instituicao_usuario=request.user.usuario.fk_instituicao_id
+        pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
+
+
+        for p in pet:
+            patrocinio = PATROCINIO.objects.filter(FK_idPet = p.id)
+
+        print(patrocinio)
+
+        return render(request, 'instituicao/doacao/listar-doacoes.html',{'pet':pet,
+                                                                          'usuario': usuario,
+                                                                          'patrocinio': patrocinio
+                                                                        })
+    #else:
+    return render(request, 'instituicao/doacao/listar-doacoes.html')
