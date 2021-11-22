@@ -1097,22 +1097,75 @@ def cadastrar_doacao(request):
     
 @login_required(login_url='/accounts/login/')
 def listar_doacoes(request):
+    """ Função que lista todas as doações à sua instituição """
+    """ Acessável pelo link /doacao/lista/ """
 
-    id_user=request.user.id
-    usuario=USUARIO.objects.get(id=id_user)
-    if(request.user.usuario.fk_instituicao_id is not None):
-        id_instituicao_usuario=request.user.usuario.fk_instituicao_id
-        pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
+    usuario = USUARIO.objects.get(user_id=request.user.id)
+    id_inst = request.user.usuario.fk_instituicao_id
 
+    if id_inst is not None:
+        try:
+            cursor = connection.cursor()
+            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto
+                        FROM core_patrocinio as pat
+                        INNER JOIN core_pet as pet ON pet.id = pat."FK_idPet_id"
+                        INNER JOIN core_instituicao as instituicao ON pet.fk_id_instituicao_id = %s
+                        ORDER BY pat.id'''
 
-        for p in pet:
-            patrocinio = PATROCINIO.objects.filter(FK_idPet = p.id)
+            # Execução da query e inserção dos dados em uma Named Tuple
+            cursor.execute(query, [id_inst])
+            patrocinio = namedtuplefetchall(cursor)
 
-        print(patrocinio)
+            return render(request, 'instituicao/doacao/listar-doacoes.html',{
+                                                                            'usuario': usuario,
+                                                                            'patrocinio': patrocinio
+                                                                            })
+        except Exception as error:
+            print("Falha em ler o banco de dados.\n", error)
+        finally:
+            if connection:
+                connection.close()
 
-        return render(request, 'instituicao/doacao/listar-doacoes.html',{'pet':pet,
-                                                                          'usuario': usuario,
-                                                                          'patrocinio': patrocinio
-                                                                        })
-    #else:
-    return render(request, 'instituicao/doacao/listar-doacoes.html')
+    return redirect('/doacao/lista/')
+
+@login_required(login_url='/accounts/login/')
+def doacao_alterar_privacidade(request, id):
+    """ Função que altera a privacidade de uma doação (Público = True/False) """
+    """ Acessável pelo link /doacao/alterar-privacidade/<id>/ """
+    """ Requisitos: login, usuário da mesma instituição do pet patrocinado, usuário com admin instituição """
+
+    patrocinio = PATROCINIO.objects.get(id=id)
+    pet = Pet.objects.get(id = patrocinio.FK_idPet_id )
+    usuario = USUARIO.objects.get(id = request.user.usuario.id)
+
+    if usuario.fk_instituicao_id == pet.fk_id_instituicao_id and usuario.is_admin_instituicao:
+
+        if patrocinio.publico == True:
+            patrocinio.publico = False
+        else:
+            patrocinio.publico = True
+
+        patrocinio.save()
+
+    return redirect('/doacao/lista/')
+
+@login_required(login_url='/accounts/login/')
+def doacao_alterar_status(request, id):
+    """ Função que altera o status de uma doação (Pago = True/False) """
+    """ Acessável pelo link /doacao/alterar-status/<id>/ """
+    """ Requisitos: login, usuário da mesma instituição do pet patrocinado, usuário com admin instituição """
+
+    patrocinio = PATROCINIO.objects.get(id=id)
+    pet = Pet.objects.get(id = patrocinio.FK_idPet_id )
+    usuario = USUARIO.objects.get(id = request.user.usuario.id)
+
+    if usuario.fk_instituicao_id == pet.fk_id_instituicao_id and usuario.is_admin_instituicao:
+
+        if patrocinio.pago == True:
+            patrocinio.pago = False
+        else:
+            patrocinio.pago = True
+
+        patrocinio.save()
+
+    return redirect('/doacao/lista/')

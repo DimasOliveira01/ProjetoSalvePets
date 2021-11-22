@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
+
     <!-- Guias -->
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
@@ -21,7 +22,7 @@
                     <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" style="color:#495057" href="/cadastrar-doacao/">{% trans "Cadastrar doação" %}</a>
+                    <a class="nav-link active" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Cadastrar doação" %}</a>
                 </li>
             {% endif %}
             <li class="nav-item">
@@ -33,33 +34,53 @@
         </ul>
     </div>
 
-<div class="container">
-                <div class="row">
-                    {% for p in pet %}            
-                        <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-                            <a href="../pet-informacao-instituicao/{{ p.id }}">
-                                <img src="{{p.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
-                            </a>
-                            <div class="card-body d-flex flex-column">
-                                <p class="mb-2 text-muted text-uppercase small">
-                                {% if p.ativo %}
-                                    Ativo
-                                {% else %}
-                                    Inativo
-                                {% endif %}</p>
-                                <h5 class="card-title">{{ p.nome }}</h5>
-                                <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
-                                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
-                            </div>
-                        </div>            
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Público?</th>
+                    <th scope="col">Pago?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pat in patrocinio %}
+                        <tr>
+                            <td>{{pat.id}}</td>
+                            <td>{{pat.nome}}</td>
+                            <td>R$ {{pat.valor}}</td>
+                            <td>{{pat.data}}</td>
+                            <td>
+                                <div class="form-check">
+                                    <input id="publico" onclick="location.href='/doacao/alterar-privacidade/{{pat.id}}/';" name="publico" class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        {% if pat.publico %}
+                                            checked
+                                        {% else %}
+                                            
+                                        {% endif %} 
+                                    >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input id="pago" onclick="location.href='/doacao/alterar-status/{{pat.id}}/';" name="pago" class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        {% if pat.pago %}
+                                            checked
+                                        {% else %}
+                                        
+                                        {% endif %} 
+                                    >
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </div>
-            </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-
-{% for pat in patrocinio %}
-    {{pat.id}}<br>
-    {{pat.valor}}<br>
-
-{% endfor %}
 {% endblock %}
