@@ -966,25 +966,28 @@ def adicionar_usuario_instituicao(request):
     INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
 '''
 
+@login_required(login_url='/accounts/login/')
 def lista_patrocinar(request):
     """ Função que apresenta a tela de lista de pets a serem patrocinados"""
-    usuario = []
+    usuario_lista = []
+    usuario = USUARIO.objects.get(user_id = request.user.id)
     instituicao = []
     i = 0
 
     #adicionei esta condição encontradoPerdido=None
     pet=Pet.objects.filter(ativo=True, encontradoPerdido=None)
     for p in pet:
-        usuario.append(USUARIO.objects.get(user_id=p.user_id))
-        if usuario[i].fk_instituicao_id:
-            instituicao.append(INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id))
+        usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
+        if usuario_lista[i].fk_instituicao_id:
+            instituicao.append(INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id))
         i = i + 1
     lista_patrocinio = zip(pet , instituicao)
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet,
-                                                               'usuario': usuario,
+                                                               'usuario': usuario_lista,
                                                                'instituicao':instituicao,
-                                                               'lista_patrocinio':
-                                                               lista_patrocinio})
+                                                               'lista_patrocinio': lista_patrocinio,
+                                                               'usuario': usuario                                                               
+                                                               })
 
 @login_required(login_url='/accounts/login/')
 def patrocinar(request, id):
@@ -996,6 +999,7 @@ def patrocinar(request, id):
                                                          'usuario':usuario,
                                                          'instituicao':instituicao})
 
+@login_required(login_url='/accounts/login/')
 def patrocinar_send(request, id):
     """ Função que faz o envio de patrocínio/doação """
     
@@ -1005,6 +1009,7 @@ def patrocinar_send(request, id):
     diaria_internacao = request.POST.get('diaria_internacao')
     
     user = request.user
+    usuario = USUARIO.objects.get(user_id = user.id)
     pet = Pet.objects.get(ativo=True, id=id)
     instituicao=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
 
@@ -1052,15 +1057,20 @@ def patrocinar_send(request, id):
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
 
     lista = zip(patrocinios , pets)
-    return render(request, 'patrocinar/meus_patrocinios.html',{'aviso':aviso,
+    return render(request, 'patrocinar/meus_patrocinios.html',{
+                                                            'aviso':aviso,
                                                             'patrocinios': patrocinios,
-                                                            'pets':pets, 'lista':lista})
+                                                            'pets':pets,
+                                                            'lista':lista,
+                                                            'usuario':usuario
+                                                            })
 
 @login_required(login_url='/accounts/login/')
 def meus_patrocinios(request):
 
     pets = []
     user = request.user
+    usuario = USUARIO.objects.get(user_id = user.id)
     patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
 
     for p in patrocinios:
@@ -1069,8 +1079,9 @@ def meus_patrocinios(request):
     lista = zip(patrocinios , pets)
 
     return render(request, 'patrocinar/meus_patrocinios.html',
-                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
+                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario})
 
+@login_required(login_url='/accounts/login/')
 def cadastrar_doacao(request):
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
