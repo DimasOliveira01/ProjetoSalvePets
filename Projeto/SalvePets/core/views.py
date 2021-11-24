@@ -19,6 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
+from geopy.geocoders import Nominatim
 
 from .forms import ContactForm
 from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm, DoacaoCadastroForm
@@ -239,7 +240,28 @@ def pet_informacao(request, id):
     """ Tela de informação de pet """
     pet = Pet.objects.get(ativo=True, id=id)
     creator = pet.user
-    return render(request, 'pet.html', {'pet':pet,'creator':creator})
+
+    try:
+        #Localização reversa
+        geolocator = Nominatim(user_agent="salve-pets")
+        coordenadas = str(pet.coordenada[1]) + ',' + str(pet.coordenada[0])
+
+        location_request = geolocator.reverse(coordenadas)
+        raw_location = location_request.raw['address']
+
+        strings = [
+            raw_location.get('road'),
+            raw_location.get('house_number'),
+            raw_location.get('postcode'),
+            raw_location.get('state'),
+            raw_location.get('country')
+        ]
+
+        location = ', '.join(filter(None, strings))
+    except Exception:
+        location = "Erro na obtenção da localização do pet"
+
+    return render(request, 'pet.html', {'pet':pet,'creator':creator, 'localizacao': location})
 
 @login_required
 @transaction.atomic
