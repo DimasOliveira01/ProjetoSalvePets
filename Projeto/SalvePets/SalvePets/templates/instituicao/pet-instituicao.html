@@ -99,7 +99,8 @@
                 </table>
             </div>
             <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
-                <div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>
+                <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
+                <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
                 <div id="g-recaptcha-error"></div>
             </div>
         </div>
@@ -116,9 +117,9 @@
 <br>
 <!------------------------------------------------------>
 
-<script>
-<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
 
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
+<script>
 function validar_captcha() { 
     var captchResponse = $('#g-recaptcha-response').val();
     if(captchResponse.length != 0 )
