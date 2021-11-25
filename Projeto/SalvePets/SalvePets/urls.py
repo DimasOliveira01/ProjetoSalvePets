@@ -85,6 +85,7 @@ urlpatterns = [
     path('doacao/lista/',views.listar_doacoes),
     path('doacao/alterar-privacidade/<id>/',views.doacao_alterar_privacidade),
     path('doacao/alterar-status/<id>/',views.doacao_alterar_status),
+    path('doacao/instrucoes-cadastro/',views.doacao_instrucoes_cadastro),
     
 
     

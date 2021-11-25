@@ -253,6 +253,7 @@ def pet_informacao(request, id):
             raw_location.get('road'),
             raw_location.get('house_number'),
             raw_location.get('postcode'),
+            raw_location.get('suburb'),
             raw_location.get('state'),
             raw_location.get('country')
         ]
@@ -1202,3 +1203,9 @@ def doacao_alterar_status(request, id):
         patrocinio.save()
 
     return redirect('/doacao/lista/')
+
+def doacao_instrucoes_cadastro(request):
+    usuario=USUARIO.objects.get(id=request.user.id)
+    return render(request, 'instituicao\doacao\instrucoes-cadastro.html', {
+                                                                            'usuario':usuario
+                                                                        })
