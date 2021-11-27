@@ -92,7 +92,7 @@ def cadastro_pet(request):
 
 @login_required(login_url='/accounts/login')
 def set_pet(request):
-    """ Tela de exibição de pet """
+    """ Cadastro e atualização de um pet """
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
     dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
@@ -107,7 +107,7 @@ def set_pet(request):
     foto=request.FILES.get('foto')
     user=request.user
 
-    # Alteração de cadastro
+    # Atualização de cadastro de um pet
     pet_id=request.POST.get('pet-id')
 
     if pet_id:
@@ -177,6 +177,7 @@ def set_pet(request):
             if foto:
                 pet.foto = foto
                 pet.save()
+    #Cadastro de um novo Pet
     else:
         if foto:
             max_size = 2097152
@@ -660,13 +661,13 @@ def cadastro_pet_instituicao(request):
             pet=Pet.objects.get(id=pet_id)
             if pet.user == request.user:
                 return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet,'usuario': usuario})
-        return render (request, 'instituicao/cadastro-pet-instituicao.html',{'usuario': usuario})
+        return render (request, 'instituicao/cadastro-pet-instituicao.html',{'pet':pet,'usuario': usuario})
     #else:
     return render(request, 'instituicao/acesso-proibido.html')
 
 @login_required(login_url='/acccounts/login')
 def set_pet_instituicao(request):
-    """ Exibição de um pet de uma determinada instituição """
+    """ Cadastro e atualização de um pet de uma determinada instituição """
     nome=request.POST.get('nome')
     ativo=request.POST.get('ativo')
     descricao=request.POST.get('descricao')
@@ -677,12 +678,18 @@ def set_pet_instituicao(request):
     foto=request.FILES.get('foto')
     user=request.user
     fk_id_instituicao_id=request.user.usuario.fk_instituicao_id
-
-    # Alteração de cadastro
     pet_id=request.POST.get('pet-id')
+    print('-----------------')
+    print('-----------------')
+    print('-----------------')
+    # Atualização de cadastro
+    
     if pet_id:
+        print('olá atualização')
+        print('olá atualização')
+        print('olá atualização')
         pet=Pet.objects.get(id=pet_id)
-        if user == pet.user:
+        if pet.fk_id_instituicao_id == request.user.usuario.fk_instituicao_id:
             if nome:
                 pet.nome=nome
                 pet.save()
@@ -720,7 +727,11 @@ def set_pet_instituicao(request):
             if foto:
                 pet.foto = foto
                 pet.save()
+    #cadastro de um novo pet na Instituição
     else:
+        print('olá cadastro')
+        print('olá cadastro')
+        print('olá cadastro')
         if ativo=='on':
             ativo=True
         else:
@@ -758,7 +769,7 @@ def pet_informacao_instituicao(request, id):
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
-    print(id_user)
+    print(id_user,'adfagadgfa')
     print(inst.nome_instituicao)
     return render(request, 'instituicao/pet-instituicao.html',
                   {'pet':pet,'inst':inst,'usuario':usuario})
@@ -852,6 +863,12 @@ def lista_pets_adocao(request):
     return render(request, 'instituicao/lista-pet-adocao.html',{'pet':pet})
 
 @login_required(login_url='/accounts/login')
+def meus_pets_adotados(request):
+    """Tela que exibe os pets adotados por um usuário"""
+    pet=Pet.objects.filter(encontradoPerdido=None, is_adotado=True)
+    return render(request, 'instituicao/meus-pets-adotados.html', {'pet':pet})
+
+@login_required(login_url='/accounts/login')
 def lista_pets_usuario_instituicao(request):
     """ conferir esta função, mas acho que precisa retirar """
     pet=Pet.objects.filter(ativo=True, user=request.user)
@@ -861,7 +878,7 @@ def lista_pets_usuario_instituicao(request):
 def deletar_pet_instituicao(request, id):
     """" Tela para excluir um pet de uma instituição"""
     pet=Pet.objects.get(id=id)
-    if pet.user == request.user:
+    if pet.fk_id_instituicao_id == request.user.usuario.fk_instituicao_id:
         pet.delete()
     return redirect('/lista-pet-instituicao/')
 

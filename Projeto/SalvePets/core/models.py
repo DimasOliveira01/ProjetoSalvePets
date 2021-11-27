@@ -125,6 +125,7 @@ class Pet(models.Model):
     cor = models.CharField(max_length=30, blank=True, null=True)
     porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
     ativo = models.BooleanField(default=True, blank=True, null=True)
+    is_adotado = models.BooleanField(default=False, blank=True, null=True)
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, blank=True, null=True)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
     coordenada = models.PointField(srid=4326, blank=True, null=True)
