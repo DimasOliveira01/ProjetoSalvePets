@@ -4,62 +4,84 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
+<div class="container">
     <!-- Guias -->
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/administrativo-instituicao/">{% trans "Informações gerais" %}</a>
+                <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/">{% trans "Cadastro da Instituição" %}</a>
+                <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
             </li>
             {% if usuario.is_admin_instituicao %}
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" style="color:#495057" href="/cadastrar-doacao/">{% trans "Cadastrar doação" %}</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PayPal" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
+            </li>
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
-            </li>
         </ul>
     </div>
 
-<div class="container">
-                <div class="row">
-                    {% for p in pet %}            
-                        <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-                            <a href="../pet-informacao-instituicao/{{ p.id }}">
-                                <img src="{{p.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
-                            </a>
-                            <div class="card-body d-flex flex-column">
-                                <p class="mb-2 text-muted text-uppercase small">
-                                {% if p.ativo %}
-                                    Ativo
-                                {% else %}
-                                    Inativo
-                                {% endif %}</p>
-                                <h5 class="card-title">{{ p.nome }}</h5>
-                                <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
-                                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
-                            </div>
-                        </div>            
+    <p><h3>{% trans "Lista de patrocínios recebidos" %}</h3></p>
+        <p>A lista a seguir mostra todas os patrocínios sinalizados. 
+        Todo patrocínio é sinalizado quando uma pessoa clica em algum dos botões de doação.<p>
+        <p>Verifique na sua conta PayPal se alguma das doações a seguir foram de fato efetuadas. 
+        Caso esteja, marque a caixinha de "Pago?".</p>
+        <p>Também é possível sinalizar se o patrocínio é público ou privado. 
+        Caso esteja público, marque a caixinha de "Público?".</p>
+        <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Público?</th>
+                    <th scope="col">Pago?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pat in patrocinio %}
+                        <tr>
+                            <td>{{pat.id}}</td>
+                            <td><a href="/pet-informacao-instituicao-adocao/{{pat.id_pet}}/" class="text-decoration-none" style="color:black">{{pat.nome}}</a></td>
+                            <td>R$ {{pat.valor}}</td>
+                            <td>{{pat.data}}</td>
+                            <td>
+                                <div class="form-check">
+                                    <input id="publico" onclick="location.href='/doacao/alterar-privacidade/{{pat.id}}/';" name="publico" class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        {% if pat.publico %}
+                                            checked
+                                        {% else %}
+                                            
+                                        {% endif %} 
+                                    >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input id="pago" onclick="location.href='/doacao/alterar-status/{{pat.id}}/';" name="pago" class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        {% if pat.pago %}
+                                            checked
+                                        {% else %}
+                                        
+                                        {% endif %} 
+                                    >
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </div>
-            </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-
-{% for pat in patrocinio %}
-    {{pat.id}}<br>
-    {{pat.valor}}<br>
-
-{% endfor %}
 {% endblock %}

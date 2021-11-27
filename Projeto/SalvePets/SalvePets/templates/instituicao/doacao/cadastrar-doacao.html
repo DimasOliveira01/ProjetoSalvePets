@@ -4,39 +4,35 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
+<div class="container">
     <!-- Guias -->
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/administrativo-instituicao/">{% trans "Informações gerais" %}</a>
+                <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/modificar-cadastro-instituicao/">{% trans "Cadastro da Instituição" %}</a>
+                <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
             </li>
             {% if usuario.is_admin_instituicao %}
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/adicionar-usuario-instituicao/">{% trans "Cadastrar usuário" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" style="color:#495057" href="/cadastrar-doacao/">{% trans "Cadastrar doação" %}</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active">{% trans "Dados do PayPal" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
+            </li>
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/lista-pet-instituicao/">{% trans "Listar Pets da Instituição" %}</a>
-            </li>
         </ul>
     </div>
-
-    <div class="container">
+        <p><h3>{% trans "Cadastro de doação" %}</h3></p>
+        <p>Para permitir que pessoas façam doações à sua instituição, por favor, preencha o formulário a seguir:<p>
+        <div class="row">
         <form method="POST">
-            <p><h3>{% trans "Cadastro de doação" %}</h3></p>
-            Para permitir que pessoas façam doações à sua instituição, por favor, preencha o formulário a seguir:
+            
+            
             <!--
             <br><br>
             <p><h4>{% trans "Doação comum" %}</h4></p>
