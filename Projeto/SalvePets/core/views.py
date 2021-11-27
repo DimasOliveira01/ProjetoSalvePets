@@ -19,6 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
+from geopy.geocoders import Nominatim
 
 from .forms import ContactForm
 from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm, DoacaoCadastroForm
@@ -239,7 +240,29 @@ def pet_informacao(request, id):
     """ Tela de informação de pet """
     pet = Pet.objects.get(ativo=True, id=id)
     creator = pet.user
-    return render(request, 'pet.html', {'pet':pet,'creator':creator})
+
+    try:
+        #Localização reversa
+        geolocator = Nominatim(user_agent="salve-pets")
+        coordenadas = str(pet.coordenada[1]) + ',' + str(pet.coordenada[0])
+
+        location_request = geolocator.reverse(coordenadas)
+        raw_location = location_request.raw['address']
+
+        strings = [
+            raw_location.get('road'),
+            raw_location.get('house_number'),
+            raw_location.get('postcode'),
+            raw_location.get('suburb'),
+            raw_location.get('state'),
+            raw_location.get('country')
+        ]
+
+        location = ', '.join(filter(None, strings))
+    except Exception:
+        location = "Erro na obtenção da localização do pet"
+
+    return render(request, 'pet.html', {'pet':pet,'creator':creator, 'localizacao': location})
 
 @login_required
 @transaction.atomic
@@ -966,25 +989,28 @@ def adicionar_usuario_instituicao(request):
     INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
 '''
 
+@login_required(login_url='/accounts/login/')
 def lista_patrocinar(request):
     """ Função que apresenta a tela de lista de pets a serem patrocinados"""
-    usuario = []
+    usuario_lista = []
+    usuario = USUARIO.objects.get(user_id = request.user.id)
     instituicao = []
     i = 0
 
     #adicionei esta condição encontradoPerdido=None
     pet=Pet.objects.filter(ativo=True, encontradoPerdido=None)
     for p in pet:
-        usuario.append(USUARIO.objects.get(user_id=p.user_id))
-        if usuario[i].fk_instituicao_id:
-            instituicao.append(INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id))
+        usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
+        if usuario_lista[i].fk_instituicao_id:
+            instituicao.append(INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id))
         i = i + 1
     lista_patrocinio = zip(pet , instituicao)
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet,
-                                                               'usuario': usuario,
+                                                               'usuario': usuario_lista,
                                                                'instituicao':instituicao,
-                                                               'lista_patrocinio':
-                                                               lista_patrocinio})
+                                                               'lista_patrocinio': lista_patrocinio,
+                                                               'usuario': usuario                                                               
+                                                               })
 
 @login_required(login_url='/accounts/login/')
 def patrocinar(request, id):
@@ -996,6 +1022,7 @@ def patrocinar(request, id):
                                                          'usuario':usuario,
                                                          'instituicao':instituicao})
 
+@login_required(login_url='/accounts/login/')
 def patrocinar_send(request, id):
     """ Função que faz o envio de patrocínio/doação """
     
@@ -1005,6 +1032,7 @@ def patrocinar_send(request, id):
     diaria_internacao = request.POST.get('diaria_internacao')
     
     user = request.user
+    usuario = USUARIO.objects.get(user_id = user.id)
     pet = Pet.objects.get(ativo=True, id=id)
     instituicao=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
 
@@ -1052,15 +1080,20 @@ def patrocinar_send(request, id):
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
 
     lista = zip(patrocinios , pets)
-    return render(request, 'patrocinar/meus_patrocinios.html',{'aviso':aviso,
+    return render(request, 'patrocinar/meus_patrocinios.html',{
+                                                            'aviso':aviso,
                                                             'patrocinios': patrocinios,
-                                                            'pets':pets, 'lista':lista})
+                                                            'pets':pets,
+                                                            'lista':lista,
+                                                            'usuario':usuario
+                                                            })
 
 @login_required(login_url='/accounts/login/')
 def meus_patrocinios(request):
 
     pets = []
     user = request.user
+    usuario = USUARIO.objects.get(user_id = user.id)
     patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
 
     for p in patrocinios:
@@ -1069,8 +1102,9 @@ def meus_patrocinios(request):
     lista = zip(patrocinios , pets)
 
     return render(request, 'patrocinar/meus_patrocinios.html',
-                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista})
+                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario})
 
+@login_required(login_url='/accounts/login/')
 def cadastrar_doacao(request):
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
@@ -1097,22 +1131,81 @@ def cadastrar_doacao(request):
     
 @login_required(login_url='/accounts/login/')
 def listar_doacoes(request):
+    """ Função que lista todas as doações à sua instituição """
+    """ Acessável pelo link /doacao/lista/ """
 
-    id_user=request.user.id
-    usuario=USUARIO.objects.get(id=id_user)
-    if(request.user.usuario.fk_instituicao_id is not None):
-        id_instituicao_usuario=request.user.usuario.fk_instituicao_id
-        pet=Pet.objects.filter(encontradoPerdido=None, fk_id_instituicao_id=id_instituicao_usuario)
+    usuario = USUARIO.objects.get(user_id=request.user.id)
+    id_inst = request.user.usuario.fk_instituicao_id
 
+    if id_inst is not None:
+        try:
+            cursor = connection.cursor()
+            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto
+                        FROM core_patrocinio as pat
+                        INNER JOIN core_pet as pet ON pet.id = pat."FK_idPet_id"
+                        INNER JOIN core_instituicao as instituicao ON pet.fk_id_instituicao_id = %s
+                        ORDER BY pat.id'''
 
-        for p in pet:
-            patrocinio = PATROCINIO.objects.filter(FK_idPet = p.id)
+            # Execução da query e inserção dos dados em uma Named Tuple
+            cursor.execute(query, [id_inst])
+            patrocinio = namedtuplefetchall(cursor)
 
-        print(patrocinio)
+            return render(request, 'instituicao/doacao/listar-doacoes.html',{
+                                                                            'usuario': usuario,
+                                                                            'patrocinio': patrocinio
+                                                                            })
+        except Exception as error:
+            print("Falha em ler o banco de dados.\n", error)
+        finally:
+            if connection:
+                connection.close()
 
-        return render(request, 'instituicao/doacao/listar-doacoes.html',{'pet':pet,
-                                                                          'usuario': usuario,
-                                                                          'patrocinio': patrocinio
+    return redirect('/doacao/lista/')
+
+@login_required(login_url='/accounts/login/')
+def doacao_alterar_privacidade(request, id):
+    """ Função que altera a privacidade de uma doação (Público = True/False) """
+    """ Acessável pelo link /doacao/alterar-privacidade/<id>/ """
+    """ Requisitos: login, usuário da mesma instituição do pet patrocinado, usuário com admin instituição """
+
+    patrocinio = PATROCINIO.objects.get(id=id)
+    pet = Pet.objects.get(id = patrocinio.FK_idPet_id )
+    usuario = USUARIO.objects.get(id = request.user.usuario.id)
+
+    if usuario.fk_instituicao_id == pet.fk_id_instituicao_id and usuario.is_admin_instituicao:
+
+        if patrocinio.publico == True:
+            patrocinio.publico = False
+        else:
+            patrocinio.publico = True
+
+        patrocinio.save()
+
+    return redirect('/doacao/lista/')
+
+@login_required(login_url='/accounts/login/')
+def doacao_alterar_status(request, id):
+    """ Função que altera o status de uma doação (Pago = True/False) """
+    """ Acessável pelo link /doacao/alterar-status/<id>/ """
+    """ Requisitos: login, usuário da mesma instituição do pet patrocinado, usuário com admin instituição """
+
+    patrocinio = PATROCINIO.objects.get(id=id)
+    pet = Pet.objects.get(id = patrocinio.FK_idPet_id )
+    usuario = USUARIO.objects.get(id = request.user.usuario.id)
+
+    if usuario.fk_instituicao_id == pet.fk_id_instituicao_id and usuario.is_admin_instituicao:
+
+        if patrocinio.pago == True:
+            patrocinio.pago = False
+        else:
+            patrocinio.pago = True
+
+        patrocinio.save()
+
+    return redirect('/doacao/lista/')
+
+def doacao_instrucoes_cadastro(request):
+    usuario=USUARIO.objects.get(id=request.user.id)
+    return render(request, 'instituicao\doacao\instrucoes-cadastro.html', {
+                                                                            'usuario':usuario
                                                                         })
-    #else:
-    return render(request, 'instituicao/doacao/listar-doacoes.html')

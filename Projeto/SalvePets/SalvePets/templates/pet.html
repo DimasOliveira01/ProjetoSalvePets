@@ -44,7 +44,7 @@
             <div class="row product-gallery">
                 <div class="col-12 mb-0">
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 500px">
-                        <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 500px; transform-origin: center center; transform: scale(1);">
+                        <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                     </figure>
                     <!--<a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>-->
                 </div>
@@ -90,9 +90,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">{% trans "Última localização" %}:</th>
-                        <td>(desenvolver)</td>
-                    </tr>
+                        <th class="pl-0 w-25" scope="row">Última localização:</th>
+                        <td>{{localizacao}}</td>
+                    <tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">{% trans "Espécie" %}:</th>
                         <td>{{pet.especie|default_if_none:"-"}}</td>
@@ -100,36 +100,12 @@
                 </tbody>
             </table>
 
-
-
-
-
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Contato</span></h6>
-                <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
-                    <div class="g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback="verifyCaptcha">
-                    <!--<div class="g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback="verifyCaptcha">-->
-                    </div>
-                    <div id="g-recaptcha-error"></div>
-                    <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
-                </form>
+            <div class="mt-4">
+                <h6><span class="pl-0 w-25">Contato</span></h6>
+                <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
+                <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
+                <div id="g-recaptcha-error"></div>
             </div>
-
-
-
-
-
-            <!--<div class="mt-4"> <span class="fw-light">Contato</span>
-                <table class="table">
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">E-mail:</th>
-                        <td>{{creator.email|default_if_none:"-"}}</td>
-                    </tr>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Telefone:</th>
-                        <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
-                    </tr>
-                </table>
-            </div>-->
         </div>
         <br>
         {% if request.user == pet.user %}
@@ -161,24 +137,20 @@
 
 </main>
 <br>
-
+<script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'core/js/jquery.mask.js' %}"></script>
 
 <!------------------------------------------------------>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
 <script>
-var recaptcha_response = '';
-function submitUserForm() {
-    if(recaptcha_response.length > 0) {
+
+function validar_captcha() { 
+    var captchResponse = $('#g-recaptcha-response').val();
+    if(captchResponse.length != 0 )
         document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"><tr><th class="pl-0 w-25" scope="row">E-mail:</th><td>{{creator.email|default_if_none:"-"}}</td></tr><tr><th class="pl-0 w-25" scope="row">Telefone:</th><td>{{creator.usuario.telefone|default_if_none:"-"}}</td></tr></table>';
-        return false;
-    }
-    return true;
+
 }
- 
-function verifyCaptcha(token) {
-    recaptcha_response = token;
-    document.getElementById('g-recaptcha-error').innerHTML = '';
-}
+
 </script>
 
 <!------------------------------------------------------>

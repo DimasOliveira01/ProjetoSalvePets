@@ -5,17 +5,29 @@
 
 {% block conteudo %}
     <div class="container">
-    <!-- Guias -->
+        <!-- Guias -->
         <div class="container mt-4">
             <ul class="nav nav-tabs nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link active">{% trans "Meus patrocínios" %}</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
+                </li>
+                {% if usuario.is_admin_instituicao %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PayPal" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
+
         {% if aviso %}
                 <p><div class="alert alert-danger" role="alert">{{aviso}}</div></p>
         {% endif %}
