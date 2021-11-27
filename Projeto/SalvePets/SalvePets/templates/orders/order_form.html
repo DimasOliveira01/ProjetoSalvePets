@@ -36,6 +36,16 @@
 
 {% endblock %}
 
+
+{% block scripts %}
+    <script>  
+        $(document).ready(function(){
+            $('#id_postal_code').mask('00000-000');
+        });
+    </script>
+{% endblock %}
+
+
 {% block script %}
 <script src="https://unpkg.com/imask@6.0.7/dist/imask.js"></script>
 <script src="{% static 'core/js/order-form.js' %}"></script>
