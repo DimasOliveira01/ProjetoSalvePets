@@ -79,21 +79,7 @@
         </div>
         <br>
 
-        <!--Ativo
-        <div class="form-group">
-            <label class="form-check-label"><b>{% trans "Ativo" %}</b>:</label>
-            <input class="checkboxinput form-check-input" name="ativo" type="checkbox" value="{{pet.ativo|default_if_none:"checked" }}">
-        </div>
-        
-        <div class="form-group"> 
-            <div id="div_id_receberNotificacoes" class="form-check"> 
-                <input type="checkbox" name="ativo" class="checkboxinput form-check-input" value="{{pet.ativo}}" id="id_receberNotificacoes" checked=""> 
-                <label for="id_receberNotificacoes" class="form-check-label">
-                    Receber notificações
-                </label> 
-            </div> 
-        </div>
-        -->
+        <!--Ativo-->
         <div class="form-row field-ativo">
             <div class="checkbox-row">
                 <label class="vCheckboxLabel" for="id_ativo"><b>Ativo</b>:</label>
@@ -105,6 +91,54 @@
             </div>
         </div>
         <br>
+
+        <!--Adotado
+        <div class="form-row field-adotado">
+            <div class="checkbox-row">
+                <label class="vCheckboxLabel" for="id_adotado"><b>Adotado</b>:</label>
+                {% if pet.adotado == True  %}
+                    <input class="checkboxinput form-check-input" type="checkbox" name="adotado" id="id_adotado" checked>
+                {% else %}
+                    <input class="checkboxinput form-check-input" type="checkbox" name="adotado" id="id_adotado">
+                {% endif %}          
+            </div>
+        </div>
+        <br>
+    -->
+    {% if pet %}
+    <div class="form-row field-adotado">
+        <div class="checkbox-row">
+            <label class="vCheckboxLabel" for="myCheck"><b>Adotado</b>:</label>
+            {% if pet.adotado == True  %}
+                <input class="checkboxinput form-check-input" type="checkbox" name="adotado" id="myCheck" checked onclick="myFunction()">
+                <p id="text" style="display:none">
+                    <label><b>{% trans "E-mail" %}</b>:</label>
+                    <input class="form-control" name="email" type="email" placeholder="Informe o e-mail do usuário que adotou este Pet">
+                </p>
+            {% else %}
+                <input class="checkboxinput form-check-input" type="checkbox" name="adotado" id="myCheck" onclick="myFunction()">
+                <p id="text" style="display:none">
+                    <label><b>{% trans "E-mail" %}</b>:</label>
+                    <input class="form-control" name="email" type="email" placeholder="Informe o e-mail do usuário que adotou este Pet">
+                </p>
+            {% endif %}          
+        </div>
+    </div>
+    <br>
+    {% endif %}
+
+        <script>
+            function myFunction() {
+              var checkBox = document.getElementById("myCheck");
+              var text = document.getElementById("text");
+              if (checkBox.checked == true){
+                text.style.display = "block";
+              } else {
+                 text.style.display = "none";
+              }
+            }
+        </script>
+
         <!-- Nome -->
         <div class="form-group">
             <label><b>{% trans "Nome" %}</b>:</label>

@@ -47,15 +47,19 @@
                             <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                         </a>
                     </figure>
+                    {% if pet.ativo %}
                     <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    {% endif %}
                 </div>
             </div>
         </div> 
     </div>
     <div class="col-md-6">
+        {% if pet.ativo %}
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
         <section class="py-2">
         </section>
+        {% endif %}
         <h5>{{pet.nome}}</h5> 
         <p class="pt-1">{{pet.descricao}}</p>
         <div class="table-responsive">
