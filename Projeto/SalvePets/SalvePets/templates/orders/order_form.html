@@ -2,6 +2,7 @@
 
 {% load crispy_forms_tags %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Checkout{% endblock title %}
 
@@ -30,7 +31,7 @@
         </div>
     </div>
     {% else %}
-    <p>Seu carrinho está vazio.</p>
+    <p>{% trans "Seu carrinho está vazio." %}</p>
     {% endif %}
 </div>
 
