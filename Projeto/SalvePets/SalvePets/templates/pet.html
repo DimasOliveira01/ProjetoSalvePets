@@ -60,41 +60,41 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Data de localização/perda:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Data de localização/perda" %}:</th>
                         <td>{{pet.dataPerdaEncontro|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Raça" %}:</th>
                         <td>{{pet.raca|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Sexo" %}:</th>
                         <td>{{pet.sexo|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Cor predominante:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Cor predominante" %}:</th>
                         <td>{{pet.cor|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Porte" %}:</th>
                         <td>
                             {% if pet.porte >= 40 and pet.porte <= 60%}
-                                Pequeno porte
+                                {% trans "Pequeno porte" %}
                             {% elif pet.porte > 60 and pet.porte <= 100 %}
-                                Médio porte
+                                {% trans "Médio porte" %}
                             {% else %}
-                                Grande porte
+                                {% trans "Grande porte" %}
                             {% endif %}
                             <br>
-                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                            ({% trans "aprox" %}. {{pet.porte|default_if_none:"-"}}{% trans "cm de altura" %})
                         </td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Última localização:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Última localização" %}:</th>
                         <td>(desenvolver)</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Espécie" %}:</th>
                         <td>{{pet.especie|default_if_none:"-"}}</td>
                     </tr>
                 </tbody>
@@ -144,14 +144,14 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="excluir_petLabel">Excluir pet</h5>
+        <h5 class="modal-title" id="excluir_petLabel">{% trans "Excluir pet" %}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Tem certeza que deseja excluir o pet?
+        {% trans "Tem certeza que deseja excluir o pet?" %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
         <a href="/deletar-pet/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
       </div>
     </div>

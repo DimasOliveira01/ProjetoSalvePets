@@ -166,7 +166,7 @@
             "image": "products/2020/11/29/Bone-infantil-formato-cachorro.jpg",
             "description": "Boné infantil de cachorro, confeccionado em veludo suede 100% poliéster, possui ajustador de tamanho no traseiro, estampa bordado simples.",
             "price": "69.90",
-            "is_available": false
+            "is_available": true
         }
     },
     {
@@ -301,6 +301,1067 @@
             "image": "products/2020/11/29/mascara-cachorro.jpg",
             "description": "Máscara personalizada de tecido reutilizável e lavável de ótima qualidade, excelente para proteção contra doenças respiratórias.",
             "price": "9.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Coleira Guia Para Cachorros Cães",
+            "slug": "coleira-guia-para-cachorros-caes",
+            "image": "products/2020/11/29/coleiraPetNinho.jpg",
+            "description": "Fabricado em Nylon Naval, os guias da Pet Ninho fornece toda segurança a você e seu Pet enquanto passeiam. Seu comprimento é de 1,10m e pode ser esticado até 1,20m. Seu material é o mais resistente do mercado. Além disso, o Guia de Passeio Para Cães da Pet Ninho é elástica, evitando que se rompa ao esticar ou que cause algum desconforto em seu pet. Pensando também em seu conforto, a alça da guia é reforçada e acolchoada com espuma, para que assim não queime sua mão enquanto passeia com seu cachorro.",
+            "price": "29.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 17,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Coleira Guia Retrátil Para Cães, Gatos, Resistente 5 Metros",
+            "slug": "coleira-guia-retratil-para-caes-gatos-resistente",
+            "image": "products/2020/11/29/guiaPets.jpg",
+            "description": "O material da guia é Poliester + PP com um comprimento de 5 metros. Possui um botão parar e suporta pets de até 10 kg.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 18,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Coleira Guia Unificada Adestramento Cães",
+            "slug": "coleira-guia-unificada-adestramento-caes",
+            "image": "products/2020/11/29/guiaUnificada.jpg",
+            "description": "Guia de polipropileno com comprimento de 1,8 M unificada para adestramento com enforcador e limitador, é produzida com material resistente, confortável e se adapta perfeitamente no pescoço do seu cão, podendo ser utilizada em passeios ou adestramento. Contem trava anti-fuga com regulagem, proporcionando comodidade e segurança extra para o passeio. A corda super resistente suporta até 400 kg.",
+            "price": "32.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 19,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Coleira Guia Retrátil Para Cães E Gatos",
+            "slug": "coleira-guia-retratil-para-caes-e-gatos",
+            "image": "products/2020/11/29/guiaRetratil.jpg",
+            "description": "Guia pet com cordão retrátil . Maior conforto e mobilidade para animais de estimação, já que o tamanho do cordão pode ser ajustado de acordo com a sua preferência (e/ou situação) através de um botão. Cadeado de alta qualidade que pode ser utilizado junto dos mais diversos tipos de coleiras peitorais ou de pescoço. Design ergonômico que se ajusta facilmente às mãos.",
+            "price": "67.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 20,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Coleira Guia Para Cachorro Com Enforcador",
+            "slug": "coleira-guia-para-cachorro-com-enforcador",
+            "image": "products/2020/11/29/guiaEnforcador.jpg",
+            "description": "Guia de corda 14mm, com 50 cm de comprimento, super resistente, com grampo em metal para maior segurança e corrente de 70 cm, modelo enforcador em argolas, medida total da guia e corrente 1,10m. Indicada para cachorros grandes",
+            "price": "31.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 21,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 1,
+            "name": "Guia Resistente Cães Grandes + Enforcador Coleira",
+            "slug": "guia-resistente-caes-grandes-enforcador-coleira",
+            "image": "products/2020/11/29/guiaRetratil.jpg",
+            "description": "A guia é toda trabalhada em couro , e com costura reforçada. Indicada para cães grandes e muito fortes .",
+            "price": "44.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 22,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Brinquedo Chalesco Pelúcia Macaco",
+            "slug": "brinquedo-chalesco-pelucia-macaco",
+            "image": "products/2020/11/29/brinquedoMacaco.jpg",
+            "description": "Pelúcia macia e resistente com formato criativo e divertido para distrair e divertir seu pet. Emite som ao ser apertado em um dos brações, em uma das pernas e no corpo.",
+            "price": "32.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 23,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Brinquedo LCM Osso Maciço Extra Forte",
+            "slug": "brinquedo-lcm-osso-macico-extra-forte",
+            "image": "products/2020/11/29/Brinquedo_Osso.jpg",
+            "description": "Elaborado com borracha brasileira, contribui para o desenvolvimento físico e mental além de fortalecer a mordida de seu pet. 100% Natural Atóxica e é muito resistente.",
+            "price": "17.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 24,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Super Banana",
+            "slug": "super-banana",
+            "image": "products/2020/11/29/banana.jpg",
+            "description": "Para brincadeiras de jogar e pegar e indicado para todos os tamanhos e idades. Feito de borracha atóxica com aroma de tutti-frutti e possui uma cavidade para rechear com petiscos: perfeito para treinamentos e diminuir a ansiedade. Medidas 4cm de altura e 14cm de largura.",
+            "price": "69.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 25,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Brinquedo Interativo Petball Pet Games",
+            "slug": "brinquedo-interativo-petball-pet-games",
+            "image": "products/2020/11/29/petball.jpg",
+            "description": "Brinquedo indicado para cães sendo uma forma divertida e saudável de estimular seu pet. A brincadeira é mais proveitosa quando seu cão estiver com fome. É atóxico, lavável e super resistente.",
+            "price": "37.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 26,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Arranhador Toca Para Gato Bege",
+            "slug": "arranhador-toca-para-gato-bege",
+            "image": "products/2020/11/29/arranhador.jpg",
+            "description": "Os arranhadores para gatos são um brinquedo necessário e fundamental para qualquer felino. Os felinos precisam de afiar as suas unhas, arranhar e ter um lugar que seja deles, por isso se não quer começar a ver os seus móveis a estragarem-se, o arranhador é a solução. Além disso, o processo de arranhar é muito importante para o seu pet, pois também faz parte dos seus processos de limpeza, higiene, brincadeira e liberação emocional. Arranhador de madeira mdf, cano revestido com sisal, tecido pelúcia.",
+            "price": "119.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 27,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 2,
+            "name": "Brinquedo Para Gato Torre de Trilhos Com Bolas",
+            "slug": "brinquedo-para-gato-torre-de-trilhos-com-bolas",
+            "image": "products/2020/11/29/torreGato.jpg",
+            "description": "Contém Pet Brinquedo Interativo Para Gato Torre de Trilhos Com Bolas, ajudando seu gato a se distrair e se divertir.",
+            "price": "32.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 28,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Cachorrinho",
+            "slug": "bone-cachorrinho",
+            "image": "products/2020/11/29/bone-cachorrinho.jpg",
+            "description": "Boné infantil confeccionado em brim com detalhes em soft.",
+            "price": "67.60",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 29,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Infantil Cachorro STZ",
+            "slug": "bone-infantil-cachorro-stz",
+            "image": "products/2020/11/29/bone-infantil-stz.jpg",
+            "description": "Para deixar o look dos pequenos ainda melhor, aposte no Boné Infantil STZ Aba Curva Cachorro Bege! - Fecho em snape track. Confeccionado em tecido - Perfeito para usar na praia ou com as produções mais estilosas.",
+            "price": "29.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 30,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Infantil Gato Preto",
+            "slug": "bone-infantil-gato-preto",
+            "image": "products/2020/11/29/boneBichinhos.jpg",
+            "description": "Boné de bichinhos para crianças, com apliques em feltro e estampa / bordado de rostinho na parte frontal e aba superior em silk. Produto produzido em microfibra. Tamanho único, como possui regulagem, veste de 6 meses a 3 anos.",
+            "price": "34.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 31,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Adulto Filhote de Cachorro Pequeno",
+            "slug": "bone-adulto-filhote-de-cachorro-pequeno",
+            "image": "products/2020/11/29/boneCachorropequeno.jpg",
+            "description": "Boné personalizado com a figura de um cão filhote da raça Beagle. Possui tamanho único para adultos.",
+            "price": "80.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 32,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Infantil De Bichinho",
+            "slug": "bone-infantil-de-bichinho",
+            "image": "products/2020/11/29/boneGato.jpg",
+            "description": "Boné infantil de bichinhos para criança de 0 a 3 anos. Possui tamanho único com regulagem de velcro atrás.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 33,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 3,
+            "name": "Boné Cachorro Bad To The Bone Desenho",
+            "slug": "bone-cachorro-bad-to-the-bone-desenho",
+            "image": "products/2020/11/29/boneCachorroOculos.jpg",
+            "description": "Boné preto Trucker Telinha. Possui tecido em poliéster. Tamanho único e unissex.",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 34,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa Personalizada Beagle",
+            "slug": "garrafa-personalizada-beagle",
+            "image": "products/2020/11/29/garrafaBeagle.jpg",
+            "description": "A Garrafa Personalizada Beagle é perfeita pra te acompanhar na academia, no trabalho, em todos os lugares. Ela é feita em alumínio, por isso preserva a temperatura das bebidas por mais tempo, sejam elas quentes ou frias. O squeeze da Pot Pet vem com duas opções de tampas, uma tipo mosquetão com antivazamento e a outra tampa bico. A  Garrafa Personalizada Beagle  é um charme e é muito prática,  resistente e divertida.",
+            "price": "49.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 35,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa Squeeze Estampa Cachorro",
+            "slug": "garrafa-squeeze-estampa-cachorro",
+            "image": "products/2020/11/29/garrafaSqueze.jpg",
+            "description": "Garrafa feminina squeeze confeccionada em material acrílico. Possui estampa Cachorro e frase, capacidade para 670ml de líquido, fechamento por tampa giratória com alça para transporte.",
+            "price": "15.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 36,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa Infantil Estampa Cachorro",
+            "slug": "garrafa-infantil-estampa-cachorro",
+            "image": "products/2020/11/29/garrafaInfantil.jpg",
+            "description": "Garrafa Infantil Estampa Cachorro, confeccionada em material acrílico, capacidade para 350ml de líquido. Possui estampa de cachorro, fechamento por tampa giratória, acabamento no tom.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 37,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa Squeeze Infantil Cachorro Plasútil",
+            "slug": "garrafa-squeeze-infantil-cachorro-plasutil",
+            "image": "products/2020/11/29/garrafaSquezeCachorro.jpg",
+            "description": "Garrafa Squeeze Infantil Estampa Cachorro 500ML Plasútil, confeccionada em material plástico, capacidade para 500ml de líquido. Possui estampa de cachorro, frase, fechamento por tampa giratória e acabamento no tom. - Tradução da frase: Mais um minuto.",
+            "price": "49.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 38,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Squeeze Cachorrinho I Love Dog",
+            "slug": "squeeze-cachorrinho-i-love-dog",
+            "image": "products/2020/11/29/garrafaTermica.jpg",
+            "description": "Garrafa em material plástico com tampa rosqueável e estampa de cachorrinho. Ideal para acompanhar seus exercícios e atividades do dia a dia, a peça além de moderna é funcional. Ideal para água, sucos, chá ou bebidas esportivas.",
+            "price": "28.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 39,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa com Estampa Gato",
+            "slug": "garrafa-com-estampa-gato",
+            "image": "products/2020/11/29/garrafaGato2.jpg",
+            "description": "Garrafa feminina com estampa de Gato, sua composição é 100% plástico. Possui alça para transporte e capacidade de 220ml.",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 40,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 4,
+            "name": "Garrafa Térmica de Inox a Vácuo Gato Rosa",
+            "slug": "garrafa-termica-de-inox-a-vacuo-gato-rosa",
+            "image": "products/2020/11/29/garrafaTermicaGato.jpg",
+            "description": "A Garrafa Térmica é toda metálica cor de rosa com a tampa no formato da cabecinha de um gato de óculos. E ainda conta com um elástico pendurado na orelhinha para você carregar aonde quiser! Perfeita para levar para academia, caminhada, andar de bike. Produzida em aço inoxidável, a Garrafa Térmica de Inox a Vácuo Gato Rosa é térmica e conta com excelente qualidade. Além de super prática e linda, tem capacidade de 280 ml. Ela tem ainda uma tampa de rosca e sua vedação é a vácuo, não deixando vazar sua bebida durante o transporte. ",
+            "price": "79.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 41,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Gato Preto Gatinho",
+            "slug": "caneca-gato-preto-gatinho",
+            "image": "products/2020/11/29/CanecaGato.jpg",
+            "description": "Caneca gatinho fofo para você tomar aquela bebida de manhã, totalmente diferente das tradicionais, sua cor veio para destacar. Com alça e capacidade de 200 ml.",
+            "price": "67.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 42,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Personalizada Bigode Gato",
+            "slug": "caneca-personalizada-bigode-gato",
+            "image": "products/2020/11/29/canecaBigodeGato.jpg",
+            "description": "Caneca personalizada de porcelana de alto brilho interior e alça branca com linda estampa Bigode de gato com capacidade de 325 ml. Estampadas em qualidade fotográfica, cores brilhantes de excelente qualidade e acabamento impecável.",
+            "price": "34.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 43,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Personalizada - Mãe de Gato",
+            "slug": "caneca-personalizada-mae-de-gato",
+            "image": "products/2020/11/29/canecaGato2.jpg",
+            "description": "Caneca de cerâmica branca personalizada com capacidade de 325 ml- Tema: pets.",
+            "price": "36.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 44,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Personalizada Cachorro",
+            "slug": "caneca-personalizada-cachorro",
+            "image": "products/2020/11/29/canecaCachorro.jpg",
+            "description": "Caneca personalizada de porcelana e alça branca com linda estampa do cachorrinho com capacidade de 325 ml. Com sua alça e bordas arredondadas proporciona um encaixe perfeito para suas mãos, e um melhor conforto na hora de deliciar sua bebida predileta.",
+            "price": "34.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 45,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Pets Gatinho Cachorro Feliz",
+            "slug": "caneca-pets-gatinho-cachorro-feliz",
+            "image": "products/2020/11/29/canecaPets.jpg",
+            "description": "Caneca de porcelana com estampa para quem é apaixonado por pets! A caneca acompanha caixinha. Possui capacidade de 325 ml.",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 46,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Cachorro e Corações",
+            "slug": "caneca-cachorro-e-coracoes",
+            "image": "products/2020/11/29/canecaCachorroCoracao.jpg",
+            "description": "Caneca personalizada em Porcelana com capacidade de 325 ml. Produzidas com porcelana de alta qualidade é resistente a micro ondas e lava louças, não desbota, não possui relevo, acabamento de alto brilho; alta durabilidade da impressão.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 47,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 5,
+            "name": "Caneca Cachorros, Casinha e Ossinhos",
+            "slug": "caneca-cachorros-casinha-e-ossinhos",
+            "image": "products/2020/11/29/canecaCachorroCasinha.jpg",
+            "description": "Caneca personalizada em Porcelana com capacidade de 325 ml. Produzidas com porcelana de alta qualidade é resistente a micro ondas e lava louças, não desbota, não possui relevo, acabamento de alto brilho; alta durabilidade da impressão.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 48,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Cachorro Felicidade",
+            "slug": "chaveiro-cachorro-felicidade",
+            "image": "products/2020/11/29/chaveiroCachorro.jpg",
+            "description": "Com o Chaveiro Cachorro Felicidade além de você organizar suas chaves, você vai levar muito encanto para sua bolsa, mala ou mochila. Com o formato da tag redonda, esse chaveirinho traz a estampa da carinha de um cachorro muito fofo no fundo roxo e com listras laranjas, rosas e roxas. Fabricado em material plástico com revestimento em resina acrílica, esse chaveiro traz penduricalhos que remetem a estampa, como um ossinho estilizado. No verso traz a frase: Felicidade é ter um cachorro.",
+            "price": "64.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 49,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Cachorro Pet",
+            "slug": "chaveiro-cachorro-pet",
+            "image": "products/2020/11/29/chaveiroCachorropet.jpg",
+            "description": "Chaveiro em acrílico resinado, acompanha pingentes com detalhes em couro, metais e metais resinados.",
+            "price": "57.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 50,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Cachorro Pelúcia",
+            "slug": "chaveiro-cachorro-pelucia",
+            "image": "products/2020/11/29/chaveiroCachorroPelucia.jpg",
+            "description": "Chaveiro de bichinho pelúcia em forma de Cachorro com um pesinho. Este vai para amantes de animais que não resistem a um bichinho de pelúcia. Cuidadosamente trabalhado, o bichinho lhe proporcionará muita diversão e companherismo para todos os momentos. Material: poliéster; Enchimento: fibra de poliéster; Tamanho: 22 cm de altura.",
+            "price": "30.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 51,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Gato Resinado",
+            "slug": "chaveiro-gato-resinado",
+            "image": "products/2020/11/29/chaveiroGatoResinada.jpg",
+            "description": "É feito com peças de metal e partes resinadas. A RESINA é uma camada transparente que é aplicada por cima da imagem, além de proteger a impressão, dá brilho e relevo. O produto fica muito mais bonito!",
+            "price": "35.00",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 52,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Gato Fofo",
+            "slug": "chaveiro-gato-fofo",
+            "image": "products/2020/11/29/chaveiroGatoFofo.jpg",
+            "description": "Chaveiro de metal prata, em formato de gatinho, com cristais interno na cor preta. Dimensão aproximada: 5,5cm x 5,5 cm",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 53,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Gato Brilhante",
+            "slug": "chaveiro-gato-brilhante",
+            "image": "products/2020/11/29/chaveiroGatoBrilhante.jpg",
+            "description": "Chaveiro Gato Azul Royal. Tamanho da Argola de Chaveiro: 20mm; Tamanho do Pingente Gato: 13x19mm; Tamanho do Chaveiro Completo: 6cm",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 54,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 6,
+            "name": "Chaveiro Gato Sereia",
+            "slug": "chaveiro-gato-sereia",
+            "image": "products/2020/11/29/chaveiroGatoSereia.jpg",
+            "description": "Chaveiro com argola de metal e enfeite de resina no formato de um gato sereia rosa com 3 cm de altura. Material: resina e metal.",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 55,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 7,
+            "name": "Abridor De Garrafa Bulldog",
+            "slug": "abridor-de-garrafa-bulldog",
+            "image": "products/2020/11/29/abridorCachorro.jpg",
+            "description": "O abridor de garrafas fixado na parede é a chave para criação de peças para áreas gourmet, churrasqueiras, cozinhas e para aquele cantinho especial do bar. Ele pode ser fixado nos mais diversos materiais com a utilização de apenas dois parafusos simples. Deixe sua imaginação e criatividades fluirem com nossa linha diversificada de abridores fixos de garrafas.",
+            "price": "15.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 56,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 7,
+            "name": "Abridor Garrafa Cão Bravo",
+            "slug": "abridor-garrafa-cao-bravo",
+            "image": "products/2020/11/29/abridorCachorroparede.jpg",
+            "description": "Abridor fixado na parede no formato da cabeça de um cachorro. O abridor é entregue acompanhado por 3 parafusos para auxiliar na fixação do abridor na parede.",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 57,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 7,
+            "name": "Abridor De Garrafas Pata De Gato",
+            "slug": "abridor-de-garrafas-pata-de-gato",
+            "image": "products/2020/11/29/abridorPataGato.jpg",
+            "description": "Abridor de garrafa no formato de uma pata de gato feito de aço inoxidável, resistente e durável. Material de alta qualidade: Abs ABS + Aço Inoxidável.",
+            "price": "34.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 58,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 7,
+            "name": "Abridor de Garrafa Divertido Gato",
+            "slug": "abridor-de-garrafa-divertido-gato",
+            "image": "products/2020/11/29/abridorGato.jpg",
+            "description": "O abridor de garrafa em formato de Gato com certeza não passará despercebido na sua casa!Além de super criativo, também é super útil!Com visual divertido, é uma ótima opção para compor a decoração divertida do seu bar ou cozinha. Material: Borracha Plástica e Metal",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 59,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 7,
+            "name": "Abridor Garras de Gato",
+            "slug": "abridor-garras-de-gato",
+            "image": "products/2020/11/29/abridorGarraGato.jpg",
+            "description": "O abridor possui um design de garras de gato 3D. Material: ferro, borracha macia, imã.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 60,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Bolsa para Transporte de Pets",
+            "slug": "bolsa-para-transporte-de-pets",
+            "image": "products/2020/11/29/bolsaTransporte.jpg",
+            "description": "A bolsa para transporte de cachorros, gatos e coelhos lhe permite levar seu animalzinho com conforto e segurança para passeios. Feita com um forro interno confortável e de grande capacidade, a bolsa possui uma estrutura que lhe proporciona uma grande integridade, garantindo que ela não se deformará.",
+            "price": "219.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 61,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Mochila Canguru para Cachorros",
+            "slug": "mochila-canguru-para-cachorros",
+            "image": "products/2020/11/29/mochilaCanguru.jpg",
+            "description": "A mochila canguru foi criada para transportar seu cãozinho ou levá-lo para um gostoso passeio. O ambiente seguro e confortável oferecido pela mochila ajudará a acalmar a ansiedade do seu animal.",
+            "price": "159.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 62,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Bolsa de Transporte Baby para Pets",
+            "slug": "bolsa-de-transporte-baby-para-pets",
+            "image": "products/2020/11/29/bolsaTransportePet.jpg",
+            "description": "Possui presilha interna para fixar na coleira, garantindo segurança e conforto no passeio com o seu pet. Indicada para cachorros e gatos de pequeno porte. Composição: Tecido 100% algodão.",
+            "price": "179.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 63,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Bolsa Transporte Pets Desmontável",
+            "slug": "bolsa-transporte-pets-desmontavel",
+            "image": "products/2020/11/29/bolsaTransportePetdesmonta.jpg",
+            "description": "Após o uso é fácil de guardar (desmonta e fica do tamanho de uma maleta de computador). Material maleável, confortável para o pet. Indicado para cães de pequeno porte. Suporta cachorros com até 6kgs.",
+            "price": "182.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 64,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Bolsa de Transporte São Pet",
+            "slug": "bolsa-de-transporte-sao-pet",
+            "image": "products/2020/11/29/bolsaPetz.jpg",
+            "description": "Indicada para cães e gatos, essa bolsa oferece mais segurança e conforto para o seu pet. Confeccionada com material resistente, ela é ideal para pets de pequeno porte.",
+            "price": "399.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 65,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 8,
+            "name": "Bolsa para Transporte de Pets - Nagano",
+            "slug": "bolsa-para-transporte-de-pets-nagano",
+            "image": "products/2020/11/29/bolsaTransportecaesgatos.jpg",
+            "description": "Bolsa de Transporte Pet para Cães e Gatos. Flexível, confortável e arejada com alças reforçadas. Possui uma rede para ventilação. Ótima para passeios em locais movimentados e com restrição de animais e/ou locais públicos. O peso máximo suportado é 10 kg.",
+            "price": "102.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 66,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda 2021 Cachorro amigo",
+            "slug": "agenda-cachorro-amigo",
+            "image": "products/2020/11/29/agendaCachorroamigo.jpg",
+            "description": "Agenda diária, capa dura, miolo com 352 páginas (176 folhas), formato 11,8 x 17,5cm, papel offset 63g, acabamento wire-o, aplique especial em tecido na capa, elástico para fechamento. Acompanha envelope para documentos, capa protetora e marcador de páginas.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 67,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda 2021 Espiral A6 Cachorro",
+            "slug": "agenda-espiral-cachorro",
+            "image": "products/2020/11/29/agendaCachorro2021.jpg",
+            "description": "Agenda com Espiral 2021 Cachorro em Aquarela Possui marcador de páginas Elástico para fechar, unindo as duas capas, Essa linda agenda deixara a organização dos seus dias muito mais fácil e prático. Tamanho ideal pra levar na bolsa. Contém: 1 unidade com 176 Folhas Dimensões aproximadas: 11 X 15,2 cm Tipo das folhas: A6 Modelo: Cachorro",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 68,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda Diária Cachorro 2021 Redoma",
+            "slug": "agenda-diaria-cachorro-redoma",
+            "image": "products/2020/11/29/agendaDiariaCachorro.jpg",
+            "description": "Agenda diária pequena com papel offset 60g / m². Possui forro decorado, elástico para fechamento e marcador de página. Contém 368 Páginas.",
+            "price": "36.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 69,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda 2021 Pets Gato Pink",
+            "slug": "agenda-pets-gato-pink",
+            "image": "products/2020/11/29/agendaGato.jpg",
+            "description": "Agenda 2021 Personalizada Pets Gato Pink com capa dura, impressão em Digital/Offset, capa impressa em papel Couché 150g. Quantidade de páginas: 336 páginas",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 70,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda Espiral 2021 Gatinhos",
+            "slug": "agenda-espiral-gatinhos",
+            "image": "products/2020/11/29/agendaGatinhos.jpg",
+            "description": "168 folhas off-set 60g. Semana folha única / Sábado e Domingo dividem a pagina. Possui índice telefônico e capa dura.",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 71,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda 2021 - Dog is Love",
+            "slug": "agenda-dog-is-love",
+            "image": "products/2020/11/29/agendaDogLove.jpg",
+            "description": "Agenda 2021 - DOG IS LOVE, 342 folhas, miolo em papel offset 63 gramas, bolsa plástica, índice telefônico, planejamento para próximo ano, mapa em 4x4 cores.",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 72,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 9,
+            "name": "Agenda Espiral Diária D+ Gato 2021",
+            "slug": "agenda-espiral-diaria-d-gato",
+            "image": "products/2020/11/29/agendaDGato.jpg",
+            "description": "Agenda espiralada com visão de 1 dia por página, exceto sábado e domingo. Possui capa dura e bolsa plástica para guardar trabalhos e anotações. Ideal para a organização do dia a dia.",
+            "price": "19.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 73,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha De Banho Infantil Gato Lepper",
+            "slug": "toalha-de-banho-infantil-gato-lepper",
+            "image": "products/2020/11/29/toalhaGato.jpg",
+            "description": "Toalha de banho infantil, confeccionada em 95% algodão e 5% poliéster. Possui estampa de gatos, recortes em animal print de onça, tecido felpudo super macio e ótima durabilidade.",
+            "price": "26.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 74,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Banho Gato Colorido",
+            "slug": "toalha-de-banho-gato-colorido",
+            "image": "products/2020/11/29/toalhaGatoColorido.jpg",
+            "description": "Toalha de banho de material Poliéster/Algodão, lavável à máquina e com secagem muito rápida.",
+            "price": "59.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 75,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Banho Gatinho",
+            "slug": "toalha-de-banho-gatinho",
+            "image": "products/2020/11/29/toalhaGatinho.jpg",
+            "description": "Toalha de banho Gatinho aveludada em algodão. Características: Composição de 100% Algodão; Medidas: 70Cm X 130 Cm.",
+            "price": "25.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 76,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Praia Cute Puppy",
+            "slug": "toalha-de-praia-cute-puppy",
+            "image": "products/2020/11/29/toalhaCachorro.jpg",
+            "description": "Toalha de praia no tamanho de 76 x 152cm, 100% Algodão aveludada e estampada em processo reativo a fibra do algodão, não desbotando com o tempo e deixando a toalha com muito brilho e cores vivas! A toalha Cute Puppy estampa a beleza de um labrador filhote atento ao chamado para brincar! Uma ótima lembrança para seu amigo ou para curtir uma praia ou piscina em um dia lindo de sol!",
+            "price": "39.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 77,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Praia Cachorro Yorkshire",
+            "slug": "toalha-de-praia-cachorro-yorkshire",
+            "image": "products/2020/11/29/toalhaYorkshire.jpg",
+            "description": "Torne seu banho mais divertido ou faça sucesso na praia ou piscina usando uma toalha de banho com este estilo diferenciado de estampa. Tecido: 54% algodão + 46% poliéster. Tamanho: 135 x 75 cm.",
+            "price": "29.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 78,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Banho Cachorro Surfista",
+            "slug": "toalha-de-banho-cachorro-surfista",
+            "image": "products/2020/11/29/toalhaCachorroSurf.jpg",
+            "description": "Toalha multicolorida com estampa de cachorros surfistas. Composta de fibra superfina 100% poliéster.",
+            "price": "54.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 79,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 10,
+            "name": "Toalha de Praia Puppies in the Stockings",
+            "slug": "toalha-de-praia-puppies-in-the-stockings",
+            "image": "products/2020/11/29/toalhaCachorroMeia.jpg",
+            "description": "Toalha com estampa de cachorros filhotes em meias. Dimensão de 76cm x 152cm e aveludada 100% algodão.",
+            "price": "59.90",
+            "is_available": true
+        }
+    },
+    
+    
+
+
+
+
+
+
+
+
+
+    {
+        "model": "products.product",
+        "pk": 80,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara Cachorros",
+            "slug": "mascara-cachorros",
+            "image": "products/2020/11/29/mascaraCachorro.jpg",
+            "description": "Máscara de proteção em Tricoline de algodão lavável. Dupla camada de tecido para maior proteção e ótimo acabamento, pode ser lavada e esterilizada.",
+            "price": "9.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 81,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara de Tecido Infantil Cachorro",
+            "slug": "mascara-de-tecido-infantil-cachorro",
+            "image": "products/2020/11/29/mascaraInfantilcachorro.jpg",
+            "description": "A Máscara de Tecido Infantil Cachorro garante proteção para as crianças de um jeito divertido. Produzida a partir da reutilização de tecido 100% algodão, com aplicação de bordado em formato de focinho de cachorro, possui forro 100% algodão e alças elásticas. A máscara é para uso doméstico e não indicada para fins hospitalares. Ainda acompanha um saquinho em tecido com a mesma estampa para poder levá-la sempre com você. Indicado para crianças de 1 a 6 anos.",
+            "price": "12.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 82,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara 3D Focinho Cachorro Feminina",
+            "slug": "mascara-focinho-cachorro-feminina",
+            "image": "products/2020/11/29/mascaraFocinho.jpg",
+            "description": "A Máscara 3D é produzida em dupla camada de tecido: em sua parte interna, é utilizado o tecido tricoline, derivado do algodão, e em sua parte externa, tecido Oxford, onde realizamos a estampa personalizada. Além disso, nosso modelo possui vinco para encaixe no topo do nariz e dispõe de elásticos já padronizados que se prendem atrás das orelhas. Com essa composição, garantimos aos nossos clientes conforto, estilo e o principal: proteção. Nosso modelo de máscara é anatômico e dispensa a utilização do clipe nasal",
+            "price": "11.99",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 83,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara Estampa Patinhas",
+            "slug": "mascara-estampa-patinhas",
+            "image": "products/2020/11/29/mascaraPatinhas.jpg",
+            "description": "As Máscaras são produzidas com tecido tricoline 100% algodão, que é antialérgico, e em camada dupla para maior proteção. Os elásticos das máscaras são ajustáveis ao rosto dando assim maior conforto para o uso.  Você mesmo faz o ajuste, super fácil. São laváveis, recomendável usar por umas 2 ou 3 horas, podendo ser reutilizável após lavagem.",
+            "price": "16.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 84,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara Estampa Gato Preto",
+            "slug": "mascara-estampa-gato-preto",
+            "image": "products/2020/11/29/mascaraGato.jpg",
+            "description": "Máscara de proteção dupla face confeccionadas em algodão 100% pode ser lavada até 80 vezes, propicia proteção contra os vírus atuais.",
+            "price": "8.90",
+            "is_available": true
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 85,
+        "fields": {
+            "created": "2020-11-29T22:13:51.267Z",
+            "modified": "2020-11-29T22:13:51.267Z",
+            "category": 11,
+            "name": "Máscara 3D Neon Gatíneos",
+            "slug": "mascara-neon-gatineos",
+            "image": "products/2020/11/29/mascaraGatoNeon.jpg",
+            "description": "Confeccionada com TRIPLA camada de tecido, tricoline 100% algodão, lavável e reutilizável, e ela é anatômica. Com Clips Nasal para melhorar ainda mais o ajuste. Além disso, não embassa os óculos. O elástico é super macio, semelhante aos das máscaras cirúrgicas e com regulagem. Tamanho único.",
+            "price": "17.90",
             "is_available": true
         }
     }
