@@ -31,7 +31,6 @@ class ProductListView(ListView):
         if search:
             queryset = queryset.filter(name__icontains=search)
 
-
         category_slug = self.kwargs.get("slug")
         if category_slug:
             self.category = get_object_or_404(Category, slug=category_slug)

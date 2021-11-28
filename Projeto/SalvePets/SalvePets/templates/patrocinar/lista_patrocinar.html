@@ -10,13 +10,25 @@
         <div class="container mt-4">
             <ul class="nav nav-tabs nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Meus patrocínios" %}</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                </li>
+                {% if usuario.is_admin_instituicao %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PayPal" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
+
         <p><h3>{% trans "Pets disponíveis para patrocínio" %}</h3></p>
         <p>Você pode ajudar diretamente uma instituição que abriga animais com o valor que desejar.<p>
         <div class="row">
@@ -29,7 +41,8 @@
                         <p class="card-text text-muted text-uppercase small">{{i.nome_instituicao}}</p>
                         <h5 class="card-title">{{ p.nome }}</h5>
                         <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
-                        <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>
+                        <!--<a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>-->
+                        <a href="../pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>
                         <a href="../patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">Patrocinar</a>
                     </div>
                 </div>            
@@ -37,4 +50,4 @@
         </div>
     </div>
 
-{% endblock %}
+{% endblock %} 

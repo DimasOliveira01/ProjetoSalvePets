@@ -5,9 +5,10 @@
 {% block head_title %}{% trans "Verifique seu e-mail" %}{% endblock %}
 
 {% block conteudo %}
-    <h1>{% trans "Verifique seu e-mail" %}</h1>
+    <div class="container mt-4">
+        <h1>{% trans "Verifique seu e-mail" %}</h1>
 
-    <p>{% blocktrans %}Você recebeu um e-mail de confirmação. Clique no link enviado para continuar seu cadastro.{% endblocktrans %}</p>
-    <p>{% blocktrans %}Caso não tenha recebido o e-mail, verifique sua caixa de spam e adicione <b>atendimentosalvepets@gmail.com</b> na sua lista de contatos.{% endblocktrans %}</p>
-
+        <p>{% blocktrans %}Você recebeu um e-mail de confirmação. Clique no link enviado para continuar seu cadastro.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Caso não tenha recebido o e-mail, verifique sua caixa de spam e adicione <b>atendimentosalvepets@gmail.com</b> na sua lista de contatos.{% endblocktrans %}</p>
+    </div>
 {% endblock %}

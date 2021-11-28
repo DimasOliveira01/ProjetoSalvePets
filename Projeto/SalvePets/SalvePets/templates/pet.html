@@ -44,9 +44,9 @@
             <div class="row product-gallery">
                 <div class="col-12 mb-0">
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 500px">
-                        <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 500px; transform-origin: center center; transform: scale(1);">
+                        <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                     </figure>
-                    <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    <!--<a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>-->
                 </div>
                 
             </div>
@@ -60,64 +60,59 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Data de localização/perda:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Data de localização/perda" %}:</th>
                         <td>{{pet.dataPerdaEncontro|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Raça" %}:</th>
                         <td>{{pet.raca|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Sexo" %}:</th>
                         <td>{{pet.sexo|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Cor predominante:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Cor predominante" %}:</th>
                         <td>{{pet.cor|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Porte" %}:</th>
                         <td>
                             {% if pet.porte >= 40 and pet.porte <= 60%}
-                                Pequeno porte
+                                {% trans "Pequeno porte" %}
                             {% elif pet.porte > 60 and pet.porte <= 100 %}
-                                Médio porte
+                                {% trans "Médio porte" %}
                             {% else %}
-                                Grande porte
+                                {% trans "Grande porte" %}
                             {% endif %}
                             <br>
-                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                            ({% trans "aprox" %}. {{pet.porte|default_if_none:"-"}}{% trans "cm de altura" %})
                         </td>
                     </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Última localização:</th>
-                        <td>(desenvolver)</td>
-                    </tr>
+                        <td>{{localizacao}}</td>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                    <tr>
+                        <th class="pl-0 w-25" scope="row">{% trans "Espécie" %}:</th>
                         <td>{{pet.especie|default_if_none:"-"}}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="mt-4"> <span class="fw-light">Contato</span>
-                <table class="table">
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">E-mail:</th>
-                        <td>{{creator.email|default_if_none:"-"}}</td>
-                    </tr>
-                    <tr>
-                        <th class="pl-0 w-25" scope="row">Telefone:</th>
-                        <td>{{creator.usuario.telefone|default_if_none:"-"}}</td>
-                    </tr>
-                </table>
+            <div class="mt-4">
+                <h6><span class="pl-0 w-25">Contato</span></h6>
+                <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
+                <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
+                <div id="g-recaptcha-error"></div>
             </div>
         </div>
+        <br>
         {% if request.user == pet.user %}
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluir_pet">{% trans "Excluir" %}</button>
             <a href="/cadastro-pet/?id={{ pet.id }}" class="btn btn-outline-dark" role="button">{% trans "Alterar" %}</a>
         {% endif %}
-    </div>
+    </div> 
 
 
 <!-- Modal -->
@@ -125,14 +120,14 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="excluir_petLabel">Excluir pet</h5>
+        <h5 class="modal-title" id="excluir_petLabel">{% trans "Excluir pet" %}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Tem certeza que deseja excluir o pet?
+        {% trans "Tem certeza que deseja excluir o pet?" %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
         <a href="/deletar-pet/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
       </div>
     </div>
@@ -142,6 +137,22 @@
 
 </main>
 <br>
+<script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'core/js/jquery.mask.js' %}"></script>
 
+<!------------------------------------------------------>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
+<script>
 
-{% endblock conteudo %}
+function validar_captcha() { 
+    var captchResponse = $('#g-recaptcha-response').val();
+    if(captchResponse.length != 0 )
+        document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"><tr><th class="pl-0 w-25" scope="row">E-mail:</th><td>{{creator.email|default_if_none:"-"}}</td></tr><tr><th class="pl-0 w-25" scope="row">Telefone:</th><td>{{creator.usuario.telefone|default_if_none:"-"}}</td></tr></table>';
+
+}
+
+</script>
+
+<!------------------------------------------------------>
+
+{% endblock conteudo %} 

@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load product_tags %}
+{% load i18n %}
 
 {% block title %}
 {% if category %}
@@ -20,7 +21,7 @@ Produtos
                 <div class="input-group mb-3">
                     <input type="text" id="search" name="search" class="form-control" placeholder="Buscar produto">
                     <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Buscar">
+                        <input type="submit" class="btn btn-primary" value="{% trans "Buscar" %}">
                     </div>
                 </div>
 
@@ -38,7 +39,7 @@ Produtos
 
     <div class="row">        
         <div class="col-lg-3">
-        <!--<div class="col-sm-3">BRUNNO-->
+        <!--<div class="col-sm-3">-->
             <ul class="list-group mb-3 mb-lg-0">
                 <a class="text-decoration-none list-group-item list-group-item-light {% if not category %}active{% endif %}"
                     href="{% url 'products:list' %}">
@@ -54,10 +55,10 @@ Produtos
             </ul>
         </div>
     
-        <!--</div>BRUNNO-->
+        <!--</div>-->
 
         <div class="col-lg-9">
-        <!--<div class="container mb-4">BRUNNO-->
+        <!--<div class="container mb-4">-->
             <div class="row">
             <!--<div class="card-deck mb-3">-->
                 {% for product in product_list %}
@@ -99,8 +100,9 @@ Produtos
             {% if is_paginated %}
             {% include "pagination.html" with page=page_obj %}
             {% endif %}
+            
         </div>
-        <!--</div>BRUNNO-->
+        <!--</div>-->
     </div>
 </div>
 

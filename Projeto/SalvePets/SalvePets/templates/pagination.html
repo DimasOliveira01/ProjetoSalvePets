@@ -1,9 +1,28 @@
+{% load i18n %}
+
 <div>
     {% if page.has_previous %}
-    <a href="?page={{ page.previous_page_number }}">Anterior</a>
+    <!--{% if search %}
+    <a href="?page={{ page.previous_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
+    {% endif %}-->
+    <a href="?page={{ page.previous_page_number }}">{% trans "Anterior" %}</a>
     {% endif %}
-    Página {{ page.number }} de {{ page.paginator.num_pages }}.
+    {% trans "Página" %} {{ page.number }} {% trans "de" %} {{ page.paginator.num_pages }}.
     {% if page.has_next %}
-    <a href="?page={{ page.next_page_number }}">Próxima</a>
+    <!--{% if search %}
+    <a href="?page={{ page.previous_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
+    {% endif %}-->
+    <a href="?page={{ page.next_page_number }}">{% trans "Próxima" %}</a>
     {% endif %}
 </div>
+
+<!--
+{% block scripts %}
+<script>
+    function searchWord(){
+        var param_search = document.getElementById("search");        
+        return true;        
+        }
+</script>
+{% endblock %}
+-->

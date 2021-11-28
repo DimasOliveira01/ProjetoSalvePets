@@ -25,7 +25,7 @@
 -->
 <main>
     <div class="container">
-        <p><h3>{% trans "Detalhes do pet para adoção" %}</h3></p>
+        <p><h3>{% trans "Detalhes do pet para adoção ou patrocínio" %}</h3></p>
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <div id="mdb-lightbox-ui">
@@ -43,18 +43,23 @@
             <div class="row product-gallery mx-1">
                 <div class="col-12 mb-0">
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
-                        <a href="{{pet.foto.url}}" data-size="710x823">
-                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1" style=" transform-origin: center center; transform: scale(0.7);">
+                        <a href="{{pet.foto.url}}">
+                            <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                         </a>
                     </figure>
+                    {% if pet.ativo %}
+                    <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    {% endif %}
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="col-md-6">
+        {% if pet.ativo %}
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
         <section class="py-2">
         </section>
+        {% endif %}
         <h5>{{pet.nome}}</h5> 
         <p class="pt-1">{{pet.descricao}}</p>
         <div class="table-responsive">
@@ -101,13 +106,11 @@
                     </tr>
                 </table>
             </div>
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
-                <form method="post" onsubmit="return submitUserForm();">{% csrf_token %}
-                    <div class="g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback="verifyCaptcha">
-                    </div>
-                    <div id="g-recaptcha-error"></div>
-                    <input class="btn btn-outline-dark" type="submit" name="submit" value="Validar que não sou um Robô" />
-                </form>
+            <div class="mt-4">
+                <h6><span class="pl-0 w-25">Contato</span></h6>
+                <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
+                <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
+                <div id="g-recaptcha-error"></div>
             </div>
         </div>
     </div>
@@ -135,15 +138,14 @@
 </div>
 
 <!------------------------------------------------------>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback'></script>
 <script>
-var recaptcha_response = '';
-function submitUserForm() {
-    if(recaptcha_response.length > 0) {
+
+function validar_captcha() { 
+    var captchResponse = $('#g-recaptcha-response').val();
+    if(captchResponse.length != 0 )
         document.getElementById('g-recaptcha-error').innerHTML = '<table class="table"> <tr> <th class="pl-0 w-25" scope="row">E-mail:</th> <td>{{inst.email|default_if_none:"-"}}</td> </tr> <tr><th class="pl-0 w-25" scope="row">Telefone:</th> <td>{{inst.telefone|default_if_none:"-"}}</td> </tr> </table>';
-        return false;
-    }
-    return true;
+
 }
  
 function verifyCaptcha(token) {

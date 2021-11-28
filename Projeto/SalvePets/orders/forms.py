@@ -6,7 +6,9 @@ from .models import Order
 
 
 class OrderCreateForm(forms.ModelForm):
+    """ Formulários referentes a compra de produtos """
     class Meta:
+        """ Campos referentes aos dados do usuário """
         model = Order
         fields = [
             "name",

@@ -12,6 +12,7 @@ class AvailableManager(models.Manager):
 
 
 class Category(TimeStampedModel):
+    """ Definição das categorias referentes ao produto """
     name = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(unique=True, always_update=False, populate_from="name")
 
@@ -21,13 +22,15 @@ class Category(TimeStampedModel):
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     def get_absolute_url(self):
+        """ Retorna as categorias do produto """
         return reverse("products:list_by_category", kwargs={"slug": self.slug})
 
 
 class Product(TimeStampedModel):
+    """ Definição dos campos referentes ao produto """
     category = models.ForeignKey(
         Category, related_name="products", on_delete=models.CASCADE
     )
@@ -45,7 +48,8 @@ class Product(TimeStampedModel):
         ordering = ("name",)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     def get_absolute_url(self):
+        """ Retorna os detalhes do produto """
         return reverse("products:detail", kwargs={"slug": self.slug})

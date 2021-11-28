@@ -38,31 +38,11 @@ SEXO = (
 
 # ===       Tabelas        ===
 
-class LOCALIZACAO(models.Model):
-    cidade = models.CharField(max_length=50)
-    uf = models.CharField(max_length=2)
-    rua = models.CharField(max_length=200)
-    cep = models.CharField(max_length=10)
-    num = models.IntegerField()
-    bairro = models.CharField(max_length=50)
-    # coordenada = models.PointField() ///// CORRIGIR
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-class AVALIACAO(models.Model):
-    FK_idUsuario = models.ManyToManyField(User)
-    nota = models.DecimalField(max_digits=30, decimal_places=15)
-    comentario = models.TextField()
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-
 class INSTITUICAO(models.Model):
+    """ Modelo de dados de instituição """
     ativo = models.BooleanField(default=True, blank=False, null=False)
-    FK_avaliacao = models.ForeignKey(AVALIACAO, on_delete=models.CASCADE, null=True, blank=True)
     nome_instituicao = models.CharField(max_length=50, null=True)
     razao_social = models.CharField(max_length=50, null=True)
-    #cnpj = models.CharField(max_length=18, null=True)
     cnpj=BRCNPJField("CNPJ", null=True)
     telefone = models.CharField(max_length=16, null=True)
     email = models.CharField(max_length=50, null=True)
@@ -73,18 +53,52 @@ class INSTITUICAO(models.Model):
     district = models.CharField("Bairro", max_length=250)
     state = BRStateField("Estado")
     city = models.CharField("Cidade", max_length=250)
+
+    doacao_valor_20_link = models.CharField("R$ 20", max_length=250, null = True, blank = True)
+    doacao_valor_50_link = models.CharField("R$ 50", max_length=250, null = True, blank = True)
+    doacao_valor_100_link = models.CharField("R$ 100", max_length=250, null = True, blank = True)
+
+    doacao_limpeza_link = models.CharField("Link para ajudar com limpeza", max_length=250, null = True, blank = True)
+    doacao_limpeza_valor = models.DecimalField("Valor da limpeza", max_digits=6, decimal_places=2, null = True, blank = True)
+
+    doacao_alimentacao_link = models.CharField("Link para ajudar com alimentação", max_length=250, null = True, blank = True)
+    doacao_alimentacao_valor = models.DecimalField("Valor da alimentação", max_digits=6, decimal_places=2, null = True, blank = True)
+
+    doacao_medicamentos_link = models.CharField("Link para ajudar com medicamentos", max_length=250, null = True, blank = True)
+    doacao_medicamentos_valor = models.DecimalField("Valor dos medicamentos", max_digits=6, decimal_places=2, null = True, blank = True)
+
+    doacao_diaria_internacao_link = models.CharField("Link para ajudar com diária de internação", max_length=250, null = True, blank = True)
+    doacao_diaria_internacao_valor = models.DecimalField("Valor da diária de internação", max_digits=6, decimal_places=2, null = True, blank = True)
     
+    doacao_patrocinio_codigo = models.CharField("Código do patrocínio", max_length=250, null = True, blank = True)
+    doacao_patrocinio_valor = models.DecimalField("Valor do patrocínio", max_digits=6, decimal_places=2, null = True, blank = True)
+
+
+class AVALIACAO(models.Model):
+    """ Modelo de dados de avaliação """
+    FK_idInstituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    FK_idAvaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
+    nota = models.DecimalField(max_digits=30, decimal_places=15)
+    comentario = models.TextField()
+    dataCriacao = models.DateTimeField(auto_now_add=True)
+    dataModificacao = models.DateTimeField(auto_now=True)
+
 
 class USUARIO(models.Model):
+    """ Modelo de dados de usuário """
     user = models.OneToOneField(User, on_delete=CASCADE)
-    #idImagem = models.ImageField(upload_to='media', null=True, blank=True)
-    #FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum', verbose_name=_("Tipo de usuário"), blank=False, null=False)
-    cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False, null=False)
+    tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum',
+                                   verbose_name=_("Tipo de usuário"), blank=False, null=False)
+    #cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,null=False)
+    cpfcnpj = BRCPFField("CPF")
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
-    telefone = models.CharField(max_length=16, verbose_name=_("Número de celular (somente números)"), blank=True, null=True)
+    telefone = models.CharField(max_length=16,
+                                verbose_name=_("Número de celular (somente números)"), blank=True,
+                                null=True)
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)
-    receberNotificacoes = models.BooleanField(default=True, verbose_name=_("Receber notificações"), blank=False, null=False)
+    receberNotificacoes = models.BooleanField(default=True,
+                                              verbose_name=_("Receber notificações"), blank=False,
+                                              null=False)
     site = models.CharField(max_length=100, verbose_name=_("Site"), blank=True, null=True)
     idImagem = models.ImageField(upload_to='usuario', blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True, null=True)
@@ -101,47 +115,36 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.usuario.save()
 
-class ABRIGO(models.Model):
-    FK_idUsuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    telefone = models.CharField(max_length=20)
-    email = models.CharField(max_length=100)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
 class Pet(models.Model):
+    """ Modelo de dados de pet """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, blank=True, null=True)
+    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, blank=True,
+                                          null=True)
     nome = models.CharField(max_length=100, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
     dataPerdaEncontro = models.DateField(blank=True, null=True)
-    especie = models.CharField(max_length=50, choices=ESPECIE, default="Cachorro", verbose_name=_("Espécie"), blank=False, null=False)
+    especie = models.CharField(max_length=50, choices=ESPECIE, default="Cachorro",
+                               verbose_name=_("Espécie"), blank=False, null=False)
     raca = models.CharField(max_length=50, blank=True, null=True)
     cor = models.CharField(max_length=30, blank=True, null=True)
     porte = models.IntegerField(default=80, verbose_name=_("Porte"), blank=False, null=False)
-    #peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ativo = models.BooleanField(default=True, blank=True, null=True)
+    adotado = models.BooleanField(default=False, blank=True, null=True)
     encontradoPerdido = models.CharField(max_length=10, choices=PET_CHOICES, blank=True, null=True)
     foto = models.ImageField(upload_to='pet', blank=False, null=False)
     coordenada = models.PointField(srid=4326, blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-    sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"), blank=True, null=True)
+    sexo = models.CharField(max_length=20, choices=SEXO, default="Macho", verbose_name=_("Sexo"),
+                            blank=True, null=True)
     dataNascimento = models.DateField(blank=True, null=True)
-    
-    def __str__(self):
-        return self.nome
+    fk_id_usuario_adocao = models.ForeignKey(USUARIO, on_delete=models.SET_NULL, blank=True, null=True)
 
-class PET_PERDIDO_ENCONTRADO(models.Model):
-    FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    observacoes = models.TextField()
-    status = models.CharField(max_length=20)
-    data = models.DateField(blank=True, null=True)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f'{self.nome}'
 
 class PATROCINIO(models.Model):
+    """ Modelo de dados de patrocínio """
     FK_idUsuario = models.ManyToManyField(User)
     FK_idPet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     observacoes = models.TextField(blank=True, null= True)
@@ -152,71 +155,18 @@ class PATROCINIO(models.Model):
     publico = models.BooleanField(default=True, blank=False, null= False)
     pago = models.BooleanField(default=False, blank=False, null= False)
 
+    doacao_tipo = models.CharField("Tipo de doação", max_length=50, null=False, default = "doacao")
+
     class Meta:
         ordering = ['data']
 
 class ADOCAO(models.Model):
+    """ Modelo de dados de adoção """
     FK_idPet = models.ForeignKey(Pet, on_delete=models.RESTRICT)
-    FK_idUsuario =  models.ForeignKey(User, on_delete=models.RESTRICT)
+    FK_idUsuario = models.ForeignKey(User, on_delete=models.RESTRICT)
     status = models.CharField(max_length=20)
     dataEntrada = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     dataAdocao = models.DateTimeField(blank=True, null=True)
     observacao = models.TextField()
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
-
-class TOKEN(models.Model):
-    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
-    dataToken = models.DateTimeField(auto_now_add=True)
-    token = models.CharField(max_length=20)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-class ANUNCIO(models.Model):
-    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
-    titulo = models.CharField(max_length=100)
-    observacoes = models.TextField()
-    tipo = models.CharField(max_length=50)
-    dataInicio = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    dataFim = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(max_length=50)
-    valor = models.DecimalField(max_digits=30, decimal_places=15)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-"""  COMENTADO POR BRUNNO (MODELS DO E-COMMERCE ESTÃO NO ARQUIVO MODELS NA PASTA PRODUCTS)
-class OPCAO_ENTREGA(models.Model):
-    opcaoEntrega = models.CharField(max_length=50)
-    prazoEntrega = models.IntegerField()
-    frete = models.DecimalField(max_digits=30, decimal_places=15)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-class FORMA_PAGAMENTO(models.Model):
-    formaPagamento = models.CharField(max_length=50)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-class PRODUTO(models.Model):
-    titulo = models.CharField(max_length=100)
-    descricao = models.TextField()
-    dadosTecnicos = models.TextField()
-    valor = models.DecimalField(max_digits=30, decimal_places=15)
-    categoria = models.CharField(max_length=100)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-
-class PEDIDO(models.Model):
-    FK_idUsuario =  models.ForeignKey(User, on_delete=models.CASCADE)
-    FK_idProduto = models.ManyToManyField(PRODUTO)
-    FK_idOpcaoEntrega = models.ForeignKey(OPCAO_ENTREGA, on_delete=models.RESTRICT)
-    FK_idFormaPagamento = models.ForeignKey(FORMA_PAGAMENTO, on_delete=models.RESTRICT)
-    FK_idLocalizacao = models.ForeignKey(LOCALIZACAO, on_delete=models.RESTRICT)
-    desconto = models.DecimalField(max_digits=30, decimal_places=15)
-    status = models.CharField(max_length=50)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
-"""
-
-
-

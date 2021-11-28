@@ -9,6 +9,7 @@ from core.models import User
 
 
 class Order(TimeStampedModel):
+    """ Modelo referente aos dados do usuário que está fazendo a compra """
     FK_iduser = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField("Nome Completo", max_length=250)
     postal_code = BRPostalCodeField("CEP")
@@ -24,18 +25,23 @@ class Order(TimeStampedModel):
         ordering = ("-created",)
 
     def __str__(self):
-        return f"Pedido {self.id}"  #seta um texto personalizado para não aparecer o texto padrão "Object ..." quando estiver trabalhando com o objeto no site
+        """ seta um texto personalizado para não aparecer o texto padrão "Object ..."
+        quando estiver trabalhando com o objeto no site """
+        return f"Pedido {self.id}"
 
     def get_total_price(self):
+        """ Modelo referente ao preço total da compra """
         total_cost = sum(item.get_total_price() for item in self.items.all())
         return total_cost
-    
+
     def get_description(self):
+        """ Modelo referente a descrição de um determinado item da compra """
         return ", ".join(
             [f"{item.quantity}x {item.product.name}" for item in self.items.all()]
         )
 
 class Item(models.Model):
+    """ Modelo referente ao item da compra """
     order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
     product = models.ForeignKey(
         Product, related_name="order_items", on_delete=models.CASCADE
@@ -52,4 +58,5 @@ class Item(models.Model):
         return str(self.id)
 
     def get_total_price(self):
+        """ Modelo referente ao preço total da compra """
         return self.price * self.quantity

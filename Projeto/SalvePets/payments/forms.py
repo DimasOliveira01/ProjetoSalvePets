@@ -6,6 +6,7 @@ from .models import Payment
 
 
 class PaymentForm(forms.ModelForm):
+    """ Formulário referente ao Pagamento """
     token = forms.CharField()
 
     class Meta:
@@ -61,6 +62,7 @@ class PaymentForm(forms.ModelForm):
 
 
 class UpdatePaymentForm(forms.Form):
+    """ Formulário de pagamento do Mercado Pago """
     action = forms.CharField()
     data = forms.JSONField()
 

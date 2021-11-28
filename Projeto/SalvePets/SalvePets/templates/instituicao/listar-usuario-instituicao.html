@@ -31,6 +31,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
                 </li>
+                
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link" style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
@@ -66,7 +67,12 @@
                     <!--<button class="btn btn-outline-dark" type="submit"> 
                     {% trans "Deletar" %}
                     </button>-->
+                    {% if p.cpf != usuario1.cpfcnpj %}
                     <a href="/deletar-usuario-instituicao/{{ p.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
+                    {% else %}
+                    <p><b>Administrador</b></p>
+                    {% endif %}
+                   
                 </form>
                 <!--<a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100">Deletar</a>-->
             </div>

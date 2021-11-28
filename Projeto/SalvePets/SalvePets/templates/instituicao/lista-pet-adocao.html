@@ -11,44 +11,39 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
   }
-  </style>
+</style>
 
-    <!-- Página de Login
+    <!-- Página de Login-->
     <div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
+            <a class="nav-link active" style="color:#495057" href="/lista-pet-adocao/">{% trans "Lista de Pets para adoção" %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/cadastro-pet/">{% trans "Cadastrar pet" %}</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active"><b>{% trans "Pets perdidos" %}</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+            <a class="nav-link" style="color:#495057" href="/meus-pets-adotados/">{% trans "Meus Pets Adotados" %}</b></a>
         </li>
     </ul>
-</div>
--->
-  
-    <div class="container">
-    <p><h3>{% trans "Lista de Pets para adoção" %}</h3></p>
+    </div>
+
+     <div class="container">
+        <!--<p><h3>{% trans "Lista de pets para adoção" %}</h3></p>-->
+        <section class="py-3">
+        </section>
         <div class="row">
-            {% for p in pet %}
-            
-            <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-            <a href="/pet-informacao-instituicao-adocao/{{ p.id }}">
-                <img src="{{p.foto.url}}" class="card-img-top" alt="Foto do pet">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">{{ p.nome }}</h5>
-                <p class="card-text">{{p.descricao}}</p>
-                <a href="/pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100">Detalhes</a>
-            </div>
-            </div>
-            
+            {% for p in pet %}            
+                <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
+                    <a href="/pet-informacao-instituicao-adocao/{{ p.id }}">
+                        <img src="{{p.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ p.nome }}</h5>
+                        <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
+                        <a href="/pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
+                    </div>
+                </div>            
             {% endfor %}
+        </div>
+    </div>
         </div>
     </div>
 

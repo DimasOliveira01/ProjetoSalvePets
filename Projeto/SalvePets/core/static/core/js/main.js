@@ -1,18 +1,14 @@
 function atualizarDoacao(v)
 {
-    document.getElementById('doar').innerHTML = "Doar R$ " + v;
     switch(v){
         case 20:
-            document.getElementById("doar").href="https://pag.ae/7XDvbF6CG/button";
-            document.getElementById("valor").value=20  
+            document.getElementById("doacao_simples_input").value=20 
             break;
         case 50:
-            document.getElementById("doar").href="https://pag.ae/7XDvnBuw4/button";
-            document.getElementById("valor").value=50
+            document.getElementById("doacao_simples_input").value=50
             break;
         case 100:
-            document.getElementById("doar").href="https://pag.ae/7XDvnLTsK/button";
-            document.getElementById("valor").value=100
+            document.getElementById("doacao_simples_input").value=100
             break;
     }
 }
@@ -40,4 +36,47 @@ function validateSize(input) {
             aviso.className = "";
         }
     }
+}
+
+function updateTextInput()
+{
+    var value = document.getElementById("range").value;
+    var img = document.getElementById('imageRange');
+    img.height = value
+
+    if (value >= 40 && value < 67){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary active")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary")
+    }
+    else if (value >= 67 && value < 94){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary active")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary")
+    }
+    else if (value >= 94 && value <= 120){
+        document.getElementById("btn-pequeno-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-medio-porte").setAttribute("class", "btn btn-primary")
+        document.getElementById("btn-grande-porte").setAttribute("class", "btn btn-primary active")
+    }
+}
+
+function SetSize(porte)
+{
+    var tamanho;
+
+    switch (porte){
+        case 'pequeno':
+            tamanho = 40
+            break;
+        case 'medio':
+            tamanho = 80
+            break;
+        case 'grande':
+            tamanho = 120
+            break;
+    }
+
+    document.getElementById("range").value = tamanho;
+    updateTextInput();
 }

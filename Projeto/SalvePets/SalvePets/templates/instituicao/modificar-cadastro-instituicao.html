@@ -21,6 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:#495057" href="/listar-usuario-instituicao/">{% trans "Usuários cadastrados" %}</a>
                 </li>
+                
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link " style="color:#495057" href="/cadastro-pet-instituicao/">{% trans "Cadastrar Pet para Adoção" %}</a>
@@ -32,18 +33,23 @@
     </div>
     <section class="py-2">
     </section>
-    <div class="container mt-4">
-        <h2>{% trans "Cadastro da Instituição" %}</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <!--{{ form|crispy }}-->
-            {% crispy form %}
-            <section class="py-2">
-            </section>
-            <!--<button class="btn btn-outline-dark" type="submit"> 
-                {% trans "Atualizar" %}
-            </button>-->
-        </form>
+    {% if usuario.cpfcnpj %}
+        <div class="container mt-4">
+            <h2>{% trans "Cadastro da Instituição" %}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <!--{{ form|crispy }}-->
+                {% crispy form %}
+                <section class="py-2">
+                </section>
+                <!--<button class="btn btn-outline-dark" type="submit"> 
+                    {% trans "Atualizar" %}
+                </button>-->
+            </form>
+    {% else %}
+    <h3 class="row h-100 justify-content-center align-items-center">{% trans "Caro usuário, é necessário realizar o cadastro dos dados pessoais para realizar o cadastro de uma Instituição" %}</h3>
+    <a href="../completar-cadastro/" class="row h-100 justify-content-center align-items-center">Clique aqui para completar o cadastro.</a>
+    {% endif %}
 
     <script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'core/js/jquery.mask.js' %}"></script>

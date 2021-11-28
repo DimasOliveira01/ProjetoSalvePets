@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<div class="container">
+    <!-- Guias -->
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+            </li>
+            {% if usuario.is_admin_instituicao %}
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PayPal" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active">{% trans "Instruções para uso do PayPal" %}</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <p><h3>{% trans "Instruções" %}</h3></p>
+        <p>Lorem</p>
+        
+
+{% endblock %}
