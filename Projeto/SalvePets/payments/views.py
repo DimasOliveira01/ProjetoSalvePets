@@ -88,13 +88,8 @@ class PaymentPendingView(TemplateView):
     template_name = "payments/pending.html"
 
 class PaymentSuccessView(TemplateView):
-<<<<<<< HEAD
-    template_name = "payments/success.html"    
-        
-=======
     """ Tela de pagamento realizado com sucesso """
     template_name = "payments/success.html"           
->>>>>>> 9e2a46718095f20cdf15927279126e025ff61d0b
 
 @csrf_exempt
 @require_POST
