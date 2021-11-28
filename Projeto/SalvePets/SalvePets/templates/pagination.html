@@ -2,27 +2,29 @@
 
 <div>
     {% if page.has_previous %}
-    <!--{% if search %}
-    <a href="?page={{ page.previous_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
-    {% endif %}-->
-    <a href="?page={{ page.previous_page_number }}">{% trans "Anterior" %}</a>
+        {% if search %}
+            <a href="?page={{ page.previous_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
+            {% else %}
+            <a href="?page={{ page.previous_page_number }}">{% trans "Anterior" %}</a>
+        {% endif %}
     {% endif %}
+    
     {% trans "Página" %} {{ page.number }} {% trans "de" %} {{ page.paginator.num_pages }}.
+    
     {% if page.has_next %}
-    <!--{% if search %}
-    <a href="?page={{ page.previous_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
-    {% endif %}-->
-    <a href="?page={{ page.next_page_number }}">{% trans "Próxima" %}</a>
+        {% if search %}
+            <a href="?page={{ page.next_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
+            {% else %}
+            <a href="?page={{ page.next_page_number }}">{% trans "Próxima" %}</a>
+        {% endif %}-->
     {% endif %}
 </div>
 
-<!--
-{% block scripts %}
+<!-- {% block scripts %}
 <script>
     function searchWord(){
         var param_search = document.getElementById("search");        
         return true;        
         }
 </script>
-{% endblock %}
--->
+{% endblock %} -->

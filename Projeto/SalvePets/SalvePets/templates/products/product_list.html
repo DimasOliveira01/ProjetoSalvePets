@@ -98,7 +98,11 @@ Produtos
             </div>
 
             {% if is_paginated %}
-            {% include "pagination.html" with page=page_obj %}
+                {% if request.GET.search %}
+                    {% include "pagination.html" with page=page_obj search=request.GET.search%}
+                {% else %}
+                    {% include "pagination.html" with page=page_obj%}
+                {% endif %}
             {% endif %}
             
         </div>
