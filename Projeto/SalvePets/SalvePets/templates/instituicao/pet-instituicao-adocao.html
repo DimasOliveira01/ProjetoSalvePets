@@ -25,7 +25,11 @@
 -->
 <main>
     <div class="container">
-        <p><h3>{% trans "Detalhes do pet para adoção ou patrocínio" %}</h3></p>
+        {% if pet.adotado %}
+            <p><h3>{% trans "Meus Pets adotados" %}</h3></p>
+        {% else %}
+            <p><h3>{% trans "Detalhes do pet para adoção ou patrocínio" %}</h3></p>
+        {% endif %}
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <div id="mdb-lightbox-ui">
@@ -47,15 +51,19 @@
                             <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                         </a>
                     </figure>
-                    <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    {% if not pet.adotado %}
+                        <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                    {% endif %}
                 </div>
             </div>
         </div> 
     </div>
     <div class="col-md-6">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
-        <section class="py-2">
-        </section>
+        {% if not pet.adotado %}
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adotar_pet">{% trans "Clique aqui para adotar este Pet" %}</button>
+            <section class="py-2">
+            </section>
+        {% endif %}
         <h5>{{pet.nome}}</h5> 
         <p class="pt-1">{{pet.descricao}}</p>
         <div class="table-responsive">

@@ -155,11 +155,11 @@
             <label><b>{% trans "Cor predominante" %}</b>:</label>
             <input class="form-control" name="cor" type="text" list="cores" value="{{ pet.cor|default_if_none:"" }}">
             <datalist id="cores">
-                <option value="Branco"></option>
-                <option value="Preto"></option>
-                <option value="Caramelo"></option>
-                <option value="Vermelho"></option>
-                <option value="Marrom"></option>
+                <option value="{% trans "Branco" %}"></option>
+                <option value="{% trans "Preto" %}"></option>
+                <option value="{% trans "Caramelo" %}"></option>
+                <option value="{% trans "Vermelho" %}"></option>
+                <option value="{% trans "Marrom" %}"></option>
             </datalist>
         </div>
         <br>

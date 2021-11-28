@@ -11,28 +11,24 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
   }
-  </style>
+</style>
 
-    <!-- Página de Login
+    <!-- Página de Login-->
     <div class="container mt-4">
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/lista-pet-usuario/">{% trans "Meus pets" %}</a>
+            <a class="nav-link active" style="color:#495057" href="/lista-pet-adocao/">{% trans "Lista de Pets para adoção" %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/cadastro-pet/">{% trans "Cadastrar pet" %}</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active"><b>{% trans "Pets perdidos" %}</b></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="color:#495057" href="/lista-pet-encontrado/">{% trans "Pets encontrados" %}</a>
+            <a class="nav-link" style="color:#495057" href="/meus-pets-adotados/">{% trans "Meus Pets Adotados" %}</b></a>
         </li>
     </ul>
-</div>
--->
+    </div>
+
      <div class="container">
-        <p><h3>{% trans "Lista de pets para adoção" %}</h3></p>
+        <!--<p><h3>{% trans "Lista de pets para adoção" %}</h3></p>-->
+        <section class="py-3">
+        </section>
         <div class="row">
             {% for p in pet %}            
                 <div class="card mb-3 mx-2 p-0" style="width: 18rem;">

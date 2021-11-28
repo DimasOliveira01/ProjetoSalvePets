@@ -45,7 +45,7 @@
                         <p class="mb-2 text-muted text-uppercase small">{{p.encontradoPerdido}}</p>
                         <h5 class="card-title">{{ p.nome }}</h5>
                         <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
-                        <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
+                        <a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">{% trans "Detalhes" %}</a>
                     </div>
                 </div>            
             {% endfor %}

@@ -92,7 +92,7 @@ def cadastro_pet(request):
 
 @login_required(login_url='/accounts/login')
 def set_pet(request):
-    """ Tela de exibição de pet """
+    """ Cadastro e atualização de um pet """
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
     dataPerdaEncontro=request.POST.get('dataPerdaEncontro')
@@ -107,7 +107,7 @@ def set_pet(request):
     foto=request.FILES.get('foto')
     user=request.user
 
-    # Alteração de cadastro
+    # Atualização de cadastro de um pet
     pet_id=request.POST.get('pet-id')
 
     if pet_id:
@@ -177,6 +177,7 @@ def set_pet(request):
             if foto:
                 pet.foto = foto
                 pet.save()
+    #Cadastro de um novo Pet
     else:
         if foto:
             max_size = 2097152
@@ -658,17 +659,18 @@ def cadastro_pet_instituicao(request):
         pet_id=request.GET.get('id')
         if pet_id:
             pet=Pet.objects.get(id=pet_id)
-            if pet.user == request.user:
-                return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet,'usuario': usuario})
+            #if pet.user == request.user:
+            return render(request,'instituicao/cadastro-pet-instituicao.html',{'pet':pet,'usuario': usuario})
         return render (request, 'instituicao/cadastro-pet-instituicao.html',{'usuario': usuario})
     #else:
     return render(request, 'instituicao/acesso-proibido.html')
 
 @login_required(login_url='/acccounts/login')
 def set_pet_instituicao(request):
-    """ Exibição de um pet de uma determinada instituição """
+    """ Cadastro e atualização de um pet de uma determinada instituição """
     nome=request.POST.get('nome')
     ativo=request.POST.get('ativo')
+    adotado=request.POST.get('adotado')
     descricao=request.POST.get('descricao')
     especie=request.POST.get('especie')
     raca=request.POST.get('raca')
@@ -677,12 +679,16 @@ def set_pet_instituicao(request):
     foto=request.FILES.get('foto')
     user=request.user
     fk_id_instituicao_id=request.user.usuario.fk_instituicao_id
-
-    # Alteração de cadastro
     pet_id=request.POST.get('pet-id')
+    
+    email=request.POST.get('email')
+
+    # Atualização de cadastro
+    
     if pet_id:
+    
         pet=Pet.objects.get(id=pet_id)
-        if user == pet.user:
+        if pet.fk_id_instituicao_id == request.user.usuario.fk_instituicao_id:
             if nome:
                 pet.nome=nome
                 pet.save()
@@ -695,6 +701,13 @@ def set_pet_instituicao(request):
                 pet.save()
             else:
                 pet.ativo=False 
+                pet.save()
+
+            if adotado=='on':
+                pet.adotado=True
+                pet.save()
+            else:
+                pet.adotado=False 
                 pet.save()
 
             if descricao:
@@ -720,13 +733,19 @@ def set_pet_instituicao(request):
             if foto:
                 pet.foto = foto
                 pet.save()
+    #cadastro de um novo pet na Instituição
     else:
         if ativo=='on':
             ativo=True
         else:
             ativo=False
 
-        pet = Pet.objects.create(ativo=ativo, porte=porte, foto=foto, user=user, sexo=sexo,
+        if adotado=='on':
+            adotado=True
+        else:
+            adotado=False
+
+        pet = Pet.objects.create(adotado=adotado, ativo=ativo, porte=porte, foto=foto, user=user, sexo=sexo,
                                  fk_id_instituicao_id=fk_id_instituicao_id)
         if nome:
             pet.nome=nome
@@ -738,6 +757,10 @@ def set_pet_instituicao(request):
             pet.ativo=ativo
             pet.save()
         
+        if adotado:
+            pet.adotado=adotado
+            pet.save()
+
         if descricao:
             pet.descricao = descricao
             pet.save()
@@ -747,6 +770,15 @@ def set_pet_instituicao(request):
         if raca:
             pet.raca = raca
             pet.save()
+
+    if email:
+        us=User.objects.filter(email=email)
+        if us:
+            pet.fk_id_usuario_adocao_id=us[0].id
+            pet.save()
+    else:
+        pet.fk_id_usuario_adocao_id=None
+        pet.save() 
 
     url = f'/pet-informacao-instituicao/{pet.id}/'
     return redirect (url)
@@ -758,7 +790,7 @@ def pet_informacao_instituicao(request, id):
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
-    print(id_user)
+    print(id_user,'adfagadgfa')
     print(inst.nome_instituicao)
     return render(request, 'instituicao/pet-instituicao.html',
                   {'pet':pet,'inst':inst,'usuario':usuario})
@@ -766,7 +798,7 @@ def pet_informacao_instituicao(request, id):
 
 def pet_informacao_instituicao_adocao(request, id):
     """ Tela de informações sobre regras de adoção de uma determinada instituição """
-    pet = Pet.objects.get(ativo=True, id=id)
+    pet = Pet.objects.get(id=id)
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
     #id_user=request.user.id
     #print(id_user)
@@ -848,8 +880,15 @@ def adicionar_usuario_instituicao(request):
 
 def lista_pets_adocao(request):
     """ Tela que exibe a lista de pets a serem adotados """
-    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True)
+    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, adotado=False)
     return render(request, 'instituicao/lista-pet-adocao.html',{'pet':pet})
+
+@login_required(login_url='/accounts/login')
+def meus_pets_adotados(request):
+    """Tela que exibe os pets adotados por um usuário"""
+    id_usuario=request.user.usuario.id
+    pet=Pet.objects.filter(encontradoPerdido=None, adotado=True,fk_id_usuario_adocao_id=id_usuario)
+    return render(request, 'instituicao/meus-pets-adotados.html', {'pet':pet})
 
 @login_required(login_url='/accounts/login')
 def lista_pets_usuario_instituicao(request):
@@ -861,7 +900,7 @@ def lista_pets_usuario_instituicao(request):
 def deletar_pet_instituicao(request, id):
     """" Tela para excluir um pet de uma instituição"""
     pet=Pet.objects.get(id=id)
-    if pet.user == request.user:
+    if pet.fk_id_instituicao_id == request.user.usuario.fk_instituicao_id:
         pet.delete()
     return redirect('/lista-pet-instituicao/')
 

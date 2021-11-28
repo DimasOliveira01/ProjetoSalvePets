@@ -2,21 +2,22 @@
 
 {% load static %}
 {% load widget_tweaks %}
+{% load i18n %}
 
 {% block title %}Meu Carrinho{% endblock title %}
 
 {% block conteudo %}
 
 <div class="container my-3 table-responsive">
-    <h1 class="font-weight-bold">Meu Carrinho</h1>
+    <h1 class="font-weight-bold">{% trans "Meu Carrinho" %}</h1>
     {% if cart %}
     <table class="table">
         <thead>
             <tr class="bg-light">
-                <th scope="col">Produto</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Preço Unitário</th>
-                <th scope="col">Preço Total</th>
+                <th scope="col">{% trans "Produto" %}</th>
+                <th scope="col">{% trans "Quantidade" %}</th>
+                <th scope="col">{% trans "Preço Unitário" %}</th>
+                <th scope="col">{% trans "Preço Total" %}</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -37,7 +38,7 @@
                                 {% render_field item.update_quantity_form.quantity class+="form-control" style+="text-align:right"%}
                             </div>
                             <div class="col">
-                                <input class="btn btn-info" type="submit" value="Atualizar">
+                                <input class="btn btn-info" type="submit" value="{% trans "Atualizar" %}">
                             </div>
                         </div>
                         {{ item.update_quantity_form.override }}
@@ -48,14 +49,14 @@
                 <td class="align-middle text-right">
                     <form action="{% url 'cart:remove' product.id %}" method="post">
                         {% csrf_token %}
-                        <input class="btn btn-danger" type="submit" value="Remover">
+                        <input class="btn btn-danger" type="submit" value="{% trans "Remover" %}">
                     </form>
                 </td>
             </tr>
             {% endwith %}
             {% endfor %}
             <tr class="bg-light">
-                <td class="font-weight-bold">Total</td>
+                <td class="font-weight-bold">{% trans "Total" %}</td>
                 <td></td>
                 <td></td>
                 <td class="font-weight-bold" style="text-align:right">R$ {{ cart.get_total_price }}</td>
@@ -64,15 +65,15 @@
         </tbody>
     </table>
     {% else %}
-    <p>O carrinho está vazio!</p>
+    <p>{% trans "O carrinho está vazio!" %}</p>
     {% endif %}
     <p class="text-right">
         <a class=" btn btn-primary" href="{% url 'products:list' %}">
-            Continuar comprando
+            {% trans "Continuar comprando" %}
         </a>
         
         <a class="btn btn-success {% if not cart %}disabled{% endif %}" href="{% url 'orders:create' %}">
-            Finalizar compra
+            {% trans "Finalizar compra" %}
         </a>
     </p>
 </div>
