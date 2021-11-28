@@ -19,16 +19,15 @@
                 <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active">{% trans "Dados do PayPal" %}</a>
+                <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
-            </li>
+            
             {% endif %}
         </ul>
     </div>
         <p><h3>{% trans "Cadastro de doação" %}</h3></p>
         <p>Para permitir que pessoas façam doações à sua instituição, por favor, preencha o formulário a seguir:<p>
+        <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.<p>
         <div class="row">
         <form method="POST">
             
@@ -36,27 +35,27 @@
             <!--
             <br><br>
             <p><h4>{% trans "Doação comum" %}</h4></p>
-            <p>Siga as instruições deste link para gerar os endereços de doação do PayPal.</p>
+            <p>Siga as instruições deste link para gerar os endereços de doação do PagSeguro.</p>
             <div class="form-group">
                 <label><b>{% trans "R$ 20" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_20_link" type="text" value="{{ instituicao.doacao_valor_20_link|default_if_none:"" }}" placeholder="Insira o link do paypal para doação de R$ 20">
+                <input class="form-control" name="doacao_valor_20_link" type="text" value="{{ instituicao.doacao_valor_20_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 20">
             </div>
             <br>
 
             <div class="form-group">
                 <label><b>{% trans "R$ 50" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_50_link" type="text" value="{{ instituicao.doacao_valor_50_link|default_if_none:"" }}" placeholder="Insira o link do paypal para doação de R$ 50">
+                <input class="form-control" name="doacao_valor_50_link" type="text" value="{{ instituicao.doacao_valor_50_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 50">
             </div>
             <br>
 
             <div class="form-group">
                 <label><b>{% trans "R$ 100" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_100_link" type="text" value="{{ instituicao.doacao_valor_100_link|default_if_none:"" }}" placeholder="Insira o link do paypal para doação de R$ 100">
+                <input class="form-control" name="doacao_valor_100_link" type="text" value="{{ instituicao.doacao_valor_100_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 100">
             </div>
             <br>
 
             <p><h4>{% trans "Ajuda com custos" %}</h4></p>
-            <p>Insira o valor de cada custo do seu pet e o link de doação para cada valor no paypal</p>
+            <p>Insira o valor de cada custo do seu pet e o link de doação para cada valor no PagSeguro</p>
             <label><b>{% trans "Limpeza" %}</b>:</label>
             <div class="input-group">
                 <input class="form-control" name="doacao_limpeza_link" type="number" value="{{ instituicao.doacao_limpeza_link|default_if_none:"" }}" placeholder="R$">
@@ -86,7 +85,7 @@
             <br>
   
             <p><h4>{% trans "Patrocínio recorrente" %}</h4></p>
-            <p>Insira o endereço para assinatura com o valor desejado do seu paypal</p>
+            <p>Insira o endereço para assinatura com o valor desejado do seu PagSeguro</p>
             <label><b>{% trans "Endereço" %}</b>:</label>
             <div class="input-group">
                 <input class="form-control" name="doacao_patrocinio_link" type="text" value="{{ instituicao.doacao_patrocinio_link|default_if_none:"" }}" placeholder="Endereço do patrocínio">
