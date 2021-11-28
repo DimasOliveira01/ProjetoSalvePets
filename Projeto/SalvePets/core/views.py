@@ -1037,7 +1037,8 @@ def lista_patrocinar(request):
     i = 0
 
     #adicionei esta condição encontradoPerdido=None
-    pet=Pet.objects.filter(ativo=True, encontradoPerdido=None)
+    pet=Pet.objects.filter(encontradoPerdido=None, adotado=False, ativo=True)
+
     for p in pet:
         usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
         if usuario_lista[i].fk_instituicao_id:
@@ -1069,15 +1070,12 @@ def patrocinar_send(request, id):
     alimentacao = request.POST.get('alimentacao')
     medicamentos = request.POST.get('medicamentos')
     diaria_internacao = request.POST.get('diaria_internacao')
+    patrocinio = request.POST.get('patrocinio')
     
     user = request.user
     usuario = USUARIO.objects.get(user_id = user.id)
     pet = Pet.objects.get(ativo=True, id=id)
     instituicao=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
-
-    patrocinio_existe = PATROCINIO.objects.filter(FK_idUsuario = user,
-        FK_idPet = Pet.objects.get(id=id))
-    # TERMINAR
 
     if limpeza:
         print('limpeza')
@@ -1095,37 +1093,41 @@ def patrocinar_send(request, id):
         print('diaria_internacao')
         doacao_tipo = 'diaria_internacao'
         valor = instituicao.doacao_diaria_internacao_valor
+    elif patrocinio:
+        print('patrocinio')
+        doacao_tipo = 'patrocinio'
+        valor = instituicao.doacao_patrocinio_valor
     else:
         doacao_tipo = 'doacao_simples'
         print(request.POST.get('doacao_simples_input'))
         valor = float(request.POST.get('doacao_simples_input'))
 
-    patrocinio = PATROCINIO(
-        FK_idPet = Pet.objects.get(id=id),
-        valor = valor,
-        doacao_tipo = doacao_tipo,
-        data = datetime.today().strftime('%Y-%m-%d')
-    )
-    patrocinio.save()
+        patrocinio = PATROCINIO(
+            FK_idPet = Pet.objects.get(id=id),
+            valor = valor,
+            doacao_tipo = doacao_tipo,
+            data = datetime.today().strftime('%Y-%m-%d')
+        )
+        patrocinio.save()
 
-    patrocinio.FK_idUsuario.add(request.user)
+        patrocinio.FK_idUsuario.add(request.user)
 
     aviso = "Por favor, efetue sua doação. Em um prazo de até 48 horas, iremos confirmar a transação e ela poderá constar nessa página."
 
     pets = []
+    user = request.user
+    usuario = USUARIO.objects.get(user_id = user.id)
     patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
 
     for p in patrocinios:
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
 
     lista = zip(patrocinios , pets)
-    return render(request, 'patrocinar/meus_patrocinios.html',{
-                                                            'aviso':aviso,
-                                                            'patrocinios': patrocinios,
-                                                            'pets':pets,
-                                                            'lista':lista,
-                                                            'usuario':usuario
-                                                            })
+
+    unique_pets = set(pets)
+
+    return render(request, 'patrocinar/meus_patrocinios.html',
+                  {'aviso':aviso, 'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario, 'unique_pets':unique_pets})
 
 @login_required(login_url='/accounts/login/')
 def meus_patrocinios(request):
@@ -1140,8 +1142,10 @@ def meus_patrocinios(request):
 
     lista = zip(patrocinios , pets)
 
+    unique_pets = set(pets)
+
     return render(request, 'patrocinar/meus_patrocinios.html',
-                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario})
+                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario, 'unique_pets':unique_pets})
 
 @login_required(login_url='/accounts/login/')
 def cadastrar_doacao(request):
@@ -1179,9 +1183,11 @@ def listar_doacoes(request):
     if id_inst is not None:
         try:
             cursor = connection.cursor()
-            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto
+            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto, usr.email
                         FROM core_patrocinio as pat
                         INNER JOIN core_pet as pet ON pet.id = pat."FK_idPet_id"
+						INNER JOIN "core_patrocinio_FK_idUsuario" as doador ON doador.patrocinio_id = pat.id
+						INNER JOIN auth_user as usr ON doador.user_id = usr.id
                         INNER JOIN core_instituicao as instituicao ON pet.fk_id_instituicao_id = %s
                         ORDER BY pat.id'''
 
@@ -1243,8 +1249,19 @@ def doacao_alterar_status(request, id):
 
     return redirect('/doacao/lista/')
 
-def doacao_instrucoes_cadastro(request):
-    usuario=USUARIO.objects.get(id=request.user.id)
-    return render(request, 'instituicao\doacao\instrucoes-cadastro.html', {
-                                                                            'usuario':usuario
-                                                                        })
+@login_required(login_url='/accounts/login/')
+def doacao_excluir(request, id):
+    """ Função que exclui uma doação """
+    """ Acessável pelo link /doacao/excluir/<id>/ """
+    """ Requisitos: login, usuário da mesma instituição do pet patrocinado, usuário com admin instituição """
+
+    patrocinio = PATROCINIO.objects.get(id=id)
+    pet = Pet.objects.get(id = patrocinio.FK_idPet_id )
+    usuario = USUARIO.objects.get(id = request.user.usuario.id)
+
+    if usuario.fk_instituicao_id == pet.fk_id_instituicao_id and usuario.is_admin_instituicao:
+
+        patrocinio.delete()
+
+    return redirect('/doacao/lista/')
+
