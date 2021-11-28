@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Order
 
@@ -29,7 +30,7 @@ class OrderCreateForm(forms.ModelForm):
         self.helper.add_input(
             Submit(
                 "submit",
-                "Ir para pagamento",
+                _("Ir para pagamento"),
                 css_class="btn btn-success btn-lg btn-block",
             )
         )
