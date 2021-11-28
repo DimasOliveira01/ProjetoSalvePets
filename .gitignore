@@ -11,6 +11,18 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+venv_deploy
+S3_sync
+VirtualEnv
+docker_imagens
+letsencrypt_backup_salvepets
+nginx.conf
+reverse-proxy.conf
+rotina_deploy.sh
+rotina_pos_deploy.sh
+ProjetoSalvePets-Projeto-SalvePets.zip
+ProjetoSalvePets.zip
+.docker_temp_877786579
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
