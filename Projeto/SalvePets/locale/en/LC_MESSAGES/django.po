@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-27 16:09-0300\n"
+"POT-Creation-Date: 2021-11-28 18:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,6 @@ msgid "Meus pets cadastrados"
 msgstr "My registered pets"
 
 #: .\SalvePets\listaPets.html:31 .\SalvePets\templates\cadastroPet.html:34
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:20
 #: .\SalvePets\templates\instituicao\lista-pets-instituicao.html:20
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:12
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:12
@@ -48,7 +47,6 @@ msgstr "Register a pet"
 #: .\SalvePets\listaPets.html:38 .\SalvePets\listaPets.html:39
 #: .\SalvePets\templates\cadastroPet.html:44
 #: .\SalvePets\templates\index.html:38
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:26
 #: .\SalvePets\templates\instituicao\lista-pets-instituicao.html:26
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:18
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:18
@@ -62,7 +60,6 @@ msgstr "Lost pets"
 
 #: .\SalvePets\listaPets.html:42 .\SalvePets\listaPets.html:43
 #: .\SalvePets\templates\cadastroPet.html:47
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:29
 #: .\SalvePets\templates\instituicao\lista-pets-instituicao.html:29
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:21
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:21
@@ -245,7 +242,7 @@ msgstr "Registration"
 #: .\SalvePets\templates\account\signup.html:17
 #: .\SalvePets\templates\base.html:143
 #: .\SalvePets\templates\cadastroPet.html:220
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:197
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:231
 msgid "Cadastrar"
 msgstr "Sign Up"
 
@@ -288,11 +285,10 @@ msgstr "Register Lost or Found Pet"
 
 #: .\SalvePets\templates\base.html:90 .\SalvePets\templates\index.html:68
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:12
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:12
-#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:12
+#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:14
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:13
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:12
-#: .\SalvePets\templates\patrocinar\patrocinar.html:58
+#: .\SalvePets\templates\patrocinar\patrocinar.html:61
 msgid "Patrocinar pets"
 msgstr "Sponsor pets"
 
@@ -322,7 +318,6 @@ msgstr "Close"
 
 #: .\SalvePets\templates\cadastroPet.html:38
 #: .\SalvePets\templates\cadastroPet.html:40
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:23
 #: .\SalvePets\templates\instituicao\lista-pets-instituicao.html:23
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:15
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:15
@@ -349,12 +344,12 @@ msgid "Foto"
 msgstr "Image"
 
 #: .\SalvePets\templates\cadastroPet.html:88
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:110
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:144
 msgid "Nome"
 msgstr "Name"
 
 #: .\SalvePets\templates\cadastroPet.html:95
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:117
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:151
 #: .\SalvePets\templates\listaPetsEncontrados.html:48
 #: .\SalvePets\templates\listaPetsPerdidos.html:46
 #: .\SalvePets\templates\listaPetsUsuario.html:46
@@ -366,55 +361,55 @@ msgid "Data de localização ou perda"
 msgstr "Date of location or loss of the pet"
 
 #: .\SalvePets\templates\cadastroPet.html:109
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:124
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:158
 #: .\SalvePets\templates\pet.html:97 .\core\models.py:123
 msgid "Espécie"
 msgstr "Species"
 
 #: .\SalvePets\templates\cadastroPet.html:113
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:128
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:162
 #: .\core\models.py:23
 msgid "Cachorro"
 msgstr "Dog"
 
 #: .\SalvePets\templates\cadastroPet.html:117
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:132
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:166
 #: .\core\models.py:24
 msgid "Gato"
 msgstr "Cat"
 
 #: .\SalvePets\templates\cadastroPet.html:121
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:136
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:170
 #: .\core\models.py:25
 msgid "Outros"
 msgstr "Others"
 
 #: .\SalvePets\templates\cadastroPet.html:128
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:143
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:177
 #: .\SalvePets\templates\pet.html:67
 msgid "Raça"
 msgstr "Breed"
 
 #: .\SalvePets\templates\cadastroPet.html:135
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:150
-#: .\SalvePets\templates\pet.html:71 .\core\models.py:133
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:184
+#: .\SalvePets\templates\pet.html:71 .\core\models.py:134
 msgid "Sexo"
 msgstr "Sex"
 
 #: .\SalvePets\templates\cadastroPet.html:139
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:154
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:188
 #: .\core\models.py:29
 msgid "Macho"
 msgstr "Male"
 
 #: .\SalvePets\templates\cadastroPet.html:143
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:158
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:192
 #: .\core\models.py:30
 msgid "Fêmea"
 msgstr "Female"
 
 #: .\SalvePets\templates\cadastroPet.html:147
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:162
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:196
 #: .\core\models.py:31
 msgid "Não sei"
 msgstr "I don't know"
@@ -444,7 +439,7 @@ msgid "Marrom"
 msgstr "Brown"
 
 #: .\SalvePets\templates\cadastroPet.html:168
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:170
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:204
 #: .\SalvePets\templates\pet.html:79 .\core\models.py:126
 msgid "Porte"
 msgstr "Pet Size"
@@ -478,7 +473,7 @@ msgid "Indique a localização"
 msgstr "Indicate the location"
 
 #: .\SalvePets\templates\cadastroPet.html:218
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:195
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:229
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:111
 #: .\SalvePets\templates\pet.html:113
 msgid "Alterar"
@@ -566,7 +561,7 @@ msgid "Informações de Entrega:"
 msgstr "Delivery Information:"
 
 #: .\SalvePets\templates\emailPedido.html:20
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:90
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:89
 msgid "Endereço"
 msgstr "Address"
 
@@ -854,11 +849,15 @@ msgstr ""
 "registered by you, will receive an email notifying them of the possibility "
 "of finding the lost pet."
 
-#: .\SalvePets\templates\faq.html:145
+#: .\SalvePets\templates\faq.html:143
+msgid "Como receber doações pelo PagSeguro?"
+msgstr ""
+
+#: .\SalvePets\templates\faq.html:182
 msgid "Não encontrou suas respostas?"
 msgstr "Didn't find your answers?"
 
-#: .\SalvePets\templates\faq.html:146
+#: .\SalvePets\templates\faq.html:183
 msgid "Fale conosco"
 msgstr "Contact us"
 
@@ -999,13 +998,13 @@ msgstr "Enter the CPF of the user to register with the Institution"
 msgid "Seja bem vindo ao módulo administrativo:"
 msgstr "Welcome to the administrative module:"
 
-#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:84
-msgid "Ativo"
-msgstr "Active"
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:115
+#: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:121
+msgid "E-mail"
+msgstr ""
 
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:15
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:15
-#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:15
+#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:17
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:16
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:15
 #, fuzzy
@@ -1014,88 +1013,72 @@ msgid "Patrocínios feitos"
 msgstr "Sponsor pets"
 
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:19
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:19
-#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:19
+#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:21
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:20
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:19
 msgid "Patrocínios recebidos"
 msgstr ""
 
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:22
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:22
-#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:22
+#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:24
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:23
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:22
-msgid "Dados do PayPal"
+msgid "Dados do PagSeguro"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:25
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:25
-#: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:25
-#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:26
-#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:25
-msgid "Instruções para uso do PayPal"
-msgstr ""
-
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:30
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:28
 #, fuzzy
 #| msgid "Cadastrar Pet"
 msgid "Cadastro de doação"
 msgstr "Register a Pet"
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:38
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:37
 msgid "Doação comum"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:41
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:40
 #, fuzzy
 #| msgid "Doar R$ 20"
 msgid "R$ 20"
 msgstr "Donate BRL 20"
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:47
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:46
 msgid "R$ 50"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:53
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:52
 msgid "R$ 100"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:58
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:57
 #, fuzzy
 #| msgid "Ajudar o pet"
 msgid "Ajuda com custos"
 msgstr "Help the pet"
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:60
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:59
 msgid "Limpeza"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:66
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:65
 msgid "Alimentação"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:73
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:72
 msgid "Medicamentos"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:80
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:79
 msgid "Diária de internação"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:88
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:87
 msgid "Patrocínio recorrente"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:104
+#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:103
 msgid "Salvar"
 msgstr ""
-
-#: .\SalvePets\templates\instituicao\doacao\instrucoes-cadastro.html:31
-#, fuzzy
-#| msgid "Instituição"
-msgid "Instruções"
-msgstr "Institution"
 
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:31
 msgid "Lista de patrocínios recebidos"
@@ -1115,7 +1098,22 @@ msgstr "Common user"
 msgid "Informações para análise:"
 msgstr "Information for analysis:"
 
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:35
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:20
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:20
+#, fuzzy
+#| msgid "Lista de Pets para adoção"
+msgid "Lista de Pets para adoção"
+msgstr "List of Pets for Adoption"
+
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:23
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:23
+#, fuzzy
+#| msgid "Meus pets cadastrados"
+msgid "Meus Pets Adotados"
+msgstr "My registered pets"
+
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:29
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:29
 #, fuzzy
 #| msgid "Lista de Pets para adoção"
 msgid "Lista de pets para adoção"
@@ -1153,15 +1151,21 @@ msgid ""
 "realizar o cadastro de uma Instituição"
 msgstr ""
 
-#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:28
+#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:29
+#, fuzzy
+#| msgid "Meus pets cadastrados"
+msgid "Meus Pets adotados"
+msgstr "My registered pets"
+
+#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:31
 msgid "Detalhes do pet para adoção ou patrocínio"
 msgstr "Pet Details for Adoption or Sponsorship"
 
-#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:56
+#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:63
 msgid "Clique aqui para adotar este Pet"
 msgstr "Click here to adopt this pet"
 
-#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:130
+#: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:138
 msgid "Adotar"
 msgstr "Adopt"
 
@@ -1181,6 +1185,12 @@ msgstr "Order Summary"
 msgid "Valor Total:"
 msgstr "Amount:"
 
+#: .\SalvePets\templates\orders\order_form.html:34
+#, fuzzy
+#| msgid "O carrinho está vazio!"
+msgid "Seu carrinho está vazio."
+msgstr "The cart is empty!"
+
 #: .\SalvePets\templates\pagination.html:6
 #: .\SalvePets\templates\pagination.html:8
 #: .\SalvePets\templates\pagination.html:13
@@ -1199,56 +1209,57 @@ msgstr "of"
 msgid "Próxima"
 msgstr "Next"
 
-#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:32
+#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:29
 msgid "Pets disponíveis para patrocínio"
 msgstr "Pets available for sponsorship"
 
-#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:34
-#: .\SalvePets\templates\patrocinar\patrocinar.html:55
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:31
+#: .\SalvePets\templates\patrocinar\patrocinar.html:58
 msgid "Meus patrocínios"
 msgstr "My sponsorships"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:64
+#: .\SalvePets\templates\patrocinar\patrocinar.html:67
 msgid "Contribuir"
 msgstr "Contribute"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:113
+#: .\SalvePets\templates\patrocinar\patrocinar.html:116
 msgid "Doar para "
 msgstr "Donate to "
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:128
-msgid "Doar R$ 20"
-msgstr "Donate BRL 20"
-
 #: .\SalvePets\templates\patrocinar\patrocinar.html:131
-#, fuzzy
-#| msgid "Doar R$ 20"
-msgid "Doar R$ 50"
+msgid "Doar R$ 20"
 msgstr "Donate BRL 20"
 
 #: .\SalvePets\templates\patrocinar\patrocinar.html:134
 #, fuzzy
 #| msgid "Doar R$ 20"
+msgid "Doar R$ 50"
+msgstr "Donate BRL 20"
+
+#: .\SalvePets\templates\patrocinar\patrocinar.html:137
+#, fuzzy
+#| msgid "Doar R$ 20"
 msgid "Doar R$ 100"
 msgstr "Donate BRL 20"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:144
+#: .\SalvePets\templates\patrocinar\patrocinar.html:147
 msgid "Ajude o pet"
 msgstr "Help the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:153
+#: .\SalvePets\templates\patrocinar\patrocinar.html:156
 msgid "Ajudar o pet"
 msgstr "Help the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:161
+#: .\SalvePets\templates\patrocinar\patrocinar.html:164
 msgid "Patrocine o pet"
 msgstr "Sponsor the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:205
-#: .\SalvePets\templates\patrocinar\patrocinar.html:218
-#: .\SalvePets\templates\patrocinar\patrocinar.html:231
-#: .\SalvePets\templates\patrocinar\patrocinar.html:244
-#: .\SalvePets\templates\patrocinar\patrocinar.html:275
+#: .\SalvePets\templates\patrocinar\patrocinar.html:179
+#: .\SalvePets\templates\patrocinar\patrocinar.html:212
+#: .\SalvePets\templates\patrocinar\patrocinar.html:225
+#: .\SalvePets\templates\patrocinar\patrocinar.html:238
+#: .\SalvePets\templates\patrocinar\patrocinar.html:251
+#: .\SalvePets\templates\patrocinar\patrocinar.html:282
 msgid "Patrocinar"
 msgstr "To Sponsor"
 
@@ -1306,7 +1317,9 @@ msgstr "Thanks for shopping with us."
 msgid ""
 "Em até 2 dias úteis você receberá um e-mail com mais informações sobre o "
 "pagamento."
-msgstr "Within 2 business days you will receive an email with further payment information."
+msgstr ""
+"Within 2 business days you will receive an email with further payment "
+"information."
 
 #: .\SalvePets\templates\payments\pending.html:17
 #: .\SalvePets\templates\payments\success.html:14
@@ -1336,6 +1349,14 @@ msgstr "about"
 #: .\SalvePets\templates\pet.html:89
 msgid "cm de altura"
 msgstr "cm"
+
+#: .\SalvePets\templates\pet.html:93
+msgid "Última localização:"
+msgstr "Last location:"
+
+#: .\SalvePets\templates\pet.html:104
+msgid "Contato"
+msgstr "Contact"
 
 #: .\SalvePets\templates\pet.html:123
 msgid "Excluir pet"
@@ -1527,35 +1548,42 @@ msgstr "Receive Notifications"
 msgid "Site"
 msgstr "Website"
 
-#: .\core\views.py:414
+#: .\core\views.py:415
 msgid "Encontramos um pet semelhante ao seu"
 msgstr "We found a pet similar to yours"
 
-#: .\core\views.py:428
+#: .\core\views.py:429
 msgid "Novos pets parecidos com o seu foram encontrados"
 msgstr "New pets similar to yours have been found"
 
-#: .\core\views.py:492 .\core\views.py:514
+#: .\core\views.py:493 .\core\views.py:515
 msgid "Solicitação de cadastro de Instituição!"
 msgstr "Institution registration request!"
 
-#: .\core\views.py:903
+#: .\core\views.py:942
 msgid "Solicitação de adoção de Pet"
 msgstr "Pet Adoption Request"
+
+#: .\orders\forms.py:33
+msgid "Ir para pagamento"
+msgstr "Go to payment"
 
 #: .\payments\views.py:52
 msgid "Pedido Recebido!"
 msgstr "Order received!"
 
+#~ msgid "Ativo"
+#~ msgstr "Active"
+
+#, fuzzy
+#~| msgid "Instituição"
+#~ msgid "Instruções"
+#~ msgstr "Institution"
+
 #, fuzzy
 #~| msgid "Cadastrar Pet"
 #~ msgid "Cadastrar doação"
 #~ msgstr "Register a Pet"
-
-#, fuzzy
-#~| msgid "Indique a localização"
-#~ msgid "Última localização"
-#~ msgstr "Indicate the location"
 
 #~ msgid "CPF (somente números)"
 #~ msgstr "CPF (Only numbers)"
@@ -1595,9 +1623,6 @@ msgstr "Order received!"
 
 #~ msgid "Descrição"
 #~ msgstr "Description"
-
-#~ msgid "Contato"
-#~ msgstr "Contact"
 
 #~ msgid "perdido"
 #~ msgstr "lost"
