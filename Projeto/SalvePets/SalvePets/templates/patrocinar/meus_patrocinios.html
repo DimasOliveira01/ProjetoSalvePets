@@ -19,10 +19,7 @@
                     <a class="nav-link" style="color:#495057" href="/doacao/lista">{% trans "Patrocínios recebidos" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PayPal" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/doacao/instrucoes-cadastro/">{% trans "Instruções para uso do PayPal" %}</a>
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
                 </li>
                 {% endif %}
             </ul>
@@ -34,16 +31,38 @@
         <p><h3>{% trans "Meus patrocínios" %}</h3></p>
         <p>Veja a lista de pets que você ajudou.<p>
         <div class="row">
-            {% for patrocinio, pet in lista %}           
+
+        {% for up in unique_pets %}           
                 <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
-                    <a href="../pet-informacao/{{ pet.id }}">
-                        <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
+                    <a href="../pet-informacao/{{ up.id }}">
+                        <img src="{{up.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 22vh; object-fit: cover;">
                     </a>
-                    <div class="card-body d-flex flex-column">
-                        <p class="card-text text-muted text-uppercase small">{{patrocinio.valor}}</p>
-                        <h5 class="card-title">{{ pet.nome }}</h5>
-                        <p class="card-text">{{pet.descricao|default_if_none:"-"}}</p>
-                        <a href="/pet-informacao/{{ pet.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>
+                    <div class="card-body d-flex flex-column">                        
+                        <h5 class="card-title">{{ up.nome }}</h5>
+                        <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for pat in patrocinios %}
+                            {% if pat.FK_idPet_id == up.id %}
+                                
+                                    <tr>
+                                    <td>R$ {{pat.valor}} {% if pat.doacao_tipo == "patrocinio" %}(recorrente){% endif %}</td>
+                                    <td>{{pat.data|date:'d/m/Y'}}</td>
+                                    </tr>
+                                
+                            {% endif%}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        </div>
+                        <a href="/pet-informacao/{{ up.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>
+                        <a href="../patrocinar/{{ up.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">Patrocinar novamente</a>
                     </div>
                 </div>            
             {% endfor %}

@@ -43,7 +43,10 @@ function submit_doacao_simples(v){
     document.getElementById("doacao_simples_1").submit();
     document.getElementById("doacao_simples_2").submit();
 }
-
+function submit_patrocinio(){
+    document.getElementById("patrocinio").submit();
+    document.getElementById("patrocinio2").submit();
+}
 </script>
 
 <main>
@@ -81,7 +84,7 @@ function submit_doacao_simples(v){
                 <div class="col-12 mb-0">
                     <figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px ">
                         <a href="/pet-informacao/{{pet.id}}" data-size="710x823">
-                            <img src="{{pet.foto.url}}" class="img-fluid z-depth-1 rounded" style="max-height: 450px; transform-origin: center center; transform: scale(1);">
+                            <img src="{{pet.foto.url}}" class="card-img-top w-100" alt="Foto do pet" style="height: 50vh; object-fit: cover;">
                         </a>
                     </figure>
                 </div>
@@ -166,10 +169,14 @@ function submit_doacao_simples(v){
                     de contribuição disponíveis                    
                     -->
 
-                <form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
+                <form id="patrocinio" enctype="multipart/form-data" action="submit", method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="patrocinio" id="patrocinio" value="patrocinio" />
+                </form>               
+                <form id="patrocinio2" action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
                     <input type="hidden" name="code" value="{{instituicao.doacao_patrocinio_codigo}}" />
                     <input type="hidden" name="iot" value="button" />
-                    <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/205x30-contratar-azul.gif" name="submit" width="205" height="30" />
+                    <button name="patrocinio" id="patrocinio" value="patrocinio" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_patrocinio()">{% trans "Patrocinar" %}</button>
                 </form>
                 <!--
                 <div class="btn-group" role="group" aria-label="Basic example">
