@@ -11,34 +11,49 @@
     <div class="container mt-4">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
+                {% if request.path == "/patrocinar/" %}
+                    <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
+                {% endif %}
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                {% if request.path == "/meus-patrocinios/" %}
+                    <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                {% endif %}
             </li>
             {% if usuario.is_admin_instituicao %}
             <li class="nav-item">
-                <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+                {% if request.path == "/doacao/lista/" %}
+                    <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
+                {% endif %}
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
+                {% if request.path == "/doacao/cadastro-info-pagamento/" %}
+                    <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
+                {% endif %}
             </li>
-            
             {% endif %}
         </ul>
     </div>
 
     <p><h3>{% trans "Lista de patrocínios recebidos" %}</h3></p>
         <p>A lista a seguir mostra todas os patrocínios sinalizados. 
-        Todo patrocínio é sinalizado quando uma pessoa clica em algum dos botões de doação.<p>
+        Todo patrocínio é sinalizado quando uma pessoa clica em algum dos botões de doação.</p>
         <p>Verifique na sua conta PagSeguro se alguma das doações a seguir foram de fato efetuadas. 
         Caso esteja, marque a caixinha de "Pago?".</p>
         <p>Também é possível sinalizar se o patrocínio é público ou privado. 
         Caso esteja público, marque a caixinha de "Público?".</p>
-        <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.<p>
+        <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.</p>
         <div class="row">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped text-nowrap">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -76,5 +91,6 @@
             </table>
         </div>
     </div>
+</div>
 
 {% endblock %}
