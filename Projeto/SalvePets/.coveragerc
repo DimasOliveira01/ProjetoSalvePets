@@ -4,4 +4,6 @@ omit =
     *migrations*,
     *tests*,
     SalvePets*,
-    conftest.py
+    conftest.py,
+    manage.py,
+    *\__init__.py
