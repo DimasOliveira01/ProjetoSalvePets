@@ -13,18 +13,9 @@
     
     {% if page.has_next %}
         {% if search %}
-            <a href="?page={{ page.next_page_number }}&search={{ search }}">{% trans "Anterior" %}</a>
+            <a href="?page={{ page.next_page_number }}&search={{ search }}">{% trans "Próxima" %}</a>
             {% else %}
             <a href="?page={{ page.next_page_number }}">{% trans "Próxima" %}</a>
-        {% endif %}-->
+        {% endif %}
     {% endif %}
 </div>
-
-<!-- {% block scripts %}
-<script>
-    function searchWord(){
-        var param_search = document.getElementById("search");        
-        return true;        
-        }
-</script>
-{% endblock %} -->
