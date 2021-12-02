@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG=False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -33,9 +33,16 @@ ALLOWED_HOSTS = ["*"]
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1']  
 
 #Caminho das imagens(foto)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
+MEDIA_URL = "/media/"
+STATIC_URL = "/static/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 #if os.name == 'nt':
  #   VENV_BASE = os.environ['VIRTUAL_ENV']
@@ -164,7 +171,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'salvepets', 
         'USER': 'postgres', 
-        'PASSWORD': POSTGIS_PASSWORD,
+        #'PASSWORD': POSTGIS_PASSWORD,
+        'PASSWORD': '123456',
         'HOST': 'postgis_container', 
         #'HOST': '127.0.0.1', 
         'PORT': '5432',
@@ -216,14 +224,12 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-#STATIC_URL = '/static/'
-STATIC_URL = "/static/"
+
 #*********************************E-COMMERCE*****************************************
 #STATICFILES_DIRS = [BASE_DIR / "static"]
 #STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = os.path.join(BASE_DIR , 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
+
 #************************************************************************************
 
 

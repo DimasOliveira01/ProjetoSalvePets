@@ -1264,4 +1264,3 @@ def doacao_excluir(request, id):
         patrocinio.delete()
 
     return redirect('/doacao/lista/')
-

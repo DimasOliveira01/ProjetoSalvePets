@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-#from SalvePets.core.views import PetCreate
+
 import debug_toolbar
 from django import urls
 from django.conf.urls import i18n
@@ -24,10 +24,8 @@ from django.urls import conf, path, include
 from django.urls.conf import include
 from core import views
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns     #imagem
-from . import settings                                                          #imagem
 from django.conf import settings #e-commerce (imagens)
 from django.conf.urls.static import static  #e-commerce (imagens)
-
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
@@ -87,18 +85,10 @@ urlpatterns = [
     path('doacao/alterar-status/<id>/',views.doacao_alterar_status),
     path('doacao/excluir/<id>/',views.doacao_excluir),
     path('meus-pets-adotados/',views.meus_pets_adotados),
-    
-
-    
- 
 ]
 
 #imagem
 urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
 
 urlpatterns += i18n_patterns (
     #path('admin/', admin.site.urls),
@@ -112,4 +102,11 @@ urlpatterns += i18n_patterns (
 #e-commerce (imagens)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+# else:
+#      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#      urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+

@@ -11,7 +11,9 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
-venv_deploy
+venv_deploy/
+.devcontainer/
+etc/
 S3_sync
 VirtualEnv
 docker_imagens
