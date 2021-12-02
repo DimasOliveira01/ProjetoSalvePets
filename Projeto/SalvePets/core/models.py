@@ -76,9 +76,9 @@ class INSTITUICAO(models.Model):
 
 class AVALIACAO(models.Model):
     """ Modelo de dados de avaliação """
-    FK_idInstituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
-    FK_idAvaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
-    nota = models.DecimalField(max_digits=30, decimal_places=15)
+    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
+    nota = models.IntegerField(blank=True, null=True)
     comentario = models.TextField()
     dataCriacao = models.DateTimeField(auto_now_add=True)
     dataModificacao = models.DateTimeField(auto_now=True)
