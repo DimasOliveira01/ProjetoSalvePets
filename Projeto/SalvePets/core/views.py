@@ -1264,3 +1264,6 @@ def doacao_excluir(request, id):
         patrocinio.delete()
 
     return redirect('/doacao/lista/')
+
+def error_404(request, exception):
+    return render (request, "not-found.html")
