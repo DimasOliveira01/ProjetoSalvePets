@@ -24,7 +24,7 @@
                     <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
                 {% endif %}
             </li>
-            {% if usuario.is_admin_instituicao %}
+            {% if user.usuario.is_admin_instituicao %}
             <li class="nav-item">
                 {% if request.path == "/doacao/lista/" %}
                     <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>

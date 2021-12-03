@@ -38,6 +38,15 @@ function validateSize(input) {
     }
 }
 
+function check_image_null() {
+    if (document.getElementById('foto').files.length == 0) {
+        var aviso = document.getElementById("tamanhoImagem")
+        aviso.innerHTML = "Você deve inserir uma imagem";
+        aviso.className = "alert alert-danger";
+        aviso.setAttribute("role", "alert");
+    }
+}
+
 function updateTextInput()
 {
     var value = document.getElementById("range").value;
