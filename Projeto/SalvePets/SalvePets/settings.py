@@ -25,7 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DEBUG=True
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -167,10 +169,13 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'salvepets', 
         'USER': 'postgres', 
-        'PASSWORD': 123456,
+        #'PASSWORD':POSTGIS_PASSWORD,
+        #'PASSWORD': 'salve123456',
+        'PASSWORD': '123456',
         #'HOST': 'postgis_container', 
         'HOST': '127.0.0.1', 
-        'PORT': '5432',
+	    #'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com',
+	    'PORT': '5432',
     }
 }
 

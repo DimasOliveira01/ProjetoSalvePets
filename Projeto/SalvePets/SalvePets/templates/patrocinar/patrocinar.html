@@ -52,16 +52,40 @@ function submit_patrocinio(){
 <main>
     <div class="container">
         <!-- Guias -->
-        <div class="container mt-4">
-            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Meus patrocínios" %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:#495057" href="/patrocinar/" selected>{% trans "Patrocinar pets" %}</a>
-                </li>
-            </ul>
-        </div>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                {% if request.path == "/patrocinar/" %}
+                    <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/meus-patrocinios/" %}
+                    <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                {% endif %}
+            </li>
+            {% if user.usuario.is_admin_instituicao %}
+            <li class="nav-item">
+                {% if request.path == "/doacao/lista/" %}
+                    <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/doacao/cadastro-info-pagamento/" %}
+                    <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
+                {% endif %}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 
         <div class="row">
         <p><h3>{% trans "Contribuir" %}</h3></p>
@@ -97,21 +121,26 @@ function submit_patrocinio(){
         <h5 class="text-capitalize">{{pet.nome}}</h5>
         <p class="mb-2 text-muted text-uppercase small">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</p>
         <p class="pt-1">{{pet.descricao|default_if_none:"-"}}</p>
-
         <!-- NAV -->
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:#495057">Doar</button>
-                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:#495057">Ajudar</button>
-                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:#495057">Patrocinar</button>
+                {% if doacao_simples %}
+                    <button class="nav-link {% if mostrar_doacao_simples %}active{% endif %}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:#495057">Doar</button>
+                {% endif %}
+                {% if doacao_por_categoria %}
+                    <button class="nav-link {% if mostrar_doacao_por_categoria %}active{% endif %}" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:#495057">Ajudar</button>
+                {% endif %}
+                {% if doacao_patrocinio %}
+                    <button class="nav-link {% if mostrar_doacao_patrocinio %}active{% endif %}" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:#495057">Patrocinar</button>
+                {% endif %}
             </div>
         </nav>
         <!-- / NAV / -->
 
         <div class="tab-content" id="nav-tabContent">
         <br>
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                
+            <div class="tab-pane fade {% if mostrar_doacao_simples %}show active{%endif%}" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                {% if doacao_simples %}
                 <!-- CA2 - Doar para este abrigo -->
                 <label><h6>{% trans "Doar para "  %} <span class="text-capitalize">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</span></h6></label>
                 <p>Você pode realizar uma doação para a instituição que está tomando conta deste pet.</p>
@@ -138,11 +167,12 @@ function submit_patrocinio(){
                     </form>
                 </div>
                 <br>
+                {% endif %}
                 <!-- / CA2 - Doar para este abrigo / -->
 
             </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-               
+            <div class="tab-pane fade {% if mostrar_doacao_por_categoria %}show active{%endif%}" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                {% if doacao_por_categoria %}
                 <!-- CA4 - Ajude este pet -->
                 <label><h6>{% trans "Ajude o pet" %}</h6></label>
                 <p>Você também pode contribuir com os custos mensais do pet.</p>
@@ -155,11 +185,12 @@ function submit_patrocinio(){
                 
                 <button type="button" style="background-color:#fbba00; color:black; font-weight:normal; border-color:gray;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajudar_pet">{% trans "Ajudar o pet" %}</button>
                 <br><br>
+                {% endif %}
                 <!-- / CA4 - Ajude este pet / -->
 
             </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                
+            <div class="tab-pane fade {% if mostrar_doacao_patrocinio %}show active{%endif%}" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                {% if doacao_patrocinio %}
                 <!-- CA6 - Patrocine este pet -->
                 <label><h6>{% trans "Patrocine o pet" %}</h6></label><br>
                 <p>Também é possível ajudar o pet cobrindo seus custos mensais definidos pela instituição que está tomando conta dele.</p>
@@ -178,12 +209,8 @@ function submit_patrocinio(){
                     <input type="hidden" name="iot" value="button" />
                     <button name="patrocinio" id="patrocinio" value="patrocinio" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_patrocinio()">{% trans "Patrocinar" %}</button>
                 </form>
-                <!--
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 50 mensais</button>
-                    <button onclick="Definir_preco_assinatura('100')" type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 100 mensais</button>
-                    <button type="button" style="border-color:gray; font-weight:normal;" class="btn btn-light">R$ 200 mensais</button>
-                </div>-->
+
+                {% endif %}
                 <!-- / CA6 - Patrocine este pet / -->
 
             </div>

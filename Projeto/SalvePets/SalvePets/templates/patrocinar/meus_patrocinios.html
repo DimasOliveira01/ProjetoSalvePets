@@ -6,43 +6,43 @@
 {% block conteudo %}
     <div class="container">
         <!-- Guias -->
-        <div class="container mt-4">
-            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item">
-                    {% if request.path == "/patrocinar/" %}
-                        <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
-                    {% else %}                    
-                        <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if request.path == "/meus-patrocinios/" %}
-                        <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
-                    {% else %}                    
-                        <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
-                    {% endif %}
-                </li>
-                {% if usuario.is_admin_instituicao %}
-                <li class="nav-item">
-                    {% if request.path == "/doacao/lista/" %}
-                        <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
-                    {% else %}                   
-                        <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if request.path == "/doacao/cadastro-info-pagamento/" %}
-                        <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
-                    {% else %}                   
-                        <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
-                    {% endif %}
-                </li>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                {% if request.path == "/patrocinar/" %}
+                    <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
                 {% endif %}
-            </ul>
-        </div>
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/meus-patrocinios/" %}
+                    <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                {% endif %}
+            </li>
+            {% if user.usuario.is_admin_instituicao %}
+            <li class="nav-item">
+                {% if request.path == "/doacao/lista/" %}
+                    <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/doacao/cadastro-info-pagamento/" %}
+                    <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
+                {% endif %}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 
-        {% if aviso %}
-                <p><div class="alert alert-danger" role="alert">{{aviso}}</div></p>
+        {% if doacao_pendente %}
+                <p><div class="alert alert-danger" role="alert">{{doacao_pendente}}</div></p>
         {% endif %}
         <p><h3>{% trans "Meus patrocínios" %}</h3></p>
         <p>Veja a lista de pets que você ajudou.<p>
