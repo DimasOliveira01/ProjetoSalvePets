@@ -79,9 +79,10 @@ class AVALIACAO(models.Model):
     fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
     fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
     nota = models.IntegerField(blank=True, null=True)
-    comentario = models.TextField()
+    #nota_geral = models.IntegerField(blank=True, null=True)
+    comentario = models.TextField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
+    #dataModificacao = models.DateTimeField(auto_now=True)
 
 
 class USUARIO(models.Model):

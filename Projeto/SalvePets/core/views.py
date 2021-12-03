@@ -20,10 +20,12 @@ from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
 from geopy.geocoders import Nominatim
+from django.db.models import Sum
+from django.db.models import Count
 
 from .forms import ContactForm
 from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm, DoacaoCadastroForm
-from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
+from .models import AVALIACAO, PATROCINIO, Pet, USUARIO, INSTITUICAO
 
 # === Funções com render simples ===
 
@@ -776,12 +778,48 @@ def set_pet_instituicao(request):
         if us:
             pet.fk_id_usuario_adocao_id=us[0].id
             pet.save()
+            
+            #envio de email de avaliação da instituição
+            assunto =_("Opine sobre a adoção do seu Pet")
+            remetente = os.environ.get("EMAIL_HOST_USER")
+            destinatario=(email)
+            html = loader.render_to_string('instituicao/email/email-avaliacao-instituicao.html',{'us': us[0], 'pet': pet})
+            plain_message = strip_tags(html)
+            # Envio do e-mail
+            mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+
+
     else:
         pet.fk_id_usuario_adocao_id=None
         pet.save() 
 
     url = f'/pet-informacao-instituicao/{pet.id}/'
     return redirect (url)
+
+#avaliacao_instituicao
+@login_required(login_url='/accounts/login')
+def avaliacao_instituicao(request):
+    return render(request, 'instituicao/avaliacao-instituicao.html')
+
+"""
+    user = request.user
+    usuario = request.user.usuario
+    pet = Pet.objects.get(id=id)
+    instituicao=INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
+    email = instituicao[0].email
+    assunto = _("Solicitação de adoção de Pet")
+    remetente = os.environ.get("EMAIL_HOST_USER")
+    destinatario = str(email)
+    html = loader.render_to_string('instituicao/email/email-solicitar-adocao.html',
+                                   {'user': user, 'usuario': usuario, 'pet': pet})
+    plain_message = strip_tags(html)
+
+    # Envio do e-mail
+    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+"""
+
+
 
 @login_required(login_url='/accounts/login')
 def pet_informacao_instituicao(request, id):
@@ -800,10 +838,19 @@ def pet_informacao_instituicao_adocao(request, id):
     """ Tela de informações sobre regras de adoção de uma determinada instituição """
     pet = Pet.objects.get(id=id)
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
-    #id_user=request.user.id
-    #print(id_user)
-    #print(inst.nome_instituicao)
-    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst})
+    #determinando a nota média dos usuários
+    media=0
+    count=0
+    soma=0
+    #itens = AVALIACAO.objects.all()
+    itens = AVALIACAO.objects.filter(fk_id_instituicao_id=pet.fk_id_instituicao_id)
+    soma = sum(itens.values_list('nota', flat=True))
+    count=len(itens)
+    if count<1:
+        media=0
+    else:
+        media=int(soma/count)
+    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst,'media':media,'itens':itens,'count':count})
 
 def lista_pets_instituicao(request):
     """ Lista de pets de uma determinada instituição a serem adotados """
