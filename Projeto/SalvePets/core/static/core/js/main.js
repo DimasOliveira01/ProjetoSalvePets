@@ -45,6 +45,14 @@ function check_image_null() {
         aviso.className = "alert alert-danger";
         aviso.setAttribute("role", "alert");
     }
+
+    if (document.getElementById('id_coordenada').value.length == 0){
+        var aviso = document.getElementById("erroMapa")
+        aviso.innerHTML = "Você deve selecionar uma localização";
+        aviso.className = "alert alert-danger";
+        aviso.setAttribute("role", "alert");
+    }
+    
 }
 
 function updateTextInput()
