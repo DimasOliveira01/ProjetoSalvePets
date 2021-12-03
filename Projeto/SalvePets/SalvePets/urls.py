@@ -85,6 +85,7 @@ urlpatterns = [
     path('doacao/alterar-status/<id>/',views.doacao_alterar_status),
     path('doacao/excluir/<id>/',views.doacao_excluir),
     path('meus-pets-adotados/',views.meus_pets_adotados),
+    path('avaliacao-instituicao/',views.avaliacao_instituicao),
 ]
 
 #imagem
