@@ -205,7 +205,7 @@
             <label><b>{% trans "Porte" %}</b>: *</label><br>
             <button id="btn-pequeno-porte" class="btn btn-primary {% if pet.porte >= 40 and pet.porte < 67 %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">{% trans "Pequeno porte" %}</button>
             <button id="btn-medio-porte" class="btn btn-primary {% if pet.porte >= 67 and pet.porte < 94 or not pet %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">{% trans "Médio porte" %}</button>
-            <button id="btn-grande-porte" class="btn btn-primary {% if pet.porte >= 94 and pet.porte < 120 %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">{% trans "Grande porte" %}</button><br><br>
+            <button id="btn-grande-porte" class="btn btn-primary {% if pet.porte >= 94 and pet.porte <= 120 %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">{% trans "Grande porte" %}</button><br><br>
 
             <table class="fixed">
                 <tr>
