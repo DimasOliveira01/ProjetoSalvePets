@@ -1,9 +1,0 @@
-[run]
-omit =
-    *env*
-    *migrations*,
-    *tests*,
-    SalvePets*,
-    conftest.py,
-    manage.py,
-    *\__init__.py
