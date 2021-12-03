@@ -16,7 +16,7 @@ Including another URLconf
 
 import debug_toolbar
 from django import urls
-from django.conf.urls import i18n
+from django.conf.urls import handler404, i18n
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
 #from django.urls import path, include
@@ -98,6 +98,7 @@ urlpatterns += i18n_patterns (
     path('accounts/', include("allauth.urls")),
 )
 
+handler404 = "core.views.error_404"
 
 #e-commerce (imagens)
 if settings.DEBUG:
