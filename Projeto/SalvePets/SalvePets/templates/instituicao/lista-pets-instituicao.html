@@ -93,6 +93,11 @@
                                     Ativo
                                 {% else %}
                                     Inativo
+                                {% endif %} - 
+                                {% if p.adotado %}
+                                    Adotado
+                                {% else %}
+                                    Não adotado
                                 {% endif %}</p>
                                 <h5 class="card-title">{{ p.nome }}</h5>
                                 <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>

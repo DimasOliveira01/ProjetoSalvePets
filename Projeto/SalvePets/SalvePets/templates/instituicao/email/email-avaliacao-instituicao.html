@@ -14,8 +14,7 @@
                 <li class="list-group-item bg-light" style="text-align: left;">Nome: {{pet.nome}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">Descrição: {{pet.descricao}}</li>
             </ul>
-                    <!--http://127.0.0.1:8000/avaliacao-instituicao/{{ pet.id }}-->
-            <a href="http://127.0.0.1:8000/avaliacao-instituicao/{{ pet.fk_id_instituicao_id }}" class="btn btn-primary w-100 mt-auto">Clique aqui para realizar a avaliação!</a>
+            <a href="https://salvepets.online/avaliacao-instituicao/{{ pet.fk_id_instituicao_id }}" class="btn btn-primary w-100 mt-auto">Clique aqui para realizar a avaliação!</a>
             <!--{% include "order_summary.html" with items=order.items.all total_price=total_price %}
             <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>-->
         </div>
