@@ -159,11 +159,11 @@ class InstituicaoForm(forms.ModelForm):
 
 class AdicionarUsuarioInstituicaoForm(forms.Form):
     """ Formulário de inclusão de usuário vinculado a uma instituição """
-    cpf = forms.CharField(max_length=14)
+    cpf = forms.CharField(max_length=14, label='CPF')
 
 class PesquisarPetForm(forms.Form):
     """ Formulário de pesquisa de um Pet da instituição """
-    id_pet = forms.IntegerField()
+    id_pet = forms.IntegerField(label='ID do pet')
 
 class AdicionarPetInstituicao(forms.ModelForm):
     """ Formulário de inclusão de pet vinculado a uma instituição """
