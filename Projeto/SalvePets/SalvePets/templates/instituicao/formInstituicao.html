@@ -7,17 +7,17 @@
 {% block conteudo %}
 
 <div style="margin:80px">
-  <h1>Cadastro de empresa</h1>
-  <h4>Solicite acesso na plataforma para anunciar a adoção de animais pela sua Instituição</h4>
+  <h1>{% trans "Cadastro de empresa" %}</h1>
+  <h4>{% trans "Solicite acesso na plataforma para anunciar a adoção de animais pela sua Instituição" %}</h4>
   <p>
-    Entraremos em contato para solicitar toda a documentação necessária. 
+    {% trans "Entraremos em contato para solicitar toda a documentação necessária." %}
   </p>
   <form method="POST">
       {% csrf_token %}
           {{form|crispy}}
           <section class="py-2">
           </section>
-          <button class="btn btn-outline-dark" type="submit">Enviar</button>
+          <button class="btn btn-outline-dark" type="submit">{% trans "Enviar" %}</button>
   </form>
 </div>
 

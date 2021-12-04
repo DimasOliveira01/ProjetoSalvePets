@@ -41,7 +41,7 @@ def test_reverse_resolve():
 
 def test_status_code(client):
     response = client.get(reverse("payments:process"))
-    assert response.status_code == 404
+    assert response.status_code == 200
 
     response = client.get(reverse("payments:failure"))
     assert response.status_code == 200

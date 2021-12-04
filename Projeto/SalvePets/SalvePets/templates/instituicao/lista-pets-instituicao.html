@@ -74,7 +74,7 @@
 
 
     {% if verifica_pesquisa %}
-        <h3><a href="../lista-pet-instituicao/">Listar todos os Pets</a></h3>
+        <h3><a href="../lista-pet-instituicao/">{% trans "Listar todos os Pets" %}</a></h3>
         <p><h3>{% trans "Resultado da pesquisa" %}</h3></p>
     {% else %}
         <p><h3>{% trans "Lista de Pets da Instituição" %}</h3></p>
@@ -90,18 +90,18 @@
                             <div class="card-body d-flex flex-column">
                                 <p class="mb-2 text-muted text-uppercase small">
                                 {% if p.ativo %}
-                                    Ativo
+                                    {% trans "Ativo" %}
                                 {% else %}
-                                    Inativo
+                                    {% trans "Inativo" %}
                                 {% endif %} - 
                                 {% if p.adotado %}
-                                    Adotado
+                                    {% trans "Adotado" %}
                                 {% else %}
-                                    Não adotado
+                                    {% trans "Não adotado" %}
                                 {% endif %}</p>
                                 <h5 class="card-title">{{ p.nome }}</h5>
                                 <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
-                                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">Detalhes</a>
+                                <a href="../pet-informacao-instituicao/{{ p.id }}" class="btn btn-primary w-100 mt-auto">{% trans "Detalhes" %}</a>
                             </div>
                         </div>            
                     {% endfor %}

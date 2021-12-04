@@ -10,21 +10,21 @@
             <p>{% trans "Solicitação de cadastro de uma nova Instituição" %}</p>
             <p><b>{% trans "Usuário:" %}</b></p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-light" style="text-align: left;">Nome: {{user.first_name}} {{user.last_name}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Nome" %}: {{user.first_name}} {{user.last_name}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">CPF: {{usuario.cpfcnpj}}</li>
             </ul> 
 
             <p><b>{% trans "Informações para análise:" %}</b></p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-light" style="text-align: left;">Nome Instituição: {{instituicao.nome_instituicao}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Razão Social: {{instituicao.razao_social}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Nome Instituição" %}: {{instituicao.nome_instituicao}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Razão Social" %}: {{instituicao.razao_social}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">CNPJ: {{instituicao.cnpj}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Telefone: {{instituicao.telefone}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Telefone" %}: {{instituicao.telefone}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">E-mail: {{instituicao.email}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Endereço: {{instituicao.address}}, {{instituicao.number}} - {{instituicao.complement}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Estado: {{instituicao.state}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Cidade: {{instituicao.city}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Bairro: {{instituicao.district}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Endereço" %}: {{instituicao.address}}, {{instituicao.number}} - {{instituicao.complement}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Estado" %}: {{instituicao.state}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Cidade" %}: {{instituicao.city}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Bairro" %}: {{instituicao.district}}</li>
                 <li class="list-group-item bg-light" style="text-align: left;">CEP: {{instituicao.postal_code}}</li>
             </ul>          
             

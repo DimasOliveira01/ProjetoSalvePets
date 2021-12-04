@@ -6,4 +6,5 @@ omit =
     SalvePets*,
     conftest.py,
     manage.py,
-    *\__init__.py
+    *\__init__.py,
+    core\custom_form_fields.py

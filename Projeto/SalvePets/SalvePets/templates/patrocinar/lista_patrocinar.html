@@ -45,7 +45,7 @@
         <p><div class="alert alert-danger" role="alert">{{erro}}</div></p>
     {% else %}
         <p><h3>{% trans "Pets disponíveis para patrocínio" %}</h3></p>
-        <p>Você pode ajudar diretamente uma instituição que abriga animais com o valor que desejar.<p>
+        <p>{% trans "Você pode ajudar diretamente uma instituição que abriga animais com o valor que desejar." %}<p>
         <div class="row">
             {% for p, i in lista_patrocinio %}           
                 <div class="card mb-3 mx-2 p-0" style="width: 18rem;">
@@ -57,8 +57,8 @@
                         <h5 class="card-title">{{ p.nome }}</h5>
                         <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
                         <!--<a href="../pet-informacao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>-->
-                        <a href="../pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">Detalhes</a>
-                        <a href="../patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">Patrocinar</a>
+                        <a href="../pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">{% trans "Detalhes" %}</a>
+                        <a href="../patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">{% trans "Patrocinar" %}</a>
                     </div>
                 </div>            
             {% endfor %}
