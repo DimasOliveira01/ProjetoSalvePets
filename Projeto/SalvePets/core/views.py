@@ -20,10 +20,12 @@ from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
 from geopy.geocoders import Nominatim
+from django.db.models import Sum
+from django.db.models import Count
 
 from .forms import ContactForm
 from .forms import UserForm, UsuarioForm, InstituicaoForm, AdicionarUsuarioInstituicaoForm, AdicionarPetInstituicao, SolicitarAdocaoForm, PesquisarPetForm, DoacaoCadastroForm
-from .models import PATROCINIO, Pet, USUARIO, INSTITUICAO
+from .models import AVALIACAO, PATROCINIO, Pet, USUARIO, INSTITUICAO
 
 # === Funções com render simples ===
 
@@ -776,12 +778,84 @@ def set_pet_instituicao(request):
         if us:
             pet.fk_id_usuario_adocao_id=us[0].id
             pet.save()
+            
+            #envio de email de avaliação da instituição
+            assunto =_("Opine sobre a adoção do seu Pet")
+            remetente = os.environ.get("EMAIL_HOST_USER")
+            destinatario=(email)
+            html = loader.render_to_string('instituicao/email/email-avaliacao-instituicao.html',{'us': us[0], 'pet': pet})
+            plain_message = strip_tags(html)
+            # Envio do e-mail
+            mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+
+
+
     else:
         pet.fk_id_usuario_adocao_id=None
         pet.save() 
 
     url = f'/pet-informacao-instituicao/{pet.id}/'
     return redirect (url)
+
+#avaliacao_instituicao
+@login_required(login_url='/accounts/login')
+def avaliacao_instituicao(request, id):
+    inst=INSTITUICAO.objects.filter(id=id)
+    return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst[0]})
+
+
+@login_required(login_url='/accounts/login')
+def enviar_avaliacao_instituicao(request, id):
+    id_inst=id
+    comentario=request.POST.get('descricao')
+    rating=int(request.POST.get('rating'))
+    user_id=request.user.id
+    print(comentario)
+    print(rating)
+    print("id do user: ", user_id)
+
+    avaliacao = AVALIACAO.objects.create(nota=rating, comentario=comentario, fk_id_avaliador_id=user_id, fk_id_instituicao_id=id_inst)
+
+    if id_inst:
+        avaliacao.fk_id_instituicao_id=id_inst
+        avaliacao.save()
+
+    if comentario:
+        avaliacao.comentario=comentario
+        avaliacao.save()
+
+    if rating:
+        avaliacao.nota=rating
+        avaliacao.save()
+
+    if user_id:
+        avaliacao.fk_id_avaliador_id=user_id
+        avaliacao.save()
+    
+    return redirect('/avaliacao-enviada/')
+
+def avaliacao_enviada(request):
+    return render(request, 'instituicao/mensagem/avaliacao-enviada.html')
+
+
+"""
+    user = request.user
+    usuario = request.user.usuario
+    pet = Pet.objects.get(id=id)
+    instituicao=INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
+    email = instituicao[0].email
+    assunto = _("Solicitação de adoção de Pet")
+    remetente = os.environ.get("EMAIL_HOST_USER")
+    destinatario = str(email)
+    html = loader.render_to_string('instituicao/email/email-solicitar-adocao.html',
+                                   {'user': user, 'usuario': usuario, 'pet': pet})
+    plain_message = strip_tags(html)
+
+    # Envio do e-mail
+    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
+"""
+
+
 
 @login_required(login_url='/accounts/login')
 def pet_informacao_instituicao(request, id):
@@ -800,10 +874,19 @@ def pet_informacao_instituicao_adocao(request, id):
     """ Tela de informações sobre regras de adoção de uma determinada instituição """
     pet = Pet.objects.get(id=id)
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
-    #id_user=request.user.id
-    #print(id_user)
-    #print(inst.nome_instituicao)
-    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst})
+    #determinando a nota média dos usuários
+    media=0
+    count=0
+    soma=0
+    #itens = AVALIACAO.objects.all()
+    itens = AVALIACAO.objects.filter(fk_id_instituicao_id=pet.fk_id_instituicao_id)
+    soma = sum(itens.values_list('nota', flat=True))
+    count=len(itens)
+    if count<1:
+        media=0
+    else:
+        media=int(soma/count)
+    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst,'media':media,'itens':itens,'count':count})
 
 def lista_pets_instituicao(request):
     """ Lista de pets de uma determinada instituição a serem adotados """
@@ -1028,28 +1111,36 @@ def adicionar_usuario_instituicao(request):
     INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
 '''
 
-@login_required(login_url='/accounts/login/')
 def lista_patrocinar(request):
     """ Função que apresenta a tela de lista de pets a serem patrocinados"""
     usuario_lista = []
-    usuario = USUARIO.objects.get(user_id = request.user.id)
-    instituicao = []
+    if request.user.is_authenticated:
+        usuario = USUARIO.objects.get(user_id = request.user.id)
+    else:
+        usuario = False
+    instituicoes = []
     i = 0
+    erro = False
 
-    #adicionei esta condição encontradoPerdido=None
-    pet=Pet.objects.filter(encontradoPerdido=None, adotado=False, ativo=True)
+    pet=Pet.objects.filter(encontradoPerdido=None, adotado=False, ativo=True)   
 
-    for p in pet:
-        usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
-        if usuario_lista[i].fk_instituicao_id:
-            instituicao.append(INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id))
-        i = i + 1
-    lista_patrocinio = zip(pet , instituicao)
+    try:
+        for p in pet:
+            usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
+            if (usuario_lista[i].fk_instituicao_id):
+                instituicao = INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id)                            
+                instituicoes.append(instituicao)
+            i = i + 1
+        lista_patrocinio = zip(pet , instituicoes)
+    except Exception:
+            erro = "Ocorreu um erro ao carregar os pets disponíveis para patrocínio."
+
     return render(request, 'patrocinar/lista_patrocinar.html',{'pet':pet,
                                                                'usuario': usuario_lista,
                                                                'instituicao':instituicao,
                                                                'lista_patrocinio': lista_patrocinio,
-                                                               'usuario': usuario                                                               
+                                                               'usuario': usuario,
+                                                               'erro':erro                                                          
                                                                })
 
 @login_required(login_url='/accounts/login/')
@@ -1058,9 +1149,71 @@ def patrocinar(request, id):
     pet = Pet.objects.get(ativo=True, id=id)
     usuario = USUARIO.objects.get(user_id=pet.user_id)
     instituicao = INSTITUICAO.objects.get(id=usuario.fk_instituicao_id)
+    doacao_simples = False
+    doacao_por_categoria = False
+    doacao_patrocinio = False
+    mostrar_doacao_patrocinio = False
+    mostrar_doacao_por_categoria = False
+    mostrar_doacao_simples = False
+
+    if (
+    instituicao.doacao_valor_20_link and
+    instituicao.doacao_valor_50_link and
+    instituicao.doacao_valor_100_link
+    ):
+        doacao_simples = True
+        
+    if (
+    instituicao.doacao_limpeza_link and
+    instituicao.doacao_limpeza_valor and
+
+    instituicao.doacao_alimentacao_link and
+    instituicao.doacao_alimentacao_valor and
+
+    instituicao.doacao_medicamentos_link and
+    instituicao.doacao_medicamentos_valor and
+
+    instituicao.doacao_diaria_internacao_link and
+    instituicao.doacao_diaria_internacao_valor
+    ):
+        doacao_por_categoria = True
+
+    if (
+    instituicao.doacao_patrocinio_codigo and
+    instituicao.doacao_patrocinio_valor
+    ):
+        doacao_patrocinio = True
+    
+    if (
+        ( doacao_simples and doacao_por_categoria and doacao_patrocinio ) or 
+        ( doacao_simples and doacao_por_categoria and not doacao_patrocinio ) or
+        ( doacao_simples and not doacao_por_categoria and not doacao_patrocinio ) or 
+        ( doacao_simples and not doacao_por_categoria and doacao_patrocinio )
+    ):
+        mostrar_doacao_simples = True
+
+    if (
+        ( doacao_por_categoria and not doacao_simples and not doacao_patrocinio ) or 
+        ( doacao_por_categoria and not doacao_simples and doacao_patrocinio )
+    ):
+        mostrar_doacao_por_categoria = True
+
+    if (
+        ( doacao_patrocinio and not doacao_simples and not doacao_por_categoria )
+    ):
+        mostrar_doacao_patrocinio = True
+    
+
     return render(request, 'patrocinar/patrocinar.html',{'pet':pet,
                                                          'usuario':usuario,
-                                                         'instituicao':instituicao})
+                                                         'instituicao':instituicao,
+                                                         'doacao_simples': doacao_simples,
+                                                         'doacao_por_categoria':doacao_por_categoria,
+                                                         'doacao_patrocinio':doacao_patrocinio,
+                                                         'mostrar_doacao_simples':mostrar_doacao_simples,
+                                                         'mostrar_doacao_por_categoria':mostrar_doacao_por_categoria,
+                                                         'mostrar_doacao_patrocinio':mostrar_doacao_patrocinio
+                                                         })
 
 @login_required(login_url='/accounts/login/')
 def patrocinar_send(request, id):
@@ -1102,32 +1255,18 @@ def patrocinar_send(request, id):
         print(request.POST.get('doacao_simples_input'))
         valor = float(request.POST.get('doacao_simples_input'))
 
-        patrocinio = PATROCINIO(
-            FK_idPet = Pet.objects.get(id=id),
-            valor = valor,
-            doacao_tipo = doacao_tipo,
-            data = datetime.today().strftime('%Y-%m-%d')
-        )
-        patrocinio.save()
+    patrocinio = PATROCINIO(
+        FK_idPet = Pet.objects.get(id=id),
+        valor = valor,
+        doacao_tipo = doacao_tipo,
+        data = datetime.today().strftime('%Y-%m-%d')
+    )
+    patrocinio.save()
 
-        patrocinio.FK_idUsuario.add(request.user)
+    patrocinio.FK_idUsuario.add(request.user)
 
-    aviso = "Por favor, efetue sua doação. Em um prazo de até 48 horas, iremos confirmar a transação e ela poderá constar nessa página."
 
-    pets = []
-    user = request.user
-    usuario = USUARIO.objects.get(user_id = user.id)
-    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
-
-    for p in patrocinios:
-        pets.append(Pet.objects.get(id=p.FK_idPet_id))
-
-    lista = zip(patrocinios , pets)
-
-    unique_pets = set(pets)
-
-    return render(request, 'patrocinar/meus_patrocinios.html',
-                  {'aviso':aviso, 'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario, 'unique_pets':unique_pets})
+    return redirect('/meus-patrocinios/')
 
 @login_required(login_url='/accounts/login/')
 def meus_patrocinios(request):
@@ -1136,6 +1275,10 @@ def meus_patrocinios(request):
     user = request.user
     usuario = USUARIO.objects.get(user_id = user.id)
     patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+    doacao_pendente = ""
+
+    if PATROCINIO.objects.filter(FK_idUsuario = user, pago = False):
+            doacao_pendente = "Você tem um patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
 
     for p in patrocinios:
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
@@ -1145,7 +1288,7 @@ def meus_patrocinios(request):
     unique_pets = set(pets)
 
     return render(request, 'patrocinar/meus_patrocinios.html',
-                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario, 'unique_pets':unique_pets})
+                  {'patrocinios': patrocinios, 'pets':pets, 'lista':lista, 'usuario':usuario, 'unique_pets':unique_pets, 'doacao_pendente': doacao_pendente})
 
 @login_required(login_url='/accounts/login/')
 def cadastrar_doacao(request):

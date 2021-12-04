@@ -7,41 +7,43 @@
 
     <div class="container">
         <!-- Guias -->
-        <div class="container mt-4">
-            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item">
-                    {% if request.path == "/patrocinar/" %}
-                        <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
-                    {% else %}                    
-                        <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if request.path == "/meus-patrocinios/" %}
-                        <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
-                    {% else %}                    
-                        <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
-                    {% endif %}
-                </li>
-                {% if usuario.is_admin_instituicao %}
-                <li class="nav-item">
-                    {% if request.path == "/doacao/lista/" %}
-                        <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
-                    {% else %}                   
-                        <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if request.path == "/doacao/cadastro-info-pagamento/" %}
-                        <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
-                    {% else %}                   
-                        <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
-                    {% endif %}
-                </li>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                {% if request.path == "/patrocinar/" %}
+                    <a class="nav-link active">{% trans "Patrocinar pets" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/patrocinar/">{% trans "Patrocinar pets" %}</a>
                 {% endif %}
-            </ul>
-        </div>
-
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/meus-patrocinios/" %}
+                    <a class="nav-link active">{% trans "Patrocínios feitos" %}</a>
+                {% else %}                    
+                    <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
+                {% endif %}
+            </li>
+            {% if user.usuario.is_admin_instituicao %}
+            <li class="nav-item">
+                {% if request.path == "/doacao/lista/" %}
+                    <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/lista/">{% trans "Patrocínios recebidos" %}</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if request.path == "/doacao/cadastro-info-pagamento/" %}
+                    <a class="nav-link active">{% trans "Dados do PagSeguro" %}</a>
+                {% else %}                   
+                    <a class="nav-link" style="color:#495057" href="/doacao/cadastro-info-pagamento/">{% trans "Dados do PagSeguro" %}</a>
+                {% endif %}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% if erro %}
+        <p><div class="alert alert-danger" role="alert">{{erro}}</div></p>
+    {% else %}
         <p><h3>{% trans "Pets disponíveis para patrocínio" %}</h3></p>
         <p>Você pode ajudar diretamente uma instituição que abriga animais com o valor que desejar.<p>
         <div class="row">
@@ -62,5 +64,6 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 
 {% endblock %} 

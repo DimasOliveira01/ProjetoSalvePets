@@ -44,7 +44,7 @@ class INSTITUICAO(models.Model):
     nome_instituicao = models.CharField(max_length=50, null=True)
     razao_social = models.CharField(max_length=50, null=True)
     cnpj=BRCNPJField("CNPJ", null=True)
-    telefone = models.CharField(max_length=16, null=True)
+    telefone = models.CharField(max_length=25, null=True)
     email = models.CharField(max_length=50, null=True)
     postal_code = BRPostalCodeField("CEP")
     address = models.CharField("Endereço", max_length=250)
@@ -79,9 +79,10 @@ class AVALIACAO(models.Model):
     fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
     fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
     nota = models.IntegerField(blank=True, null=True)
-    comentario = models.TextField()
+    #nota_geral = models.IntegerField(blank=True, null=True)
+    comentario = models.TextField(blank=True, null=True)
     dataCriacao = models.DateTimeField(auto_now_add=True)
-    dataModificacao = models.DateTimeField(auto_now=True)
+    #dataModificacao = models.DateTimeField(auto_now=True)
 
 
 class USUARIO(models.Model):
@@ -92,7 +93,7 @@ class USUARIO(models.Model):
     #cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,null=False)
     cpfcnpj = BRCPFField("CPF")
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
-    telefone = models.CharField(max_length=16,
+    telefone = models.CharField(max_length=25,
                                 verbose_name=_("Número de celular (somente números)"), blank=True,
                                 null=True)
     pontuacao = models.DecimalField(max_digits=30, decimal_places=15, blank=True, null=True)

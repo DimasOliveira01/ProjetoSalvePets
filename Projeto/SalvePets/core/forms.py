@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
 from .models import Pet, USUARIO, ADOCAO, INSTITUICAO
+import re
 #from .custom_form_fields import cpfcnpjField, TelefoneField
 
 

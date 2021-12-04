@@ -22,7 +22,7 @@
                     <a class="nav-link" style="color:#495057" href="/meus-patrocinios/">{% trans "Patrocínios feitos" %}</a>
                 {% endif %}
             </li>
-            {% if usuario.is_admin_instituicao %}
+            {% if user.usuario.is_admin_instituicao %}
             <li class="nav-item">
                 {% if request.path == "/doacao/lista/" %}
                     <a class="nav-link active">{% trans "Patrocínios recebidos" %}</a>
@@ -45,78 +45,17 @@
         <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.<p>
         <div class="row">
         <form method="POST">
-            
-            
-            <!--
-            <br><br>
-            <p><h4>{% trans "Doação comum" %}</h4></p>
-            <p>Siga as instruições deste link para gerar os endereços de doação do PagSeguro.</p>
-            <div class="form-group">
-                <label><b>{% trans "R$ 20" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_20_link" type="text" value="{{ instituicao.doacao_valor_20_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 20">
-            </div>
-            <br>
-
-            <div class="form-group">
-                <label><b>{% trans "R$ 50" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_50_link" type="text" value="{{ instituicao.doacao_valor_50_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 50">
-            </div>
-            <br>
-
-            <div class="form-group">
-                <label><b>{% trans "R$ 100" %}</b>:</label>
-                <input class="form-control" name="doacao_valor_100_link" type="text" value="{{ instituicao.doacao_valor_100_link|default_if_none:"" }}" placeholder="Insira o link do PagSeguro para doação de R$ 100">
-            </div>
-            <br>
-
-            <p><h4>{% trans "Ajuda com custos" %}</h4></p>
-            <p>Insira o valor de cada custo do seu pet e o link de doação para cada valor no PagSeguro</p>
-            <label><b>{% trans "Limpeza" %}</b>:</label>
-            <div class="input-group">
-                <input class="form-control" name="doacao_limpeza_link" type="number" value="{{ instituicao.doacao_limpeza_link|default_if_none:"" }}" placeholder="R$">
-                <input class="form-control" name="doacao_limpeza_valor" type="text" value="{{ instituicao.doacao_limpeza_valor|default_if_none:"" }}" placeholder="Endereço para doação">
-            </div>
-            <br>
-            <label><b>{% trans "Alimentação" %}</b>:</label>
-            <div class="input-group">
-                
-                <input class="form-control" name="doacao_alimentacao_link" type="number" value="{{ instituicao.doacao_alimentacao_link|default_if_none:"" }}" placeholder="R$">
-                <input class="form-control" name="doacao_alimentacao_valor" type="text" value="{{ instituicao.doacao_alimentacao_valor|default_if_none:"" }}" placeholder="Endereço para doação">
-            </div>
-            <br>
-            <label><b>{% trans "Medicamentos" %}</b>:</label>
-            <div class="input-group">
-                
-                <input class="form-control" name="doacao_medicamentos_link" type="number" value="{{ instituicao.doacao_medicamentos_link|default_if_none:"" }}" placeholder="R$">
-                <input class="form-control" name="doacao_medicamentos_valor" type="text" value="{{ instituicao.doacao_medicamentos_valor|default_if_none:"" }}" placeholder="Endereço para doação">
-            </div>
-            <br>
-            <label><b>{% trans "Diária de internação" %}</b>:</label>
-            <div class="input-group">
-                
-                <input class="form-control" name="doacao_diaria_internacao_link" type="number" value="{{ instituicao.doacao_diaria_internacao_link|default_if_none:"" }}" placeholder="R$">
-                <input class="form-control" name="doacao_diaria_internacao_valor" type="text" value="{{ instituicao.doacao_diaria_internacao_valor|default_if_none:"" }}" placeholder="Endereço para doação">
-            </div>
-            <br>
-  
-            <p><h4>{% trans "Patrocínio recorrente" %}</h4></p>
-            <p>Insira o endereço para assinatura com o valor desejado do seu PagSeguro</p>
-            <label><b>{% trans "Endereço" %}</b>:</label>
-            <div class="input-group">
-                <input class="form-control" name="doacao_patrocinio_link" type="text" value="{{ instituicao.doacao_patrocinio_link|default_if_none:"" }}" placeholder="Endereço do patrocínio">
-            </div>
-            <br>
-            -->
-
-
-                {% csrf_token %}
-                <!--{{ form|crispy }}-->
-                    {{form|crispy}}
-
-            <!-- Submit -->
-            <button type="submit" class="btn btn-outline-dark mt-4 w-100">
-                {% trans "Salvar" %}
-            </button>
+        {% csrf_token %}
+        {{form|crispy}}
+        <!-- Submit -->
+        <button type="submit" class="btn btn-outline-dark mt-4 w-100">
+            {% trans "Salvar" %}
+        </button>
 
     </div>
+    <script>  
+        $('#id_doacao_patrocinio_codigo').change(function(){
+            $('#id_doacao_patrocinio_codigo').val($('#id_doacao_patrocinio_codigo').val().replace(/-/g,""));
+        });
+    </script>
 {% endblock %}

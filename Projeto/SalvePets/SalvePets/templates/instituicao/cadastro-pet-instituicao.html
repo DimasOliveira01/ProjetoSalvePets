@@ -72,12 +72,13 @@
                 <label><b>{% trans "Foto" %}</b>: *</label><br>
             {% endif %}
             {% if pet.id != null %}
-                <input type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}">
+                <input type="file" class="form-control" name="foto" id="foto" accept="image/*" value="{{ pet.foto }}">
             {% else %}
-                <input required="required" type="file" class="form-control" name="foto" accept="image/*" value="{{ pet.foto }}" >
+                <input required="required" type="file" class="form-control" name="foto" id="foto" accept="image/*" value="{{ pet.foto }}" >
             {% endif %}
         </div>
         <br>
+        <div id="tamanhoImagem"></div>
 
         <!--Ativo-->
         <div class="form-row field-ativo">
@@ -202,9 +203,9 @@
         <!-- Porte -->
         <div class="form-group">
             <label><b>{% trans "Porte" %}</b>: *</label><br>
-            <button id="btn-pequeno-porte" class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">Pequeno porte</button>
-            <button id="btn-medio-porte" class="btn btn-primary active" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">Médio porte</button>
-            <button id="btn-grande-porte" class="btn btn-primary" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">Grande porte</button><br><br>
+            <button id="btn-pequeno-porte" class="btn btn-primary {% if pet.porte >= 40 and pet.porte < 67 %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('pequeno')" type="button">{% trans "Pequeno porte" %}</button>
+            <button id="btn-medio-porte" class="btn btn-primary {% if pet.porte >= 67 and pet.porte < 94 or not pet %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('medio')" type="button">{% trans "Médio porte" %}</button>
+            <button id="btn-grande-porte" class="btn btn-primary {% if pet.porte >= 94 and pet.porte <= 120 %}active{% endif %}" style="color:black; font-size:70%" onclick="SetSize('grande')" type="button">{% trans "Grande porte" %}</button><br><br>
 
             <table class="fixed">
                 <tr>
@@ -224,7 +225,7 @@
         <br>
 
         <!-- Submit -->
-        <button type="submit" class="btn btn-outline-dark mt-4 w-100">
+        <button type="submit" onclick="check_image_null()" class="btn btn-outline-dark mt-4 w-100">
             {% if pet %}
                 {% trans "Alterar" %}
             {% else %}
