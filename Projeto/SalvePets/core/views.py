@@ -801,7 +801,11 @@ def set_pet_instituicao(request):
 @login_required(login_url='/accounts/login')
 def avaliacao_instituicao(request, id):
     inst=INSTITUICAO.objects.filter(id=id)
-    return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst[0]})
+    avaliacao_exists = AVALIACAO.objects.filter(fk_id_avaliador_id=request.user.id)
+    if not avaliacao_exists:
+        return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst[0]})
+    else:
+        return redirect('/')
 
 
 @login_required(login_url='/accounts/login')
