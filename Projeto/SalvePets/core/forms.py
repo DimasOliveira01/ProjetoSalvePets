@@ -75,7 +75,7 @@ então não é utilizada """
     receberNotificacoes = forms.BooleanField(required=False, label =
                                              _('Desejo receber notificações'),
                                              help_text=_('(Marque este campo caso deseje ser'+
-                                             'notificado sobre pets perdidos ou encontrados.)'))
+                                             ' notificado sobre pets perdidos ou encontrados.)'))
     #siteUrl = forms.URLField(initial='http://', label='URL do seu Site')
 
 

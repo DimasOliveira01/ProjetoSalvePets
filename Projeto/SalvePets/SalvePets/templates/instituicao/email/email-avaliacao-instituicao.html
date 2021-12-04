@@ -8,13 +8,13 @@
     <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:0;word-break:break-word;">
         <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:center;color:#555;">
 
-            <p><b>Olá {{us.first_name}}, você gostaria da avaliar a adoção do seu Pet?</b></p>
+            <p><b>{% trans "Olá" %} {{us.first_name}}, {% trans "você gostaria da avaliar a adoção do seu Pet?" %}</b></p>
 
             <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-light" style="text-align: left;">Nome: {{pet.nome}}</li>
-                <li class="list-group-item bg-light" style="text-align: left;">Descrição: {{pet.descricao}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Nome" %}: {{pet.nome}}</li>
+                <li class="list-group-item bg-light" style="text-align: left;">{% trans "Descrição" %}: {{pet.descricao}}</li>
             </ul>
-            <a href="https://salvepets.online/avaliacao-instituicao/{{ pet.fk_id_instituicao_id }}" class="btn btn-primary w-100 mt-auto">Clique aqui para realizar a avaliação!</a>
+            <a href="https://salvepets.online/avaliacao-instituicao/{{ pet.fk_id_instituicao_id }}" class="btn btn-primary w-100 mt-auto">{% trans "Clique aqui para realizar a avaliação!" %}</a>
             <!--{% include "order_summary.html" with items=order.items.all total_price=total_price %}
             <p style="font-size: smaller;">*Em caso de parcelamento, juros podem ser cobrados pelo seu banco.</p>-->
         </div>

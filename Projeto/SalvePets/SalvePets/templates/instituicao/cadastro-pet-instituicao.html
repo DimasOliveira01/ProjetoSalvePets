@@ -83,7 +83,7 @@
         <!--Ativo-->
         <div class="form-row field-ativo">
             <div class="checkbox-row">
-                <label class="vCheckboxLabel" for="id_ativo"><b>Ativo</b>:</label>
+                <label class="vCheckboxLabel" for="id_ativo"><b>{% trans "Ativo" %}</b>:</label>
                 {% if pet.ativo == True  %}
                     <input class="checkboxinput form-check-input" type="checkbox" name="ativo" id="id_ativo" checked>
                 {% else %}
@@ -109,7 +109,7 @@
     {% if pet %}
     <div class="form-row field-adotado">
         <div class="checkbox-row">
-            <label class="vCheckboxLabel" for="myCheck"><b>Adotado</b>:</label>
+            <label class="vCheckboxLabel" for="myCheck"><b>{% trans "Adotado" %}</b>:</label>
             {% if pet.adotado == True  %}
                 <input class="checkboxinput form-check-input" type="checkbox" name="adotado" id="myCheck" checked onclick="myFunction()">
                 <p id="text" style="display:none">

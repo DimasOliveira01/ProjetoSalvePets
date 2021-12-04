@@ -58,47 +58,47 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Raça" %}:</th>
                         <td>{{pet.raca|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Sexo" %}:</th>
                         <td>{{pet.sexo|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
                         <th class="pl-0 w-25" scope="row">Porte:</th>
                         <td>
                             {% if pet.porte >= 40 and pet.porte <= 60%}
-                                Pequeno porte
+                                {% trans "Pequeno porte" %}
                             {% elif pet.porte > 60 and pet.porte <= 100 %}
-                                Médio porte
+                                {% trans "Médio porte" %}
                             {% else %}
-                                Grande porte
+                                {% trans "Grande porte" %}
                             {% endif %}
                             
-                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                            ({% trans "aprox" %}. {{pet.porte|default_if_none:"-"}}{% trans "cm de altura" %})
                         </td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Espécie" %}:</th>
                         <td>{{pet.especie|default_if_none:"-"}}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Local da Instituição</span></h6>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">{% trans "Local da Instituição" %}</span></h6>
                 <table class="table">
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Cidade:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Cidade" %}:</th>
                         <td>{{inst.city|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Estado:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Estado" %}:</th>
                         <td>{{inst.state|default_if_none:"-"}}</td>
                     </tr>
                 </table>
             </div>
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Contatos da Instituição</span></h6>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">{% trans "Contatos da Instituição" %}</span></h6>
                 <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
                 <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
                 <div id="g-recaptcha-error"></div>
