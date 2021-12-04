@@ -799,8 +799,44 @@ def set_pet_instituicao(request):
 
 #avaliacao_instituicao
 @login_required(login_url='/accounts/login')
-def avaliacao_instituicao(request):
-    return render(request, 'instituicao/avaliacao-instituicao.html')
+def avaliacao_instituicao(request, id):
+    inst=INSTITUICAO.objects.filter(id=id)
+    return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst[0]})
+
+
+@login_required(login_url='/accounts/login')
+def enviar_avaliacao_instituicao(request, id):
+    id_inst=id
+    comentario=request.POST.get('descricao')
+    rating=int(request.POST.get('rating'))
+    user_id=request.user.id
+    print(comentario)
+    print(rating)
+    print("id do user: ", user_id)
+
+    avaliacao = AVALIACAO.objects.create(nota=rating, comentario=comentario, fk_id_avaliador_id=user_id, fk_id_instituicao_id=id_inst)
+
+    if id_inst:
+        avaliacao.fk_id_instituicao_id=id_inst
+        avaliacao.save()
+
+    if comentario:
+        avaliacao.comentario=comentario
+        avaliacao.save()
+
+    if rating:
+        avaliacao.nota=rating
+        avaliacao.save()
+
+    if user_id:
+        avaliacao.fk_id_avaliador_id=user_id
+        avaliacao.save()
+    
+    return redirect('/avaliacao-enviada/')
+
+def avaliacao_enviada(request):
+    return render(request, 'instituicao/mensagem/avaliacao-enviada.html')
+
 
 """
     user = request.user
