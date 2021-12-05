@@ -120,7 +120,7 @@ class InstituicaoForm(forms.ModelForm):
         self.helper.add_input(
             Submit(
                 "submit",
-                "Atualizar",
+                _("Atualizar"),
                 css_class="btn btn-outline-dark",
             )
         )
@@ -158,7 +158,7 @@ class AdicionarUsuarioInstituicaoForm(forms.Form):
 
 class PesquisarPetForm(forms.Form):
     """ Formulário de pesquisa de um Pet da instituição """
-    id_pet = forms.IntegerField(label='ID do pet')
+    id_pet = forms.IntegerField(label=_('ID do pet'))
 
 class AdicionarPetInstituicao(forms.ModelForm):
     """ Formulário de inclusão de pet vinculado a uma instituição """

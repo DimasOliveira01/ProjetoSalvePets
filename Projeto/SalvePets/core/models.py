@@ -54,9 +54,9 @@ class INSTITUICAO(models.Model):
     state = BRStateField("Estado")
     city = models.CharField("Cidade", max_length=250)
 
-    doacao_valor_20_link = models.CharField("R$ 20", max_length=250, null = True, blank = True)
-    doacao_valor_50_link = models.CharField("R$ 50", max_length=250, null = True, blank = True)
-    doacao_valor_100_link = models.CharField("R$ 100", max_length=250, null = True, blank = True)
+    doacao_valor_20_link = models.CharField(_("R$ 20"), max_length=250, null = True, blank = True)
+    doacao_valor_50_link = models.CharField(_("R$ 50"), max_length=250, null = True, blank = True)
+    doacao_valor_100_link = models.CharField(_("R$ 100"), max_length=250, null = True, blank = True)
 
     doacao_limpeza_link = models.CharField("URL para ajudar com limpeza", max_length=250, null = True, blank = True)
     doacao_limpeza_valor = models.DecimalField("Valor da limpeza", max_digits=6, decimal_places=2, null = True, blank = True)
@@ -70,8 +70,8 @@ class INSTITUICAO(models.Model):
     doacao_diaria_internacao_link = models.CharField("URL para ajudar com diária de internação", max_length=250, null = True, blank = True)
     doacao_diaria_internacao_valor = models.DecimalField("Valor da diária de internação", max_digits=6, decimal_places=2, null = True, blank = True)
     
-    doacao_patrocinio_codigo = models.CharField("Código do patrocínio", max_length=250, null = True, blank = True)
-    doacao_patrocinio_valor = models.DecimalField("Valor do patrocínio", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_patrocinio_codigo = models.CharField(_("Código do patrocínio"), max_length=250, null = True, blank = True)
+    doacao_patrocinio_valor = models.DecimalField(_("Valor do patrocínio"), max_digits=6, decimal_places=2, null = True, blank = True)
 
 
 class AVALIACAO(models.Model):
@@ -156,7 +156,7 @@ class PATROCINIO(models.Model):
     publico = models.BooleanField(default=True, blank=False, null= False)
     pago = models.BooleanField(default=False, blank=False, null= False)
 
-    doacao_tipo = models.CharField("Tipo de doação", max_length=50, null=False, default = "doacao")
+    doacao_tipo = models.CharField(_("Tipo de doação"), max_length=50, null=False, default = "doacao")
 
     class Meta:
         ordering = ['data']
