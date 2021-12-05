@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-05 14:54-0300\n"
+"POT-Creation-Date: 2021-12-05 18:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,7 +354,7 @@ msgstr "Image"
 
 #: .\SalvePets\templates\cadastroPet.html:88
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:145
-#: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:14
+#: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:13
 #: .\SalvePets\templates\instituicao\email\email-solicitacao-cadastro-instituicao.html:13
 #: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:13
 msgid "Nome"
@@ -519,8 +519,7 @@ msgstr "Total Price"
 #: .\SalvePets\templates\instituicao\adicionar-usuario-instituicao.html:52
 #: .\SalvePets\templates\instituicao\listar-usuario-instituicao.html:88
 #: .\SalvePets\templates\instituicao\modificar-cadastro-instituicao.html:46
-#: .\SalvePets\templates\modificar-cadastro.html:17 .\core\forms.py:128
-#: .\core\forms.py:208
+#: .\SalvePets\templates\modificar-cadastro.html:17 .\core\forms.py:123
 msgid "Atualizar"
 msgstr "Update"
 
@@ -1289,11 +1288,11 @@ msgstr ""
 "module."
 
 #: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:53
-msgid "Avalie a Instituição"
+msgid "Avalie a instituição"
 msgstr "Evaluate the Institution"
 
 #: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:65
-msgid "Conte sobre a Instituição para outras pessoas"
+msgid "Conte sobre a instituição para outras pessoas"
 msgstr "Tell others about the institution"
 
 #: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:71
@@ -1351,10 +1350,6 @@ msgstr "Do not know what to do? See how the donation system works at"
 msgid "nosso FAQ"
 msgstr "our FAQ"
 
-#: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:52
-msgid "Salvar"
-msgstr "Save"
-
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:46
 msgid "Lista de patrocínios recebidos"
 msgstr "List of sponsorships received"
@@ -1402,16 +1397,16 @@ msgid "Pago?"
 msgstr "Paid?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:11
-msgid "você gostaria de avaliar a adoção do seu Pet?"
-msgstr "would you like to evaluate your pet's adoption?"
+msgid "você gostaria de avaliar a antiga instituição do seu pet?"
+msgstr "would you like to rate your pet's former institution?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:15
 #: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:14
 msgid "Descrição"
 msgstr "Description"
 
-#: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:17
-msgid "Clique aqui para realizar a avaliação!"
+#: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:18
+msgid "Clique aqui para realizar a avaliação."
 msgstr "Click here to take the assessment!"
 
 #: .\SalvePets\templates\instituicao\email\email-cadastro-usuario-instituicao.html:11
@@ -1582,7 +1577,7 @@ msgstr ""
 msgid "Agradecemos o contato!"
 msgstr "We appreciate the contact!"
 
-#: .\SalvePets\templates\instituicao\modificar-cadastro-instituicao.html:50
+#: .\SalvePets\templates\instituicao\modificar-cadastro-instituicao.html:51
 msgid ""
 "Caro usuário, é necessário realizar o cadastro dos dados pessoais para "
 "realizar o cadastro de uma Instituição"
@@ -1590,7 +1585,7 @@ msgstr ""
 "Dear User, it is necessary to register personal data to register an "
 "Institution"
 
-#: .\SalvePets\templates\instituicao\modificar-cadastro-instituicao.html:51
+#: .\SalvePets\templates\instituicao\modificar-cadastro-instituicao.html:52
 msgid "Clique aqui para completar o cadastro."
 msgstr "Click here to complete the registration."
 
@@ -2049,32 +2044,48 @@ msgstr "Name"
 msgid "Sobrenome"
 msgstr "Last Name"
 
-#: .\core\forms.py:52 .\core\forms.py:73
+#: .\core\forms.py:49 .\core\forms.py:68
 msgid "Data de Nascimento"
 msgstr "Birth date"
 
-#: .\core\forms.py:53
+#: .\core\forms.py:50
 msgid "Número de Celular"
 msgstr "Phone Number"
 
-#: .\core\forms.py:74
+#: .\core\forms.py:69
 msgid "Número de Telefone"
 msgstr "Phone Number"
 
-#: .\core\forms.py:76
+#: .\core\forms.py:71
 msgid "Desejo receber notificações"
 msgstr "Receive Notifications"
 
-#: .\core\forms.py:77
+#: .\core\forms.py:72
 msgid ""
 "(Marque este campo caso deseje ser notificado sobre pets perdidos ou "
 "encontrados.)"
 msgstr ""
 "(Check this field if you want to be notified about lost pets or found.)"
 
-#: .\core\forms.py:166
+#: .\core\forms.py:161
 msgid "ID do pet"
 msgstr "Pet ID"
+
+#: .\core\forms.py:203
+msgid "Salvar"
+msgstr "Save"
+
+#: .\core\forms.py:209
+msgid "Doação simples"
+msgstr "Simple donation"
+
+#: .\core\forms.py:218
+msgid "Ajuda com custos"
+msgstr "Help with costs"
+
+#: .\core\forms.py:241
+msgid "Patrocínio recorrente"
+msgstr "Recurring sponsorship"
 
 #: .\core\models.py:17
 msgid "Usuário comum"
@@ -2105,32 +2116,32 @@ msgid "R$ 100"
 msgstr "BRL 100"
 
 #: .\core\models.py:61
-msgid "Link para ajudar com limpeza"
-msgstr "Link to help with cleaning"
+msgid "URL para ajudar com limpeza"
+msgstr "URL to help with cleaning"
 
 #: .\core\models.py:62
 msgid "Valor da limpeza"
 msgstr "Cleaning value"
 
 #: .\core\models.py:64
-msgid "Link para ajudar com alimentação"
-msgstr "Link to help with food"
+msgid "URL para ajudar com alimentação"
+msgstr "URL to help with feeding"
 
 #: .\core\models.py:65
 msgid "Valor da alimentação"
 msgstr "Food Value"
 
 #: .\core\models.py:67
-msgid "Link para ajudar com medicamentos"
-msgstr "Link to help with medications"
+msgid "URL para ajudar com medicamentos"
+msgstr "URL to help with medications"
 
 #: .\core\models.py:68
 msgid "Valor dos medicamentos"
-msgstr "Value of medicines"
+msgstr "Value of medications"
 
 #: .\core\models.py:70
-msgid "Link para ajudar com diária de internação"
-msgstr "Link to help with daily hospitalization"
+msgid "URL para ajudar com diária de internação"
+msgstr "URL to help with daily hospitalization"
 
 #: .\core\models.py:71
 msgid "Valor da diária de internação"
@@ -2165,36 +2176,34 @@ msgid "Site"
 msgstr "Website"
 
 #: .\core\models.py:159
-#, fuzzy
-#| msgid "Cadastro de doação"
 msgid "Tipo de doação"
-msgstr "Donation registration"
+msgstr "Type of donation"
 
-#: .\core\views.py:417
+#: .\core\views.py:410
 msgid "Encontramos um pet semelhante ao seu"
 msgstr "We found a pet similar to yours"
 
-#: .\core\views.py:431
+#: .\core\views.py:424
 msgid "Novos pets parecidos com o seu foram encontrados"
 msgstr "New pets similar to yours have been found"
 
-#: .\core\views.py:495 .\core\views.py:517
+#: .\core\views.py:488 .\core\views.py:510
 msgid "Solicitação de cadastro de Instituição!"
 msgstr "Institution registration request!"
 
-#: .\core\views.py:587
+#: .\core\views.py:565
 msgid "Solicitação de cadastro na Instituição: "
 msgstr "Request for registration at the institution: "
 
-#: .\core\views.py:605
+#: .\core\views.py:583
 msgid "Por favor selecione um usuário existente!"
 msgstr "Please select an existing user!"
 
-#: .\core\views.py:785
-msgid "Opine sobre a adoção do seu Pet"
-msgstr "Give your opinion about your pet's adoption"
+#: .\core\views.py:763
+msgid "Opine sobre a instituição do seu pet"
+msgstr "Give your opinion about your pet's institution"
 
-#: .\core\views.py:1031
+#: .\core\views.py:936
 msgid "Solicitação de adoção de Pet"
 msgstr "Pet Adoption Request"
 
@@ -2220,11 +2229,6 @@ msgstr "Order received!"
 
 #~ msgid "Marrom"
 #~ msgstr "Brown"
-
-#, fuzzy
-#~| msgid "Ajudar o pet"
-#~ msgid "Ajuda com custos"
-#~ msgstr "Help the pet"
 
 #, fuzzy
 #~| msgid "Instituição"
