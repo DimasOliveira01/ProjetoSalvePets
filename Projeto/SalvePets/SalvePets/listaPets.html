@@ -57,10 +57,10 @@
 
 {% for p in pet %}
     {% if p.encontradoPerdido == 'encontrado' %}
-    <h1 class="text-center">Pets Encontrados</h1>
+    <h1 class="text-center">{% trans "Pets Encontrados" %}</h1>
         <!--{{ break }}-->
     {% elif p.encontradoPerdido == 'perdido' %}
-    <h1 class="text-center">Pets Perdidos</h1>
+    <h1 class="text-center">{% trans "Pets Perdidos" %}</h1>
         <!--{{ break }}-->
     {% endif %}
 {{ break }}
