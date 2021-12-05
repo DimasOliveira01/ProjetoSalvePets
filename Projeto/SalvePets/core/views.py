@@ -943,6 +943,8 @@ def solicitar_adocao(request, id):
     # Envio do e-mail
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
+    return render(request, "instituicao/mensagem/solicitar-adocao.html")
+
 def lista_patrocinar(request):
     """ Função que apresenta a tela de lista de pets a serem patrocinados"""
     usuario_lista = []
