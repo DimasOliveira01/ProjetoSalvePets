@@ -6,9 +6,10 @@
 
 {% block conteudo %}
     <div class="container mt-4">
-        <h1>{% trans "Verifique seu e-mail" %}</h1>
+        <h3>{% trans "Verifique seu e-mail" %}</h3>
 
         <p>{% blocktrans %}Você recebeu um e-mail de confirmação. Clique no link enviado para continuar seu cadastro.{% endblocktrans %}</p>
         <p>{% blocktrans %}Caso não tenha recebido o e-mail, verifique sua caixa de spam e adicione <b>atendimentosalvepets@gmail.com</b> na sua lista de contatos.{% endblocktrans %}</p>
+        <a href="/accounts/login/" class="btn btn-primary" style="color:black; font-size:70%" type="button" >Entrar</a>
     </div>
 {% endblock %}

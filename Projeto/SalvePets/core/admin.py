@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PATROCINIO, Pet, ADOCAO,USUARIO, User
+from .models import INSTITUICAO, PATROCINIO, Pet, ADOCAO,USUARIO, User
 from leaflet.admin import LeafletGeoAdmin
 
 @admin.register(Pet)
@@ -20,3 +20,7 @@ class UsuarioAdmin(admin.ModelAdmin):
     list_display=['cpfcnpj', 'is_admin_instituicao']
     list_filter = ('cpfcnpj',)
     search_fields = ('cpfcnpj',)
+
+@admin.register(INSTITUICAO)
+class InstituicaoAdmin(admin.ModelAdmin):
+    list_display = ['nome_instituicao', 'razao_social','cnpj','telefone','email', 'address']

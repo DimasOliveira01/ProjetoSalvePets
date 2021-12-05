@@ -47,8 +47,10 @@
                 </button>-->
             </form>
     {% else %}
-    <h3 class="row h-100 justify-content-center align-items-center">{% trans "Caro usuário, é necessário realizar o cadastro dos dados pessoais para realizar o cadastro de uma Instituição" %}</h3>
-    <a href="../completar-cadastro/" class="row h-100 justify-content-center align-items-center">{% trans "Clique aqui para completar o cadastro." %}</a>
+    <div class="container mt-4">
+        <h3 class="row h-100 justify-content-center align-items-center">{% trans "Caro usuário, é necessário realizar o cadastro dos dados pessoais para realizar o cadastro de uma Instituição" %}</h3>
+        <a href="../completar-cadastro/" class="btn btn-primary row justify-content-center w-100 mt-3" style="color:black; font-size:70%">{% trans "Clique aqui para completar o cadastro." %}</a>
+    </div>
     {% endif %}
 
     <script src="{% static 'core/js/jquery-3.6.0.min.js' %}"></script>

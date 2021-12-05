@@ -46,11 +46,7 @@
         <div class="row">
         <form method="POST">
         {% csrf_token %}
-        {{form|crispy}}
-        <!-- Submit -->
-        <button type="submit" class="btn btn-outline-dark mt-4 w-100">
-            {% trans "Salvar" %}
-        </button>
+        {% crispy form %}
 
     </div>
     <script>  
@@ -58,4 +54,5 @@
             $('#id_doacao_patrocinio_codigo').val($('#id_doacao_patrocinio_codigo').val().replace(/-/g,""));
         });
     </script>
+</div>
 {% endblock %}
