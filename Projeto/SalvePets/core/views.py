@@ -306,13 +306,6 @@ def completar_cadastro(request):
     })
 
 
-"""
-def sobre(request):
-    return render(request, 'sobre.html')
-def em_construcao(request):
-    return render(request, 'emconstrucao.html')
-"""
-
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
     desc = cursor.description
@@ -536,21 +529,6 @@ def completar_cadastro_instituicao(request):
         'form': form, 'usuario':usuario
     })
 
-''' print('cpf enviado no post = ', cpf)
-    id_instituicao = USUARIO.objects.filter(id=usuario.id)
-    print ('id da instituicao do usuario = ', id_instituicao[0].fk_instituicao_id)
-    res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
-    print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
-    len(res_filtro)
-    print('tamanhao do vetor: ', len(res_filtro))
-    #USUARIO.objects.filter(request.POST.get('cpf')==teste)
-    INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
-'''
-
-'''
-pet=Pet.objects.filter(encontradoPerdido='Encontrado', ativo=True)
-instituicao=INSTITUICAO.objects.filter(encontradoPerdido='Encontrado', ativo=True)
-'''
 
 def teste(request):
     """ tela de teste """
@@ -780,7 +758,7 @@ def set_pet_instituicao(request):
             pet.save()
             
             #envio de email de avaliação da instituição
-            assunto =_("Opine sobre a adoção do seu Pet")
+            assunto =_("Opine sobre a instituição do seu pet")
             remetente = os.environ.get("EMAIL_HOST_USER")
             destinatario=(email)
             html = loader.render_to_string('instituicao/email/email-avaliacao-instituicao.html',{'us': us[0], 'pet': pet})
@@ -800,11 +778,14 @@ def set_pet_instituicao(request):
 #avaliacao_instituicao
 @login_required(login_url='/accounts/login')
 def avaliacao_instituicao(request, id):
-    inst=INSTITUICAO.objects.filter(id=id)
-    avaliacao_exists = AVALIACAO.objects.filter(fk_id_avaliador_id=request.user.id)
-    if not avaliacao_exists:
-        return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst[0]})
-    else:
+    try:
+        inst=INSTITUICAO.objects.get(id=id)
+        avaliacao_exists = AVALIACAO.objects.filter(fk_id_avaliador_id=request.user.id, fk_id_instituicao_id = inst.id)
+        if not avaliacao_exists:
+            return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst})
+        else:
+            return redirect('/avaliacao-enviada/')
+    except:
         return redirect('/')
 
 
@@ -840,25 +821,6 @@ def enviar_avaliacao_instituicao(request, id):
 
 def avaliacao_enviada(request):
     return render(request, 'instituicao/mensagem/avaliacao-enviada.html')
-
-
-"""
-    user = request.user
-    usuario = request.user.usuario
-    pet = Pet.objects.get(id=id)
-    instituicao=INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
-    email = instituicao[0].email
-    assunto = _("Solicitação de adoção de Pet")
-    remetente = os.environ.get("EMAIL_HOST_USER")
-    destinatario = str(email)
-    html = loader.render_to_string('instituicao/email/email-solicitar-adocao.html',
-                                   {'user': user, 'usuario': usuario, 'pet': pet})
-    plain_message = strip_tags(html)
-
-    # Envio do e-mail
-    mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
-"""
-
 
 
 @login_required(login_url='/accounts/login')
@@ -927,44 +889,6 @@ def lista_pets_instituicao(request):
     return render(request, 'instituicao/acesso-proibido-lista-pet.html')
 
 
-
-"""
-def adicionar_usuario_instituicao(request):
-    if request.user.usuario.is_admin_instituicao is True:
-        form = AdicionarUsuarioInstituicaoForm()
-        if request.method == "POST":
-            #obtêm o dado do usuário logado
-            usuario = request.user.usuario
-            #obtêm o dado enviado no POST
-            cpf=request.POST.get('cpf')
-            #Obtêm o objeto usuario que tem o mesmo cpf do POST
-            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
-
-            #print(user[0].email)
-            if len(res_filtro)>0:
-                user=User.objects.filter(id=res_filtro[0].user_id)
-                id_instituicao = USUARIO.objects.filter(id=usuario.id)
-                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
-                #form = AdicionarUsuarioInstituicaoForm(request.POST)
-                #print (request.POST.get('cpf'))
-                
-                return render(request, 'instituicao/mensagem/confirmacao-cadastro.html')
-            #else:
-            messages.error(request, 'Por favor selecione um usuário existente!')
-        id_user=request.user.id
-        usuario=USUARIO.objects.get(id=id_user)
-        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
-            'form': form, 'usuario': usuario
-        })
-    #else:
-    user=request.user.usuario
-    return render(request, 'instituicao/acesso-proibido.html',{'user':user})
-"""
-
-
-
-
-
 def lista_pets_adocao(request):
     """ Tela que exibe a lista de pets a serem adotados """
     pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, adotado=False)
@@ -997,27 +921,8 @@ def administrativo_instituicao(request):
     id_user=request.user.id
     usuario=USUARIO.objects.get(id=id_user)
     return render(request, 'instituicao/administrativoInstituicao.html',{'usuario':usuario})
-'''
-@login_required
-def solicitar_adocao(request):
-    user = request.user
-    form_usuario = UserForm()
-    if request.method == 'POST':
-        form = SolicitarAdocaoForm(request.POST)
-        if form.is_valid():
-            subject = "Solicitação de adoção de Pet"
-            body = {'nome': form.cleaned_data['nome'], 'numero_celular':
-            form.cleaned_data['numero_celular'], 'email': form.cleaned_data['email'],}
-            message = '\n'.join(body.values())
-            try:
-                send_mail(subject, message, settings.EMAIL_HOST_USER,
-                ['COLOCAR EMAIL DA INSTITUICAO'], fail_silently=False)
-            except BadHeaderError:
-                return HttpResponse('Invalid header found')
-            return render(request, "index.html")
-    form = SolicitarAdocaoForm()
-    return render(request, 'instituicao/solicitar-adocao.html', {'form':form})
-'''
+
+
 @login_required
 def solicitar_adocao(request, id):
     """ Função que apresenta a tela de pedido de adoção """
@@ -1036,88 +941,10 @@ def solicitar_adocao(request, id):
     # Envio do e-mail
     mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
-    '''
-    user = request.user
-    pet=Pet.objects.get(id=id)
-    instituicao= INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
-    subject = "Solicitação de adoção de Pet"
-    body = {'Código do Pet': id, 'nome': user.first_name, 'numero_celular':
-    user.usuario.telefone, 'email': user.email}
-    message = '\n'.join(body.values())
-    try:
-        send_mail(subject, message, settings.EMAIL_HOST_USER, [instituicao[0].email],
-        fail_silently=False)
-    except BadHeaderError:
-        return HttpResponse('Invalid header found')
-    '''
-    return render(request, "instituicao/mensagem/solicitar-adocao.html")
-
-'''def deletar_pet(request, id):
-    pet=Pet.objects.get(id=id)
-    if pet.user == request.user:
-        pet.delete()
-    return redirect('/lista-pet-usuario')'''
-
-'''@transaction.atomic
-def modificar_cadastro(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST, instance=request.user)
-        usuario_form = UsuarioForm(request.POST, instance=request.user.usuario)
-        if usuario_form.is_valid() and user_form.is_valid():
-            user_form.save()
-            usuario_form.save()   
-            return render(request, 'index.html')
-        else:
-            messages.error(request, ('Please correct the error below.'))
-    else:
-            usuario_form = UsuarioForm(instance=request.user.usuario)
-            user_form = UserForm(instance=request.user)
-    return render(request, 'modificar-cadastro.html', {
-        'usuario_form': usuario_form,
-        'user_form': user_form,
-    })'''
-
-"""@login_required
-@transaction.atomic
-def adicionar_usuario_instituicao(request):
-    if (request.user.usuario.fk_instituicao_id != None):
-        form = AdicionarUsuarioInstituicaoForm()
-        if request.method == "POST":
-            #obtêm o dado do usuário logado
-            usuario = request.user.usuario
-            #obtêm o dado enviado no POST
-            cpf=request.POST.get('cpf')
-            #Obtêm o objeto usuario que tem o mesmo cpf do POST
-            res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
-            if len(res_filtro)>0:
-                id_instituicao = USUARIO.objects.filter(id=usuario.id)
-                USUARIO.objects.filter(cpfcnpj=cpf).update(fk_instituicao_id=id_instituicao[0].fk_instituicao_id)
-                #form = AdicionarUsuarioInstituicaoForm(request.POST)
-                #print (request.POST.get('cpf'))
-                return render(request, 'index.html')
-            else:
-                messages.error(request, 'Por favor selecione um usuário existente!')
-        return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
-            'form': form
-        })
-    else:
-        #print('ola else')
-        return render(request, 'instituicao/acesso-proibido.html')"""
-
-''' print('cpf enviado no post = ', cpf)
-    id_instituicao = USUARIO.objects.filter(id=usuario.id)
-    print ('id da instituicao do usuario = ', id_instituicao[0].fk_instituicao_id)
-    res_filtro = USUARIO.objects.filter(cpfcnpj=cpf)
-    print('id do usuário que possui o mesmo cpf do post: ', res_filtro[0].id)
-    len(res_filtro)
-    print('tamanhao do vetor: ', len(res_filtro))
-    #USUARIO.objects.filter(request.POST.get('cpf')==teste)
-    INSTITUICAO.objects.get(id=usuario[i].fk_instituicao_id)
-'''
-
 def lista_patrocinar(request):
     """ Função que apresenta a tela de lista de pets a serem patrocinados"""
     usuario_lista = []
+    instituicao = False
     if request.user.is_authenticated:
         usuario = USUARIO.objects.get(user_id = request.user.id)
     else:
@@ -1132,8 +959,26 @@ def lista_patrocinar(request):
         for p in pet:
             usuario_lista.append(USUARIO.objects.get(user_id=p.user_id))
             if (usuario_lista[i].fk_instituicao_id):
-                instituicao = INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id)                            
-                instituicoes.append(instituicao)
+                instituicao = INSTITUICAO.objects.get(id=usuario_lista[i].fk_instituicao_id)
+                if (
+                    (instituicao.doacao_valor_20_link and
+                    instituicao.doacao_valor_50_link and
+                    instituicao.doacao_valor_100_link) or
+                    (instituicao.doacao_limpeza_link and
+                    instituicao.doacao_limpeza_valor and
+
+                    instituicao.doacao_alimentacao_link and
+                    instituicao.doacao_alimentacao_valor and
+
+                    instituicao.doacao_medicamentos_link and
+                    instituicao.doacao_medicamentos_valor and
+
+                    instituicao.doacao_diaria_internacao_link and
+                    instituicao.doacao_diaria_internacao_valor) or
+                    (instituicao.doacao_patrocinio_codigo and
+                    instituicao.doacao_patrocinio_valor)
+                ):                          
+                    instituicoes.append(instituicao)
             i = i + 1
         lista_patrocinio = zip(pet , instituicoes)
     except Exception:

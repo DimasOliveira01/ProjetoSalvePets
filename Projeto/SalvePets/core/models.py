@@ -58,16 +58,16 @@ class INSTITUICAO(models.Model):
     doacao_valor_50_link = models.CharField("R$ 50", max_length=250, null = True, blank = True)
     doacao_valor_100_link = models.CharField("R$ 100", max_length=250, null = True, blank = True)
 
-    doacao_limpeza_link = models.CharField("Link para ajudar com limpeza", max_length=250, null = True, blank = True)
+    doacao_limpeza_link = models.CharField("URL para ajudar com limpeza", max_length=250, null = True, blank = True)
     doacao_limpeza_valor = models.DecimalField("Valor da limpeza", max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_alimentacao_link = models.CharField("Link para ajudar com alimentação", max_length=250, null = True, blank = True)
+    doacao_alimentacao_link = models.CharField("URL para ajudar com alimentação", max_length=250, null = True, blank = True)
     doacao_alimentacao_valor = models.DecimalField("Valor da alimentação", max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_medicamentos_link = models.CharField("Link para ajudar com medicamentos", max_length=250, null = True, blank = True)
+    doacao_medicamentos_link = models.CharField("URL para ajudar com medicamentos", max_length=250, null = True, blank = True)
     doacao_medicamentos_valor = models.DecimalField("Valor dos medicamentos", max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_diaria_internacao_link = models.CharField("Link para ajudar com diária de internação", max_length=250, null = True, blank = True)
+    doacao_diaria_internacao_link = models.CharField("URL para ajudar com diária de internação", max_length=250, null = True, blank = True)
     doacao_diaria_internacao_valor = models.DecimalField("Valor da diária de internação", max_digits=6, decimal_places=2, null = True, blank = True)
     
     doacao_patrocinio_codigo = models.CharField("Código do patrocínio", max_length=250, null = True, blank = True)

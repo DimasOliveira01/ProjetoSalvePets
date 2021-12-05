@@ -97,7 +97,7 @@
             </section>
         {% endif %}
         <h5>{{pet.nome}}</h5> 
-        <p class="pt-1">{{pet.descricao}}</p>
+        <p class="pt-1">{{pet.descricao|default_if_none:"-"}}</p>
         <div class="table-responsive">
             <table class="table">
                 <tbody>
