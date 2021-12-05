@@ -200,13 +200,13 @@ class DoacaoCadastroForm(forms.ModelForm):
         self.helper.add_input(
             Submit(
                 "submit",
-                "Salvar",
+                _("Salvar"),
                 css_class="btn btn-outline-dark mt-4 w-100",
             )
         )
         self.helper.layout = Layout(
             Fieldset(
-                "Doação simples",
+                _("Doação simples"),
                 Div(
                     Field("doacao_valor_20_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
                     Field("doacao_valor_50_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
@@ -215,7 +215,7 @@ class DoacaoCadastroForm(forms.ModelForm):
                 )
             ),
             Fieldset (
-                "Ajuda com custos",
+                _("Ajuda com custos"),
                 Div(
                     Field("doacao_limpeza_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
                     Field("doacao_limpeza_valor", wrapper_class="col", css_class="mb-3", placeholder="R$ 50"),
@@ -238,7 +238,7 @@ class DoacaoCadastroForm(forms.ModelForm):
                 )
             ),
             Fieldset (
-                "Patrocínio recorrente",
+                _("Patrocínio recorrente"),
                 Div(
                     Field("doacao_patrocinio_codigo", wrapper_class="col", placeholder="E000000000000000000000000000000"),
                     Field("doacao_patrocinio_valor", wrapper_class="col", placeholder="R$ 50"),
