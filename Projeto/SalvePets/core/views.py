@@ -584,7 +584,9 @@ def adicionar_usuario_instituicao(request):
                 
                 instituicao=INSTITUICAO.objects.filter(id=id_instituicao[0].fk_instituicao_id)
                 email = user[0].email
-                msgm=("Solicitação de cadastro na Instituição: " + str(instituicao[0].nome_instituicao))
+                msgAux =_("Solicitação de cadastro na Instituição: ")
+                #msgm=("Solicitação de cadastro na Instituição: " + str(instituicao[0].nome_instituicao))
+                msgm=(msgAux + str(instituicao[0].nome_instituicao))
                 assunto = _(msgm)
                 remetente = os.environ.get("EMAIL_HOST_USER")
                 destinatario = str(email)
@@ -600,7 +602,7 @@ def adicionar_usuario_instituicao(request):
 
                 return render(request, 'instituicao/mensagem/confirmacao-cadastro.html')
             #else:
-            messages.error(request, 'Por favor selecione um usuário existente!')
+            messages.error(request, _('Por favor selecione um usuário existente!'))
         id_user=request.user.id
         usuario=USUARIO.objects.get(id=id_user)
         return render(request, 'instituicao/adicionar-usuario-instituicao.html', {
