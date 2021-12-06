@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-05 18:28-0300\n"
+"POT-Creation-Date: 2021-12-06 15:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -381,7 +381,7 @@ msgstr "Date of location or loss of the pet"
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:159
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:127
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:83
-#: .\SalvePets\templates\pet.html:97 .\core\models.py:128
+#: .\SalvePets\templates\pet.html:97 .\core\models.py:119
 msgid "Espécie"
 msgstr "Species"
 
@@ -415,7 +415,7 @@ msgstr "Breed"
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:185
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:109
 #: .\SalvePets\templates\instituicao\pet-instituicao.html:65
-#: .\SalvePets\templates\pet.html:71 .\core\models.py:139
+#: .\SalvePets\templates\pet.html:71 .\core\models.py:130
 msgid "Sexo"
 msgstr "Sex"
 
@@ -444,7 +444,7 @@ msgstr "Predominant color"
 #: .\SalvePets\templates\cadastroPet.html:168
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:205
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:113
-#: .\SalvePets\templates\pet.html:79 .\core\models.py:131
+#: .\SalvePets\templates\pet.html:79 .\core\models.py:122
 msgid "Porte"
 msgstr "Pet Size"
 
@@ -1291,11 +1291,11 @@ msgstr ""
 msgid "Avalie a instituição"
 msgstr "Evaluate the Institution"
 
-#: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:65
+#: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:75
 msgid "Conte sobre a instituição para outras pessoas"
 msgstr "Tell others about the institution"
 
-#: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:71
+#: .\SalvePets\templates\instituicao\avaliacao-instituicao.html:81
 #: .\SalvePets\templates\instituicao\formInstituicao.html:20
 msgid "Enviar"
 msgstr "Send"
@@ -2155,27 +2155,27 @@ msgstr "Sponsorship Code"
 msgid "Valor do patrocínio"
 msgstr "Sponsorship amount"
 
-#: .\core\models.py:92
+#: .\core\models.py:83
 msgid "Tipo de usuário"
 msgstr "User Type"
 
-#: .\core\models.py:95
+#: .\core\models.py:86
 msgid "Data de nascimento"
 msgstr "Birth date"
 
-#: .\core\models.py:97
+#: .\core\models.py:88
 msgid "Número de celular (somente números)"
 msgstr "Phone Number (Only numbers)"
 
-#: .\core\models.py:101
+#: .\core\models.py:92
 msgid "Receber notificações"
 msgstr "Receive Notifications"
 
-#: .\core\models.py:103
+#: .\core\models.py:94
 msgid "Site"
 msgstr "Website"
 
-#: .\core\models.py:159
+#: .\core\models.py:162
 msgid "Tipo de doação"
 msgstr "Type of donation"
 
@@ -2203,7 +2203,13 @@ msgstr "Please select an existing user!"
 msgid "Opine sobre a instituição do seu pet"
 msgstr "Give your opinion about your pet's institution"
 
-#: .\core\views.py:936
+#: .\core\views.py:803
+msgid ""
+"Não é possível realizar duas vezes a avaliação da Instituição para o mesmo "
+"Pet!"
+msgstr "It is not possible to perform the Institution's evaluation twice for the same Pet!"
+
+#: .\core\views.py:943
 msgid "Solicitação de adoção de Pet"
 msgstr "Pet Adoption Request"
 

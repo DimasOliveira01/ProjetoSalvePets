@@ -800,7 +800,7 @@ def enviar_avaliacao_instituicao(request, id, id_pet):
     print("id do user: ", user_id)
     aval=AVALIACAO.objects.filter(fk_id_avaliador_id=user_id, fk_id_instituicao_id=id_inst, fk_id_pet_id=id_pet)
     if(aval):
-        messages.error(request, 'Nâo é possível realizar duas vezes a avaliação da Instituição para o mesmo Pet!')
+        messages.error(request, _('Não é possível realizar duas vezes a avaliação da Instituição para o mesmo Pet!'))
         return render(request,  'instituicao/avaliacao-instituicao.html',{'inst':inst, 'pet_id':pet_id})
     else:
         avaliacao = AVALIACAO.objects.create(nota=rating, comentario=comentario, fk_id_avaliador_id=user_id, 
