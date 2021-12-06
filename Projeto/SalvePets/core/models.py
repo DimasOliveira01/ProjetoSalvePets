@@ -74,15 +74,6 @@ class INSTITUICAO(models.Model):
     doacao_patrocinio_valor = models.DecimalField(_("Valor do patrocínio"), max_digits=6, decimal_places=2, null = True, blank = True)
 
 
-class AVALIACAO(models.Model):
-    """ Modelo de dados de avaliação """
-    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
-    fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
-    nota = models.IntegerField(blank=True, null=True)
-    #nota_geral = models.IntegerField(blank=True, null=True)
-    comentario = models.TextField(blank=True, null=True)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    #dataModificacao = models.DateTimeField(auto_now=True)
 
 
 class USUARIO(models.Model):
@@ -143,6 +134,18 @@ class Pet(models.Model):
 
     def __str__(self):
         return f'{self.nome}'
+
+
+class AVALIACAO(models.Model):
+    """ Modelo de dados de avaliação """
+    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
+    fk_id_pet = models.ForeignKey(Pet, on_delete=models.RESTRICT, null=True)
+    nota = models.IntegerField(blank=True, null=True)
+    #nota_geral = models.IntegerField(blank=True, null=True)
+    comentario = models.TextField(blank=True, null=True)
+    dataCriacao = models.DateTimeField(auto_now_add=True)
+    #dataModificacao = models.DateTimeField(auto_now=True)
 
 class PATROCINIO(models.Model):
     """ Modelo de dados de patrocínio """

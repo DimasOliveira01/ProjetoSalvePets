@@ -779,47 +779,54 @@ def set_pet_instituicao(request):
 
 #avaliacao_instituicao
 @login_required(login_url='/accounts/login')
-def avaliacao_instituicao(request, id):
-    try:
-        inst=INSTITUICAO.objects.get(id=id)
-        avaliacao_exists = AVALIACAO.objects.filter(fk_id_avaliador_id=request.user.id, fk_id_instituicao_id = inst.id)
-        if not avaliacao_exists:
-            return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst})
-        else:
-            return redirect('/avaliacao-enviada/')
-    except:
-        return redirect('/')
-
+def avaliacao_instituicao(request, id, id_pet):
+    inst=INSTITUICAO.objects.get(id=id)
+    pet_id=Pet.objects.get(id=id_pet)
+    return render(request, 'instituicao/avaliacao-instituicao.html',{'inst':inst, 'pet_id':pet_id})
 
 @login_required(login_url='/accounts/login')
-def enviar_avaliacao_instituicao(request, id):
+def enviar_avaliacao_instituicao(request, id, id_pet):
     id_inst=id
     comentario=request.POST.get('descricao')
     rating=int(request.POST.get('rating'))
     user_id=request.user.id
-    print(comentario)
-    print(rating)
+
+    inst=INSTITUICAO.objects.get(id=id)
+    pet_id=Pet.objects.get(id=id_pet)
+    print("Comentário: ",comentario)
+    print("Rating: ",rating)
+    print("id do pet: ",id_pet)
+    print("id instituicao: ",id_inst)
     print("id do user: ", user_id)
+    aval=AVALIACAO.objects.filter(fk_id_avaliador_id=user_id, fk_id_instituicao_id=id_inst, fk_id_pet_id=id_pet)
+    if(aval):
+        messages.error(request, 'Nâo é possível realizar duas vezes a avaliação da Instituição para o mesmo Pet!')
+        return render(request,  'instituicao/avaliacao-instituicao.html',{'inst':inst, 'pet_id':pet_id})
+    else:
+        avaliacao = AVALIACAO.objects.create(nota=rating, comentario=comentario, fk_id_avaliador_id=user_id, 
+                                            fk_id_instituicao_id=id_inst, fk_id_pet_id=id_pet)
 
-    avaliacao = AVALIACAO.objects.create(nota=rating, comentario=comentario, fk_id_avaliador_id=user_id, fk_id_instituicao_id=id_inst)
+        if id_inst:
+            avaliacao.fk_id_instituicao_id=id_inst
+            avaliacao.save()
 
-    if id_inst:
-        avaliacao.fk_id_instituicao_id=id_inst
-        avaliacao.save()
+        if comentario:
+            avaliacao.comentario=comentario
+            avaliacao.save()
 
-    if comentario:
-        avaliacao.comentario=comentario
-        avaliacao.save()
+        if rating:
+            avaliacao.nota=rating
+            avaliacao.save()
 
-    if rating:
-        avaliacao.nota=rating
-        avaliacao.save()
-
-    if user_id:
-        avaliacao.fk_id_avaliador_id=user_id
-        avaliacao.save()
-    
-    return redirect('/avaliacao-enviada/')
+        if user_id:
+            avaliacao.fk_id_avaliador_id=user_id
+            avaliacao.save()
+        
+        if id_pet:
+            avaliacao.fk_id_pet_id=id_pet
+            avaliacao.save()
+        
+        return redirect('/avaliacao-enviada/')
 
 def avaliacao_enviada(request):
     return render(request, 'instituicao/mensagem/avaliacao-enviada.html')

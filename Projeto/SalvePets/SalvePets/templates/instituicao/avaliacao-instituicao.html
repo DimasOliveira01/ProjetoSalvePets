@@ -59,7 +59,17 @@
             <li class="rating-item" data-rate="5"></li>
             </ul>
             
+        <!--Mensagem caso o usuário informe um usuário inexistente-->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
             <input type="hidden" name="rating" id="rating" value="2">
+            <input type="hidden" name="id_pet" id="id_pet" value={{pet_id.id}}>
 
             <div class="form-group">
                 <label><b>{% trans "Conte sobre a instituição para outras pessoas" %}</b>:</label>
