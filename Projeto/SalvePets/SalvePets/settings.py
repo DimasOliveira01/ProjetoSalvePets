@@ -297,4 +297,5 @@ MERCADO_PAGO_ACCESS_TOKEN = str(os.environ.get("MERCADO_PAGO_ACCESS_TOKEN"))
 
 # MATHEUS: Redireciona links http para https
 #SECURE_SSL_REDIRECT = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
