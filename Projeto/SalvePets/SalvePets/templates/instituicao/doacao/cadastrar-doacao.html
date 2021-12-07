@@ -41,16 +41,12 @@
         </ul>
     </div>
         <p><h3>{% trans "Cadastro de doação" %}</h3></p>
-        <p>Para permitir que pessoas façam doações à sua instituição, por favor, preencha o formulário a seguir:<p>
-        <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.<p>
+        <p>{% trans "Para permitir que pessoas façam doações à sua instituição, por favor, preencha o formulário a seguir:" %}<p>
+        <p>{% trans "Não sabe o que fazer? Veja o funcionamento do sistema de doações no" %} <a href="/faq/#headingTwelve" target="_blank">{% trans "nosso FAQ" %}</a>.<p>
         <div class="row">
         <form method="POST">
         {% csrf_token %}
-        {{form|crispy}}
-        <!-- Submit -->
-        <button type="submit" class="btn btn-outline-dark mt-4 w-100">
-            {% trans "Salvar" %}
-        </button>
+        {% crispy form %}
 
     </div>
     <script>  
@@ -58,4 +54,5 @@
             $('#id_doacao_patrocinio_codigo').val($('#id_doacao_patrocinio_codigo').val().replace(/-/g,""));
         });
     </script>
+</div>
 {% endblock %}

@@ -50,7 +50,7 @@
         <form enctype="multipart/form-data" action="submit", method="POST">
             {% csrf_token %}
         <div class="container mt-5" style="width: 35rem;">
-            <h3 class="pt-3 text-center">Avalie a Instituição {{inst.nome_instituicao}}</h3>
+            <h3 class="pt-3 text-center">{% trans "Avalie a instituição" %} {{inst.nome_instituicao}}</h3>
             <ul class="rating">
             <li class="rating-item" data-rate="1"></li>
             <li class="rating-item active" data-rate="2"></li>
@@ -59,16 +59,26 @@
             <li class="rating-item" data-rate="5"></li>
             </ul>
             
+        <!--Mensagem caso o usuário informe um usuário inexistente-->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
             <input type="hidden" name="rating" id="rating" value="2">
+            <input type="hidden" name="id_pet" id="id_pet" value={{pet_id.id}}>
 
             <div class="form-group">
-                <label><b>Conte sobre a Instituição para outras pessoas</b>:</label>
-                <textarea class="form-control" rows="3" name="descricao" type="text" placeholder="A Instituição...">{{ pet.descricao|default_if_none:"" }}</textarea>
+                <label><b>{% trans "Conte sobre a instituição para outras pessoas" %}</b>:</label>
+                <textarea class="form-control" rows="3" name="descricao" type="text" placeholder="A instituição...">{{ pet.descricao|default_if_none:"" }}</textarea>
             </div>
             <br>
 
             <button type="submit" class="btn btn-outline-dark mt-4 w-100">
-                Enviar
+                {% trans "Enviar" %}
             </button>
         </div>
         </form>

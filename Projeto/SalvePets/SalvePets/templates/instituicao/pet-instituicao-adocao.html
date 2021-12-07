@@ -84,7 +84,7 @@
                         </a>
                     </figure>
                     {% if not pet.adotado %}
-                        <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">Patrocinar</a>
+                        <a href="/patrocinar/{{ pet.id }}" class="btn btn-secondary w-100 border-0" style="background-color:#0B9C45">{% trans "Patrocinar" %}</a>
                     {% endif %}
                 </div>
             </div>
@@ -97,47 +97,47 @@
             </section>
         {% endif %}
         <h5>{{pet.nome}}</h5> 
-        <p class="pt-1">{{pet.descricao}}</p>
+        <p class="pt-1">{{pet.descricao|default_if_none:"-"}}</p>
         <div class="table-responsive">
             <table class="table">
                 <tbody>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Raça:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Raça" %}:</th>
                         <td>{{pet.raca|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Sexo:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Sexo" %}:</th>
                         <td>{{pet.sexo|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Porte:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Porte" %}:</th>
                         <td>
                             {% if pet.porte >= 40 and pet.porte <= 60%}
-                                Pequeno porte
+                                {% trans "Pequeno porte" %}
                             {% elif pet.porte > 60 and pet.porte <= 100 %}
-                                Médio porte
+                                {% trans "Médio porte" %}
                             {% else %}
-                                Grande porte
+                                {% trans "Grande porte" %}
                             {% endif %}
                             
-                            (aprox. {{pet.porte|default_if_none:"-"}}cm de altura)
+                            ({% trans "aprox" %}. {{pet.porte|default_if_none:"-"}}{% trans "cm de altura" %})
                         </td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Espécie:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Espécie" %}:</th>
                         <td>{{pet.especie|default_if_none:"-"}}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Local da Instituição</span></h6>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">{% trans "Local da Instituição" %}</span></h6>
                 <table class="table">
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Cidade:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Cidade" %}:</th>
                         <td>{{inst.city|default_if_none:"-"}}</td>
                     </tr>
                     <tr>
-                        <th class="pl-0 w-25" scope="row">Estado:</th>
+                        <th class="pl-0 w-25" scope="row">{% trans "Estado" %}:</th>
                         <td>{{inst.state|default_if_none:"-"}}</td>
                     </tr>
                 </table>
@@ -147,7 +147,7 @@
 
 
 
-            <div class="mt-4"> <h6><span class="pl-0 w-25">Avaliação da Instituição</span></h6>
+            <div class="mt-4"> <h6><span class="pl-0 w-25">{% trans "Avaliação da Instituição" %}</span></h6>
                 
                 <table class="table">
                     <tr>
@@ -178,7 +178,7 @@
                                 {% else %}
                                     <li class="rating-item" data-rate="5"></li>
                                 {% endif %}
-                                <li class="mt-3" style="color:black"> - ({{count}} Opiniões)</li>
+                                <li class="mt-3" style="color:black"> - ({{count}} {% trans "Opiniões" %})</li>
                             </ul>
                         </span>
                     </tr>
@@ -192,7 +192,7 @@
 
 
             <div class="mt-4">
-                <h6><span class="pl-0 w-25">Contato</span></h6>
+                <h6><span class="pl-0 w-25">{% trans "Contato" %}</span></h6>
                 <div class="col s12 g-recaptcha" data-sitekey="6LcZECsdAAAAAEz7fWpYJ2EDzDaWLGQKXP000gLG" data-callback='validar_captcha'></div>
                 <!--<div class="col s12 g-recaptcha" data-sitekey="6LcwOAsdAAAAAKv-ZdyWgYPnP7TJv-NTIxK9rsmK" data-callback='validar_captcha'></div>-->
                 <div id="g-recaptcha-error"></div>
@@ -207,15 +207,15 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="adotar_petLabel">Adotar pet</h5>
+                <h5 class="modal-title" id="adotar_petLabel">{% trans "Adotar pet" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Tem certeza que deseja adotar este pet?</p>
+                <p>{% trans "Tem certeza que deseja adotar este pet?" %}</p>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
                 <a href="/solicitar-adocao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Adotar" %}</a>
             </div>
         </div>
@@ -227,11 +227,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="adotar_petLabel">Avaliações sobre a Instituição</h5>
+                <h5 class="modal-title" id="adotar_petLabel">{% trans "Avaliações sobre a Instituição" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <b>Nota média:</b>
+                <b>{% trans "Nota média" %}:</b>
                 <ul class="rating">
                     {% if media == 1 %}
                         <li class="rating-item active" data-rate="1"></li>
@@ -260,7 +260,7 @@
                     {% endif %}
                 </ul>
 
-                <b>Comentários:</b>
+                <b>{% trans "Comentários" %}:</b>
                 {% for i in itens %}
                     <ul>
                         <li><p class="card-title"> {{ i.comentario }}</p></li>
@@ -269,7 +269,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
                 <!--<a href="/solicitar-adocao/{{ pet.id }}" class="btn btn-danger" role="button">{% trans "Adotar" %}</a>-->
             </div>
         </div>

@@ -54,35 +54,26 @@ class INSTITUICAO(models.Model):
     state = BRStateField("Estado")
     city = models.CharField("Cidade", max_length=250)
 
-    doacao_valor_20_link = models.CharField("R$ 20", max_length=250, null = True, blank = True)
-    doacao_valor_50_link = models.CharField("R$ 50", max_length=250, null = True, blank = True)
-    doacao_valor_100_link = models.CharField("R$ 100", max_length=250, null = True, blank = True)
+    doacao_valor_20_link = models.CharField(_("R$ 20"), max_length=250, null = True, blank = True)
+    doacao_valor_50_link = models.CharField(_("R$ 50"), max_length=250, null = True, blank = True)
+    doacao_valor_100_link = models.CharField(_("R$ 100"), max_length=250, null = True, blank = True)
 
-    doacao_limpeza_link = models.CharField("Link para ajudar com limpeza", max_length=250, null = True, blank = True)
-    doacao_limpeza_valor = models.DecimalField("Valor da limpeza", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_limpeza_link = models.CharField(_("URL para ajudar com limpeza"), max_length=250, null = True, blank = True)
+    doacao_limpeza_valor = models.DecimalField(_("Valor da limpeza"), max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_alimentacao_link = models.CharField("Link para ajudar com alimentação", max_length=250, null = True, blank = True)
-    doacao_alimentacao_valor = models.DecimalField("Valor da alimentação", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_alimentacao_link = models.CharField(_("URL para ajudar com alimentação"), max_length=250, null = True, blank = True)
+    doacao_alimentacao_valor = models.DecimalField(_("Valor da alimentação"), max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_medicamentos_link = models.CharField("Link para ajudar com medicamentos", max_length=250, null = True, blank = True)
-    doacao_medicamentos_valor = models.DecimalField("Valor dos medicamentos", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_medicamentos_link = models.CharField(_("URL para ajudar com medicamentos"), max_length=250, null = True, blank = True)
+    doacao_medicamentos_valor = models.DecimalField(_("Valor dos medicamentos"), max_digits=6, decimal_places=2, null = True, blank = True)
 
-    doacao_diaria_internacao_link = models.CharField("Link para ajudar com diária de internação", max_length=250, null = True, blank = True)
-    doacao_diaria_internacao_valor = models.DecimalField("Valor da diária de internação", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_diaria_internacao_link = models.CharField(_("URL para ajudar com diária de internação"), max_length=250, null = True, blank = True)
+    doacao_diaria_internacao_valor = models.DecimalField(_("Valor da diária de internação"), max_digits=6, decimal_places=2, null = True, blank = True)
     
-    doacao_patrocinio_codigo = models.CharField("Código do patrocínio", max_length=250, null = True, blank = True)
-    doacao_patrocinio_valor = models.DecimalField("Valor do patrocínio", max_digits=6, decimal_places=2, null = True, blank = True)
+    doacao_patrocinio_codigo = models.CharField(_("Código do patrocínio"), max_length=250, null = True, blank = True)
+    doacao_patrocinio_valor = models.DecimalField(_("Valor do patrocínio"), max_digits=6, decimal_places=2, null = True, blank = True)
 
 
-class AVALIACAO(models.Model):
-    """ Modelo de dados de avaliação """
-    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
-    fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
-    nota = models.IntegerField(blank=True, null=True)
-    #nota_geral = models.IntegerField(blank=True, null=True)
-    comentario = models.TextField(blank=True, null=True)
-    dataCriacao = models.DateTimeField(auto_now_add=True)
-    #dataModificacao = models.DateTimeField(auto_now=True)
 
 
 class USUARIO(models.Model):
@@ -144,6 +135,18 @@ class Pet(models.Model):
     def __str__(self):
         return f'{self.nome}'
 
+
+class AVALIACAO(models.Model):
+    """ Modelo de dados de avaliação """
+    fk_id_instituicao = models.ForeignKey(INSTITUICAO, on_delete=models.SET_NULL, null=True)
+    fk_id_avaliador = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
+    fk_id_pet = models.ForeignKey(Pet, on_delete=models.RESTRICT, null=True)
+    nota = models.IntegerField(blank=True, null=True)
+    #nota_geral = models.IntegerField(blank=True, null=True)
+    comentario = models.TextField(blank=True, null=True)
+    dataCriacao = models.DateTimeField(auto_now_add=True)
+    #dataModificacao = models.DateTimeField(auto_now=True)
+
 class PATROCINIO(models.Model):
     """ Modelo de dados de patrocínio """
     FK_idUsuario = models.ManyToManyField(User)
@@ -156,7 +159,7 @@ class PATROCINIO(models.Model):
     publico = models.BooleanField(default=True, blank=False, null= False)
     pago = models.BooleanField(default=False, blank=False, null= False)
 
-    doacao_tipo = models.CharField("Tipo de doação", max_length=50, null=False, default = "doacao")
+    doacao_tipo = models.CharField(_("Tipo de doação"), max_length=50, null=False, default = "doacao")
 
     class Meta:
         ordering = ['data']

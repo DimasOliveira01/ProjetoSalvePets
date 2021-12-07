@@ -85,9 +85,9 @@ urlpatterns = [
     path('doacao/alterar-status/<id>/',views.doacao_alterar_status),
     path('doacao/excluir/<id>/',views.doacao_excluir),
     path('meus-pets-adotados/',views.meus_pets_adotados),
-    path('avaliacao-instituicao/<id>/',views.avaliacao_instituicao),
-    path('avaliacao-instituicao/<id>/submit',views.enviar_avaliacao_instituicao),
-    path('avaliacao-enviada/',views.avaliacao_enviada),
+    path('avaliacao-instituicao/<id>/<id_pet>/',views.avaliacao_instituicao),
+    path('avaliacao-instituicao/<id>/<id_pet>/submit',views.enviar_avaliacao_instituicao),
+    path('avaliacao-enviada/',views.avaliacao_enviada), 
 
 ]
 

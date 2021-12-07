@@ -125,13 +125,13 @@ function submit_patrocinio(){
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 {% if doacao_simples %}
-                    <button class="nav-link {% if mostrar_doacao_simples %}active{% endif %}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:#495057">Doar</button>
+                    <button class="nav-link {% if mostrar_doacao_simples %}active{% endif %}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:#495057">{% trans "Doar" %}</button>
                 {% endif %}
                 {% if doacao_por_categoria %}
-                    <button class="nav-link {% if mostrar_doacao_por_categoria %}active{% endif %}" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:#495057">Ajudar</button>
+                    <button class="nav-link {% if mostrar_doacao_por_categoria %}active{% endif %}" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:#495057">{% trans "Ajudar" %}</button>
                 {% endif %}
                 {% if doacao_patrocinio %}
-                    <button class="nav-link {% if mostrar_doacao_patrocinio %}active{% endif %}" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:#495057">Patrocinar</button>
+                    <button class="nav-link {% if mostrar_doacao_patrocinio %}active{% endif %}" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:#495057">{% trans "Patrocinar" %}</button>
                 {% endif %}
             </div>
         </nav>
@@ -143,8 +143,8 @@ function submit_patrocinio(){
                 {% if doacao_simples %}
                 <!-- CA2 - Doar para este abrigo -->
                 <label><h6>{% trans "Doar para "  %} <span class="text-capitalize">{{instituicao.nome_instituicao|default_if_none:"SEM INSTITUIÇÃO"}}</span></h6></label>
-                <p>Você pode realizar uma doação para a instituição que está tomando conta deste pet.</p>
-                <p>Por favor, selecione a quantidade desejada.</p>
+                <p>{% trans "Você pode realizar uma doação para a instituição que está tomando conta deste pet." %}</p>
+                <p>{% trans "Por favor, selecione a quantidade desejada." %}</p>
 
                     <!--
                     Então ele é redirecionado para a tela com três valores padrão e um campo para
@@ -175,8 +175,8 @@ function submit_patrocinio(){
                 {% if doacao_por_categoria %}
                 <!-- CA4 - Ajude este pet -->
                 <label><h6>{% trans "Ajude o pet" %}</h6></label>
-                <p>Você também pode contribuir com os custos mensais do pet.</p>
-                <p>É possível pagar os custos de limpeza, alimentação, medicamentos e diária de internação. E claro, se preferir, pode inclusive pagar por todos esses itens juntos.</p>
+                <p>{% trans "Você também pode contribuir com os custos mensais do pet." %}</p>
+                <p>{% trans "É possível pagar os custos de limpeza, alimentação, medicamentos e diária de internação. E claro, se preferir, pode inclusive pagar por todos esses itens juntos." %}</p>
                     
                     <!--
                     Então ele é redirecionado para a tela com a lista de opções "fixas" escolhidas pelo
@@ -193,8 +193,8 @@ function submit_patrocinio(){
                 {% if doacao_patrocinio %}
                 <!-- CA6 - Patrocine este pet -->
                 <label><h6>{% trans "Patrocine o pet" %}</h6></label><br>
-                <p>Também é possível ajudar o pet cobrindo seus custos mensais definidos pela instituição que está tomando conta dele.</p>
-                <p>Para apoiá-lo, selecione uma das opções abaixo:</p>
+                <p>{% trans "Também é possível ajudar o pet cobrindo seus custos mensais definidos pela instituição que está tomando conta dele." %}</p>
+                <p>{% trans "Para apoiá-lo, selecione uma das opções abaixo:" %}</p>
                     <!--
                     Então ele é redirecionado para a tela com os custos mensais daquele pet e os períodos
                     de contribuição disponíveis                    
@@ -221,14 +221,14 @@ function submit_patrocinio(){
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ajudar_petLabel">Patrocínio</h5>
+                        <h5 class="modal-title" id="ajudar_petLabel">{% trans "Patrocínio" %}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Limpeza</th>
+                                    <th scope="row">{% trans "Limpeza" %}</th>
                                     <td>R$ {{instituicao.doacao_limpeza_valor|default_if_none:""}}</td>
                                     <td>                            
                                         <form id="limpeza1" enctype="multipart/form-data" action="submit", method="POST">
@@ -241,7 +241,7 @@ function submit_patrocinio(){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Alimentação</th>
+                                    <th scope="row">{% trans "Alimentação" %}</th>
                                     <td>R$ {{instituicao.doacao_alimentacao_valor|default_if_none:""}}</td>
                                     <td>
                                         <form id="alimentacao1" enctype="multipart/form-data" action="submit", method="POST">
@@ -254,7 +254,7 @@ function submit_patrocinio(){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Medicamentos</th>
+                                    <th scope="row">{% trans "Medicamentos" %}</th>
                                     <td>R$ {{instituicao.doacao_medicamentos_valor|default_if_none:""}}</td>
                                     <td>
                                         <form id="medicamentos1" enctype="multipart/form-data" action="submit", method="POST">
@@ -267,7 +267,7 @@ function submit_patrocinio(){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Diária de internação</th>
+                                    <th scope="row">{% trans "Diária de internação" %}</th>
                                     <td>R$ {{instituicao.doacao_diaria_internacao_valor|default_if_none:""}}</td>
                                     <td>
                                         <form id="diaria_internacao1" enctype="multipart/form-data" action="submit", method="POST">
@@ -283,7 +283,7 @@ function submit_patrocinio(){
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
                     </div>
                 </div>
             </div>
@@ -295,11 +295,11 @@ function submit_patrocinio(){
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="patrocinar_petLabel">Patrocínio</h5>
+                        <h5 class="modal-title" id="patrocinar_petLabel">{% trans "Patrocínio" %}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        patrocinar
+                        {% trans "patrocinar" %}
                     </div>
                     <div class="modal-footer">
                         <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">

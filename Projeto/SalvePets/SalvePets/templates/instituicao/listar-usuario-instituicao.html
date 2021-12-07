@@ -61,7 +61,7 @@
             <div class="card-body">
                 <form method="POST">
                     {% csrf_token %}
-                    <p class="card-title"><b>Usuário:</b> {{ p.nome1 }} {{ p.nome2 }} </p>
+                    <p class="card-title"><b>{% trans "Usuário" %}:</b> {{ p.nome1 }} {{ p.nome2 }} </p>
                     <p class="card-title"><b>CPF:</b> {{ p.cpf }}</p>
                     <!--<p class="card-title"><b>Cadastro:</b> {{ p.id }}</p>-->
                     <!--<button class="btn btn-outline-dark" type="submit"> 
@@ -70,7 +70,7 @@
                     {% if p.cpf != usuario1.cpfcnpj %}
                     <a href="/deletar-usuario-instituicao/{{ p.id }}" class="btn btn-danger" role="button">{% trans "Excluir" %}</a>
                     {% else %}
-                    <p><b>Administrador</b></p>
+                    <p><b>{% trans "Administrador" %}</b></p>
                     {% endif %}
                    
                 </form>

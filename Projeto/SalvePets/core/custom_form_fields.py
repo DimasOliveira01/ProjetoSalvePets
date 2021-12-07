@@ -32,13 +32,13 @@ class CpfCnpjField(forms.CharField):
         if tam!=tam_cpf:
             if tam<tam_cpf:
                 raise ValidationError(
-                    _(f'Número de dígitos {tam} inferior ao esperado: {tam_cpf}'),
+                    (f'Número de dígitos {tam} inferior ao esperado: {tam_cpf}'),
                     code='TamDivergente',
                     params={'value': '11'},
                 )
             else:
                 raise ValidationError(
-                    _(f'Número de dígitos {tam} superior ao esperado: {tam_cpf}'),
+                    (f'Número de dígitos {tam} superior ao esperado: {tam_cpf}'),
                     code='TamDivergente',
                     params={'value': '11'},
                 )

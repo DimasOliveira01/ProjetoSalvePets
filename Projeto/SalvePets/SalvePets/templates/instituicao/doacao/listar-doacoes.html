@@ -44,13 +44,10 @@
     </div>
 
     <p><h3>{% trans "Lista de patrocínios recebidos" %}</h3></p>
-        <p>A lista a seguir mostra todas os patrocínios sinalizados. 
-        Todo patrocínio é sinalizado quando uma pessoa clica em algum dos botões de doação.</p>
-        <p>Verifique na sua conta PagSeguro se alguma das doações a seguir foram de fato efetuadas. 
-        Caso esteja, marque a caixinha de "Pago?".</p>
-        <p>Também é possível sinalizar se o patrocínio é público ou privado. 
-        Caso esteja público, marque a caixinha de "Público?".</p>
-        <p>Não sabe o que fazer? Veja o funcionamento do sistema de doações no <a href="/faq/#headingTwelve" target="_blank">nosso FAQ</a>.</p>
+        <p>{% trans "A lista a seguir mostra todas os patrocínios sinalizados. Todo patrocínio é sinalizado quando uma pessoa clica em algum dos botões de doação." %}</p>
+        <p>{% trans "Verifique na sua conta PagSeguro se alguma das doações a seguir foram de fato efetuadas. Caso esteja, marque a caixinha de 'Pago?'." %}</p>
+        <p>{% trans "Também é possível sinalizar se o patrocínio é público ou privado. Caso esteja público, marque a caixinha de 'Público?'." %}</p>
+        <p>{% trans "Não sabe o que fazer? Veja o funcionamento do sistema de doações no" %} <a href="/faq/#headingTwelve" target="_blank">{% trans "nosso FAQ" %}</a>.</p>
         <div class="row">
         <div class="table-responsive">
             <table class="table table-striped text-nowrap">
@@ -58,10 +55,10 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Pet</th>
-                    <th scope="col">E-mail do doador</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Pago?</th>
+                    <th scope="col">{% trans "E-mail do doador" %}</th>
+                    <th scope="col">{% trans "Valor" %}</th>
+                    <th scope="col">{% trans "Data" %}</th>
+                    <th scope="col">{% trans "Pago?" %}</th>
                     <th scope="col"></th>
                     </tr>
                 </thead>

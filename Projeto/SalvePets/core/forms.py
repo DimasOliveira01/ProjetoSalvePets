@@ -44,16 +44,11 @@ class UserForm(forms.ModelForm):
 class UsuarioForm(forms.ModelForm):
     """ Formulário de inclusão de usuário """
     #cpfcnpj = CpfcnpjField(label='CPF')
-    '''dataNascimento = forms.DateField(required=True,
-    widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),input_formats=['%d/%m/%Y','%m/%d/%Y'],
-    label=_('Data de Nascimento'))'''
     dataNascimento = forms.DateField(required=True,
                                      widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
                                      label=_('Data de Nascimento'))
     telefone = forms.CharField(required=True, label=_('Número de Celular'))
-    '''receberNotificacoes = forms.BooleanField(required=False,
-    label = 'Desejo receber notificações', help_text='(Marque este campo caso deseje ser
-    notificado sobre pets perdidos ou encontrados.)')'''
+
     class Meta:
         model = USUARIO
         #Retirei tipoUsuario
@@ -75,7 +70,7 @@ então não é utilizada """
     receberNotificacoes = forms.BooleanField(required=False, label =
                                              _('Desejo receber notificações'),
                                              help_text=_('(Marque este campo caso deseje ser'+
-                                             'notificado sobre pets perdidos ou encontrados.)'))
+                                             ' notificado sobre pets perdidos ou encontrados.)'))
     #siteUrl = forms.URLField(initial='http://', label='URL do seu Site')
 
 
@@ -125,7 +120,7 @@ class InstituicaoForm(forms.ModelForm):
         self.helper.add_input(
             Submit(
                 "submit",
-                "Atualizar",
+                _("Atualizar"),
                 css_class="btn btn-outline-dark",
             )
         )
@@ -163,7 +158,7 @@ class AdicionarUsuarioInstituicaoForm(forms.Form):
 
 class PesquisarPetForm(forms.Form):
     """ Formulário de pesquisa de um Pet da instituição """
-    id_pet = forms.IntegerField(label='ID do pet')
+    id_pet = forms.IntegerField(label=_('ID do pet'))
 
 class AdicionarPetInstituicao(forms.ModelForm):
     """ Formulário de inclusão de pet vinculado a uma instituição """
@@ -201,37 +196,53 @@ class DoacaoCadastroForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
-        self.helper.form_action = "."
+        self.helper.form_action = "submit"
         self.helper.add_input(
             Submit(
                 "submit",
-                "Atualizar",
-                css_class="btn btn-outline-dark",
+                _("Salvar"),
+                css_class="btn btn-outline-dark mt-4 w-100",
             )
         )
         self.helper.layout = Layout(
             Fieldset(
-                "",
+                _("Doação simples"),
                 Div(
-                    Field("doacao_limpeza_link", wrapper_class="col"),
-                    Field("doacao_limpeza_valor", wrapper_class="col"),
+                    Field("doacao_valor_20_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_valor_50_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_valor_100_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    css_class="row",
+                )
+            ),
+            Fieldset (
+                _("Ajuda com custos"),
+                Div(
+                    Field("doacao_limpeza_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_limpeza_valor", wrapper_class="col", css_class="mb-3", placeholder="R$ 50"),
                     css_class="row",
                 ),
                 Div(
-                    Field("doacao_alimentacao_link", wrapper_class="col"),
-                    Field("doacao_alimentacao_valor", wrapper_class="col"),
+                    Field("doacao_alimentacao_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_alimentacao_valor", wrapper_class="col", css_class="mb-3", placeholder="R$ 50"),
                     css_class="row",
                 ),
                 Div(
-                    Field("doacao_medicamentos_link", wrapper_class="col"),
-                    Field("doacao_medicamentos_valor", wrapper_class="col"),
+                    Field("doacao_medicamentos_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_medicamentos_valor", wrapper_class="col", css_class="mb-3", placeholder="R$ 50"),
                     css_class="row",
                 ),
                 Div(
-                    Field("doacao_diaria_internacao_link", wrapper_class="col"),
-                    Field("doacao_diaria_internacao_valor", wrapper_class="col"),
+                    Field("doacao_diaria_internacao_link", wrapper_class="col", css_class="mb-3", placeholder="https://pag.ae/000000000"),
+                    Field("doacao_diaria_internacao_valor", wrapper_class="col", css_class="mb-3", placeholder="R$ 50"),
+                    css_class="row",
+                )
+            ),
+            Fieldset (
+                _("Patrocínio recorrente"),
+                Div(
+                    Field("doacao_patrocinio_codigo", wrapper_class="col", placeholder="E000000000000000000000000000000"),
+                    Field("doacao_patrocinio_valor", wrapper_class="col", placeholder="R$ 50"),
                     css_class="row",
                 ),
-                css_class="border-bottom mb-3",
             )
         )

@@ -6,14 +6,14 @@
 
 {% block conteudo %}
 <div class="container mt-4">
-    <h2>{% trans "Confirmar endereço de e-mail" %}</h2>
+    <h3>{% trans "Confirmar endereço de e-mail" %}</h3>
 
     {% if confirmation %}
         {% user_display confirmation.email_address.user as user_display %}
         <p>{% blocktrans with confirmation.email_address.email as email %}Confirme que <a href="mailto:{{ email }}">{{ email }}</a> é um endereço de e-mail do usuário {{ user_display }}.{% endblocktrans %}</p>
         <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
             {% csrf_token %}
-            <button type="submit">{% trans 'Confirmar' %}</button>
+            <button type="submit" class="btn btn-primary" style="color:black; font-size:70%">{% trans 'Confirmar' %}</button>
         </form>
     {% else %}
         {% url 'account_email' as email_url %}
