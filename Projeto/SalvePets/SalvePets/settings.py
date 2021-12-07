@@ -170,8 +170,8 @@ DATABASES = {
         'NAME': 'salvepets', 
         'USER': 'postgres', 
         'PASSWORD': 123456,
-        'HOST': 'postgis_container', 
-        #'HOST': '127.0.0.1', 
+        #'HOST': 'postgis_container', 
+        'HOST': '127.0.0.1', 
 	    #'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com',
 	    'PORT': '5432',
     }
