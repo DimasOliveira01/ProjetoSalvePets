@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:44-0300\n"
+"POT-Creation-Date: 2021-12-07 21:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -669,160 +669,37 @@ msgstr ""
 "Look here for the answer to your question about adoption, finding lost pets, "
 "pet sponsorship and more!"
 
-#: .\SalvePets\templates\faq.html:27
-msgid "Quem pode realizar uma adoção?"
-msgstr "Who can carry out an adoption?"
-
-#: .\SalvePets\templates\faq.html:31
-msgid ""
-"Qualquer pessoa, plenamente capaz, maior de 18 anos, mediante assinatura do "
-"contrato de adoção."
-msgstr ""
-"Anyone, fully capable, over the age of 18, upon signing the adoption "
-"contract."
-
-#: .\SalvePets\templates\faq.html:39
-msgid "Os animais que vão para adoção são castrados?"
-msgstr "Are animals that go for adoption neutered?"
-
-#: .\SalvePets\templates\faq.html:43
-msgid ""
-"Sim. Os animais que participam do processo de adoção são castrados, "
-"vacinados de acordo com a idade, vermifugados, microchipados e recebem "
-"medicamentos para controle de pulgas e carrapatos, de acordo com a "
-"legislação vigente."
-msgstr ""
-"Yes. The animals that participate in the adoption process are neutered, "
-"vaccinated according to their age, dewormed, microchipped and receive "
-"medication to control fleas and ticks, in accordance with current "
-"legislation."
-
-#: .\SalvePets\templates\faq.html:50
-msgid "Os animais são vacinados?"
-msgstr "Are animals vaccinated?"
-
-#: .\SalvePets\templates\faq.html:54
-msgid "Sim. São vacinados de acordo com sua idade e condições."
-msgstr "Yes. They are vaccinated according to their age and condition."
-
-#: .\SalvePets\templates\faq.html:61
+#: .\SalvePets\templates\faq.html:28
 msgid "Quais são os documentos necessários para uma adoção?"
 msgstr "What documents are required for an adoption?"
 
-#: .\SalvePets\templates\faq.html:65
+#: .\SalvePets\templates\faq.html:32
 msgid ""
-"RG, CPF e comprovante de endereço recente. É necessário apresentar RG "
-"original também no dia da retirada do pet."
-msgstr ""
-"ID, CPF and recent proof of address. It is necessary to present an original "
-"ID on the day the pet is picked up."
-
-#: .\SalvePets\templates\faq.html:66
-msgid ""
-"OBS: a equipe Salve Pets somente se responsabiliza por estabelecer a conexão "
+"A equipe Salve Pets somente se responsabiliza por estabelecer a conexão "
 "entre o adotante e a instituição de adoção de pets, não exigindo portanto, "
 "nenhum documento no processo de manifestar interesse de adoção de um pet."
-msgstr ""
-"NOTE: the Salve Pets team is only responsible for establishing the "
-"connection between the adopter and the institution of pet adoption, "
-"therefore not requiring any document in the process of expressing interest "
-"in adopting a pet."
+msgstr "The Salve Pets team is only responsible for establishing the connection between the adopter and the institution of adoption of pets, therefore not requiring any document in the process of expressing interest in adopting a pet."
 
-#: .\SalvePets\templates\faq.html:73
-msgid "Fui aprovado, posso retirar o pet no mesmo dia?"
-msgstr "I was approved, can I pick up the pet on the same day?"
-
-#: .\SalvePets\templates\faq.html:77
-msgid ""
-"Sim. Após a aprovação da instituição para a adoção do pet, o adotante tem "
-"até 24h para a retirada do animal na instituição."
-msgstr ""
-"Yes. After approval by the institution for the adoption of the pet, the "
-"adopter has up to 24 hours to retrieve the animal from the institution."
-
-#: .\SalvePets\templates\faq.html:83
-msgid "Os animais para adoção são animais sociáveis?"
-msgstr "Are animals for adoption sociable animals?"
-
-#: .\SalvePets\templates\faq.html:87
-msgid ""
-"Todos os animais passam por uma avaliação, mas cada pet tem a sua "
-"particularidade/personalidade. Esses animais são oriundos da rua e podem "
-"estar assustados, porém, enquanto estão no espaço da instituição de adoção, "
-"os pets realizam diversas atividades físicas, passam por técnicas de "
-"comportamento, estimulação cognitiva e sensorial (percepção, memória e "
-"raciocínio), entre outras atividades. Importante seguir as diretrizes "
-"repassadas pela instituição, bem como as orientações repassadas para apoiar "
-"o processo de adaptação do pet durante o período de pós-adoção."
-msgstr ""
-"All animals undergo an assessment, but each pet has its own particularity/"
-"personality. These animals come from the street and may be scared, however, "
-"while they are in the foster care space, the pets perform various physical "
-"activities, undergo behavioral techniques, cognitive and sensory stimulation "
-"(perception, memory and reasoning), among other activities . It is important "
-"to follow the guidelines passed on by the institution, as well as the "
-"guidelines passed on to support the pet's adaptation process during the post-"
-"adoption period."
-
-#: .\SalvePets\templates\faq.html:93
-msgid "Posso sair com o meu cão no colo?"
-msgstr "Can I go out with my dog on my lap?"
-
-#: .\SalvePets\templates\faq.html:97
-msgid ""
-"Sim, caso o cão já tenha tomado todas as vacinas. Para maior segurança, é "
-"indicado que seja adquirida uma coleira e uma guia para a saída do pet para "
-"a rua. No caso de filhotes que ainda não possuem todas as vacinas, "
-"orientamos o uso de caixa de transporte."
-msgstr ""
-"Yes, if the dog has already had all the vaccinations. For greater safety, it "
-"is recommended that you purchase a collar and a guide for the pet to leave "
-"for the street. In the case of puppies that still do not have all the "
-"vaccines, we advise the use of a transport box."
-
-#: .\SalvePets\templates\faq.html:103
-msgid "Posso sair com o meu gato no colo?"
-msgstr "Can I go out with my cat on my lap?"
-
-#: .\SalvePets\templates\faq.html:107
-msgid ""
-"Pensando no bem-estar e segurança do seu gato, é necessário levar uma caixa "
-"de transporte no dia da retirada."
-msgstr ""
-"Thinking about the welfare and safety of your cat, it is necessary to take a "
-"transport box on the day of pick-up."
-
-#: .\SalvePets\templates\faq.html:113
+#: .\SalvePets\templates\faq.html:39
 msgid "Tem alguma taxa para a adoção?"
 msgstr "Do you have any fees for adoption?"
 
-#: .\SalvePets\templates\faq.html:117
+#: .\SalvePets\templates\faq.html:43
 msgid ""
 "Algumas instituições solicitam uma colaboração para custear o gasto que "
 "tiveram com o animal adotado, a fim de conseguir realizar novos resgates. "
 "Esta cobrança fica a critério de cada instituição e o valor varia conforme "
 "definição de cada instituição parceira. O valor é estipulado por cada "
-"instituição e só será cobrado mediante aprovação do adotante na entrevista e "
-"posterior assinatura e aceite no contrato de adoção. Reforçamos que esta "
-"cobrança é paga diretamente à instituição parceira no ato da adoção, sem "
-"qualquer envolvimento da equipe Salve Pets, ou seja, a Salve Pets não "
-"interfere ou recebe parte alguma destes valores."
-msgstr ""
-"Some institutions are requesting collaboration to defray the expense they "
-"had with the adopted animal, in order to be able to carry out new rescues. "
-"This charge is at the discretion of each institution and the amount varies "
-"as defined by each partner institution. The amount is stipulated by each "
-"institution and will only be charged upon approval by the adopter at the "
-"interview and subsequent signature and acceptance in the adoption contract. "
-"We emphasize that this charge is paid directly to the partner institution at "
-"the time of adoption, without any involvement of the Salve Pets team, that "
-"is, Salve Pets does not interfere or receive any part of these amounts."
+"instituição. Reforçamos que esta cobrança é paga diretamente à instituição "
+"parceira no ato da adoção, sem qualquer envolvimento da equipe Salve Pets, "
+"ou seja, a Salve Pets não interfere ou recebe parte alguma destes valores."
+msgstr "Some institutions request collaboration to defray the expense they had with the adopted animal, in order to be able to carry out new rescues. This charge is at the discretion of each institution and the amount varies as defined by each partner institution. The amount is stipulated by each institution. We emphasize that this charge is paid directly to the partner institution at the time of adoption, without any involvement of the Salve Pets team, that is, Salve Pets does not interfere or receive any part of these amounts."
 
-#: .\SalvePets\templates\faq.html:123
+#: .\SalvePets\templates\faq.html:49
 msgid "Como posso encontrar meu pet perdido?"
 msgstr "How can I find my lost pet?"
 
-#: .\SalvePets\templates\faq.html:127
+#: .\SalvePets\templates\faq.html:53
 msgid ""
 "Para te ajudar na busca do seu pet perdido, realizamos, por meio de um "
 "processo automatizado, correspondências entre pets cadastrados como perdidos "
@@ -835,11 +712,11 @@ msgstr ""
 "location of loss or encounter, species, race, size and among other "
 "variables. For this, you must register your lost pet in the service"
 
-#: .\SalvePets\templates\faq.html:127 .\SalvePets\templates\faq.html:137
+#: .\SalvePets\templates\faq.html:53 .\SalvePets\templates\faq.html:63
 msgid "Cadastrar Pet Perdido ou Encontrado"
 msgstr "Register Lost or Found Pet"
 
-#: .\SalvePets\templates\faq.html:127
+#: .\SalvePets\templates\faq.html:53
 msgid ""
 "fornecendo o máximo de detalhes possível. Quando um pet for cadastrado como "
 "<b>encontrado</b> e a localização, espécie e porte forem similares ao do seu "
@@ -850,11 +727,11 @@ msgstr ""
 "b> and the location, species and size are similar to your lost pet, you will "
 "receive an email notifying you of the possibility of finding your pet."
 
-#: .\SalvePets\templates\faq.html:133
+#: .\SalvePets\templates\faq.html:59
 msgid "Como posso cadastrar um pet encontrado?"
 msgstr "How can I register a found pet?"
 
-#: .\SalvePets\templates\faq.html:137
+#: .\SalvePets\templates\faq.html:63
 msgid ""
 "Ao encontrar um pet perdido, para facilitar o encontro de seu tutor, "
 "cadastre-o no serviço"
@@ -862,7 +739,7 @@ msgstr ""
 "When you find a lost pet, to make it easier for your guardian to find it, "
 "register it in the service"
 
-#: .\SalvePets\templates\faq.html:137
+#: .\SalvePets\templates\faq.html:63
 msgid ""
 "indicando no campo <b>Situação do pet</b> o status de <b>Encontrado</b>. "
 "Após o cadastro, todos os usuários com pets perdidos cadastrados, similares "
@@ -874,11 +751,11 @@ msgstr ""
 "registered by you, will receive an email notifying them of the possibility "
 "of finding the lost pet."
 
-#: .\SalvePets\templates\faq.html:143
+#: .\SalvePets\templates\faq.html:69
 msgid "Como receber doações pelo PagSeguro?"
 msgstr "How to receive donations through PagSeguro?"
 
-#: .\SalvePets\templates\faq.html:147
+#: .\SalvePets\templates\faq.html:73
 msgid ""
 "As doações são feitas diretamente às instituições cadastradas. Todas elas "
 "são processadas pelo PagSeguro, plataforma na qual a instituição deve "
@@ -888,7 +765,7 @@ msgstr ""
 "processed by PagSeguro, a platform on which the institution must have a "
 "registered account."
 
-#: .\SalvePets\templates\faq.html:148
+#: .\SalvePets\templates\faq.html:74
 msgid ""
 "Para conectar doações com nossa plataforma, o administrador da instituição "
 "deve gerar links de pagamentos pelo PagSeguro e inserí-los na plataforma "
@@ -898,7 +775,7 @@ msgstr ""
 "generate payment links through PagSeguro and enter them in the Salve Pets "
 "platform, in addition to assigning a value to each donation."
 
-#: .\SalvePets\templates\faq.html:149
+#: .\SalvePets\templates\faq.html:75
 msgid ""
 "Todo esse procedimento e as informações inseridas na plataforma Salve Pets "
 "provenientes de uma doação é de responsabilidade integral da instituição."
@@ -906,7 +783,7 @@ msgstr ""
 "All this procedure and the information entered on the Salve Pets platform "
 "from a donation is the institution's full responsibility."
 
-#: .\SalvePets\templates\faq.html:150
+#: .\SalvePets\templates\faq.html:76
 msgid ""
 "Há três formas de receber doações pela plataforma Salve Pets: doação simples "
 "de valor único, doação de valor único por categoria dos custos do pet, e "
@@ -916,7 +793,7 @@ msgstr ""
 "single-valued simple donation, single-valued donation by category of pet "
 "costs, and recurring sponsorship."
 
-#: .\SalvePets\templates\faq.html:151
+#: .\SalvePets\templates\faq.html:77
 msgid ""
 "As duas opções de valor único têm o mesmo procedimento, enquanto o "
 "patrocínio recorrente é feito de forma um pouco diferente. Abaixo estão "
@@ -927,19 +804,19 @@ msgstr ""
 "sponsorship is done a little differently. Listed below are the steps "
 "required to receive donations through the Salve Pets platform:"
 
-#: .\SalvePets\templates\faq.html:152
+#: .\SalvePets\templates\faq.html:78
 msgid "Doação por valor único"
 msgstr "Single value donation"
 
-#: .\SalvePets\templates\faq.html:154 .\SalvePets\templates\faq.html:165
+#: .\SalvePets\templates\faq.html:80 .\SalvePets\templates\faq.html:91
 msgid "Crie uma conta no PagSeguro"
 msgstr "Create an account on PagSeguro"
 
-#: .\SalvePets\templates\faq.html:154 .\SalvePets\templates\faq.html:165
+#: .\SalvePets\templates\faq.html:80 .\SalvePets\templates\faq.html:91
 msgid "seguindo os procedimentos da plataforma. Aguarde pela sua aprovação."
 msgstr "following the platform procedures. Wait for your approval."
 
-#: .\SalvePets\templates\faq.html:155
+#: .\SalvePets\templates\faq.html:81
 msgid ""
 "Após aprovado e com sua conta conectada, vá para a página de 'link de "
 "pagamento', clicando"
@@ -947,11 +824,11 @@ msgstr ""
 "Once approved and with your account connected, go to the 'payment link' page "
 "by clicking"
 
-#: .\SalvePets\templates\faq.html:155
+#: .\SalvePets\templates\faq.html:81
 msgid "aqui."
 msgstr "here"
 
-#: .\SalvePets\templates\faq.html:156
+#: .\SalvePets\templates\faq.html:82
 msgid ""
 "Clique em 'Criar novo link de pagamento' e insira o termo que desejar em "
 "'Produto ou serviço'. Em seguida, insira o valor de doação desejado. Lembre-"
@@ -965,7 +842,7 @@ msgstr ""
 "Pets platform, and if you are creating a link to a simple single-value "
 "donation, the amount must be 20, 50 or 100 reais. Click 'Continue'."
 
-#: .\SalvePets\templates\faq.html:157
+#: .\SalvePets\templates\faq.html:83
 msgid ""
 "Uma página com campos opcionais irá aparecer. Você pode preenchê-los ou não, "
 "e em seguida clique em 'Criar Link de Pagamento'."
@@ -973,7 +850,7 @@ msgstr ""
 "A page with optional fields will appear. You can fill them in or not, and "
 "then click 'Create Payment Link'."
 
-#: .\SalvePets\templates\faq.html:158
+#: .\SalvePets\templates\faq.html:84
 msgid ""
 "Vá para 'Compartilhe seu Link de Pagamento' e clique em 'Copiar link'. Esse "
 "link deverá ser inserido na plataforma Salve Pets nos campos correspondentes."
@@ -981,14 +858,14 @@ msgstr ""
 "Go to 'Share your Payment Link' and click 'Copy Link'. This link must be "
 "inserted on the Salve Pets platform in the corresponding fields."
 
-#: .\SalvePets\templates\faq.html:159
+#: .\SalvePets\templates\faq.html:85
 msgid ""
 "Para conectar o link de pagamento com a plataforma Salve Pets, vá até sua "
 "página de"
 msgstr ""
 "To connect the payment link with the Salve Pets platform, go to your page"
 
-#: .\SalvePets\templates\faq.html:159
+#: .\SalvePets\templates\faq.html:85
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:35
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:37
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:37
@@ -1002,11 +879,11 @@ msgstr ""
 msgid "Dados do PagSeguro"
 msgstr "PagSeguro Data"
 
-#: .\SalvePets\templates\faq.html:159
+#: .\SalvePets\templates\faq.html:85
 msgid "e insira o link gerado no campo correspondente."
 msgstr "and enter the generated link in the corresponding field."
 
-#: .\SalvePets\templates\faq.html:160
+#: .\SalvePets\templates\faq.html:86
 msgid ""
 "Nos campos de valores fixos (R$ 20, R$ 50 e R$ 100), crie um link para cada "
 "opção. Nos campos de valor por categoria, você pode criar um link para cada "
@@ -1016,7 +893,7 @@ msgstr ""
 "option. In the category value fields, you can create a link for each "
 "category or just one for all of them."
 
-#: .\SalvePets\templates\faq.html:161
+#: .\SalvePets\templates\faq.html:87
 msgid ""
 "Lembrando que você deve inserir o valor da doação igual ao valor configurado "
 "no link de pagamento do PagSeguro."
@@ -1024,11 +901,11 @@ msgstr ""
 "Remembering that you must enter the donation amount equal to the amount "
 "configured in the payment link of PagSeguro."
 
-#: .\SalvePets\templates\faq.html:163
+#: .\SalvePets\templates\faq.html:89
 msgid "Doação por valor recorrente"
 msgstr "Donation by recurring amount"
 
-#: .\SalvePets\templates\faq.html:166
+#: .\SalvePets\templates\faq.html:92
 msgid ""
 "Após aprovado e com sua conta conectada, vá para a página de 'Planos de "
 "Pagamentos Recorrentes', clicando"
@@ -1036,11 +913,11 @@ msgstr ""
 "Once approved and with your account connected, go to the 'Recurring Payment "
 "Plans' page by clicking"
 
-#: .\SalvePets\templates\faq.html:166
+#: .\SalvePets\templates\faq.html:92
 msgid "aqui"
 msgstr "here"
 
-#: .\SalvePets\templates\faq.html:167
+#: .\SalvePets\templates\faq.html:93
 msgid ""
 "Clique em 'Novo Plano' e insira o termo que desejar em 'Nome do plano'. Em "
 "seguida, insira o valor de patrocínio recorrente desejado. Lembre-se que "
@@ -1051,7 +928,7 @@ msgstr ""
 "the desired recurring sponsorship amount. Remember that this value must be "
 "equal to the value that will be registered on the Salve Pets platform."
 
-#: .\SalvePets\templates\faq.html:168
+#: .\SalvePets\templates\faq.html:94
 msgid ""
 "Selecione a frequência das cobranças desejada. Em seguida, escolha a opção "
 "'Adesões sem expiração', e preencha o restante dos campos da forma que "
@@ -1061,13 +938,13 @@ msgstr ""
 "'Subscriptions without expiry', and fill in the rest of the fields as you "
 "wish. Click 'Continue'."
 
-#: .\SalvePets\templates\faq.html:169
+#: .\SalvePets\templates\faq.html:95
 msgid ""
 "Confirme os dados e clique em 'Confirmar'. Copie o 'código do plano' gerado."
 msgstr ""
 "Confirm the data and click on 'Confirm'. Copy the generated 'plan code'."
 
-#: .\SalvePets\templates\faq.html:170
+#: .\SalvePets\templates\faq.html:96
 msgid ""
 "Para conectar o link de pagamento com a plataforma Salve Pets, vá até sua "
 "página de 'Dados do PagSeguro' e insira o código do plano gerado na opção de "
@@ -1077,11 +954,11 @@ msgstr ""
 "'PagSeguro Data' page and enter the plan code generated in the recurring "
 "payment option, as well as the sponsorship amount."
 
-#: .\SalvePets\templates\faq.html:172
+#: .\SalvePets\templates\faq.html:98
 msgid "Recebendo e confirmando doações"
 msgstr "Receiving and confirming donations"
 
-#: .\SalvePets\templates\faq.html:173
+#: .\SalvePets\templates\faq.html:99
 msgid ""
 "Após a realização dos procedimentos anteriores, você já poderá receber "
 "doações. Para que elas sejam confirmadas, você deve marcá-las como pagas na "
@@ -1091,7 +968,7 @@ msgstr ""
 "donations. In order for them to be confirmed, you must mark them as paid on "
 "the page of"
 
-#: .\SalvePets\templates\faq.html:173
+#: .\SalvePets\templates\faq.html:99
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:28
 #: .\SalvePets\templates\instituicao\doacao\cadastrar-doacao.html:30
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:30
@@ -1105,7 +982,7 @@ msgstr ""
 msgid "Patrocínios recebidos"
 msgstr "Sponsorship received"
 
-#: .\SalvePets\templates\faq.html:174
+#: .\SalvePets\templates\faq.html:100
 msgid ""
 "Caso um usuário realize uma doação, você receberá um e-mail do PagSeguro com "
 "a confirmação da transação. Depois que receber esse e-mail, vá até a lista "
@@ -1117,11 +994,11 @@ msgstr ""
 "of received sponsorships, find the confirmed donation and check the 'paid' "
 "box."
 
-#: .\SalvePets\templates\faq.html:182
+#: .\SalvePets\templates\faq.html:108
 msgid "Não encontrou suas respostas?"
 msgstr "Didn't find your answers?"
 
-#: .\SalvePets\templates\faq.html:183
+#: .\SalvePets\templates\faq.html:109
 msgid "Fale conosco"
 msgstr "Contact us"
 
@@ -2207,7 +2084,9 @@ msgstr "Give your opinion about your pet's institution"
 msgid ""
 "Não é possível realizar duas vezes a avaliação da Instituição para o mesmo "
 "Pet!"
-msgstr "It is not possible to perform the Institution's evaluation twice for the same Pet!"
+msgstr ""
+"It is not possible to perform the Institution's evaluation twice for the "
+"same Pet!"
 
 #: .\core\views.py:943
 msgid "Solicitação de adoção de Pet"
@@ -2220,6 +2099,99 @@ msgstr "Go to payment"
 #: .\payments\views.py:52
 msgid "Pedido Recebido!"
 msgstr "Order received!"
+
+#~ msgid "Quem pode realizar uma adoção?"
+#~ msgstr "Who can carry out an adoption?"
+
+#~ msgid ""
+#~ "Qualquer pessoa, plenamente capaz, maior de 18 anos, mediante assinatura "
+#~ "do contrato de adoção."
+#~ msgstr ""
+#~ "Anyone, fully capable, over the age of 18, upon signing the adoption "
+#~ "contract."
+
+#~ msgid "Os animais que vão para adoção são castrados?"
+#~ msgstr "Are animals that go for adoption neutered?"
+
+#~ msgid ""
+#~ "Sim. Os animais que participam do processo de adoção são castrados, "
+#~ "vacinados de acordo com a idade, vermifugados, microchipados e recebem "
+#~ "medicamentos para controle de pulgas e carrapatos, de acordo com a "
+#~ "legislação vigente."
+#~ msgstr ""
+#~ "Yes. The animals that participate in the adoption process are neutered, "
+#~ "vaccinated according to their age, dewormed, microchipped and receive "
+#~ "medication to control fleas and ticks, in accordance with current "
+#~ "legislation."
+
+#~ msgid "Os animais são vacinados?"
+#~ msgstr "Are animals vaccinated?"
+
+#~ msgid "Sim. São vacinados de acordo com sua idade e condições."
+#~ msgstr "Yes. They are vaccinated according to their age and condition."
+
+#~ msgid ""
+#~ "RG, CPF e comprovante de endereço recente. É necessário apresentar RG "
+#~ "original também no dia da retirada do pet."
+#~ msgstr ""
+#~ "ID, CPF and recent proof of address. It is necessary to present an "
+#~ "original ID on the day the pet is picked up."
+
+#~ msgid "Fui aprovado, posso retirar o pet no mesmo dia?"
+#~ msgstr "I was approved, can I pick up the pet on the same day?"
+
+#~ msgid ""
+#~ "Sim. Após a aprovação da instituição para a adoção do pet, o adotante tem "
+#~ "até 24h para a retirada do animal na instituição."
+#~ msgstr ""
+#~ "Yes. After approval by the institution for the adoption of the pet, the "
+#~ "adopter has up to 24 hours to retrieve the animal from the institution."
+
+#~ msgid "Os animais para adoção são animais sociáveis?"
+#~ msgstr "Are animals for adoption sociable animals?"
+
+#~ msgid ""
+#~ "Todos os animais passam por uma avaliação, mas cada pet tem a sua "
+#~ "particularidade/personalidade. Esses animais são oriundos da rua e podem "
+#~ "estar assustados, porém, enquanto estão no espaço da instituição de "
+#~ "adoção, os pets realizam diversas atividades físicas, passam por técnicas "
+#~ "de comportamento, estimulação cognitiva e sensorial (percepção, memória e "
+#~ "raciocínio), entre outras atividades. Importante seguir as diretrizes "
+#~ "repassadas pela instituição, bem como as orientações repassadas para "
+#~ "apoiar o processo de adaptação do pet durante o período de pós-adoção."
+#~ msgstr ""
+#~ "All animals undergo an assessment, but each pet has its own particularity/"
+#~ "personality. These animals come from the street and may be scared, "
+#~ "however, while they are in the foster care space, the pets perform "
+#~ "various physical activities, undergo behavioral techniques, cognitive and "
+#~ "sensory stimulation (perception, memory and reasoning), among other "
+#~ "activities . It is important to follow the guidelines passed on by the "
+#~ "institution, as well as the guidelines passed on to support the pet's "
+#~ "adaptation process during the post-adoption period."
+
+#~ msgid "Posso sair com o meu cão no colo?"
+#~ msgstr "Can I go out with my dog on my lap?"
+
+#~ msgid ""
+#~ "Sim, caso o cão já tenha tomado todas as vacinas. Para maior segurança, é "
+#~ "indicado que seja adquirida uma coleira e uma guia para a saída do pet "
+#~ "para a rua. No caso de filhotes que ainda não possuem todas as vacinas, "
+#~ "orientamos o uso de caixa de transporte."
+#~ msgstr ""
+#~ "Yes, if the dog has already had all the vaccinations. For greater safety, "
+#~ "it is recommended that you purchase a collar and a guide for the pet to "
+#~ "leave for the street. In the case of puppies that still do not have all "
+#~ "the vaccines, we advise the use of a transport box."
+
+#~ msgid "Posso sair com o meu gato no colo?"
+#~ msgstr "Can I go out with my cat on my lap?"
+
+#~ msgid ""
+#~ "Pensando no bem-estar e segurança do seu gato, é necessário levar uma "
+#~ "caixa de transporte no dia da retirada."
+#~ msgstr ""
+#~ "Thinking about the welfare and safety of your cat, it is necessary to "
+#~ "take a transport box on the day of pick-up."
 
 #~ msgid "Branco"
 #~ msgstr "White"
