@@ -257,6 +257,7 @@ def pet_informacao(request, id):
             raw_location.get('house_number'),
             raw_location.get('postcode'),
             raw_location.get('suburb'),
+            raw_location.get('city'),
             raw_location.get('state'),
             raw_location.get('country')
         ]
