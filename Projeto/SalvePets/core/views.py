@@ -382,7 +382,7 @@ def notif_pet_encontrado(id):
                         # Percorre por todas as distâncias para caso seja menor que 10km,
                         # inicia o processo de envio de e-mail               
                         if valor <= 10000 and pets[count].receberNotificacoes is True:
-                            if pet[0].encontradoPerdido == "encontrado":
+                            if pet[0].encontradoPerdido == "Encontrado":
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
                                     enviar_email_pet_encontrado(pet[0].id, str(pets[count].email),
