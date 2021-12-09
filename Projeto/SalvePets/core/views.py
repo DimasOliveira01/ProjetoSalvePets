@@ -504,6 +504,7 @@ def completar_cadastro_instituicao(request):
             if form.is_valid():
                 instancia = form.save()
                 usuario = request.user.usuario
+                user = request.user
                 USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
 
                 instituicao=INSTITUICAO.objects.get(id=instancia.id)
@@ -512,7 +513,7 @@ def completar_cadastro_instituicao(request):
                 remetente = os.environ.get("EMAIL_HOST_USER")
                 destinatario = str(email)            
                 html = loader.render_to_string('instituicao/email/email-solicitacao-cadastro-instituicao.html',
-                                               {'instituicao': instituicao})
+                                               {'instituicao': instituicao, 'usuario':usuario,'user':user})
                 plain_message = strip_tags(html)
 
                 # Envio do e-mail
