@@ -185,7 +185,6 @@ def set_pet(request):
             max_size = 2097152
             file = request.FILES['foto']
             extensao = os.path.splitext(file.name)[1]
-            print(extensao)
             extensao_valida = ['.png', '.jpg', '.jpeg', '.bmp']
 
             if not extensao in extensao_valida:
@@ -317,6 +316,7 @@ def namedtuplefetchall(cursor):
 def notif_pet_encontrado(id):
     """ Conexão com o banco de dados sobre notificação de pet encontrado """
     try:
+
         # Conexão com o banco
         cursor = connection.cursor()
 
@@ -331,10 +331,10 @@ def notif_pet_encontrado(id):
         
         ''' Garante que a pessoa que cadastrou um pet perdido vai receber e-mails apenas de pets
         encontrados próximos a região, e vice-versa. '''
-        if pet[0].encontradoPerdido == "perdido":
-            encontrado_perdido_pesquisar = "encontrado"
+        if pet[0].encontradoPerdido == "Perdido":
+            encontrado_perdido_pesquisar = "Encontrado"
         else:
-            encontrado_perdido_pesquisar = "perdido"
+            encontrado_perdido_pesquisar = "Perdido"
 
         if pet[0].dataPerdaEncontro:
             perdido_inicio = pet[0].dataPerdaEncontro - timedelta(days = 60)
@@ -353,6 +353,7 @@ def notif_pet_encontrado(id):
                             AND pet.especie = %s AND pet.porte BETWEEN %s and %s
                         ORDER BY pet.id
                         '''
+
 
         # Execução da query e inserção dos dados em uma Named Tuple
         cursor.execute(query,[encontrado_perdido_pesquisar, perdido_inicio, perdido_fim,
