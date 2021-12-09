@@ -1188,13 +1188,13 @@ def listar_doacoes(request):
     if id_inst is not None:
         try:
             cursor = connection.cursor()
-            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto, usr.email
-                        FROM core_patrocinio as pat
-                        INNER JOIN core_pet as pet ON pet.id = pat."FK_idPet_id"
-						INNER JOIN "core_patrocinio_FK_idUsuario" as doador ON doador.patrocinio_id = pat.id
+            query = '''SELECT patrocinio.id, pet.id AS id_pet, patrocinio.valor, patrocinio.data, patrocinio.pago, pet.nome, usr.email
+                        FROM core_patrocinio as patrocinio
+                        INNER JOIN core_pet as pet ON pet.id = patrocinio."FK_idPet_id"
+						INNER JOIN "core_patrocinio_FK_idUsuario" as doador ON doador.patrocinio_id = patrocinio.id
 						INNER JOIN auth_user as usr ON doador.user_id = usr.id
-                        INNER JOIN core_instituicao as instituicao ON pet.fk_id_instituicao_id = %s
-                        ORDER BY pat.id'''
+                        WHERE pet.fk_id_instituicao_id = %s
+                        ORDER BY patrocinio.id'''
 
             # Execução da query e inserção dos dados em uma Named Tuple
             cursor.execute(query, [id_inst])
@@ -1209,7 +1209,6 @@ def listar_doacoes(request):
         finally:
             if connection:
                 connection.close()
-
     return redirect('/doacao/lista/')
 
 @login_required(login_url='/accounts/login/')
