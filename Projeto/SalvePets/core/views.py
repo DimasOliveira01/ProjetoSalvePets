@@ -185,7 +185,6 @@ def set_pet(request):
             max_size = 2097152
             file = request.FILES['foto']
             extensao = os.path.splitext(file.name)[1]
-            print(extensao)
             extensao_valida = ['.png', '.jpg', '.jpeg', '.bmp']
 
             if not extensao in extensao_valida:
@@ -317,6 +316,7 @@ def namedtuplefetchall(cursor):
 def notif_pet_encontrado(id):
     """ Conexão com o banco de dados sobre notificação de pet encontrado """
     try:
+
         # Conexão com o banco
         cursor = connection.cursor()
 
@@ -331,10 +331,10 @@ def notif_pet_encontrado(id):
         
         ''' Garante que a pessoa que cadastrou um pet perdido vai receber e-mails apenas de pets
         encontrados próximos a região, e vice-versa. '''
-        if pet[0].encontradoPerdido == "perdido":
-            encontrado_perdido_pesquisar = "encontrado"
+        if pet[0].encontradoPerdido == "Perdido":
+            encontrado_perdido_pesquisar = "Encontrado"
         else:
-            encontrado_perdido_pesquisar = "perdido"
+            encontrado_perdido_pesquisar = "Perdido"
 
         if pet[0].dataPerdaEncontro:
             perdido_inicio = pet[0].dataPerdaEncontro - timedelta(days = 60)
@@ -353,6 +353,7 @@ def notif_pet_encontrado(id):
                             AND pet.especie = %s AND pet.porte BETWEEN %s and %s
                         ORDER BY pet.id
                         '''
+
 
         # Execução da query e inserção dos dados em uma Named Tuple
         cursor.execute(query,[encontrado_perdido_pesquisar, perdido_inicio, perdido_fim,
@@ -381,7 +382,7 @@ def notif_pet_encontrado(id):
                         # Percorre por todas as distâncias para caso seja menor que 10km,
                         # inicia o processo de envio de e-mail               
                         if valor <= 10000 and pets[count].receberNotificacoes is True:
-                            if pet[0].encontradoPerdido == "encontrado":
+                            if pet[0].encontradoPerdido == "Encontrado":
                                 # Passa as informações do dono do pet próximo para o envio do e-mail
                                 if pet[0].email != pets[count].email:
                                     enviar_email_pet_encontrado(pet[0].id, str(pets[count].email),
@@ -504,6 +505,7 @@ def completar_cadastro_instituicao(request):
             if form.is_valid():
                 instancia = form.save()
                 usuario = request.user.usuario
+                user = request.user
                 USUARIO.objects.filter(id=usuario.id).update(fk_instituicao_id=instancia.id)
 
                 instituicao=INSTITUICAO.objects.get(id=instancia.id)
@@ -512,7 +514,7 @@ def completar_cadastro_instituicao(request):
                 remetente = os.environ.get("EMAIL_HOST_USER")
                 destinatario = str(email)            
                 html = loader.render_to_string('instituicao/email/email-solicitacao-cadastro-instituicao.html',
-                                               {'instituicao': instituicao})
+                                               {'instituicao': instituicao, 'usuario':usuario,'user':user})
                 plain_message = strip_tags(html)
 
                 # Envio do e-mail
@@ -1187,13 +1189,13 @@ def listar_doacoes(request):
     if id_inst is not None:
         try:
             cursor = connection.cursor()
-            query = '''SELECT pat.id, pet.id AS id_pet, pat.valor, pat.data, pat.publico, pat.pago, pat.doacao_tipo, pet.nome, pet.descricao, pet.foto, usr.email
-                        FROM core_patrocinio as pat
-                        INNER JOIN core_pet as pet ON pet.id = pat."FK_idPet_id"
-						INNER JOIN "core_patrocinio_FK_idUsuario" as doador ON doador.patrocinio_id = pat.id
+            query = '''SELECT patrocinio.id, pet.id AS id_pet, patrocinio.valor, patrocinio.data, patrocinio.pago, pet.nome, usr.email
+                        FROM core_patrocinio as patrocinio
+                        INNER JOIN core_pet as pet ON pet.id = patrocinio."FK_idPet_id"
+						INNER JOIN "core_patrocinio_FK_idUsuario" as doador ON doador.patrocinio_id = patrocinio.id
 						INNER JOIN auth_user as usr ON doador.user_id = usr.id
-                        INNER JOIN core_instituicao as instituicao ON pet.fk_id_instituicao_id = %s
-                        ORDER BY pat.id'''
+                        WHERE pet.fk_id_instituicao_id = %s
+                        ORDER BY patrocinio.id'''
 
             # Execução da query e inserção dos dados em uma Named Tuple
             cursor.execute(query, [id_inst])
@@ -1208,7 +1210,6 @@ def listar_doacoes(request):
         finally:
             if connection:
                 connection.close()
-
     return redirect('/doacao/lista/')
 
 @login_required(login_url='/accounts/login/')
