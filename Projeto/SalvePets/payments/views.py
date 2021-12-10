@@ -20,7 +20,7 @@ from orders.models import Order
 from .forms import PaymentForm, UpdatePaymentForm
 from .models import Payment
 
-#from cart.cart import Cart
+from cart.cart import Cart
 
 class PaymentCreateView(CreateView):
     """ Criação de tela do pagamento """
@@ -44,8 +44,8 @@ class PaymentCreateView(CreateView):
         status = form.instance.mercado_pago_status
 
         if status == "approved":
-            #cart = Cart(self.request)
-            #cart.clear()
+            cart = Cart(self.request)
+            cart.clear()
             redirect_url = "payments:success"
 
             order_id = self.request.session.get("order_id")
@@ -68,6 +68,8 @@ class PaymentCreateView(CreateView):
             mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
         if status == "in_process":
+            cart = Cart(self.request)
+            cart.clear()
             redirect_url = "payments:pending"
 
         if status and status != "rejected":
