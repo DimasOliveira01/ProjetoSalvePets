@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+<div class="container">
+
+    <p><h3>{% trans "Lista de pedidos feitos" %}</h3></p>
+
+        <p>{% trans "A lista a seguir mostra todos os pedidos realizados por você. Registros com o mesmo número de 'Pedido' correspondem a uma mesma compra, ou seja, o Valor Total é resultante da soma de todos os itens com o mesmo número de pedido." %}</p>
+    <!--
+        <p>{% trans "Verifique na sua conta PagSeguro se alguma das doações a seguir foram de fato efetuadas. Caso esteja, marque a caixinha de 'Pago?'." %}</p>
+        <p>{% trans "Também é possível sinalizar se o patrocínio é público ou privado. Caso esteja público, marque a caixinha de 'Público?'." %}</p>
+        <p>{% trans "Não sabe o que fazer? Veja o funcionamento do sistema de doações no" %} <a href="/faq/#headingTwelve" target="_blank">{% trans "nosso FAQ" %}</a>.</p>
+    -->
+    <div class="row">
+        <!--
+        {% for ped in pedidos %}
+            {% if forloop.counter <= 1 %}
+                <h5>Pedido {{ped.id}}</h5>
+            {% endif %} 
+        {% endfor %}
+        -->
+
+        <div class="table-responsive">
+            <table class="table table-striped text-nowrap">
+                <thead>
+                    <tr>
+                    <th scope="col" style="text-align: right;">{% trans "Pedido" %}</th>
+                    <th scope="col">{% trans "Produto" %}</th>
+                    <th scope="col" style="text-align: right;">{% trans "Preço Unitário" %}</th>
+                    <th scope="col" style="text-align: right;">{% trans "Quantidade" %}</th>
+                    <th scope="col" style="text-align: right;">{% trans "Valor Total" %}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for ped in pedidos %}
+                        <tr>
+                            <th style="text-align: right;">{{ped.id}}</th>
+                            <td>{{ped.name}}</td>
+                            <td style="text-align: right;">R$ {{ped.price}}</td>
+                            <td style="text-align: right;">{{ped.quantity}}</td>
+                            <td style="text-align: right;">R$ {{ped.transaction_amount}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
