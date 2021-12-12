@@ -1272,3 +1272,37 @@ def doacao_excluir(request, id):
 
 def error_404(request, exception):
     return render (request, "not-found.html")
+
+
+@login_required(login_url='/accounts/login/')
+def meus_pedidos(request):
+    usuario = USUARIO.objects.get(user_id=request.user.id)
+    id_user = request.user.id
+
+    if id_user is not None:
+        try:
+            cursor = connection.cursor()
+            query = '''SELECT pedido.id, item.price, item.quantity, produto.name, pagamento.transaction_amount 
+                        from auth_user as usuario 
+                        inner join orders_order as pedido on usuario.id = pedido."FK_iduser_id"
+                        inner join orders_item as item on item.order_id = pedido.id
+                        inner join products_product as produto on produto.id = item.product_id
+                        inner join payments_payment as pagamento on pagamento.order_id = pedido.id
+                        where usuario.id = %s and pagamento.mercado_pago_status = 'approved';'''
+
+            
+
+            # Execução da query e inserção dos dados em uma Named Tuple
+            cursor.execute(query, [id_user])
+            meusPedidos = namedtuplefetchall(cursor)
+
+            return render(request, 'orders/meus-pedidos.html',{
+                                                                'usuario': usuario,
+                                                                'pedidos': meusPedidos
+                                                                })
+        except Exception as error:
+            print("Falha em ler o banco de dados.\n", error)
+        finally:
+            if connection:
+                connection.close()
+    return redirect('/meus-pedidos/')
