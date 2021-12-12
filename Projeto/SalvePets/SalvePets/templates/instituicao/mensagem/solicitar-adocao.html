@@ -9,11 +9,11 @@
 <div class="container mt-4">
   <!--Mensagem caso o usuário informe um usuário inexistente-->
   {% if messages %}
-    <h3>Sua solicitação de adoção foi realizada, mas...</h3>
+    <h3>{% trans "Sua solicitação de adoção foi realizada, mas" %}...</h3>
     {% for message in messages %}
     <h5 style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
     {% endfor %}
-    <h3>Obrigado pela compreensão!</h3>
+    <h3>{% trans "Obrigado pela compreensão!" %}</h3>
     {%else%}
   
     <h3>{% trans "Solicitação de adoção realizada com sucesso!" %}</h3>
