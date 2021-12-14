@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 14:40-0300\n"
+"POT-Creation-Date: 2021-12-14 11:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1282,6 +1282,7 @@ msgid "Valor"
 msgstr "Value"
 
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:60
+#: .\SalvePets\templates\orders\meus-pedidos.html:31
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:63
 msgid "Data"
 msgstr "Date"
@@ -1291,8 +1292,9 @@ msgid "Pago?"
 msgstr "Paid?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:11
-msgid "você gostaria de avaliar a antiga instituição do seu pet?"
-msgstr "would you like to rate your pet's former institution?"
+msgid "você gostaria de avaliar a instituição da qual você adotou o seu pet?"
+msgstr ""
+"would you like to evaluate the institution from which you adopted your pet?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:15
 #: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:14
@@ -2141,14 +2143,17 @@ msgstr ""
 "same Pet!"
 
 #: .\core\views.py:957
-msgid "Atenção meu querido, você já solicitou a adoção deste Pet."
-msgstr "Attention my dear, you have already requested the adoption of this Pet."
+msgid "Atenção: Você já solicitou a adoção deste Pet."
+msgstr ""
+"Attention: You have already requested the adoption of this Pet."
 
 #: .\core\views.py:959
 msgid ""
 "Atenção: Para este Pet existe um usuário com intenção de adotá-lo, caso esta "
 "adoção não ocorra entraremos em contato."
-msgstr "Attention: For this Pet there is a user with the intention of adopting it, if this adoption does not occur we will contact you."
+msgstr ""
+"Attention: For this Pet there is a user with the intention of adopting it, "
+"if this adoption does not occur we will contact you."
 
 #: .\core\views.py:963
 msgid "Solicitação de adoção de Pet"

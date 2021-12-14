@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Fieldset, Layout, Submit
 from .models import Pet, USUARIO, ADOCAO, INSTITUICAO
+from django.forms.widgets import MultiWidget
 import re
 #from .custom_form_fields import cpfcnpjField, TelefoneField
 
@@ -45,7 +46,7 @@ class UsuarioForm(forms.ModelForm):
     """ Formulário de inclusão de usuário """
     #cpfcnpj = CpfcnpjField(label='CPF')
     dataNascimento = forms.DateField(required=True,
-                                     widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
+                                     widget=forms.SelectDateWidget(attrs=({'style': 'width: 33.3%; display: inline-block;'}), years=BIRTH_YEAR_CHOICES),
                                      label=_('Data de Nascimento'))
     telefone = forms.CharField(required=True, label=_('Número de Celular'))
 
@@ -53,7 +54,6 @@ class UsuarioForm(forms.ModelForm):
         model = USUARIO
         #Retirei tipoUsuario
         fields = ('cpfcnpj', 'dataNascimento', 'telefone', 'site', 'receberNotificacoes')
-
 
 class ExtendedSignupForm(SignupForm):
     """ Classe que seria usada como "Cadastro Único" - li que é possível fazer funcionar,
