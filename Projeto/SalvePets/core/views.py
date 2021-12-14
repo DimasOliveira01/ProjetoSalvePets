@@ -954,7 +954,7 @@ def solicitar_adocao(request, id):
         #atualização da intenção de adoção do Pet
         Pet.objects.filter(id=id).update(fk_id_usuario_adocao_id=user.id)
     elif pet.fk_id_usuario_adocao_id == user.id:
-        messages.error(request, _('Atenção meu querido, você já solicitou a adoção deste Pet.'))
+        messages.error(request, _('Atenção: Você já solicitou a adoção deste Pet.'))
     else:
         messages.error(request, _('Atenção: Para este Pet existe um usuário com intenção de adotá-lo, caso esta adoção não ocorra entraremos em contato.'))
     usuario = request.user.usuario
@@ -1299,7 +1299,7 @@ def meus_pedidos(request):
     if id_user is not None:
         try:
             cursor = connection.cursor()
-            query = '''SELECT pedido.id, item.price, item.quantity, produto.name, pagamento.transaction_amount 
+            query = '''SELECT pedido.id, item.price, item.quantity, produto.name, pagamento.transaction_amount, pagamento.created 
                         from auth_user as usuario 
                         inner join orders_order as pedido on usuario.id = pedido."FK_iduser_id"
                         inner join orders_item as item on item.order_id = pedido.id

@@ -28,6 +28,7 @@
                     <th scope="col" style="text-align: right;">{% trans "Preço Unitário" %}</th>
                     <th scope="col" style="text-align: right;">{% trans "Quantidade" %}</th>
                     <th scope="col" style="text-align: right;">{% trans "Valor Total" %}</th>
+                    <th scope="col">{% trans "Data" %}</th>
                     </tr>
                 </thead>
 
@@ -39,6 +40,7 @@
                             <td style="text-align: right;">R$ {{ped.price}}</td>
                             <td style="text-align: right;">{{ped.quantity}}</td>
                             <td style="text-align: right;">R$ {{ped.transaction_amount}}</td>
+                            <td>{{ped.created}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
