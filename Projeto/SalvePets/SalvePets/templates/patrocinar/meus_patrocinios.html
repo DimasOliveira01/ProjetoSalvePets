@@ -58,18 +58,25 @@
                         <div class="table-responsive">
                         <table class="table">
                         <thead>
-                            <tr>
+                            <tr style="font-size: 14px;">
                             <th scope="col">{% trans "Valor" %}</th>
                             <th scope="col">{% trans "Data" %}</th>
+                            <th scope="col">{% trans "Status" %}</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for pat in patrocinios %}
                             {% if pat.FK_idPet_id == up.id %}
                                 
-                                    <tr>
+                                    <tr style="font-size: 14px;">
                                     <td>R$ {{pat.valor}} {% if pat.doacao_tipo == "patrocinio" %}({% trans "recorrente" %}){% endif %}</td>
                                     <td>{{pat.data|date:'d/m/Y'}}</td>
+                                    <td>{% if pat.pago == True %}
+                                            Pago
+                                        {% else %}
+                                            Pendente
+                                        {% endif %}
+                                        </td>
                                     </tr>
                                 
                             {% endif%}
@@ -78,7 +85,7 @@
                         </table>
                         </div>
                         <a href="/pet-informacao-instituicao-adocao/{{ up.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">{% trans "Detalhes" %}</a>
-                        <a href="../patrocinar/{{ up.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">{% trans "Patrocinar novamente" %}</a>
+                        <a href="../patrocinar/{{ up.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">{% trans "Doar novamente" %}</a>
                     </div>
                 </div>            
             {% endfor %}

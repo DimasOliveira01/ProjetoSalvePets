@@ -57,7 +57,7 @@
                         <h5 class="card-title">{{ p.nome }}</h5>
                         <p class="card-text">{{p.descricao|default_if_none:"-"}}</p>
                         <a href="/pet-informacao-instituicao-adocao/{{ p.id }}" class="btn btn-primary w-100 mt-auto" style="background-color:#FAA307">{% trans "Detalhes" %}</a>
-                        <a href="/patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">{% trans "Patrocinar" %}</a>
+                        <a href="/patrocinar/{{ p.id }}" class="btn btn-secondary w-100 border-0 mt-2" style="background-color:#0B9C45">{% trans "Doar" %}</a>
                     </div>
                 </div>            
             {% endfor %}
