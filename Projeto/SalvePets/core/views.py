@@ -1154,11 +1154,15 @@ def meus_patrocinios(request):
     pets = []
     user = request.user
     usuario = USUARIO.objects.get(user_id = user.id)
-    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user)
     doacao_pendente = ""
+    doacao_pendente_registros = PATROCINIO.objects.filter(FK_idUsuario = user, pago = False)
 
-    if PATROCINIO.objects.filter(FK_idUsuario = user, pago = False):
-            doacao_pendente = "Você tem um patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
+    if doacao_pendente_registros:
+        if doacao_pendente_registros.count() > 1:
+            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínio(s) pendente(s). Realize o pagamento de cada um e aguarde por até 48 horas para que eles sejam validados pela instituição."
+        else:
+            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
 
     for p in patrocinios:
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
