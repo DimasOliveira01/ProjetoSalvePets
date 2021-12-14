@@ -906,7 +906,7 @@ def lista_pets_instituicao(request):
 
 def lista_pets_adocao(request):
     """ Tela que exibe a lista de pets a serem adotados """
-    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, adotado=False, fk_id_usuario_adocao_id=None)
+    pet=Pet.objects.filter(encontradoPerdido=None, ativo=True, adotado=False)
     return render(request, 'instituicao/lista-pet-adocao.html',{'pet':pet})
 
 @login_required(login_url='/accounts/login')
