@@ -1160,7 +1160,7 @@ def meus_patrocinios(request):
 
     if doacao_pendente_registros:
         if doacao_pendente_registros.count() > 1:
-            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínio(s) pendente(s). Realize o pagamento de cada um e aguarde por até 48 horas para que eles sejam validados pela instituição."
+            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínios pendentes. Realize o pagamento de cada um e aguarde por até 48 horas para que eles sejam validados pela instituição."
         else:
             doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
 
