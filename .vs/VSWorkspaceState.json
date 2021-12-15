@@ -4,12 +4,14 @@
     "\\Projeto",
     "\\Projeto\\SalvePets",
     "\\Projeto\\SalvePets\\core",
+    "\\Projeto\\SalvePets\\core\\static",
+    "\\Projeto\\SalvePets\\core\\static\\core",
+    "\\Projeto\\SalvePets\\core\\tests",
     "\\Projeto\\SalvePets\\orders",
-    "\\Projeto\\SalvePets\\payments",
+    "\\Projeto\\SalvePets\\orders\\tests",
     "\\Projeto\\SalvePets\\SalvePets",
-    "\\VirtualEnv",
-    "\\VirtualEnv\\salvepets"
+    "\\Projeto\\SalvePets\\SalvePets\\templates"
   ],
-  "SelectedNode": "\\Projeto\\SalvePets\\payments\\views.py",
+  "SelectedNode": "\\Projeto\\SalvePets\\core\\forms.py",
   "PreviewInSolutionExplorer": false
 }
