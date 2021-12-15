@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'core',
+    'django.contrib.humanize',
 
     #bibliotecas instaladas
     'allauth',

@@ -35,6 +35,7 @@ urlpatterns = [
     path("cart/", include("cart.urls")),
     path("orders/", include("orders.urls")),
     path("payments/", include("payments.urls")),
+    path('meus-pedidos/',views.meus_pedidos),
     #path('login/', views.login_user),
     #path('login/submit', views.submit_login),
     #path('logout/', views.logout_user),
@@ -87,7 +88,8 @@ urlpatterns = [
     path('meus-pets-adotados/',views.meus_pets_adotados),
     path('avaliacao-instituicao/<id>/<id_pet>/',views.avaliacao_instituicao),
     path('avaliacao-instituicao/<id>/<id_pet>/submit',views.enviar_avaliacao_instituicao),
-    path('avaliacao-enviada/',views.avaliacao_enviada), 
+    path('avaliacao-enviada/',views.avaliacao_enviada),
+    path('meus-pets-em-processo-adocao/',views.meus_pets_em_processo_adocao), 
 
 ]
 

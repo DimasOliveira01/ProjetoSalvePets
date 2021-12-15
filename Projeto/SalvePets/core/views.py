@@ -667,7 +667,6 @@ def set_pet_instituicao(request):
     pet_id=request.POST.get('pet-id')
     
     email=request.POST.get('email')
-
     # Atualização de cadastro
     
     if pet_id:
@@ -771,12 +770,6 @@ def set_pet_instituicao(request):
             # Envio do e-mail
             mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
 
-
-
-    else:
-        pet.fk_id_usuario_adocao_id=None
-        pet.save() 
-
     url = f'/pet-informacao-instituicao/{pet.id}/'
     return redirect (url)
 
@@ -848,9 +841,19 @@ def pet_informacao_instituicao(request, id):
                   {'pet':pet,'inst':inst,'usuario':usuario})
 
 
+@login_required(login_url='/accounts/login')
 def pet_informacao_instituicao_adocao(request, id):
     """ Tela de informações sobre regras de adoção de uma determinada instituição """
     pet = Pet.objects.get(id=id)
+    if pet.adotado:
+        isadotado=False
+    else:
+        isadotado=True
+    if pet.fk_id_usuario_adocao_id == None:
+        isuser=True
+    else:
+        isuser=False
+    
     inst=INSTITUICAO.objects.get(id=pet.fk_id_instituicao_id)
     #determinando a nota média dos usuários
     media=0
@@ -861,10 +864,10 @@ def pet_informacao_instituicao_adocao(request, id):
     soma = sum(itens.values_list('nota', flat=True))
     count=len(itens)
     if count<1:
-        media=0
+        media=1
     else:
         media=int(soma/count)
-    return render(request, 'instituicao/pet-instituicao-adocao.html', {'pet':pet,'inst':inst,'media':media,'itens':itens,'count':count})
+    return render(request, 'instituicao/pet-instituicao-adocao.html', {'isuser':isuser, 'isadotado':isadotado, 'pet':pet,'inst':inst,'media':media,'itens':itens,'count':count})
 
 def lista_pets_instituicao(request):
     """ Lista de pets de uma determinada instituição a serem adotados """
@@ -914,6 +917,13 @@ def meus_pets_adotados(request):
     return render(request, 'instituicao/meus-pets-adotados.html', {'pet':pet})
 
 @login_required(login_url='/accounts/login')
+def meus_pets_em_processo_adocao(request):
+    """Tela que exibe os pets em processo de adoção por um usuário"""
+    id_usuario=request.user.usuario.id
+    pet=Pet.objects.filter(encontradoPerdido=None, adotado=False,fk_id_usuario_adocao_id=id_usuario)
+    return render(request, 'instituicao/meus-pets-em-processo-adocao.html', {'pet':pet})
+
+@login_required(login_url='/accounts/login')
 def lista_pets_usuario_instituicao(request):
     """ conferir esta função, mas acho que precisa retirar """
     pet=Pet.objects.filter(ativo=True, user=request.user)
@@ -939,8 +949,15 @@ def administrativo_instituicao(request):
 def solicitar_adocao(request, id):
     """ Função que apresenta a tela de pedido de adoção """
     user = request.user
-    usuario = request.user.usuario
     pet = Pet.objects.get(id=id)
+    if pet.fk_id_usuario_adocao_id == None:
+        #atualização da intenção de adoção do Pet
+        Pet.objects.filter(id=id).update(fk_id_usuario_adocao_id=user.id)
+    elif pet.fk_id_usuario_adocao_id == user.id:
+        messages.error(request, _('Atenção: Você já solicitou a adoção deste Pet.'))
+    else:
+        messages.error(request, _('Atenção: Para este Pet existe um usuário com intenção de adotá-lo, caso esta adoção não ocorra entraremos em contato.'))
+    usuario = request.user.usuario
     instituicao=INSTITUICAO.objects.filter(id=pet.fk_id_instituicao_id)
     email = instituicao[0].email
     assunto = _("Solicitação de adoção de Pet")
@@ -1137,11 +1154,15 @@ def meus_patrocinios(request):
     pets = []
     user = request.user
     usuario = USUARIO.objects.get(user_id = user.id)
-    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user, pago = True)
+    patrocinios = PATROCINIO.objects.filter(FK_idUsuario = user)
     doacao_pendente = ""
+    doacao_pendente_registros = PATROCINIO.objects.filter(FK_idUsuario = user, pago = False)
 
-    if PATROCINIO.objects.filter(FK_idUsuario = user, pago = False):
-            doacao_pendente = "Você tem um patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
+    if doacao_pendente_registros:
+        if doacao_pendente_registros.count() > 1:
+            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínios pendentes. Realize o pagamento de cada um e aguarde por até 48 horas para que eles sejam validados pela instituição."
+        else:
+            doacao_pendente = "Você tem " + str(doacao_pendente_registros.count()) + " patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para que ele seja validado pela instituição."
 
     for p in patrocinios:
         pets.append(Pet.objects.get(id=p.FK_idPet_id))
@@ -1272,3 +1293,37 @@ def doacao_excluir(request, id):
 
 def error_404(request, exception):
     return render (request, "not-found.html")
+
+
+@login_required(login_url='/accounts/login/')
+def meus_pedidos(request):
+    usuario = USUARIO.objects.get(user_id=request.user.id)
+    id_user = request.user.id
+
+    if id_user is not None:
+        try:
+            cursor = connection.cursor()
+            query = '''SELECT pedido.id, item.price, item.quantity, produto.name, pagamento.transaction_amount, pagamento.created 
+                        from auth_user as usuario 
+                        inner join orders_order as pedido on usuario.id = pedido."FK_iduser_id"
+                        inner join orders_item as item on item.order_id = pedido.id
+                        inner join products_product as produto on produto.id = item.product_id
+                        inner join payments_payment as pagamento on pagamento.order_id = pedido.id
+                        where usuario.id = %s and pagamento.mercado_pago_status = 'approved';'''
+
+            
+
+            # Execução da query e inserção dos dados em uma Named Tuple
+            cursor.execute(query, [id_user])
+            meusPedidos = namedtuplefetchall(cursor)
+
+            return render(request, 'orders/meus-pedidos.html',{
+                                                                'usuario': usuario,
+                                                                'pedidos': meusPedidos
+                                                                })
+        except Exception as error:
+            print("Falha em ler o banco de dados.\n", error)
+        finally:
+            if connection:
+                connection.close()
+    return redirect('/meus-pedidos/')

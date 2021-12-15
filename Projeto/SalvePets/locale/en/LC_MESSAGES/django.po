@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-08 20:59-0300\n"
+"POT-Creation-Date: 2021-12-14 11:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,7 +154,7 @@ msgstr ""
 #: .\SalvePets\templates\account\login.html:10
 #: .\SalvePets\templates\account\login.html:17
 #: .\SalvePets\templates\account\password_reset_from_key_done.html:10
-#: .\SalvePets\templates\base.html:140
+#: .\SalvePets\templates\base.html:142
 msgid "Entrar"
 msgstr "Log in"
 
@@ -164,13 +164,13 @@ msgstr "Forgot your password?"
 
 #: .\SalvePets\templates\account\logout.html:10
 #: .\SalvePets\templates\account\logout.html:17
-#: .\SalvePets\templates\base.html:136 .\SalvePets\templates\base.html:174
-#: .\SalvePets\templates\base.html:184
+#: .\SalvePets\templates\base.html:138 .\SalvePets\templates\base.html:176
+#: .\SalvePets\templates\base.html:186
 msgid "Sair"
 msgstr "Log Out"
 
 #: .\SalvePets\templates\account\logout.html:11
-#: .\SalvePets\templates\base.html:178
+#: .\SalvePets\templates\base.html:180
 msgid "Você tem certeza que deseja sair?"
 msgstr "Are you sure you want to quit?"
 
@@ -240,7 +240,7 @@ msgid "Cadastro"
 msgstr "Registration"
 
 #: .\SalvePets\templates\account\signup.html:17
-#: .\SalvePets\templates\base.html:143
+#: .\SalvePets\templates\base.html:145
 #: .\SalvePets\templates\cadastroPet.html:219
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:232
 msgid "Cadastrar"
@@ -301,23 +301,27 @@ msgstr "Sponsor pets"
 msgid "Loja Salve Pets"
 msgstr "Salve Pets Store"
 
-#: .\SalvePets\templates\base.html:94 .\SalvePets\templates\index.html:88
+#: .\SalvePets\templates\base.html:94
+msgid "Meus Pedidos"
+msgstr "My orders"
+
+#: .\SalvePets\templates\base.html:96 .\SalvePets\templates\index.html:88
 msgid "FAQ"
 msgstr "FAQ"
 
-#: .\SalvePets\templates\base.html:126
+#: .\SalvePets\templates\base.html:128
 msgid "Meu perfil"
 msgstr "My profile"
 
-#: .\SalvePets\templates\base.html:129
+#: .\SalvePets\templates\base.html:131
 msgid "Minha conta pessoal"
 msgstr "My personal account"
 
-#: .\SalvePets\templates\base.html:130
+#: .\SalvePets\templates\base.html:132
 msgid "Minha conta institucional"
 msgstr "My institutional account"
 
-#: .\SalvePets\templates\base.html:181
+#: .\SalvePets\templates\base.html:183
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:218
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:272
 #: .\SalvePets\templates\patrocinar\patrocinar.html:286
@@ -362,13 +366,14 @@ msgstr "Name"
 
 #: .\SalvePets\templates\cadastroPet.html:95
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:152
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:41
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:44
 #: .\SalvePets\templates\instituicao\lista-pets-instituicao.html:104
-#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:41
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:44
+#: .\SalvePets\templates\instituicao\meus-pets-em-processo-adocao.html:44
 #: .\SalvePets\templates\listaPetsEncontrados.html:48
 #: .\SalvePets\templates\listaPetsPerdidos.html:46
 #: .\SalvePets\templates\listaPetsUsuario.html:46
-#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:60
+#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:59
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:80
 msgid "Detalhes"
 msgstr "Pet Details"
@@ -500,14 +505,17 @@ msgid "Meu Carrinho"
 msgstr "My cart"
 
 #: .\SalvePets\templates\cart\cart_detail.html:17
+#: .\SalvePets\templates\orders\meus-pedidos.html:27
 msgid "Produto"
 msgstr "Product"
 
 #: .\SalvePets\templates\cart\cart_detail.html:18
+#: .\SalvePets\templates\orders\meus-pedidos.html:29
 msgid "Quantidade"
 msgstr "Quantity"
 
 #: .\SalvePets\templates\cart\cart_detail.html:19
+#: .\SalvePets\templates\orders\meus-pedidos.html:28
 msgid "Preço Unitário"
 msgstr "Unit Price"
 
@@ -547,9 +555,9 @@ msgstr "Checkout"
 msgid "Completar cadastro"
 msgstr "Complete registration"
 
-#: .\SalvePets\templates\completar-cadastro.html:16
-msgid "Completar"
-msgstr "Complete"
+#: .\SalvePets\templates\completar-cadastro.html:16 .\core\forms.py:203
+msgid "Salvar"
+msgstr "Save"
 
 #: .\SalvePets\templates\emailPedido.html:10
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:11
@@ -1159,7 +1167,11 @@ msgid ""
 "forma após o cadastro da sua Instituição realizaremos uma análise e em até \n"
 "            dois dias úteis você receberá a confirmação da aprovação ou "
 "negação do seu cadastro. "
-msgstr "Salve Pets only accepts the registration of reputable legal entities. Thus, after registering your Institution, we will carry out an analysis and within two business days you will receive confirmation of approval or denial of your registration."
+msgstr ""
+"Salve Pets only accepts the registration of reputable legal entities. Thus, "
+"after registering your Institution, we will carry out an analysis and within "
+"two business days you will receive confirmation of approval or denial of "
+"your registration."
 
 #: .\SalvePets\templates\instituicao\administrativoInstituicao.html:41
 msgid ""
@@ -1270,6 +1282,7 @@ msgid "Valor"
 msgstr "Value"
 
 #: .\SalvePets\templates\instituicao\doacao\listar-doacoes.html:60
+#: .\SalvePets\templates\orders\meus-pedidos.html:31
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:63
 msgid "Data"
 msgstr "Date"
@@ -1279,8 +1292,9 @@ msgid "Pago?"
 msgstr "Paid?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:11
-msgid "você gostaria de avaliar a antiga instituição do seu pet?"
-msgstr "would you like to rate your pet's former institution?"
+msgid "você gostaria de avaliar a instituição da qual você adotou o seu pet?"
+msgstr ""
+"would you like to evaluate the institution from which you adopted your pet?"
 
 #: .\SalvePets\templates\instituicao\email\email-avaliacao-instituicao.html:15
 #: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:14
@@ -1324,7 +1338,7 @@ msgid "Razão Social"
 msgstr "Corporate name"
 
 #: .\SalvePets\templates\instituicao\email\email-solicitacao-cadastro-instituicao.html:22
-#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:20
+#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:21
 msgid "Telefone"
 msgstr "Telephone"
 
@@ -1336,11 +1350,11 @@ msgstr "I'm"
 msgid "e gostaria de adotar o seguinte Pet"
 msgstr "and would like to adopt the following pet"
 
-#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:18
+#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:19
 msgid "Meus dados de contato"
 msgstr "My contact details"
 
-#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:24
+#: .\SalvePets\templates\instituicao\email\email-solicitar-adocao.html:25
 msgid "Obrigado!"
 msgstr "Thanks!"
 
@@ -1362,16 +1376,25 @@ msgstr "We will contact you to request all the necessary documentation."
 
 #: .\SalvePets\templates\instituicao\lista-pet-adocao.html:20
 #: .\SalvePets\templates\instituicao\meus-pets-adotados.html:20
+#: .\SalvePets\templates\instituicao\meus-pets-em-processo-adocao.html:20
 msgid "Lista de Pets para adoção"
 msgstr "List of Pets for Adoption"
 
 #: .\SalvePets\templates\instituicao\lista-pet-adocao.html:23
 #: .\SalvePets\templates\instituicao\meus-pets-adotados.html:23
+#: .\SalvePets\templates\instituicao\meus-pets-em-processo-adocao.html:23
+msgid "Meus Pets em processo de Adoção"
+msgstr "My Pets in the Adoption Process"
+
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:26
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:26
+#: .\SalvePets\templates\instituicao\meus-pets-em-processo-adocao.html:26
 msgid "Meus Pets Adotados"
 msgstr "My Adopted Pets"
 
-#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:29
-#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:29
+#: .\SalvePets\templates\instituicao\lista-pet-adocao.html:32
+#: .\SalvePets\templates\instituicao\meus-pets-adotados.html:32
+#: .\SalvePets\templates\instituicao\meus-pets-em-processo-adocao.html:32
 msgid "Lista de pets para adoção"
 msgstr "List of Pets for Adoption"
 
@@ -1431,7 +1454,7 @@ msgstr "Thank you for participating"
 
 #: .\SalvePets\templates\instituicao\mensagem\avaliacao-enviada.html:12
 #: .\SalvePets\templates\instituicao\mensagem\confirmacao-cadastro.html:12
-#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:13
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:23
 msgid "Ir para página inicial"
 msgstr "Back to home page"
 
@@ -1443,11 +1466,19 @@ msgstr "User registration request successful!"
 msgid "O usuário será avisado sobre essa operação."
 msgstr "The user will be warned about this operation."
 
-#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:10
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:12
+msgid "Sua solicitação de adoção foi realizada, mas"
+msgstr "Your adoption request was made, but"
+
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:16
+msgid "Obrigado pela compreensão!"
+msgstr "Thank you for understanding!"
+
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:19
 msgid "Solicitação de adoção realizada com sucesso!"
 msgstr "Adoption request successful!"
 
-#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:11
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:20
 msgid ""
 "Após a sua solicitação a Instituição entrará em contato para realizar o "
 "processo de adoção."
@@ -1455,7 +1486,7 @@ msgstr ""
 "After your request, the Institution will contact you to carry out the "
 "adoption process."
 
-#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:12
+#: .\SalvePets\templates\instituicao\mensagem\solicitar-adocao.html:21
 msgid "Agradecemos o contato!"
 msgstr "We appreciate the contact!"
 
@@ -1480,7 +1511,7 @@ msgid "Detalhes do pet para adoção ou patrocínio"
 msgstr "Pet Details for Adoption or Sponsorship"
 
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:87
-#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:61
+#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:60
 #: .\SalvePets\templates\patrocinar\patrocinar.html:134
 #: .\SalvePets\templates\patrocinar\patrocinar.html:210
 #: .\SalvePets\templates\patrocinar\patrocinar.html:239
@@ -1572,7 +1603,29 @@ msgstr "Order Summary"
 
 #: .\SalvePets\templates\order_summary.html:12
 msgid "Valor Total:"
-msgstr "Amount:"
+msgstr "Total Value:"
+
+#: .\SalvePets\templates\orders\meus-pedidos.html:11
+msgid "Lista de pedidos feitos"
+msgstr "List of orders placed"
+
+#: .\SalvePets\templates\orders\meus-pedidos.html:12
+msgid ""
+"A lista a seguir mostra todos os pedidos realizados por você. Registros com "
+"o mesmo número de 'Pedido' correspondem a uma mesma compra, ou seja, o Valor "
+"Total é resultante da soma de todos os itens com o mesmo número de pedido."
+msgstr ""
+"The following list shows all orders placed by you. Records with the same "
+"'Order' number correspond to the same purchase, that is, the Total Value is "
+"the sum of all items with the same order number."
+
+#: .\SalvePets\templates\orders\meus-pedidos.html:26
+msgid "Pedido"
+msgstr "Order"
+
+#: .\SalvePets\templates\orders\meus-pedidos.html:30
+msgid "Valor Total"
+msgstr "Total Value"
 
 #: .\SalvePets\templates\orders\order_form.html:34
 msgid "Seu carrinho está vazio."
@@ -1953,10 +2006,6 @@ msgstr ""
 msgid "ID do pet"
 msgstr "Pet ID"
 
-#: .\core\forms.py:203
-msgid "Salvar"
-msgstr "Save"
-
 #: .\core\forms.py:209
 msgid "Doação simples"
 msgstr "Simple donation"
@@ -2061,31 +2110,31 @@ msgstr "Website"
 msgid "Tipo de doação"
 msgstr "Type of donation"
 
-#: .\core\views.py:410
+#: .\core\views.py:412
 msgid "Encontramos um pet semelhante ao seu"
 msgstr "We found a pet similar to yours"
 
-#: .\core\views.py:424
+#: .\core\views.py:426
 msgid "Novos pets parecidos com o seu foram encontrados"
 msgstr "New pets similar to yours have been found"
 
-#: .\core\views.py:488 .\core\views.py:510
+#: .\core\views.py:490 .\core\views.py:513
 msgid "Solicitação de cadastro de Instituição!"
 msgstr "Institution registration request!"
 
-#: .\core\views.py:565
+#: .\core\views.py:568
 msgid "Solicitação de cadastro na Instituição: "
 msgstr "Request for registration at the institution: "
 
-#: .\core\views.py:583
+#: .\core\views.py:586
 msgid "Por favor selecione um usuário existente!"
 msgstr "Please select an existing user!"
 
-#: .\core\views.py:763
+#: .\core\views.py:765
 msgid "Opine sobre a instituição do seu pet"
 msgstr "Give your opinion about your pet's institution"
 
-#: .\core\views.py:803
+#: .\core\views.py:799
 msgid ""
 "Não é possível realizar duas vezes a avaliação da Instituição para o mesmo "
 "Pet!"
@@ -2093,7 +2142,20 @@ msgstr ""
 "It is not possible to perform the Institution's evaluation twice for the "
 "same Pet!"
 
-#: .\core\views.py:943
+#: .\core\views.py:957
+msgid "Atenção: Você já solicitou a adoção deste Pet."
+msgstr ""
+"Attention: You have already requested the adoption of this Pet."
+
+#: .\core\views.py:959
+msgid ""
+"Atenção: Para este Pet existe um usuário com intenção de adotá-lo, caso esta "
+"adoção não ocorra entraremos em contato."
+msgstr ""
+"Attention: For this Pet there is a user with the intention of adopting it, "
+"if this adoption does not occur we will contact you."
+
+#: .\core\views.py:963
 msgid "Solicitação de adoção de Pet"
 msgstr "Pet Adoption Request"
 
@@ -2104,6 +2166,9 @@ msgstr "Go to payment"
 #: .\payments\views.py:55
 msgid "Pedido Recebido!"
 msgstr "Order received!"
+
+#~ msgid "Completar"
+#~ msgstr "Complete"
 
 #~ msgid "Quem pode realizar uma adoção?"
 #~ msgstr "Who can carry out an adoption?"
