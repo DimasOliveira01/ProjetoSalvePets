@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-14 11:12-0300\n"
+"POT-Creation-Date: 2021-12-15 20:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,7 +239,15 @@ msgstr "Your password is now changed."
 msgid "Cadastro"
 msgstr "Registration"
 
-#: .\SalvePets\templates\account\signup.html:17
+#: .\SalvePets\templates\account\signup.html:15
+msgid "A senha precisa conter no mínimo 8 caracteres."
+msgstr "The password must contain at least 8 characters."
+
+#: .\SalvePets\templates\account\signup.html:16
+msgid "A senha não pode ser inteiramente numérica."
+msgstr "The password cannot be entirely numeric."
+
+#: .\SalvePets\templates\account\signup.html:21
 #: .\SalvePets\templates\base.html:145
 #: .\SalvePets\templates\cadastroPet.html:219
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:232
@@ -292,8 +300,8 @@ msgstr "Register Lost or Found Pet"
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:16
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:13
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:15
-#: .\SalvePets\templates\patrocinar\patrocinar.html:59
-#: .\SalvePets\templates\patrocinar\patrocinar.html:61
+#: .\SalvePets\templates\patrocinar\patrocinar.html:60
+#: .\SalvePets\templates\patrocinar\patrocinar.html:62
 msgid "Patrocinar pets"
 msgstr "Sponsor pets"
 
@@ -324,7 +332,7 @@ msgstr "My institutional account"
 #: .\SalvePets\templates\base.html:183
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:218
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:272
-#: .\SalvePets\templates\patrocinar\patrocinar.html:286
+#: .\SalvePets\templates\patrocinar\patrocinar.html:287
 #: .\SalvePets\templates\pet.html:130
 msgid "Fechar"
 msgstr "Close"
@@ -374,7 +382,7 @@ msgstr "Name"
 #: .\SalvePets\templates\listaPetsPerdidos.html:46
 #: .\SalvePets\templates\listaPetsUsuario.html:46
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:59
-#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:80
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:87
 msgid "Detalhes"
 msgstr "Pet Details"
 
@@ -490,8 +498,12 @@ msgid "Perdido"
 msgstr "Lost"
 
 #: .\SalvePets\templates\cadastroPet.html:207
-msgid "Indique a localização"
-msgstr "Indicate the location"
+msgid ""
+"Indique a localização (Para alterar, clique no botão de 'ponto' e posicione "
+"o ícone na localização desejada)"
+msgstr ""
+"Indicate the location (To change, click on the 'dot' button and place the "
+"icon on the desired location)"
 
 #: .\SalvePets\templates\cadastroPet.html:217
 #: .\SalvePets\templates\instituicao\cadastro-pet-instituicao.html:230
@@ -894,8 +906,8 @@ msgstr ""
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:38
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:35
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:37
-#: .\SalvePets\templates\patrocinar\patrocinar.html:81
-#: .\SalvePets\templates\patrocinar\patrocinar.html:83
+#: .\SalvePets\templates\patrocinar\patrocinar.html:82
+#: .\SalvePets\templates\patrocinar\patrocinar.html:84
 msgid "Dados do PagSeguro"
 msgstr "PagSeguro Data"
 
@@ -997,8 +1009,8 @@ msgstr ""
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:31
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:28
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:30
-#: .\SalvePets\templates\patrocinar\patrocinar.html:74
-#: .\SalvePets\templates\patrocinar\patrocinar.html:76
+#: .\SalvePets\templates\patrocinar\patrocinar.html:75
+#: .\SalvePets\templates\patrocinar\patrocinar.html:77
 msgid "Patrocínios recebidos"
 msgstr "Sponsorship received"
 
@@ -1217,8 +1229,8 @@ msgstr "E-mail"
 #: .\SalvePets\templates\patrocinar\lista_patrocinar.html:23
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:20
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:22
-#: .\SalvePets\templates\patrocinar\patrocinar.html:66
-#: .\SalvePets\templates\patrocinar\patrocinar.html:68
+#: .\SalvePets\templates\patrocinar\patrocinar.html:67
+#: .\SalvePets\templates\patrocinar\patrocinar.html:69
 msgid "Patrocínios feitos"
 msgstr "Sponsorships made"
 
@@ -1511,14 +1523,12 @@ msgid "Detalhes do pet para adoção ou patrocínio"
 msgstr "Pet Details for Adoption or Sponsorship"
 
 #: .\SalvePets\templates\instituicao\pet-instituicao-adocao.html:87
-#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:60
-#: .\SalvePets\templates\patrocinar\patrocinar.html:134
-#: .\SalvePets\templates\patrocinar\patrocinar.html:210
-#: .\SalvePets\templates\patrocinar\patrocinar.html:239
-#: .\SalvePets\templates\patrocinar\patrocinar.html:252
-#: .\SalvePets\templates\patrocinar\patrocinar.html:265
-#: .\SalvePets\templates\patrocinar\patrocinar.html:278
-#: .\SalvePets\templates\patrocinar\patrocinar.html:309
+#: .\SalvePets\templates\patrocinar\patrocinar.html:135
+#: .\SalvePets\templates\patrocinar\patrocinar.html:240
+#: .\SalvePets\templates\patrocinar\patrocinar.html:253
+#: .\SalvePets\templates\patrocinar\patrocinar.html:266
+#: .\SalvePets\templates\patrocinar\patrocinar.html:279
+#: .\SalvePets\templates\patrocinar\patrocinar.html:310
 msgid "Patrocinar"
 msgstr "Sponsor"
 
@@ -1661,6 +1671,11 @@ msgstr ""
 "You can directly help an institution that shelters animals of whatever value "
 "you want."
 
+#: .\SalvePets\templates\patrocinar\lista_patrocinar.html:60
+#: .\SalvePets\templates\patrocinar\patrocinar.html:129
+msgid "Doar"
+msgstr "Donate"
+
 #: .\SalvePets\templates\patrocinar\meus_patrocinios.html:47
 msgid "Meus patrocínios"
 msgstr "My sponsorships"
@@ -1669,62 +1684,70 @@ msgstr "My sponsorships"
 msgid "Veja a lista de pets que você ajudou."
 msgstr "See the list of pets you helped."
 
-#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:71
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:64
+msgid "Status"
+msgstr "Status"
+
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:72
 msgid "recorrente"
 msgstr "recurrent"
 
-#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:81
-msgid "Patrocinar novamente"
-msgstr "Sponsor again"
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:75
+msgid "Pago"
+msgstr "Paid"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:91
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:77
+msgid "Pendente"
+msgstr "Pending"
+
+#: .\SalvePets\templates\patrocinar\meus_patrocinios.html:88
+msgid "Doar novamente"
+msgstr "Donate again"
+
+#: .\SalvePets\templates\patrocinar\patrocinar.html:92
 msgid "Contribuir"
 msgstr "Contribute"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:128
-msgid "Doar"
-msgstr "Donate"
-
-#: .\SalvePets\templates\patrocinar\patrocinar.html:131
+#: .\SalvePets\templates\patrocinar\patrocinar.html:132
 msgid "Ajudar"
 msgstr "Help"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:145
+#: .\SalvePets\templates\patrocinar\patrocinar.html:146
 msgid "Doar para "
 msgstr "Donate to "
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:146
+#: .\SalvePets\templates\patrocinar\patrocinar.html:147
 msgid ""
 "Você pode realizar uma doação para a instituição que está tomando conta "
 "deste pet."
 msgstr ""
 "You can make a donation to the institution that is taking care of this pet."
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:147
+#: .\SalvePets\templates\patrocinar\patrocinar.html:148
 msgid "Por favor, selecione a quantidade desejada."
 msgstr "Please select the desired quantity."
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:160
+#: .\SalvePets\templates\patrocinar\patrocinar.html:161
 msgid "Doar R$ 20"
 msgstr "Donate BRL 20"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:163
+#: .\SalvePets\templates\patrocinar\patrocinar.html:164
 msgid "Doar R$ 50"
 msgstr "Donate BRL 50"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:166
+#: .\SalvePets\templates\patrocinar\patrocinar.html:167
 msgid "Doar R$ 100"
 msgstr "Donate BRL 100"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:177
+#: .\SalvePets\templates\patrocinar\patrocinar.html:178
 msgid "Ajude o pet"
 msgstr "Help the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:178
+#: .\SalvePets\templates\patrocinar\patrocinar.html:179
 msgid "Você também pode contribuir com os custos mensais do pet."
 msgstr "You can also contribute to the pet's monthly costs."
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:179
+#: .\SalvePets\templates\patrocinar\patrocinar.html:180
 msgid ""
 "É possível pagar os custos de limpeza, alimentação, medicamentos e diária de "
 "internação. E claro, se preferir, pode inclusive pagar por todos esses itens "
@@ -1734,15 +1757,15 @@ msgstr ""
 "stay. And of course, if you prefer, you can even pay for all these items "
 "together."
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:186
+#: .\SalvePets\templates\patrocinar\patrocinar.html:187
 msgid "Ajudar o pet"
 msgstr "Help the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:195
+#: .\SalvePets\templates\patrocinar\patrocinar.html:196
 msgid "Patrocine o pet"
 msgstr "Sponsor the pet"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:196
+#: .\SalvePets\templates\patrocinar\patrocinar.html:197
 msgid ""
 "Também é possível ajudar o pet cobrindo seus custos mensais definidos pela "
 "instituição que está tomando conta dele."
@@ -1750,32 +1773,42 @@ msgstr ""
 "It is also possible to help the pet by covering its monthly costs defined by "
 "the institution that is taking care of it."
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:197
+#: .\SalvePets\templates\patrocinar\patrocinar.html:198
 msgid "Para apoiá-lo, selecione uma das opções abaixo:"
 msgstr "To support you, select one of the options below:"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:224
-#: .\SalvePets\templates\patrocinar\patrocinar.html:298
+#: .\SalvePets\templates\patrocinar\patrocinar.html:211
+#, fuzzy
+#| msgid "Patrocinar"
+msgid "Patrocinar com"
+msgstr "Sponsor"
+
+#: .\SalvePets\templates\patrocinar\patrocinar.html:211
+msgid "por mês"
+msgstr ""
+
+#: .\SalvePets\templates\patrocinar\patrocinar.html:225
+#: .\SalvePets\templates\patrocinar\patrocinar.html:299
 msgid "Patrocínio"
 msgstr "Sponsorship"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:231
+#: .\SalvePets\templates\patrocinar\patrocinar.html:232
 msgid "Limpeza"
 msgstr "Cleaning"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:244
+#: .\SalvePets\templates\patrocinar\patrocinar.html:245
 msgid "Alimentação"
 msgstr "Food"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:257
+#: .\SalvePets\templates\patrocinar\patrocinar.html:258
 msgid "Medicamentos"
 msgstr "Medicines"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:270
+#: .\SalvePets\templates\patrocinar\patrocinar.html:271
 msgid "Diária de internação"
 msgstr "Daily hospitalization"
 
-#: .\SalvePets\templates\patrocinar\patrocinar.html:302
+#: .\SalvePets\templates\patrocinar\patrocinar.html:303
 msgid "patrocinar"
 msgstr "sponsor"
 
@@ -1971,19 +2004,19 @@ msgstr "Invalid CPF. Identical numbers."
 msgid "CPF inválido."
 msgstr "Invalid CPF."
 
-#: .\core\forms.py:23
+#: .\core\forms.py:24
 msgid "Nome:"
 msgstr "Name"
 
-#: .\core\forms.py:24
+#: .\core\forms.py:25
 msgid "Sobrenome"
 msgstr "Last Name"
 
-#: .\core\forms.py:49 .\core\forms.py:68
+#: .\core\forms.py:50 .\core\forms.py:68
 msgid "Data de Nascimento"
 msgstr "Birth date"
 
-#: .\core\forms.py:50
+#: .\core\forms.py:51
 msgid "Número de Celular"
 msgstr "Phone Number"
 
@@ -2144,8 +2177,7 @@ msgstr ""
 
 #: .\core\views.py:957
 msgid "Atenção: Você já solicitou a adoção deste Pet."
-msgstr ""
-"Attention: You have already requested the adoption of this Pet."
+msgstr "Attention: You have already requested the adoption of this Pet."
 
 #: .\core\views.py:959
 msgid ""
@@ -2159,6 +2191,22 @@ msgstr ""
 msgid "Solicitação de adoção de Pet"
 msgstr "Pet Adoption Request"
 
+#: .\core\views.py:1163 .\core\views.py:1165
+msgid "Você tem "
+msgstr "You have "
+
+#: .\core\views.py:1163
+msgid ""
+" patrocínios pendentes. Realize o pagamento de cada um e aguarde por até 48 "
+"horas para que eles sejam validados pela instituição."
+msgstr " pending sponsorships. Make the payment for each one and wait for up to 48 hours for them to be validated by the institution."
+
+#: .\core\views.py:1165
+msgid ""
+" patrocínio pendente. Realize o pagamento e aguarde por até 48 horas para "
+"que ele seja validado pela instituição."
+msgstr " sponsorship pending. Make the payment and wait up to 48 hours for it to be validated by the institution."
+
 #: .\orders\forms.py:33
 msgid "Ir para pagamento"
 msgstr "Go to payment"
@@ -2166,6 +2214,12 @@ msgstr "Go to payment"
 #: .\payments\views.py:55
 msgid "Pedido Recebido!"
 msgstr "Order received!"
+
+#~ msgid "Indique a localização"
+#~ msgstr "Indicate the location"
+
+#~ msgid "Patrocinar novamente"
+#~ msgstr "Sponsor again"
 
 #~ msgid "Completar"
 #~ msgstr "Complete"
