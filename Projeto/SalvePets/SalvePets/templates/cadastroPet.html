@@ -126,7 +126,7 @@
         <!-- Raça -->
         <div class="form-group">
             <label><b>{% trans "Raça" %}</b>:</label>
-            <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}">
+            <input class="form-control" name="raca" type="text" value="{{ pet.raca|default_if_none:"" }}" placeholder="Caso não saiba, mantenha este campo vazio">
         </div>
         <br>
 
@@ -153,7 +153,7 @@
         <!-- Cor predominante -->
         <div class="form-group">
             <label><b>{% trans "Cor predominante" %}</b>:</label>
-            <input class="form-control" name="cor" type="text" list="cores" value="{{ pet.cor|default_if_none:"" }}">
+            <input class="form-control" name="cor" type="text" list="cores" value="{{ pet.cor|default_if_none:"" }}" placeholder="Caso não saiba, mantenha este campo vazio">
             <datalist id="cores">
                 <option value="Branco"></option>
                 <option value="Preto"></option>

@@ -7,9 +7,19 @@
 {% block conteudo %}
 
 <div class="container mt-4">
-  <h3>{% trans "Solicitação de adoção realizada com sucesso!" %}</h3>
-  <p>{% trans "Após a sua solicitação a Instituição entrará em contato para realizar o processo de adoção." %}</p>
-  <p>{% trans "Agradecemos o contato!" %}</p>
+  <!--Mensagem caso o usuário informe um usuário inexistente-->
+  {% if messages %}
+    <h3>{% trans "Sua solicitação de adoção foi realizada, mas" %}...</h3>
+    {% for message in messages %}
+    <h5 style="color: #f00" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+    {% endfor %}
+    <h3>{% trans "Obrigado pela compreensão!" %}</h3>
+    {%else%}
+  
+    <h3>{% trans "Solicitação de adoção realizada com sucesso!" %}</h3>
+    <p>{% trans "Após a sua solicitação a Instituição entrará em contato para realizar o processo de adoção." %}</p>
+    <p>{% trans "Agradecemos o contato!" %}</p>
+  {% endif %}
   <a href="/" class="btn btn-primary" style="color:black; font-size:70%" type="button" >{% trans "Ir para página inicial" %}</a>
 </div>
 

@@ -103,7 +103,23 @@
 </div>
 
 {% endwith %}
+
+
+{% block scripts %}
+    <script>
+        document.getElementById("docNumber").onchange = function() {leftPad()};
+        function leftPad(){
+            //$("#docNumber").mask("000.000.000-00");
+            var length = 11 - $("#docNumber").toString.length + 1;
+            var cpf = document.getElementById("docNumber");
+            cpf.value = Array(length).join(paddingChar || '0') + $("#docNumber");
+        }
+    </script>
+    <!-- https://pt.stackoverflow.com/questions/175662/fun%C3%A7%C3%A3o-javascript-que-complete-o-campo-com-zeros-%C3%A0-esquerda -->
 {% endblock %}
+
+
+{% endblock conteudo %}
 
 {% block script %}
 <script src="https://unpkg.com/imask@6.0.7/dist/imask.js"></script>
