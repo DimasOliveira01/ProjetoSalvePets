@@ -46,13 +46,13 @@ class INSTITUICAO(models.Model):
     cnpj=BRCNPJField("CNPJ", null=True)
     telefone = models.CharField(max_length=25, null=True)
     email = models.CharField(max_length=50, null=True)
-    postal_code = BRPostalCodeField("CEP")
-    address = models.CharField("Endereço", max_length=250)
-    number = models.CharField("Número", max_length=250)
+    postal_code = BRPostalCodeField("CEP", null=True)
+    address = models.CharField("Endereço", max_length=250, null=True)
+    number = models.CharField("Número", max_length=250, null=True)
     complement = models.CharField("Complemento", max_length=250, blank=True)
-    district = models.CharField("Bairro", max_length=250)
-    state = BRStateField("Estado")
-    city = models.CharField("Cidade", max_length=250)
+    district = models.CharField("Bairro", max_length=250, null=True)
+    state = BRStateField("Estado", null=True)
+    city = models.CharField("Cidade", max_length=250, null=True)
 
     doacao_valor_20_link = models.CharField(_("R$ 20"), max_length=250, null = True, blank = True)
     doacao_valor_50_link = models.CharField(_("R$ 50"), max_length=250, null = True, blank = True)
@@ -80,9 +80,9 @@ class USUARIO(models.Model):
     """ Modelo de dados de usuário """
     user = models.OneToOneField(User, on_delete=CASCADE)
     tipousuario = models.CharField(max_length=30, choices=TIPOS_USUARIO, default='Usuário comum',
-                                   verbose_name=_("Tipo de usuário"), blank=False, null=False)
+                                   verbose_name=_("Tipo de usuário"), blank=False, null=True)
     #cpfcnpj = models.CharField(max_length=14, verbose_name=_("CPF (somente números)"), blank=False,null=False)
-    cpfcnpj = BRCPFField("CPF")
+    cpfcnpj = BRCPFField("CPF", null=True)
     dataNascimento = models.DateField(verbose_name=_("Data de nascimento"), blank=True, null=True)
     telefone = models.CharField(max_length=25,
                                 verbose_name=_("Número de celular (somente números)"), blank=True,
