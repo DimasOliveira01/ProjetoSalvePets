@@ -208,7 +208,7 @@ function submit_patrocinio(){
                 <form id="patrocinio2" action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
                     <input type="hidden" name="code" value="{{instituicao.doacao_patrocinio_codigo}}" />
                     <input type="hidden" name="iot" value="button" />
-                    <button name="patrocinio" id="patrocinio" value="patrocinio" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_patrocinio()">Patrocinar com R$ {{instituicao.doacao_patrocinio_valor|intcomma}} por mês</button>
+                    <button name="patrocinio" id="patrocinio" value="patrocinio" class="btn btn-primary" style="background-color:#FAA307" onclick="submit_patrocinio()">{% trans "Patrocinar com" %} R$ {{instituicao.doacao_patrocinio_valor|intcomma}} {% trans "por mês" %}</button>
                 </form>
 
                 {% endif %}

@@ -72,9 +72,9 @@
                                     <td>R$ {{pat.valor}} {% if pat.doacao_tipo == "patrocinio" %}({% trans "recorrente" %}){% endif %}</td>
                                     <td>{{pat.data|date:'d/m/Y'}}</td>
                                     <td>{% if pat.pago == True %}
-                                            Pago
+                                            {% trans "Pago" %}
                                         {% else %}
-                                            Pendente
+                                            {% trans "Pendente" %}
                                         {% endif %}
                                         </td>
                                     </tr>
