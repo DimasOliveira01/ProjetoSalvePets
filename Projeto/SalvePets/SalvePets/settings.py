@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-99x#o@c^zab4yjx^t96nq!zniee1+r7fr*@7duka^3-vm2+iln
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG=False
+DEBUG=True
 
 
 ALLOWED_HOSTS = ["*"]
@@ -167,23 +167,14 @@ POSTGIS_PASSWORD=str(os.environ.get("POSTGIS_PASSWORD"))
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-<<<<<<< HEAD
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'salvepets', 
         'USER': 'postgres', 
-        'PASSWORD': 'salve123456',
-        #'HOST': 'postgis_container', 
-        #'HOST': '127.0.0.1', 
-	    'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com',
-	    'PORT': '5432',
-=======
-        'ENGINE':'django.contrib.gis.db.backends.postgis',
-        'NAME':'salvepets',
-        'USER':'postgres',
-       	'PASSWORD':'salve123456',
-	'HOST':'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com',
-	'PORT':'5432',
->>>>>>> 91d51f68a397b3e24b0e445300fd6a41f0c2cd89
+        'PASSWORD': '123456',
+        'HOST': 'postgis_container', 
+        'HOST': '127.0.0.1', 
+	    #'HOST': 'salvepets.cwytbkj9txjz.us-east-1.rds.amazonaws.com',
+	    #'PORT': '5432',
     }
 }
 
