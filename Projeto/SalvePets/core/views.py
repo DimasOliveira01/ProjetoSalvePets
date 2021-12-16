@@ -519,8 +519,8 @@ def completar_cadastro_instituicao(request):
 
                 # Envio do e-mail
                 mail.send_mail(assunto, plain_message, remetente, [destinatario], html_message=html)
-
-
+                
+                
                 return render(request, 'instituicao/administrativoInstituicao.html')
             #else:
             messages.error(request, ('Por favor corriga o erro abaixo!'))
