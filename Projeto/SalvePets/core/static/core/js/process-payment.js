@@ -106,3 +106,4 @@ function setCardTokenAndPay(status, response) {
         alert("Dados de pagamento inválidos.\n Verifique os dados preenchidos!")
     }
 }
+//al
