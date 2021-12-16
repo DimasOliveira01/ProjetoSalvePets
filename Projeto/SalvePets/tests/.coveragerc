@@ -1,0 +1,22 @@
+[run]
+omit = 
+    *init*, 
+    *asgi*, 
+    *urls*, 
+    *wsgi*, 
+    */admin*,  
+    */views*,
+    *conftest*, 
+    *apps*
+    *custom_form_fields*,
+    *forms*,
+    *auto*,
+    */models*,
+    *manage.py,
+    */000*,
+    *factories*,
+    */settings.py,
+    */cart.py,
+    *produts_tags.py,
+    
+    
